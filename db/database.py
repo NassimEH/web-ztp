@@ -17,7 +17,7 @@ async def get_db():
     async with engine.begin() as db_connection:
         await db_connection.run_sync(Base.metadata.create_all)
     db = SessionLocal()
-    try: 
+    try:
         yield db
     finally:
         await db.close()
