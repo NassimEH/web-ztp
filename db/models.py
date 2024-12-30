@@ -1,0 +1,33 @@
+"""Fichier contenant le modele de données de l'ORM"""
+
+from typing import Optional
+
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import Integer, String, ForeignKey, UniqueConstraint
+
+from db.database import Base
+
+
+class Template(Base):
+    """Modele de donnée pour un template configuration ZTP"""
+    __tablename__ = 'templates'
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    file_path: Mapped[str] = mapped_column(String)
+
+    devices: Mapped[list["Device"]] = relationship("Device", back_populates="template")
+
+class Device(Base):
+    """Modele de donnée pour une machine a configurer"""
+    __tablename__ = 'devices'
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    serial_number: Mapped[str] = mapped_column()
+    ip: Mapped[str] = mapped_column(unique=True)
+    hostname: Mapped[str] = mapped_column(nullable=True)
+    interface: Mapped[str] = mapped_column(nullable=True)
+    template_id: Mapped[Optional[int]] = mapped_column(Integer, ForeignKey('templates.id'), nullable=True) 
+
+    template: Mapped[Optional[Template]] = relationship("Template", back_populates="devices")
+
+    __table_args__ = (
+        UniqueConstraint('serial_number', 'interface'),
+    )
