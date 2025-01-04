@@ -1,13 +1,16 @@
+"""Simplify DHCP server."""
 import socket
 from scapy.all import packet
 from scapy.all import BOOTP, DHCP, get_if_addr
 
 
 def get_dhcp_packet(data: bytes) -> packet:
+    """Get DHCP packet from bytes."""
     return BOOTP(data)
 
 
 def get_ip_in_pool(packet: packet) -> str:
+    """Get ip from the bdd"""
     for option in packet["DHCP"].options:
         if option[0] == "requested_addr":
             return option[1]
@@ -16,6 +19,7 @@ def get_ip_in_pool(packet: packet) -> str:
 
 
 def create_dhcp_reply(packet: packet, ip_address: str) -> bytes:
+    """Send DHCP reply packet."""
     ip_client = get_ip_in_pool(packet)
 
     new_options = [
@@ -53,6 +57,7 @@ def create_dhcp_reply(packet: packet, ip_address: str) -> bytes:
 
 
 def dhcp_receive_message(interface: str, bind_port=67, buffer_size=1024) -> None:
+    """Receive DHCP message by socket."""
     ip_address = get_if_addr(interface)
 
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
@@ -74,4 +79,4 @@ def dhcp_receive_message(interface: str, bind_port=67, buffer_size=1024) -> None
 
 
 if __name__ == "__main__":
-    dhcp_receive_message("enp0s3")
+    dhcp_receive_message("vboxnet0")
