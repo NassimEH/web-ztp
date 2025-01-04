@@ -1,15 +1,19 @@
 """Fichier pour lancer le serveur fastapi"""
 
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
+
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 
 from db.database import get_db
-
 from db.models import Device, Template
 from db.schema import DeviceSchema, TemplateSchema
 
+from env import FRONTEND_URL
+
 app = FastAPI()
+app.add_middleware(CORSMiddleware, allow_origins=[FRONTEND_URL], allow_credentials=True)
 
 
 @app.post("/device", response_model=DeviceSchema)
@@ -37,12 +41,22 @@ def get_devices(db: Session = Depends(get_db)):
 
     return devices
 
+
 @app.get("/device/{device_id}")
 def get_device(device_id: int, db: Session = Depends(get_db)):
     """Recupère un device"""
     device = db.get(Device, device_id)
 
     return device
+
+
+@app.get("/ip/{device_serial_number}")
+def get_ip(device_serial_number: str, db: Session = Depends(get_db)):
+    """Recupère l'ip d'un device à partir de son serial number"""
+    device = db.get(Device, device_serial_number)
+
+    return device.ip
+
 
 @app.post("/template", response_model=TemplateSchema)
 def add_template(template: TemplateSchema, db: Session = Depends(get_db)):
@@ -56,6 +70,7 @@ def add_template(template: TemplateSchema, db: Session = Depends(get_db)):
 
     return new_template
 
+
 @app.get("/templates")
 def get_templates(db: Session = Depends(get_db)):
     """Recupère la liste des templates"""
@@ -63,6 +78,7 @@ def get_templates(db: Session = Depends(get_db)):
     templates = results.scalars().all()
 
     return templates
+
 
 @app.get("/template/{template_id}")
 def get_template(template_id: int, db: Session = Depends(get_db)):
