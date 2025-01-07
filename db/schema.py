@@ -1,5 +1,5 @@
 """Fichier contenant les schémas Pydantic:
-Les schémas Pydantic permetent de gerer le typages 
+Les schémas Pydantic permetent de gerer le typages
 et l'affichage des champs entre l'API et la base de donnée"""
 
 from typing import Optional
@@ -10,6 +10,7 @@ from pydantic.networks import IPv4Address
 
 class DeviceSchema(BaseModel):
     """Schéma Pydantic pour un une machine a configurer"""
+
     serial_number: str
     ip: IPv4Address
     hostname: Optional[str] = None
@@ -19,8 +20,10 @@ class DeviceSchema(BaseModel):
     class Config:
         from_attributes = True
 
+
 class TemplateSchema(BaseModel):
     """Schéma Pydantic pour un template configuration ZTP"""
+
     file_path: str
 
     class Config:
