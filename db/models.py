@@ -18,6 +18,23 @@ class Template(Base):
     devices: Mapped[list["Device"]] = relationship("Device", back_populates="template")
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Device(Base):
     """Modele de donnée pour une machine a configurer"""
 
@@ -36,3 +53,12 @@ class Device(Base):
     )
 
     __table_args__ = (UniqueConstraint("serial_number", "interface"),)
+
+
+class DHCPConfig(Base):
+    """Modele de donnée des configuration DHCP"""
+
+    __tablename__ = "dhcpconfig"
+    subnet: Mapped[str] = mapped_column(String)
+    min_ip_pool: Mapped[str] = mapped_column(String)
+    max_ip_pool: Mapped[str] = mapped_column(String)
