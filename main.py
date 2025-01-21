@@ -41,6 +41,7 @@ def get_devices(db: Session = Depends(get_db)):
 
     return devices
 
+  
 @app.get("/ips")
 def get_ips(db: Session = Depends(get_db)):
     """Recupère la liste des ips"""
