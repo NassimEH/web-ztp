@@ -17,6 +17,7 @@ class Template(Base):
 
     devices: Mapped[list["Device"]] = relationship("Device", back_populates="template")
 
+
 class Device(Base):
     """Modele de donnée pour une machine a configurer"""
 
