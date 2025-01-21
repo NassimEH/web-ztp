@@ -36,3 +36,13 @@ class Device(Base):
     )
 
     __table_args__ = (UniqueConstraint("serial_number", "interface"),)
+
+
+class DHCPConfig(Base):
+    """Modele de donnée des configuration DHCP"""
+
+    __tablename__ = "dhcpconfig"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, default=1)
+    subnet: Mapped[str] = mapped_column(String)
+    min_ip_pool: Mapped[str] = mapped_column(String)
+    max_ip_pool: Mapped[str] = mapped_column(String)
