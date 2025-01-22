@@ -7,17 +7,16 @@
     font-family: 'poppins',sans-serif;
 }
 
-body{
+.form-bg{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: url(a-beautiful-view-4k-gj-3840x2160.jpg) no-repeat;
+    background: url(../img/a-beautiful-view-4k-gj-3840x2160.jpg) no-repeat;
     background-size: cover;
     background-position: center center;
 }
 
-.wrapper{
+.form{
     width: 420px;
     background: transparent ;
     border: 2px solid rgba(255,255,255,0.2);
@@ -25,14 +24,15 @@ body{
     color: #fff;
     border-radius: 10px;
     padding: 30px 40px;
+    margin: 3em;
 }
 
-.wrapper h1{
+.form h1{
     font-size: 36px;
     text-align: center;
 }
 
-.wrapper .input-box{
+.form .input-box{
     position: relative;
     width: 100%;
     height: 50px;
@@ -49,12 +49,12 @@ body{
     border: 2px solid rgba(255,255,255,0.2);
     border-radius: 40px;
     font-size: 16px;
-    color: #222222;
+    color: #fff;
     padding: 20px 45px 20px 20px;
 }
 
 .input-box input::placeholder{
-    color: #242323 
+    color: #fbfbfb;
 }
 
 .input-box i{
@@ -66,7 +66,7 @@ body{
     color: #242323;
 }
 
-.wrapper .remember-forget{
+.form .remember-forget{
     display: flex;
     justify-content: space-between;
     font-size: 14.5px;
@@ -87,7 +87,7 @@ body{
 
 }
 
-.wrapper .btn  {
+.form .btn  {
     width: 100%;
     height: 45px;
     background: #fff;
@@ -101,13 +101,13 @@ body{
     font-weight: 600;
 }
 
-.wrapper .btn:hover{
+.form .btn:hover{
     background: rgba(255,255,255,0.5);
     color: #fff;
     border-color: #fff;
 }
 
-.wrapper .register-link {
+.form .register-link {
     font-size: 14.5px;
     text-align: center;
     margin: 20px 0 15px ;

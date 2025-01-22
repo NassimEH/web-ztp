@@ -5,17 +5,19 @@
             <!-- route par défaut : menu principal -->
             <route path="(#)?">
                 <landing updateCinneList={updateCinneList} type={state.currentType} genres={state.allGenders} langue={state.langue}></landing>
-                <h2 id="home">{state.currentTitle}</h2>
+                <!--<h2 id="home">{state.currentTitle}</h2>
                 <pagination currentPageNum={state.currentCinneList.page} maxPageNum={state.currentCinneList.total_pages}
                         updateCinneList={updateCinneList}></pagination>
-                <div class="cinne-container">
+                <div>
                     <cinne each={cinne in state.currentCinneList.results} cinne={cinne} type={state.currentType}
                         updateCinneList={updateCinneList} getYear={getYear} langue={state.langue}></cinne>
-                </div>
+                </div> -->
+                <device-from>
+                </device-from>
+
                 <my-footer updateCinneList={updateCinneList} langue={state.langue}></my-footer>
             </route>
-
-    <script>
+<script>
 
     export default {
 
