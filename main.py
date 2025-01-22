@@ -3,8 +3,6 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 
-from fastapi.middleware.cors import CORSMiddleware
-
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 
@@ -14,10 +12,8 @@ from db.schema import DeviceSchema, TemplateSchema
 
 from env import FRONTEND_URL
 
-from env import FRONTEND_URL
 
 app = FastAPI()
-app.add_middleware(CORSMiddleware, allow_origins=[FRONTEND_URL], allow_credentials=True)
 app.add_middleware(CORSMiddleware, allow_origins=[FRONTEND_URL], allow_credentials=True)
 
 
@@ -46,15 +42,6 @@ def get_devices(db: Session = Depends(get_db)):
 
     return devices
 
-  
-@app.get("/ips")
-def get_ips(db: Session = Depends(get_db)):
-    """Recupère la liste des ips"""
-    results = db.execute(select(Device.ip))
-    ips = results.scalars().all()
-
-    return ips
-
 
 @app.get("/ips")
 def get_ips(db: Session = Depends(get_db)):
@@ -71,15 +58,6 @@ def get_device(device_id: int, db: Session = Depends(get_db)):
     device = db.get(Device, device_id)
 
     return device
-
-
-@app.get("/ip/{device_serial_number}")
-def get_ip(device_serial_number: str, db: Session = Depends(get_db)):
-    """Recupère l'ip d'un device à partir de son serial number"""
-    device = db.get(Device, device_serial_number)
-
-    return device.ip
-
 
 
 @app.get("/ip/{device_serial_number}")
@@ -120,4 +98,3 @@ def get_template(template_id: int, db: Session = Depends(get_db)):
     template = db.get(Template, template_id)
 
     return template
-
