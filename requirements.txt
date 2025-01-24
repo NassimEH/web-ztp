@@ -1,6 +1,0 @@
-fastapi[standard]
-uvicorn
-SQLAlchemy
-aiosqlite
-pydantic
-pydantic-extra-types
