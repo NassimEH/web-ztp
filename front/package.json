@@ -1,0 +1,16 @@
+{
+  "name": "ztp-front",
+  "version": "1.0.0",
+  "description": "le front",
+  "main": "ztp.js",
+  "scripts": {
+    "start": "serve -s public",
+    "build": "riot src public --output ztp.js"
+  },
+  "dependencies": {
+    "riot": "^6.0.0"
+  },
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}
