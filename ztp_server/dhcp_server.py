@@ -1,11 +1,7 @@
-import os
-
 import socket
 from scapy.all import packet, BOOTP, DHCP
 
 from dhcp_db import DHCPData
-
-BACKEND_URL = os.getenv("BACKEND_URL")
 
 
 class DHCPServer:
@@ -14,7 +10,7 @@ class DHCPServer:
         self.bind_port = bind_port
         self.buffer_size = buffer_size
 
-        self.dhcp_data = DHCPData(BACKEND_URL)
+        self.dhcp_data = DHCPData()
 
     def get_dhcp_packet(self, data: bytes):
         return BOOTP(data)
@@ -28,11 +24,15 @@ class DHCPServer:
 
     def create_dhcp_options(self, packet: packet, message_type: str):
         new_options = [
+            ("subnet_mask", self.dhcp_data.subnet),
+            ("router", self.dhcp_data.router),
+            ("name_server", "8.8.8.8"),
+            ("domain", "local"), #15
+            ("static-routes", self.dhcp_data.router+":"+self.dhcp_data.subnet), #33
+            ("boot-file-name", "http:"+self.dhcp_data.url+"/ztp.py"), #67
             ("message-type", message_type),
             ("lease_time", 3600),
             ("server_id", self.ip_address),
-            ("subnet_mask", "255.255.255.0"),
-            ("name_server", "8.8.8.8"),
         ]
 
         for option in packet["DHCP"].options:

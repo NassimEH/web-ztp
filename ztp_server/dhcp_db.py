@@ -1,4 +1,8 @@
+import os
+
 import requests
+
+BACKEND_URL = os.getenv("BACKEND_URL")
 
 
 class IPaddress:
@@ -8,10 +12,12 @@ class IPaddress:
         # self.bin_octets = [bin((octet)) for octet in self.octets]
 
     def next(self):
-        new_ip = f"{self.octets[0]}.{self.octets[1]}.{self.octets[2]}.{self.octets[3] + 1}"
+        new_ip = (
+            f"{self.octets[0]}.{self.octets[1]}.{self.octets[2]}.{self.octets[3] + 1}"
+        )
         return IPaddress(new_ip)
 
-    def lt(self, other):
+    def __lt__(self, other):
         if self.octets[0] != other.octets[0]:
             return self.octets[0] < other.octets[0]
         if self.octets[1] != other.octets[1]:
@@ -26,17 +32,26 @@ class IPaddress:
 
 
 class DHCPData:
-    def __init__(self, url):
-        self.url = url
+    def __init__(self):
+        self.url = BACKEND_URL
         self.subnet = self.get_subnet()
+        self.router = self.get_router()
         self.min_ip_pool = self.get_min_ip_pool()
         self.max_ip_pool = self.get_max_ip_pool()
 
     def get_subnet(self) -> str:
         try:
-           # response = requests.get(self.url + "/subnets"
-           # response.raise_for_status()
+            # response = requests.get(self.url + "/subnet")
+            # response.raise_for_status()
             return "255.255.255.0"
+        except:
+            pass
+
+    def get_router(self) -> str:
+        try:
+            # response = requests.get(self.url + "/router")
+            # response.raise_for_status()
+            return "0.0.0.0"
         except:
             pass
 
@@ -58,7 +73,7 @@ class DHCPData:
 
     def get_use_ip(self) -> set:
         try:
-            response = requests.get(self.url + "/ips" )
+            response = requests.get(self.url + "/ips")
             response.raise_for_status()
             return set(response)
         except:
@@ -67,7 +82,7 @@ class DHCPData:
     def get_ip_in_pool(self) -> str:
         ip_address = IPaddress(self.min_ip_pool)
         max_ip_address = IPaddress(self.max_ip_pool)
-        while ip_address.lt(max_ip_address):
+        while ip_address < max_ip_address:
             ip_address = ip_address.next()
             yield str(ip_address)
 

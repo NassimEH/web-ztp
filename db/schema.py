@@ -28,3 +28,14 @@ class TemplateSchema(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class DHCPConfigSchema(BaseModel):
+    """Schéma Pydantic pour une configuration DHCP"""
+
+    subnet: IPv4Address
+    min_ip_pool: Optional[IPv4Address]
+    max_ip_pool: Optional[IPv4Address]
+
+    class Config:
+        from_attributes = True
