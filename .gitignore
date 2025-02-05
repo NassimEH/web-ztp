@@ -1,3 +1,5 @@
 __pycache__
 extended_db_file.dhcpo
 *.db
+node_modules
+package-lock.json
