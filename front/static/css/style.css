@@ -1,0 +1,626 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Reem+Kufi+Ink&display=swap');
+
+/* GENERAL */
+
+* {
+    --font-color: #000000;
+    --main-color: #8C3243;
+    --second-color: #BF211E;
+    --third-color: #1C1D21;
+    font-family: 'Reem Kufi Ink', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.wrapper {
+    display: grid;
+}
+
+.flex {
+    display: flex;
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.none {
+    display: none;
+}
+
+.invisible {
+    opacity: 0.0;
+}
+
+body {
+    background: var(--font-color);
+    color: var(--main-color);
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.home h1, .home h2 {
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
+    font-weight: 600;
+}
+
+h2 {
+    margin-top: 100px;
+    font-size: 30px;
+}
+
+h3 {
+    color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+select {
+    padding: 0 0 0 8px;
+    border-radius: 7px;
+    width: 170px;
+    height: 33px;
+    align-self: center;
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #d2d1d1;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: .5s ease-out;
+}
+
+select:hover {
+    background-color: var(--main-color);
+    color: var(--font-color);
+    box-shadow: 0 0 6px var(--main-color);
+}
+
+select:focus {
+    background-color: var(--third-color);
+    color: white;
+    box-shadow: 0 0 10px var(--third-color);
+    border: 1px solid white;
+}
+
+input {
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 50px;
+    color: white;
+    transition: all .5s;
+}
+
+input::-webkit-search-cancel-button {
+    display: none;
+}
+
+input::placeholder {
+    color: white;
+    opacity: 0.5;
+}
+
+input:hover {
+    border: 1px solid transparent;
+    box-shadow: 0px 0px 5px white;
+}
+
+input:focus {
+    box-shadow: 0 0 15px var(--main-color);
+    border: 1px solid transparent;
+    outline: none;
+}
+
+input:focus::placeholder {
+    color: transparent;
+}
+
+/* landing-page */
+
+.landing-page {
+    width: 100%;
+    height: 100vh;
+}
+
+.home {
+    background-image: url('../img/wallpaper2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.back {
+    position: absolute;
+    border: 1px solid transparent;
+    background-color: transparent;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    transition: all .5s;
+}
+
+.previous {
+    top: 6%;
+    left: 3%;
+}
+
+.back-home {
+    top: 6%;
+    right: 3%;
+}
+
+.back-top {
+    position: fixed;
+    bottom: 5%;
+    right: 3%;
+}
+
+.back-top .back-image {
+    width: 25px;
+    height: 25px;
+}
+
+.back:hover {
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.back-image {
+    filter: blur(1px);
+    padding-top: 5px;
+    width: 20px;
+    height: 20px;
+    transition: all .5s;
+}
+
+.back:hover .back-image {
+    filter: none;
+}
+
+/* NAVBAR */
+
+nav {
+    min-width: fit-content;
+    margin: 0 0 25px 0;
+    min-height: 50px;
+    background-color: transparent;
+}
+
+.navbar-scroll {
+    top: -60px;
+    z-index: 1;
+    transition: top .5s;
+}
+
+.scrolled {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--third-color);
+}
+
+.navbar {
+    gap: 40px;
+    padding-left: 5%;
+    flex-direction: row;
+}
+
+.logo-navbar {
+    width: 120px;
+    height: 120px;
+    min-width: 80px;
+    min-height: 80px;
+    margin: 5px 10px 0 0;
+}
+
+nav button {
+    padding: 7px 20px;
+    border-radius: 7px;
+    align-self: center;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 14px;
+    transition: .5s ease-out;
+}
+
+nav .filtre:hover {
+    background-color: var(--main-color);
+    color: var(--font-color);
+    box-shadow: 0 0 10px var(--main-color);
+}
+
+nav .filtre:focus {
+    background-color: var(--third-color);
+    color: white;
+    box-shadow: 0 0 10px var(--third-color);
+}
+
+nav input {
+    width: 28%;
+    align-self: center;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+nav input:focus {
+    box-shadow: 0 0 8px white;
+    border: 1px solid transparent;
+    outline: none;
+}
+
+nav input::placeholder {
+    color: white;
+    font-size: 14px;
+}
+
+nav .langue {
+    margin-left: auto;
+    margin-right: 40px;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 3px 7px;
+    color:#c0c0c0;
+    background-color:#2e2e2e;
+    border: 1px solid #434343;
+    cursor: pointer;
+    transition: all .4s;
+}
+
+nav .langue:hover {
+    background-color:var(--third-color);
+    color: white;
+    border: 1px solid white;
+}
+
+nav .langue:active {
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+
+/* SIDE-BAR */
+
+.side-bar {
+    position: fixed;
+    top: 0;
+    left: -400px;
+    min-width: 250px;
+    max-width: 250px;
+    height: 100%;
+    padding: 50px 25px 0 40px;
+    background-color: var(--third-color);
+    z-index: 2;
+    transition: all .5s;
+}
+
+.side-bar.active {
+    left: 0;
+}
+
+.side-bar .close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    opacity: 0.4;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+.menu-mode {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000cc;
+    z-index: 1;
+    transition: all .3s;
+}
+
+.side-bar a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: white;
+    opacity: 0.7;
+    line-height: 10px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.side-bar a:hover {
+    opacity: 1;
+}
+
+.side-bar .icon {
+    width: 20px;
+    height: 20px;
+}
+
+.side-bar p {
+    color: #757575;
+}
+
+.genres {
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.side-bar .genre {
+    margin: 3% 3% 0 0;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 3px 7px;
+    color:#c0c0c0;
+    background-color:#2e2e2e;
+    text-wrap: nowrap;
+    border: 1px solid #434343;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.side-bar .genre:hover {
+    background-color:var(--third-color);
+    color: white;
+    border: 1px solid white;
+}
+
+.side-bar .genre:active {
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+
+.genre.activated {
+    background-color: var(--main-color);
+    color: var(--third-color);
+    box-shadow: 0 0 5px var(--main-color);
+    border: 1px solid transparent;
+}
+
+.genre.activated:hover {
+    background-color: var(--main-color);
+    color: var(--third-color);
+    box-shadow: 0 0 5px var(--main-color);
+    border: 1px solid transparent;
+}
+
+.genre.activated:active {
+    background-color: var(--third-color);
+    border: 1px solid white;
+    color: white;
+    box-shadow: none;
+}
+
+.close-filters {
+    width: 100%;
+    height: 100%;
+}
+
+/* LANDING */
+
+.landing {
+    text-align: center;
+    color: var(--main-color);
+    padding-top: 5px;
+}
+
+.landing input {
+    width: 400px;
+    margin-top: 10px;
+    padding: 10px 15px 10px 15px;
+    font-size: 17px;
+}
+
+.landing input::placeholder {
+    color: white;
+    font-size: 17px;
+}
+
+/* TITLE */
+
+cinne-app h2 {
+    text-align: center;
+}
+
+/* PAGINATION */
+
+.filters {
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+}
+
+.filters * {
+    background-color: var(--third-color);
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    transition: all .5s;
+}
+
+.filters *:hover {
+    background-color: var(--font-color);
+    cursor: pointer;
+}
+
+.filters .current {
+    background-color: var(--main-color);
+    color: var(--font-color);
+}
+
+.pending {
+    background-color: var(--font-color);
+    cursor:none;
+}
+
+.genres {
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.genre {
+    margin: 3% 3% 0 0;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 3px 7px;
+    color: #aeadad;
+    text-wrap: nowrap;
+    white-space: nowrap;
+    background-color: #434343;
+}
+
+
+
+.reset {
+    justify-self: end;
+}
+
+.reset img {
+    width: 14px;
+    height: 14px;
+    margin: 0 0 -20% 0;
+}
+
+
+
+
+
+
+
+/* FOOTER */
+
+my-footer {
+    position: relative;
+    background: var(--font-color);
+    height: 50%;
+    min-width: 100%;
+    min-height: 50%;
+    color: white;
+}
+
+.footer-logo {
+    align-self: center;
+    justify-self: center;
+    
+}
+
+.footer .logo {
+    width: 120px;
+    height: 120px;
+    min-width: 80px;
+    min-height: 80px;
+    margin: 5px 10px 0 0;
+}
+
+.footer {
+    margin-left: 5%;
+    width: 87%;
+}
+
+.footer-title {
+    display: grid;
+}
+
+.footer-part {
+    display: grid;
+}
+
+.last-footer-column {
+    grid-column: 5 / 5;
+}
+
+.footer-title > a {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+.footer-title > a > h1 {
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 22px;
+    color: var(--main-color);
+}
+
+.footer-part > a {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+.footer-part > a > h4 {
+    font-family: 'Fjalla One';
+    font-weight: lighter;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.footer-part > #void {
+    color: transparent;
+}
+
+.white-bar {
+    background-color: white;
+    width: 88%;
+    height: 2px;
+    margin: 2% 0 2% 6%;
+}
+
+.footer-rights {
+    display: flex;
+    justify-self: flex-start;
+    margin: 0 0 2% 15%;
+}
+
+.footer-rights > h5 {
+    margin: 2% 5%;
+    text-wrap: nowrap;
+    font-weight: 200;
+}
+
+.footer-logos {
+    display: grid;
+    grid-column: 2 / 2;
+    justify-self: flex-end;
+    margin-right: 18%;
+}
+
+.footer-logos > a {
+    margin: 0 20px;
+    grid-row: 1;
+}
+
+.footer-logos > a > img {
+    width: 25px;
+    height: 25px;
+}
