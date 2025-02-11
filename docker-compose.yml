@@ -1,18 +1,22 @@
+version: "3.8"
 services:
-  dhcp:
-    build:
-      context: ./ztp_server/
-      dockerfile: Dockerfile.ztp
-    container_name: service_dhcp
-    network_mode: host
-    # ports:
-    #   - 67:67/udp
-    environment:
-      - BACKEND_URL=http://127.0.0.1:8080
-  fastapi:
+  web:
     build:
       context: .
-      dockerfile: Dockerfile.backend 
-    container_name: fastapi-web-ztp
+      dockerfile: Dockerfile
+    container_name: django_web
     ports:
-      - 8080:8080
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=1
+
+  dhcp:
+    build:
+      context: ./dhcp
+      dockerfile: Dockerfile.dhcp   # Vous pouvez créer un Dockerfile spécifique pour le serveur DHCP
+    container_name: dhcp_server
+    network_mode: host
+    environment:
+      - BACKEND_URL=http://127.0.0.1:8000
