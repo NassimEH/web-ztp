@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Configuration ZTP </title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+<!-- =============== Navigation ================ -->
+   {% include 'app/components/menu.html' %}
+               <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+    <!-- ========================= Main ==================== -->
+        {% block content %}
+        {% endblock %}
+
+    
+    <!-- =============== Footer ================ -->
+            </div>
+     <!-- {% include 'app/components/footer.html' %} -->
+            </div>
+    <!-- =========== Scripts =========  -->
+    <script>
+        let list = document.querySelectorAll(".navigation li");
+      
+        function activeLink() {
+          list.forEach((item) => {
+            item.classList.remove("hovered");
+          });
+          this.classList.add("hovered");
+        }
+      
+        list.forEach((item) => item.addEventListener("mouseover", activeLink));
+      
+        let toggle = document.querySelector(".toggle");
+        let navigation = document.querySelector(".navigation");
+        let main = document.querySelector(".main");
+      
+        toggle.onclick = function () {
+          navigation.classList.toggle("active");
+          main.classList.toggle("active");
+        };
+      </script>
+      
+    {% block script %}
+    {% endblock %}
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

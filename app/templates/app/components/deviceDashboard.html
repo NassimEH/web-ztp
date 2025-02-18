@@ -1,0 +1,24 @@
+{% load custom_tags %}
+<div class="deviceDashboard">
+    <div class="cardHeader">
+        <h2>Mes appareils</h2>
+        <a href="#" class="btn">Tout voir</a>
+    </div>
+    <div>
+    <table>
+        <thead>
+            <tr>
+                <td> Hostname </td>
+                <td> Adresse IP </td>
+                <td> Serial Number </td>
+                <td> Template </td>
+                <td> Status </td>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% render_device_rows %}
+        </tbody>
+    </table>
+    </div>
+</div>

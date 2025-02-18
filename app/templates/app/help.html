@@ -1,0 +1,143 @@
+{% extends 'app/base.html' %}
+{% block content %}
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Rechercher une information...">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+            </div>
+
+            <!-- ========== Section d'Aide ========== -->
+            <div class="dropdown-container">
+                <div class="dropdown">
+                    <button class="dropbtn">Termes techniques</button>
+                    <div class="dropdown-content">
+                        <div class="cardBox">
+                            <!-- Carte IP -->
+                            <div class="card flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <div>
+                                            <div class="numbers">IP</div>
+                                            <div class="cardName">Adresse IP</div>
+                                        </div>
+                                        <div class="iconBx"><ion-icon name="globe-outline"></ion-icon></div>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <p>L'adresse IP est un identifiant unique attribué à chaque appareil sur un réseau.</p>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- Carte DHCP -->
+                            <div class="card flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <div>
+                                            <div class="numbers">DHCP</div>
+                                            <div class="cardName">Attribution Dynamique</div>
+                                        </div>
+                                        <div class="iconBx"><ion-icon name="server-outline"></ion-icon></div>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <p>Le DHCP permet d'attribuer automatiquement des adresses IP aux appareils d'un réseau.</p>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- Carte ZTP -->
+                            <div class="card flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <div>
+                                            <div class="numbers">ZTP</div>
+                                            <div class="cardName">Zero-Touch Provisioning</div>
+                                        </div>
+                                        <div class="iconBx"><ion-icon name="cloud-download-outline"></ion-icon></div>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <p>Le ZTP permet de configurer automatiquement un appareil réseau dès son premier démarrage.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="dropdown">
+                    <button class="dropbtn">Autres catégories</button>
+                    <div class="dropdown-content">
+                        <div class="cardBox">
+                            <!-- Carte A -->
+                            <div class="card flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <div>
+                                            <div class="numbers">A</div>
+                                            <div class="cardName">Catégorie A</div>
+                                        </div>
+                                        <div class="iconBx"><ion-icon name="list-outline"></ion-icon></div>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <p>Description de la catégorie A.</p>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- Carte B -->
+                            <div class="card flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <div>
+                                            <div class="numbers">B</div>
+                                            <div class="cardName">Catégorie B</div>
+                                        </div>
+                                        <div class="iconBx"><ion-icon name="bookmark-outline"></ion-icon></div>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <p>Description de la catégorie B.</p>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- Carte C -->
+                            <div class="card flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <div>
+                                            <div class="numbers">C</div>
+                                            <div class="cardName">Catégorie C</div>
+                                        </div>
+                                        <div class="iconBx"><ion-icon name="cube-outline"></ion-icon></div>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <p>Description de la catégorie C.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+{% endblock %}
+{% block script %}
+    <!-- =========== Scripts ========= -->
+    <script>
+        document.querySelectorAll('.dropbtn').forEach(button => {
+        button.addEventListener('click', function () {
+            let dropdown = this.parentElement;
+            dropdown.classList.toggle('active');
+
+            // Fermer les autres dropdowns
+            document.querySelectorAll('.dropdown').forEach(d => {
+                if (d !== dropdown) d.classList.remove('active');
+            });
+        });
+    });
+
+    window.addEventListener('click', function (e) {
+        if (!e.target.matches('.dropbtn')) {
+            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+        }
+    });
+      </script>
+{% endblock %}

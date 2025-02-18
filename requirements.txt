@@ -1,6 +1,3 @@
-fastapi[standard]
-uvicorn
-SQLAlchemy
-aiosqlite
-pydantic
-pydantic-extra-types
+Django==5.1.6
+django-anchor=0.6.1
+django-htmx=1.22.0

@@ -1,0 +1,40 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/styleFormulaire.css' %}">
+<script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <form method="POST" x-post="{% url 'config_device' %}" 
+          hx-post="{% url 'config_device' %}"  
+          hx-target="#response-container" 
+          hx-swap="innerHTML">
+        
+        <h2>Formulaire</h2>
+        {% csrf_token %}
+
+        <div class="input-box">
+            {{ form.serial_number }}
+            <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+            {{ form.ip }}
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+        <div class="input-box">
+            {{ form.hostname }}
+            <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+            {{ form.template }}
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+        <br>
+        <button type="submit" class="btn">Ajouter mon appareil</button>
+    </form>
+    
+    <div id="response-container" ></div>
+</div>
+{% endblock %}
