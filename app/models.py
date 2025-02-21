@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Template(models.Model):
@@ -35,3 +36,17 @@ class DHCPConfig(models.Model):
 
     def __str__(self):
         return f"DHCP: {self.subnet}"
+
+class Action(models.Model):
+    ACTION_CHOICES = [
+        ('add', 'Add'),
+        ('delete', 'Delete'),
+        ('modify', 'Modify'),
+    ]
+    
+    action_type = models.CharField(max_length=10, choices=ACTION_CHOICES)
+    description = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return f"{self.get_action_type_display()} on {self.created_at}"
