@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from app.views import index_views, device_views, template_views, config_device_views, help_views
+from app.views import index_views, device_views, template_views, config_device_views, help_views, log_views
 
 from django.conf import settings
 from django.views.static import serve
@@ -34,5 +34,4 @@ urlpatterns = [
     path('deviceCount/', device_views.DeviceCountView.as_view())
 ]
 
-# if settings.DEBUG:
 urlpatterns += static(settings.MEDIA_URL + "conf/", document_root=settings.MEDIA_ROOT / "conf")

@@ -1,8 +1,8 @@
 import socket
 from scapy.all import packet, BOOTP, DHCP
 
-from dhcp_db import DHCPData
-
+from dhcp_server.dhcp_db import DHCPData
+from app.utils import device_utils
 
 class DHCPServer:
     def __init__(self, ip_address: str, bind_port=67, buffer_size=1024):
@@ -22,7 +22,6 @@ class DHCPServer:
                 return dhcp_option[1]
 
     def get_reply_message_type(self, message_type):
-        print(message_type)
         if message_type == "discover" or message_type == 1:
             return "offer"
         elif message_type == "request" or message_type == 3:
@@ -39,11 +38,12 @@ class DHCPServer:
         if requested_addr:
             return requested_addr
 
-        if serial_number: 
+        if serial_number:
             return self.dhcp_data.get_ip(serial_number)
-    
+
     def get_bootfile(self, serial_number):
         if serial_number:
+            serial_number = ''.join(c for c in serial_number if c.isprintable()).strip()
             return self.dhcp_data.get_bootfile(serial_number)
 
     def create_dhcp_options(self, message_type: str):
@@ -109,17 +109,20 @@ class DHCPServer:
         client_ip = self.get_ip_in_pool(requested_addr, serial_number)
 
         message_type = self.get_dhcp_option(packet, "message-type")
-        options = self.create_dhcp_options(message_type)
+        reply_message_type = self.get_reply_message_type(message_type)
 
-        chaddr=packet["BOOTP"].chaddr
-        xid=packet["BOOTP"].xid
-        bootfile = self.get_bootfile(serial_number)
-        bootp = self.create_bootp(client_ip, chaddr, xid, bootfile)
-        dhcp = DHCP(options=options)
+        if reply_message_type:
+            options = self.create_dhcp_options(reply_message_type)
 
-        reply = bootp / dhcp
+            chaddr = packet["BOOTP"].chaddr
+            xid = packet["BOOTP"].xid
+            bootfile = self.get_bootfile(serial_number)
+            bootp = self.create_bootp(client_ip, chaddr, xid, bootfile)
+            dhcp = DHCP(options=options)
 
-        return bytes(reply)
+            reply = bootp / dhcp
+
+            return bytes(reply)
 
         # if message_type == 1:
         #     return self.dhcp_offer(packet)

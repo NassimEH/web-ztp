@@ -1,4 +1,3 @@
-import django_setup
 from app.utils import device_utils, dhcp_utils
 
 
@@ -68,10 +67,9 @@ class DHCPData:
 
     def get_ip(self, serial_number: str):
         if serial_number:
-            ip = device_utils.get_device_by_serial(serial_number).ip
-            if ip:
-                return ip
-
+            device = device_utils.get_device_by_serial(serial_number)
+            if device:
+                return device.ip
             try:
                 return next(self.generate_ip)
             except StopIteration:
