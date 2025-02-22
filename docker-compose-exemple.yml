@@ -1,0 +1,57 @@
+services:
+ caddy:
+ container_name: caddy
+ hostname: caddy
+ image: caddy
+ network:
+  - web
+ ports:
+  -'443:443/tcp'
+  -'80:80/tcp'
+ restart: unless-stopped
+ volumes:
+  -'$PWD/Caddyfile:/etc/caddy/Caddyfile'
+  -'$PWD/docker-data/caddy/data:/data'
+  -'$PWD/docker-data/caddy/config:/config'
+  -'$PWD/docker-data/STATIC:/static'
+ working_dir: /srv
+ database:
+ container_name: database
+ environment:
+ POSTGRES_USER: postgres
+ POSTGRES_PASSWORD: '..............'
+ PGDATA: /var/lib/postgresql/data
+ hostname: database
+ image: 'pgautoupgrade/pgautoupgrade:17-bookworm'
+ networks:
+  - database
+ restart: unless-stopped
+ volumes:
+  -'$PWD/docker-data/database/data:/var/lib/postgresql/data'
+
+portal:
+ container_name: portal
+ hostname: portal
+ build:
+ context: '..........'
+ args:
+  BUILDKIT_CONTEXT_KEEP_GIT_DIR: 1
+ networks:
+  - web
+  - database
+ depends_on:
+  - database
+ environment:
+ DB_NAME: portal
+ DB_USER: postgres
+ DB_PASSWORD: '..............'
+ DB_HOST: database
+ DB_PORT: '5432'
+ SECRET_KEY: '...............'
+ restart: unless-stopped
+ volumes:
+  -'$PWD/docker-data/STATIC:/cdn/'
+
+networks:
+ database: null
+ web: null
