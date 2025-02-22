@@ -4,7 +4,7 @@ from dhcp_server import dhcp_server
 
 
 class Command(BaseCommand):
-    help = "Lance un serveur DHCP avec la configuration en base de donéees"
+    help = "Lance un serveur DHCP avec la configuration en base de donéees pour provisioning ztp"
 
     def handle(self, *args, **options):
         try:
