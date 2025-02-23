@@ -1,4 +1,4 @@
-from ..models import DHCPConfig
+from app.models import DHCPConfig
 
 def get_dhcp_config():
     """Récupère les informations du subnet DHCP et du pool d'adresses IP."""

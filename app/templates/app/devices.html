@@ -1,17 +1,11 @@
 {% extends 'app/base.html' %}
+{% load static %}
 {% load custom_tags %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/styleAppareils.css' %}">
+{% endblock %}
 {% block content %}
 {% device_count as nb_device %}
-                <div class="search">
-                    <label>
-                        <input type="text" placeholder="Rechercher un appareil...">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div>
-
-                <div class="user">
-                    <img src="assets/imgs/customer01.jpg" alt="">
-                </div>
             </div>
 
             <!-- ======================= Cards ================== -->
@@ -25,13 +19,5 @@
             {% include "app/components/deviceDashboard.html" %}
 
                 <!-- ================= New Customers ================ -->
-                <div class="actionHistory">
-                    <div class="cardHeader">
-                        <h2> Actions récentes </h2>
-                    </div>
 
-                    <table>
-
-                    </table>
-                </div>
 {% endblock %}

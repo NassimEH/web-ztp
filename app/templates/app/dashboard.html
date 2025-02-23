@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+{% load custom_tags %}
+{% block content %}
+{% device_count as nb_device %}
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Rechercher un appareil...">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="assets/imgs/customer01.jpg" alt="">
+                </div>
+            </div>
+
+            <!-- ======================= Cards ================== -->
+            <div class="cardBox">
+                    {% render_card "Nombre d'appareils configurés" nb_device "eye-outline" %}
+            </div>
+
+            <!-- ================ Order Details List ================= -->
+            <div class="details">
+                
+            {% include "app/components/deviceDashboard.html" %}
+
+                <!-- ================= New Customers ================ -->
+                <div class="actionHistory">
+                    <div class="cardHeader">
+                        <h2> Actions récentes </h2>
+                    </div>
+
+                    <table>
+
+                    </table>
+                </div>
+{% endblock %}

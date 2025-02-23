@@ -7,8 +7,8 @@
 
 {% block content %}
 <div class="wrapper">
-    <form method="POST" x-post="{% url 'config_device' %}" 
-          hx-post="{% url 'config_device' %}"  
+    <form method="POST" x-post="{% url 'device_form' %}" 
+          hx-post="{% url 'device_form' %}"  
           hx-target="#response-container" 
           hx-swap="innerHTML">
         

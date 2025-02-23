@@ -3,4 +3,4 @@ from django.views import View
 
 class IndexView(View):
     def get(self, request):
-        return redirect("/device/")
+        return redirect("/dashboard/")
