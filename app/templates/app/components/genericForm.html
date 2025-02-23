@@ -1,0 +1,16 @@
+<form method="POST" 
+    hx-post="{{ action_url }}" 
+    hx-target="#response-container" 
+    hx-swap="innerHTML">
+
+    <h2>{{ title }}</h2>
+    {% csrf_token %}
+    
+    {% for field in form %}
+    <div class="input-box">
+        {{ field }}
+    </div>
+    {% endfor %}
+    <br>
+    <button type="submit" class="btn">{{ submit_text }}</button>
+</form>

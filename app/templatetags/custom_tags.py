@@ -1,5 +1,5 @@
 from django import template
-from ..utils import device_utils
+from app.utils import device_utils
 
 
 register = template.Library()

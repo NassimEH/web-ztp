@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.views import View
 from django.views.generic.edit import FormView
@@ -6,6 +7,7 @@ from django.http import HttpResponse
 
 from app.forms import DeviceForm
 from app.models import Device
+
 
 class DeviceListView(View):
     def get(self, request):
@@ -31,30 +33,23 @@ class AddDeviceView(FormView):
 
     def form_valid(self, form):
         device = form.save()
-        return HttpResponse(
-            f"""
-            <br>
-            <div class="errorHandling">
-                <p style='color: green;'>✅ Appareil ajouté : {device.hostname} ({device.ip})</p>
-            </div>
-            """,
-            status=200,
+        html = render_to_string(
+            "app/components/formResponse.html",
+            {
+                "success": True,
+                "modele": device,
+            },
         )
+
+        return HttpResponse(html, status=200)
 
     def form_invalid(self, form):
-        errors_html = "<ul>"
-        for field, errors in form.errors.items():
-            for error in errors:
-                errors_html += f"<li>{field}: {error}</li>"
-        errors_html += "</ul>"
-
-        return HttpResponse(
-            f"""
-            <br>
-            <div class="errorHandling">
-                <p style="color: red;">❌ Erreur :</p>
-                {errors_html}
-            </div>
-            """,
-            status=200,
+        html = render_to_string(
+            "app/components/formResponse.html",
+            {
+                "success": False,
+                "form": form,
+            },
         )
+
+        return HttpResponse(html, status=200)

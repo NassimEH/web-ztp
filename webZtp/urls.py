@@ -28,7 +28,7 @@ urlpatterns = [
     path('devices/', device_views.DeviceListView.as_view() ),
     path('deviceForm/', device_views.AddDeviceView.as_view(), name="device_form"),
     path('help/', help_views.HelpView.as_view()),
-    path('deviceCount/', device_views.DeviceCountView.as_view())
+    path('deviceCount/', device_views.DeviceCountView.as_view()),
 ]
 
 urlpatterns += static(settings.MEDIA_URL + "conf/", document_root=settings.MEDIA_ROOT / "conf")
