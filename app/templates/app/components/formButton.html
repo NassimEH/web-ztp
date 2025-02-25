@@ -1,0 +1,19 @@
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="device">
+        <button type="submit">Ajouter un Device</button>
+    </form>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="template">
+        <button type="submit">Ajouter un Template</button>
+    </form>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="dhcp">
+        <button type="submit">Modifier la Configuration DHCP</button>
+    </form>
+</div>

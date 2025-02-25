@@ -8,8 +8,8 @@
 {% block content %}
 {% include "app/components/formButton.html" %}
 <div class="wrapper">
-    {% url 'device_form' as url %}
-    {% include "app/components/genericForm.html" with form=form title="Formulaire" action_url=url submit_text="Ajouter mon appareil" %}
+    {% url 'template_form' as url %}
+    {% include "app/components/genericForm.html" with form=form title="Formulaire" action_url=url submit_text="Ajouter ma tempalte" %}
     
     <div id="response-container" ></div>
 </div>

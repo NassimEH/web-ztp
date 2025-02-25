@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import index_views, device_views, help_views, dashboard_views
+from app.views import index_views, device_views, help_views, dashboard_views, form_views
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -26,7 +26,10 @@ urlpatterns = [
     path('', index_views.IndexView.as_view()),
     path('dashboard/', dashboard_views.DashboardView.as_view()),
     path('devices/', device_views.DeviceListView.as_view() ),
-    path('deviceForm/', device_views.AddDeviceView.as_view(), name="device_form"),
+    path('deviceForm/', form_views.AddDeviceView.as_view(), name="device_form"),
+    path('templateForm/', form_views.AddTemplateView.as_view(), name="template_form"),
+    path('dhcpconfigForm/', form_views.ChangeDHCPConfig.as_view(), name="dhcpconfig_form"),
+    path('config/', form_views.ConfFormView.as_view()),
     path('help/', help_views.HelpView.as_view()),
     path('deviceCount/', device_views.DeviceCountView.as_view()),
 ]

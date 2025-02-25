@@ -8,8 +8,8 @@
 {% block content %}
 {% include "app/components/formButton.html" %}
 <div class="wrapper">
-    {% url 'device_form' as url %}
-    {% include "app/components/genericForm.html" with form=form title="Formulaire" action_url=url submit_text="Ajouter mon appareil" %}
+    {% url 'dhcpconfig_form' as url %}
+    {% include "app/components/genericForm.html" with form=form title="Formulaire" action_url=url submit_text="Modifier la config DHCP" %}
     
     <div id="response-container" ></div>
 </div>
