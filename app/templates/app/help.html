@@ -1,143 +1,294 @@
 {% extends 'app/base.html' %}
 {% block content %}
-                <div class="search">
-                    <label>
-                        <input type="text" placeholder="Rechercher une information...">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
+    <div class="search">
+        <label>
+            <input type="text" placeholder="Rechercher une information...">
+            <ion-icon name="search-outline"></ion-icon>
+        </label>
+    </div>
+
+    <!-- ========== Section d'Aide Modernisée ========== -->
+    <div class="help-section">
+        <h2 class="section-title">Centre de Connaissances</h2>
+        <p class="section-description">Explorez nos ressources pour mieux comprendre la gestion réseau, le DHCP et le ZTP</p>
+        
+        <div class="help-categories">
+            <!-- Catégorie 1: Concepts de base -->
+            <div class="help-category">
+                <div class="category-header">
+                    <ion-icon name="school-outline"></ion-icon>
+                    <h3>Concepts fondamentaux</h3>
+                </div>
+                <div class="cards-container">
+                    <!-- Carte IP -->
+                    <div class="info-card">
+                        <div class="card-front">
+                            <div class="card-icon"><ion-icon name="globe-outline"></ion-icon></div>
+                            <h4>Adresse IP</h4>
+                        </div>
+                        <div class="card-back">
+                            <h4>Adresse IP</h4>
+                            <p>Identifiant numérique unique attribué à chaque appareil sur un réseau. Format standard IPv4: 192.168.1.1</p>
+                            <ul class="card-details">
+                                <li>Permet l'identification sur le réseau</li>
+                                <li>Peut être statique ou dynamique</li>
+                                <li>Essentielle pour la communication réseau</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Carte Sous-réseau -->
+                    <div class="info-card">
+                        <div class="card-front">
+                            <div class="card-icon"><ion-icon name="git-network-outline"></ion-icon></div>
+                            <h4>Sous-réseau</h4>
+                        </div>
+                        <div class="card-back">
+                            <h4>Sous-réseau</h4>
+                            <p>Division logique d'un réseau IP en segments distincts pour améliorer la gestion et la sécurité.</p>
+                            <ul class="card-details">
+                                <li>Optimise la performance du réseau</li>
+                                <li>Utilise un masque de sous-réseau</li>
+                                <li>Facilite l'administration du réseau</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Carte VLAN -->
+                    <div class="info-card">
+                        <div class="card-front">
+                            <div class="card-icon"><ion-icon name="layers-outline"></ion-icon></div>
+                            <h4>VLAN</h4>
+                        </div>
+                        <div class="card-back">
+                            <h4>VLAN</h4>
+                            <p>Réseau local virtuel permettant de segmenter un réseau physique en plusieurs réseaux logiques isolés.</p>
+                            <ul class="card-details">
+                                <li>Améliore la sécurité et les performances</li>
+                                <li>Réduit le trafic de diffusion</li>
+                                <li>Facilite la gestion des ressources réseau</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <!-- ========== Section d'Aide ========== -->
-            <div class="dropdown-container">
-                <div class="dropdown">
-                    <button class="dropbtn">Termes techniques</button>
-                    <div class="dropdown-content">
-                        <div class="cardBox">
-                            <!-- Carte IP -->
-                            <div class="card flip-card">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-front">
-                                        <div>
-                                            <div class="numbers">IP</div>
-                                            <div class="cardName">Adresse IP</div>
-                                        </div>
-                                        <div class="iconBx"><ion-icon name="globe-outline"></ion-icon></div>
-                                    </div>
-                                    <div class="flip-card-back">
-                                        <p>L'adresse IP est un identifiant unique attribué à chaque appareil sur un réseau.</p>
-                                    </div>
-                                </div>
-                            </div>
             
-                            <!-- Carte DHCP -->
-                            <div class="card flip-card">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-front">
-                                        <div>
-                                            <div class="numbers">DHCP</div>
-                                            <div class="cardName">Attribution Dynamique</div>
-                                        </div>
-                                        <div class="iconBx"><ion-icon name="server-outline"></ion-icon></div>
-                                    </div>
-                                    <div class="flip-card-back">
-                                        <p>Le DHCP permet d'attribuer automatiquement des adresses IP aux appareils d'un réseau.</p>
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <!-- Carte ZTP -->
-                            <div class="card flip-card">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-front">
-                                        <div>
-                                            <div class="numbers">ZTP</div>
-                                            <div class="cardName">Zero-Touch Provisioning</div>
-                                        </div>
-                                        <div class="iconBx"><ion-icon name="cloud-download-outline"></ion-icon></div>
-                                    </div>
-                                    <div class="flip-card-back">
-                                        <p>Le ZTP permet de configurer automatiquement un appareil réseau dès son premier démarrage.</p>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Catégorie 2: DHCP -->
+            <div class="help-category">
+                <div class="category-header">
+                    <ion-icon name="server-outline"></ion-icon>
+                    <h3>DHCP - Attribution Dynamique</h3>
+                </div>
+                <div class="cards-container">
+                    <!-- Carte Principes DHCP -->
+                    <div class="info-card">
+                        <div class="card-front">
+                            <div class="card-icon"><ion-icon name="flash-outline"></ion-icon></div>
+                            <h4>Principes DHCP</h4>
+                        </div>
+                        <div class="card-back">
+                            <h4>Principes DHCP</h4>
+                            <p>Protocole permettant l'attribution automatique d'adresses IP et d'autres paramètres réseau.</p>
+                            <ul class="card-details">
+                                <li>Simplifie la gestion des adresses IP</li>
+                                <li>Réduit les conflits d'adressage</li>
+                                <li>Centralise la configuration réseau</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Carte Plages DHCP -->
+                    <div class="info-card">
+                        <div class="card-front">
+                            <div class="card-icon"><ion-icon name="list-outline"></ion-icon></div>
+                            <h4>Plages DHCP</h4>
+                        </div>
+                        <div class="card-back">
+                            <h4>Plages DHCP</h4>
+                            <p>Ensembles d'adresses IP disponibles pour attribution aux clients du réseau.</p>
+                            <ul class="card-details">
+                                <li>Définit les adresses disponibles</li>
+                                <li>Permet des exclusions spécifiques</li>
+                                <li>Optimise l'utilisation des ressources</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Carte Réservations -->
+                    <div class="info-card">
+                        <div class="card-front">
+                            <div class="card-icon"><ion-icon name="bookmark-outline"></ion-icon></div>
+                            <h4>Réservations</h4>
+                        </div>
+                        <div class="card-back">
+                            <h4>Réservations</h4>
+                            <p>Attribution permanente d'une adresse IP spécifique à un appareil identifié par son adresse MAC.</p>
+                            <ul class="card-details">
+                                <li>Garantit une adresse IP stable</li>
+                                <li>Idéal pour les serveurs et imprimantes</li>
+                                <li>Combine avantages IP statique et dynamique</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+            </div>
             
-                <div class="dropdown">
-                    <button class="dropbtn">Autres catégories</button>
-                    <div class="dropdown-content">
-                        <div class="cardBox">
-                            <!-- Carte A -->
-                            <div class="card flip-card">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-front">
-                                        <div>
-                                            <div class="numbers">A</div>
-                                            <div class="cardName">Catégorie A</div>
-                                        </div>
-                                        <div class="iconBx"><ion-icon name="list-outline"></ion-icon></div>
-                                    </div>
-                                    <div class="flip-card-back">
-                                        <p>Description de la catégorie A.</p>
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <!-- Carte B -->
-                            <div class="card flip-card">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-front">
-                                        <div>
-                                            <div class="numbers">B</div>
-                                            <div class="cardName">Catégorie B</div>
-                                        </div>
-                                        <div class="iconBx"><ion-icon name="bookmark-outline"></ion-icon></div>
-                                    </div>
-                                    <div class="flip-card-back">
-                                        <p>Description de la catégorie B.</p>
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <!-- Carte C -->
-                            <div class="card flip-card">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-front">
-                                        <div>
-                                            <div class="numbers">C</div>
-                                            <div class="cardName">Catégorie C</div>
-                                        </div>
-                                        <div class="iconBx"><ion-icon name="cube-outline"></ion-icon></div>
-                                    </div>
-                                    <div class="flip-card-back">
-                                        <p>Description de la catégorie C.</p>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Catégorie 3: ZTP -->
+            <div class="help-category">
+                <div class="category-header">
+                    <ion-icon name="cloud-download-outline"></ion-icon>
+                    <h3>ZTP - Provisionnement automatique</h3>
+                </div>
+                <div class="cards-container">
+                    <!-- Carte Principes ZTP -->
+                    <div class="info-card">
+                        <div class="card-front">
+                            <div class="card-icon"><ion-icon name="rocket-outline"></ion-icon></div>
+                            <h4>Principes ZTP</h4>
+                        </div>
+                        <div class="card-back">
+                            <h4>Principes ZTP</h4>
+                            <p>Méthode de configuration automatique des équipements réseau sans intervention manuelle.</p>
+                            <ul class="card-details">
+                                <li>Réduit les erreurs de configuration</li>
+                                <li>Accélère le déploiement de nouveaux appareils</li>
+                                <li>Standardise les configurations</li>
+                            </ul>
                         </div>
                     </div>
+                    
+                    <!-- Carte Scripts ZTP -->
+                    <div class="info-card">
+                        <div class="card-front">
+                            <div class="card-icon"><ion-icon name="code-outline"></ion-icon></div>
+                            <h4>Scripts ZTP</h4>
+                        </div>
+                        <div class="card-back">
+                            <h4>Scripts ZTP</h4>
+                            <p>Fichiers de scripts qui automatisent la configuration complète d'un équipement réseau.</p>
+                            <ul class="card-details">
+                                <li>Configuration automatisée</li>
+                                <li>Mise à jour des firmwares</li>
+                                <li>Installation des certificats et configurations</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Carte TFTP/HTTP -->
+                    <div class="info-card">
+                        <div class="card-front">
+                            <div class="card-icon"><ion-icon name="download-outline"></ion-icon></div>
+                            <h4>TFTP/HTTP</h4>
+                        </div>
+                        <div class="card-back">
+                            <h4>TFTP/HTTP</h4>
+                            <p>Protocoles utilisés par ZTP pour télécharger les fichiers de configuration et les images système.</p>
+                            <ul class="card-details">
+                                <li>Transfert des configurations</li>
+                                <li>Téléchargement des firmwares</li>
+                                <li>Communication sécurisée (HTTPS)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Catégorie 4: Architecture réseau -->
+            <div class="help-category">
+                <div class="category-header">
+                    <ion-icon name="construct-outline"></ion-icon>
+                    <h3>Architecture réseau</h3>
+                </div>
+                <div class="cards-container">
+                    <!-- Carte Topologie -->
+                    <div class="info-card">
+                        <div class="card-front">
+                            <div class="card-icon"><ion-icon name="prism-outline"></ion-icon></div>
+                            <h4>Topologie</h4>
+                        </div>
+                        <div class="card-back">
+                            <h4>Topologie</h4>
+                            <p>Organisation physique ou logique des éléments d'un réseau informatique.</p>
+                            <ul class="card-details">
+                                <li>Topologie en étoile, en arbre, en maille</li>
+                                <li>Impact sur la redondance et la résilience</li>
+                                <li>Influence la performance et la sécurité</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Carte Haute disponibilité -->
+                    <div class="info-card">
+                        <div class="card-front">
+                            <div class="card-icon"><ion-icon name="shield-checkmark-outline"></ion-icon></div>
+                            <h4>Haute disponibilité</h4>
+                        </div>
+                        <div class="card-back">
+                            <h4>Haute disponibilité</h4>
+                            <p>Conception réseau assurant une continuité de service optimale, même en cas de défaillance.</p>
+                            <ul class="card-details">
+                                <li>Redondance des équipements et liaisons</li>
+                                <li>Équilibrage de charge</li>
+                                <li>Failover automatique</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Carte Sécurité réseau -->
+                    <div class="info-card">
+                        <div class="card-front">
+                            <div class="card-icon"><ion-icon name="lock-closed-outline"></ion-icon></div>
+                            <h4>Sécurité réseau</h4>
+                        </div>
+                        <div class="card-back">
+                            <h4>Sécurité réseau</h4>
+                            <p>Ensemble de pratiques et technologies protégeant l'intégrité et la confidentialité du réseau.</p>
+                            <ul class="card-details">
+                                <li>Firewalls et filtrage</li>
+                                <li>Segmentation et isolation</li>
+                                <li>Authentification et autorisation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
 {% block script %}
     <!-- =========== Scripts ========= -->
     <script>
-        document.querySelectorAll('.dropbtn').forEach(button => {
-        button.addEventListener('click', function () {
-            let dropdown = this.parentElement;
-            dropdown.classList.toggle('active');
-
-            // Fermer les autres dropdowns
-            document.querySelectorAll('.dropdown').forEach(d => {
-                if (d !== dropdown) d.classList.remove('active');
+        // Animation des cartes info au survol
+        document.querySelectorAll('.info-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('flipped');
             });
         });
-    });
 
-    window.addEventListener('click', function (e) {
-        if (!e.target.matches('.dropbtn')) {
-            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
-        }
-    });
-      </script>
+        // Animation des catégories
+        document.querySelectorAll('.category-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const category = this.parentElement;
+                category.classList.toggle('collapsed');
+                
+                // Fermer les autres catégories si on en ouvre une
+                if (!category.classList.contains('collapsed')) {
+                    document.querySelectorAll('.help-category').forEach(cat => {
+                        if (cat !== category) cat.classList.add('collapsed');
+                    });
+                }
+            });
+        });
+
+        // Animation d'entrée au chargement
+        window.addEventListener('DOMContentLoaded', () => {
+            const categories = document.querySelectorAll('.help-category');
+            categories.forEach((category, index) => {
+                setTimeout(() => {
+                    category.classList.add('appear');
+                }, 150 * index);
+            });
+        });
+    </script>
 {% endblock %}
