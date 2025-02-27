@@ -14,22 +14,96 @@
 </head>
 
 <body>
-<!-- =============== Navigation ================ -->
-   {% include 'app/components/menu.html' %}
-               <div class="main">
-            <div class="topbar">
-                <div class="toggle">
-                    <ion-icon name="menu-outline"></ion-icon>
-                </div>
-    <!-- ========================= Main ==================== -->
-        {% block content %}
-        {% endblock %}
-
+    <!-- =============== Navigation ================ -->
+    {% include 'app/components/menu.html' %}
     
-    <!-- =============== Footer ================ -->
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
             </div>
-     <!-- {% include 'app/components/footer.html' %} -->
-            </div>
+        </div>
+        
+        <!-- ========================= Main Content ==================== -->
+        <div class="content-wrapper">
+            {% block content %}
+            {% endblock %}
+        </div>
+        
+        <!-- =============== Footer ================ -->
+<footer class="footer">
+  <div class="container">
+      <div class="footer-container">
+          <div class="footer-logo">
+              <h3>ConfigZTP</h3>
+              <p>Solutions de configuration réseau avancées</p>
+          </div>
+          
+          <div class="footer-links">
+              <h4>Liens rapides</h4>
+              <ul>
+                  <li><a href="#">Accueil</a></li>
+                  <li><a href="#">Mes Appareils</a></li>
+                  <li><a href="#">Configurer un appareil</a></li>
+                  <li><a href="#">Aide</a></li>
+              </ul>
+          </div>
+          
+          <div class="footer-contact">
+              <h4>Contact</h4>
+              <p><ion-icon name="mail-outline"></ion-icon> support@configztp.com</p>
+              <p><ion-icon name="call-outline"></ion-icon> +33 1 23 45 67 89</p>
+          </div>
+          
+          <div class="footer-social">
+              <h4>Suivez-nous</h4>
+              <ul>
+                  <li>
+                      <span>Nassim</span>
+                      <div class="member-icons">
+                          <a href="#" class="social-icon" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
+                          <a href="#" class="social-icon" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+                      </div>
+                  </li>
+                  <li>
+                      <span>Chadi</span>
+                      <div class="member-icons">
+                          <a href="#" class="social-icon" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
+                          <a href="#" class="social-icon" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+                      </div>
+                  </li>
+                  <li>
+                      <span>Ilyes</span>
+                      <div class="member-icons">
+                          <a href="#" class="social-icon" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
+                          <a href="#" class="social-icon" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+                      </div>
+                  </li>
+                  <li>
+                      <span>Lucas</span>
+                      <div class="member-icons">
+                          <a href="#" class="social-icon" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
+                          <a href="#" class="social-icon" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      
+      <div class="footer-bottom">
+          <div class="footer-copyright">
+              <p>&copy; {% now "Y" %} ConfigZTP. Tous droits réservés.</p>
+          </div>
+          <div class="footer-legal">
+              <a href="#">Conditions d'utilisation</a>
+              <span class="divider">|</span>
+              <a href="#">Politique de confidentialité</a>
+          </div>
+      </div>
+  </div>
+</footer>
+    </div>
+
     <!-- =========== Scripts =========  -->
     <script>
         let list = document.querySelectorAll(".navigation li");
@@ -51,13 +125,12 @@
           navigation.classList.toggle("active");
           main.classList.toggle("active");
         };
-      </script>
-      
+    </script>
+    
     {% block script %}
     {% endblock %}
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
 </body>
 </html>
