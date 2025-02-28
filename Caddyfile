@@ -1,0 +1,23 @@
+http://127.0.0.1 {
+   # Servir les fichiers statiques sous app/static/
+   handle_path /app/static/* {
+       root * /django-docker/staticfiles  # Correspond à STATIC_ROOT
+       file_server
+   }
+
+   # Servir les fichiers médias (uploads utilisateurs)
+   handle_path /media/* {
+       root * /django-docker/media
+       file_server
+   }
+
+   # Tout le reste passe par Django (Gunicorn)
+   handle {
+       reverse_proxy web:8000
+   }
+
+   # Activer les logs pour voir ce qui se passe
+   log {
+       output stderr
+   }
+}

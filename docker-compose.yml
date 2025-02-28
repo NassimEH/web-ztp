@@ -1,31 +1,54 @@
 services:
-  db:
-    image: postgres:15
-    restart: always
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  caddy:
+    container_name: caddy
+    image: caddy:2
+    networks:
+      - web
+    ports:
+      - "443:443/tcp"
+      - "80:80/tcp"
+    restart: unless-stopped
     volumes:
-      - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+      - django-docker_media:/django-docker/media  # Volume partagé avec Django
+      - django-docker_static:/django-docker/staticfiles  # Volume partagé avec Django
+    working_dir: /srv
 
   web:
-    build: .
-    depends_on:
-      db:
-        condition: service_healthy
+    container_name: web
+    hostname: web
+    build:
+      context: "."  # Utilise le Dockerfile dans le répertoire courant
+    networks:
+      - web
     ports:
-      - "8000:8000"
-    environment:
-      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}"
+      - "8000:8000"  # Expose le port Django
+    restart: unless-stopped
     volumes:
-      - .:/app
-    command: ["python", "/app/entrypoint.py"]
+      - ".:/app"  # Monte le code source
+      - "${PWD}/docker-data/sqlite:/app/db"  # Pour stocker la base SQLite
+      - "django-docker_static:/app/staticfiles"  # Correspond à STATIC_ROOT dans Django
+
+  dhcp:
+    container_name: dhcp
+    hostname: dhcp
+    build:
+      context: "."
+      dockerfile: Dockerfile.dhcp
+    restart: unless-stopped
+    privileged: true  # Nécessaire pour sudo et les opérations DHCP
+    volumes:
+      - ".:/app"
+      - "${PWD}/docker-data/sqlite:/app/db"  # Partage la même base SQLite
 
 volumes:
-  pgdata:
+  caddy_data: 
+  caddy_config:
+  django-docker_media:
+  django-docker_static:
+
+networks:
+  web:
+    driver: bridge
