@@ -31,7 +31,7 @@
 
 ---
 
-##  Overview
+##  Présentation
 
 <code>❯ Notre projet propose une interface web complète intégrant un serveur DHCP que nous avons développé nous-mêmes, ainsi qu’une implémentation personnalisée de la fonctionnalité Zero Touch Provisioning (ZTP). Cette plateforme permet aux utilisateurs d’ajouter et de configurer des appareils de manière automatisée, en renseignant les paramètres requis via des formulaires dédiés. L’ensemble a été conçu pour offrir une expérience utilisateur optimale, avec une interface intuitive, épurée et ergonomique, garantissant une gestion efficace des équipements et une mise en réseau simplifiée.</code>
 
