@@ -92,16 +92,12 @@
 
 Vous aurez besoin de ces technologies :
 
-- **Programming Language:** Python
-- **Package Manager:** Pip
-- **Container Runtime:** Docker
+- **Technologie de conteneurisation:** Docker
 
 
 ###  Installation
 
 Installer le projet :
-
-**Build from source:**
 
 1. Clonez le dépôt :
 ```sh
@@ -113,37 +109,12 @@ Installer le projet :
 ❯ cd web-ztp
 ```
 
-3. Installez les dépendances
-
-**En utilisant `pip`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Pip-3776AB.svg?style={badge_style}&logo=pypi&logoColor=white" />](https://pypi.org/project/pip/)
-
-```sh
-❯ pip install -r requirements.txt, dhcp_server/requirements.txt
-```
-
-
-**En utilisant `docker`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Docker-2CA5E0.svg?style={badge_style}&logo=docker&logoColor=white" />](https://www.docker.com/)
-
-```sh
-❯ docker build -t Chadi-Mangle/web-ztp .
-```
-
-
-
-
 ###  Utilisation
-Lancez l'application:
-**En utilisant `python`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Pip-3776AB.svg?style={badge_style}&logo=pypi&logoColor=white" />](https://pypi.org/project/pip/)
-
-```sh
-❯ python manage.py runserver
-```
-
 
 **En utilisant `docker`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Docker-2CA5E0.svg?style={badge_style}&logo=docker&logoColor=white" />](https://www.docker.com/)
 
 ```sh
-❯ docker run -it {image_name}
+❯ docker compose up --build -d
 ```
 
 ## Auteurs
