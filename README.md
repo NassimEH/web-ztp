@@ -24,7 +24,7 @@
 - [ Commencer](#-getting-started)
   - [ Prérequis ](#-prerequisites)
   - [ Installation](#-installation)
-  - [ Usage](#-usage)
+  - [ Utilisation](#-usage)
 - [ Auteurs ](#-contributing)
 - [ Informations ](#-acknowledgments)
 
