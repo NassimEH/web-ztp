@@ -1,15 +1,16 @@
-FROM python:3.9
+FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY ./requirements.txt requirements.txt
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+# Installation des dépendances
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ../ . 
-ENV PORT=67
-EXPOSE 67
+# Copie du code source
+COPY . .
 
-RUN cd dhcp_server/ 
+# Exposition du port pour le serveur web Django
+EXPOSE 8000
 
-CMD ["python3", "dhcp_server.py"]
+# Commande de démarrage
+CMD ["/bin/sh", "entrypoint.sh"]

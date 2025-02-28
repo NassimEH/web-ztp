@@ -2,3 +2,6 @@ __pycache__
 db.sqlite3
 .scpconfig.json
 media/*
+staticfiles
+static
+docker-data
