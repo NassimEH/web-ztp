@@ -18,15 +18,15 @@
 
 ##  Sommaire
 
-- [ Présentation ](#-overview)
-- [ Fonctionnalités ](#-features)
-- [ Structure du projet ](#-project-structure)
-- [ Commencer](#-getting-started)
-  - [ Prérequis ](#-prerequisites)
-  - [ Installation](#-installation)
-  - [ Utilisation](#-usage)
-- [ Auteurs ](#-contributing)
-- [ Informations ](#-acknowledgments)
+- [Présentation](#présentation)
+- [Fonctionnalités](#fonctionnalités)
+- [Structure du projet](#structure-du-projet)
+- [Commencer](#commencer)
+  - [Prérequis](#prérequis)
+  - [Installation](#installation)
+  - [Utilisation](#utilisation)
+- [Auteurs](#auteurs)
+- [Informations](#informations)
 
 ---
 
@@ -118,16 +118,24 @@ Installer le projet :
 ❯ docker compose up --build -d
 ```
 
-### Alternative 
+### Information
 
-On a remarqué que le docker compose ne fonctionne pas sur Windows (fonctionne sur Linux et pas Windows). on essaiera de corriger ce problème de compatibilité pour le S6. En attendant, si vous testez sur Windows et que le docker-compose ne fonctionne pas, une fois dans le bon répertoire, exécutez votre PowerShell avec les droits administrateurs et faites : 
+On a remarqué que le docker compose ne fonctionne pas sur Windows (fonctionne sur Linux et pas Windows). on essaiera de corriger ce problème de compatibilité pour le S6. En attendant, si vous êtes sur Windows utilisez WSL. 
 
-```sh
-❯ python manage.py runserver
-```
+### Alternative
+
+Vous pouvez aussi utiliser les commandes suivantes pour run l'application : 
+
 ```sh
 ❯ python manage.py migrate
 ```
+```sh
+❯ python manage.py loaddata dhcp_config.json
+```
+```sh
+❯ python manage.py runserver
+```
+Si vous voulez charger des configs ZTP depuis Windows, exécutez cette commande en admin :
 ```sh
 ❯ python manage.py rundhcp
 ```
