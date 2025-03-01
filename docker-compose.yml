@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
     volumes:
       - ".:/app"  # Monte le code source
-      - "${PWD}/docker-data/sqlite:/app/db"  # Pour stocker la base SQLite
+      - "./docker-data/sqlite:/app/db"  # Pour stocker la base SQLite
       - "django-docker_static:/app/staticfiles"  # Correspond à STATIC_ROOT dans Django
 
   dhcp:
@@ -41,7 +41,7 @@ services:
     privileged: true  # Nécessaire pour sudo et les opérations DHCP
     volumes:
       - ".:/app"
-      - "${PWD}/docker-data/sqlite:/app/db"  # Partage la même base SQLite
+      - "./docker-data/sqlite:/app/db"  # Partage la même base SQLite
 
 volumes:
   caddy_data: 
