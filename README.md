@@ -120,7 +120,7 @@ Installer le projet :
 
 ### Information
 
-On a remarqué que le docker compose ne fonctionne pas sur Windows (fonctionne sur Linux et pas Windows). on essaiera de corriger ce problème de compatibilité pour le S6. En attendant, si vous êtes sur Windows utilisez WSL. 
+On a remarqué que le docker compose ne fonctionne pas sur Windows ni sur Alma Linux (fonctionne sur Linux et pas Windows). on essaiera de corriger ce problème de compatibilité pour le S6. En attendant, si vous êtes sur Windows ou Alma Linux utilisez WSL. Si vous êtes sur Linux, le docker fonctionne.
 
 ### Alternative
 
