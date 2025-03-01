@@ -117,6 +117,20 @@ Installer le projet :
 ❯ docker compose up --build -d
 ```
 
+### Alternative 
+
+On a remarqué que le docker compose ne fonctionne pas sur Windows (fonctionne sur Linux et pas Windows). on essaiera de corriger ce problème de compatibilité pour le S6. En attendant, si vous testez sur Windows et que le docker-compose ne fonctionne pas, une fois dans le bon répertoire, exécutez votre PowerShell avec les droits administrateurs et faites : 
+
+```sh
+❯ python manage.py runserver
+```
+```sh
+❯ python manage.py migrate
+```
+```sh
+❯ python manage.py rundhcp
+```
+
 ## Auteurs
 
 - Nassim El Haddad
