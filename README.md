@@ -100,6 +100,7 @@ Vous aurez besoin de ces technologies :
 Installer le projet :
 
 1. Clonez le dépôt :
+
 ```sh
 ❯ git clone https://github.com/Chadi-Mangle/web-ztp
 ```
