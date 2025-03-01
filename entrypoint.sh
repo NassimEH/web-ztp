@@ -3,6 +3,9 @@
 echo "Exécution des migrations..."
 python manage.py migrate
 
+echo "Chargement des modèles..."
+python manage.py loaddata dhcp_config.yaml
+
 echo "Collecte des fichiers statiques..."
 python manage.py collectstatic --noinput
 
