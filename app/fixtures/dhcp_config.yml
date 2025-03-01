@@ -1,0 +1,6 @@
+- model: app.dhcpconfig
+  pk: 1
+  fields:
+    subnet: 255.255.255.0
+    min_ip_pool: 192.168.0.10
+    max_ip_pool: 192.168.0.50
