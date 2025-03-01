@@ -34,6 +34,15 @@ class DHCPConfig(models.Model):
     min_ip_pool = models.GenericIPAddressField()
     max_ip_pool = models.GenericIPAddressField()
 
+    def save(self, *args, **kwargs):
+        if not self.subnet:
+            self.subnet = "255.255.255.0"
+        if not self.min_ip_pool:
+            self.min_ip_pool = "192.168.0.100"
+        if not self.max_ip_pool:
+            self.max_ip_pool = "192.168.0.200"
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"DHCP: {self.subnet}"
 
