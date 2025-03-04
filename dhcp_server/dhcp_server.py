@@ -31,8 +31,11 @@ class DHCPServer:
         client_id = self.get_dhcp_option(packet, "client_id")
 
         if client_id:
-            serial_number = client_id.decode("utf-8")
-            return serial_number
+            try:
+                serial_number = client_id.decode("utf-8")
+                return serial_number
+            except:
+                pass
 
     def get_ip_in_pool(self, requested_addr, serial_number):
         if requested_addr:
