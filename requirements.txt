@@ -1,3 +1,6 @@
 django
 django-htmx
 gunicorn
+django-crispy-forms
+crispy-bootstrap5
+django-allauth

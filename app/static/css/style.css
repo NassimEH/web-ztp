@@ -1199,3 +1199,324 @@ body {
   width: 25px;
   height: 25px;
 }
+
+/* Styles pour la topbar */
+.user-menu {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-right: 20px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--white);
+}
+
+.user-name {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.auth-btn, .logout-btn {
+  color: #333;
+  font-size: 1.4rem;
+  transition: color 0.3s ease;
+  margin: 0 10px;
+}
+
+.auth-btn:hover, .logout-btn:hover {
+  color: var(--blue);
+  transform: scale(1.1);
+}
+
+/* Styles pour les formulaires d'authentification */
+.card {
+  border: none;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.form-control {
+  border-radius: 8px;
+  padding: 0.8rem;
+  border: 1px solid #e0e0e0;
+}
+
+.form-control:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+  background-color: var(--blue);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--blue2);
+}
+
+/* Messages de notification */
+.alert {
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Liens dans les formulaires */
+.card-body a {
+  color: var(--blue);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.card-body a:hover {
+  color: var(--blue2);
+  text-decoration: underline;
+}
+
+/* Style pour le formulaire de connexion */
+.auth-form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form-container .form-control {
+  padding: 12px;
+  font-size: 1.1rem;
+}
+
+/* Message d'accès restreint */
+.restricted-access {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #f8f9fa;
+  border-radius: 15px;
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+.restricted-access i {
+  font-size: 4rem;
+  color: var(--blue);
+  margin-bottom: 1.5rem;
+}
+
+.restricted-access h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.restricted-access p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.restricted-access .btn {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+}
+
+/* Barre de progression */
+.progress-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(12, 98, 145, 0.1);
+  z-index: 1000;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--gray));
+  width: 0;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(12, 98, 145, 0.5);
+  animation: progress-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes progress-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(12, 98, 145, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(12, 98, 145, 0.8); }
+}
+
+.device-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  margin: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+}
+
+.device-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(-5deg);
+  box-shadow: 20px 20px 30px rgba(0,0,0,0.15);
+}
+
+.device-card .icon {
+  font-size: 2.5em;
+  color: var(--blue);
+  transform: translateZ(30px);
+}
+
+.device-card .content {
+  margin-top: 15px;
+  transform: translateZ(20px);
+}
+
+.notification-center {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  width: 300px;
+  max-height: 400px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+  overflow: hidden;
+  transform: translateX(120%);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+}
+
+.notification-center.active {
+  transform: translateX(0);
+}
+
+.notification {
+  padding: 15px;
+  border-left: 4px solid;
+  margin: 10px;
+  border-radius: 8px;
+  background: #f8f9fa;
+  animation: slideIn 0.3s ease-out;
+}
+
+.notification.success { border-color: #28a745; }
+.notification.warning { border-color: #ffc107; }
+.notification.error { border-color: #dc3545; }
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(12, 98, 145, 0.1));
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.stat-card:hover::before {
+  transform: translateX(0);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 15px 20px;
+  padding-left: 50px;
+  border: 2px solid rgba(12, 98, 145, 0.1);
+  border-radius: 25px;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.search-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 5px rgba(12, 98, 145, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--blue);
+  font-size: 1.2rem;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.search-container:focus-within .search-suggestions {
+  opacity: 1;
+  transform: translateY(0);
+}
