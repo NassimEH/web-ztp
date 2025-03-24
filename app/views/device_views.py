@@ -2,13 +2,15 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from app.models import Device
 
 
-class DeviceListView(View):
+class DeviceListView(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, "app/devices.html")
+        devices = Device.objects.all()
+        return render(request, "app/devices.html", {"devices": devices})
 
 
 class DeviceDetailView(View):
@@ -18,9 +20,9 @@ class DeviceDetailView(View):
         pass
 
 
-class DeviceCountView(View):
+class DeviceCountView(LoginRequiredMixin, View):
     def get(self, request):
-        device_count = Device.objects.count()
-        return JsonResponse({"device_count": device_count})
+        count = Device.objects.count()
+        return render(request, "app/device_count.html", {"count": count})
 
 

@@ -8,7 +8,7 @@
         </div>
 
         <ul>
-            <li class="active">
+            <li class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
                 <a href="/dashboard">
                     <div class="icon-container">
                         <span class="icon">
@@ -20,7 +20,7 @@
                 <span class="tooltip">Accueil</span>
             </li>
 
-            <li>
+            <li class="{% if request.resolver_match.url_name == 'devices' %}active{% endif %}">
                 <a href="/devices">
                     <div class="icon-container">
                         <span class="icon">
@@ -32,7 +32,7 @@
                 <span class="tooltip">Mes appareils</span>
             </li>
 
-            <li>
+            <li class="{% if request.resolver_match.url_name == 'config' %}active{% endif %}">
                 <a href="/config">
                     <div class="icon-container">
                         <span class="icon">
@@ -44,7 +44,7 @@
                 <span class="tooltip">Configurer</span>
             </li>
 
-            <li>
+            <li class="{% if request.resolver_match.url_name == 'help' %}active{% endif %}">
                 <a href="/help">
                     <div class="icon-container">
                         <span class="icon">
@@ -56,29 +56,78 @@
                 <span class="tooltip">Aide</span>
             </li>
 
-            <li class="disabled">
-                <a href="#">
-                    <div class="icon-container">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                    </div>
-                    <span class="title"> <span class="coming-soon">À VENIR</span> Mot de passe </span>
-                </a>
-                <span class="tooltip">Mot de passe</span>
-            </li>
+            {% if user.is_authenticated %}
+                <li class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+                    <a href="/profile">
+                        <div class="icon-container">
+                            <span class="icon">
+                                <ion-icon name="person-outline"></ion-icon>
+                            </span>
+                        </div>
+                        <span class="title"> Profil </span>
+                    </a>
+                    <span class="tooltip">Profil</span>
+                </li>
 
-            <li class="disabled">
-                <a href="#">
-                    <div class="icon-container">
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
-                    </div>
-                    <span class="title"> <span class="coming-soon">À VENIR</span> Se déconnecter </span>
-                </a>
-                <span class="tooltip">Se déconnecter</span>
-            </li>
+                <li>
+                    <a href="{% url 'auth:logout' %}">
+                        <div class="icon-container">
+                            <span class="icon">
+                                <ion-icon name="log-out-outline"></ion-icon>
+                            </span>
+                        </div>
+                        <span class="title"> Se déconnecter </span>
+                    </a>
+                    <span class="tooltip">Se déconnecter</span>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'auth:login' %}">
+                        <div class="icon-container">
+                            <span class="icon">
+                                <ion-icon name="log-in-outline"></ion-icon>
+                            </span>
+                        </div>
+                        <span class="title"> Se connecter </span>
+                    </a>
+                    <span class="tooltip">Se connecter</span>
+                </li>
+
+                <li>
+                    <a href="{% url 'auth:register' %}">
+                        <div class="icon-container">
+                            <span class="icon">
+                                <ion-icon name="person-add-outline"></ion-icon>
+                            </span>
+                        </div>
+                        <span class="title"> S'inscrire </span>
+                    </a>
+                    <span class="tooltip">S'inscrire</span>
+                </li>
+            {% endif %}
         </ul>
     </div>
+</div>
+
+<div class="user-menu">
+    {% if user.is_authenticated %}
+        <div class="user-info">
+            <span class="user-name">
+                <i class="fas fa-user-circle me-2"></i>
+                {{ user.username }}
+            </span>
+            <a href="{% url 'auth:logout' %}" class="logout-btn" title="Se déconnecter">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+    {% else %}
+        <div class="auth-buttons">
+            <a href="{% url 'auth:login' %}" class="auth-btn" title="Se connecter">
+                <i class="fas fa-sign-in-alt"></i>
+            </a>
+            <a href="{% url 'auth:register' %}" class="auth-btn" title="S'inscrire">
+                <i class="fas fa-user-plus"></i>
+            </a>
+        </div>
+    {% endif %}
 </div>

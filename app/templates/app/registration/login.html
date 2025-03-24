@@ -1,0 +1,26 @@
+{% extends "app/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="auth-form-container">
+    <div class="card shadow">
+        <div class="card-body">
+            <h2 class="text-center mb-4">Bienvenue sur ConfigZTP</h2>
+            <p class="text-center text-muted mb-4">Connectez-vous pour accéder à votre espace de configuration</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                    </button>
+                </div>
+            </form>
+            <div class="text-center mt-4">
+                <p class="mb-0">Pas encore de compte ?</p>
+                <a href="{% url 'auth:register' %}" class="btn btn-link">Créer un compte gratuitement</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

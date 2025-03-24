@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from app.views import index_views, device_views, help_views, dashboard_views, form_views
 
 from django.conf import settings
@@ -23,15 +23,16 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index_views.IndexView.as_view()),
-    path('dashboard/', dashboard_views.DashboardView.as_view()),
-    path('devices/', device_views.DeviceListView.as_view() ),
+    path('', index_views.IndexView.as_view()),  # Restauration de la vue index
+    path('dashboard/', dashboard_views.DashboardView.as_view(), name='dashboard'),
+    path('devices/', device_views.DeviceListView.as_view(), name='devices'),
     path('deviceForm/', form_views.AddDeviceView.as_view(), name="device_form"),
     path('templateForm/', form_views.AddTemplateView.as_view(), name="template_form"),
     path('dhcpconfigForm/', form_views.ChangeDHCPConfig.as_view(), name="dhcpconfig_form"),
-    path('config/', form_views.ConfFormView.as_view()),
-    path('help/', help_views.HelpView.as_view()),
-    path('deviceCount/', device_views.DeviceCountView.as_view()),
+    path('config/', form_views.ConfFormView.as_view(), name='config'),
+    path('help/', help_views.HelpView.as_view(), name='help'),
+    path('deviceCount/', device_views.DeviceCountView.as_view(), name='device_count'),
+    path('accounts/', include(('app.urls', 'auth'), namespace='auth')),  # Modification ici
 ]
 
 urlpatterns += static(settings.MEDIA_URL + "conf/", document_root=settings.MEDIA_ROOT / "conf")
