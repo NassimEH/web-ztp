@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from jinja2 import Template
-from ../models import Device
+from app.models import Device
 
 def generate_config(request, device_id):
     device = get_object_or_404(Device, device_id=device_id)

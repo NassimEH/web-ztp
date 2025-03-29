@@ -1,0 +1,37 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}Profil - ZTP{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Profil</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Informations personnelles</h4>
+                            <p><strong>Nom d'utilisateur :</strong> {{ user.username }}</p>
+                            <p><strong>Email :</strong> {{ user.email }}</p>
+                            <p><strong>Prénom :</strong> {{ user.first_name }}</p>
+                            <p><strong>Nom :</strong> {{ user.last_name }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Rôles</h4>
+                            <p><strong>Administrateur :</strong> {% if user.is_staff %}Oui{% else %}Non{% endif %}</p>
+                            <p><strong>Super utilisateur :</strong> {% if user.is_superuser %}Oui{% else %}Non{% endif %}</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="{% url 'dashboard' %}" class="btn btn-primary">Retour au tableau de bord</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

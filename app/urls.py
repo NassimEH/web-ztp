@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import auth_views
+from .views.auth_views import login_view, register_view, logout_view, ProfileView
 
-app_name = 'auth'  # Ajout du namespace
+app_name = 'auth'
 
 urlpatterns = [
-    path('login/', auth_views.login_view, name='login'),
-    path('register/', auth_views.register_view, name='register'),
-    path('logout/', auth_views.logout_view, name='logout'),
+    path('login/', login_view, name='login'),
+    path('register/', register_view, name='register'),
+    path('logout/', logout_view, name='logout'),
+    path('profile/', ProfileView.as_view(), name='profile'),
 ] 

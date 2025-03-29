@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index_views.IndexView.as_view()),  # Restauration de la vue index
+    path('', index_views.IndexView.as_view(), name='home'),
     path('dashboard/', dashboard_views.DashboardView.as_view(), name='dashboard'),
     path('devices/', device_views.DeviceListView.as_view(), name='devices'),
     path('deviceForm/', form_views.AddDeviceView.as_view(), name="device_form"),
@@ -32,7 +32,9 @@ urlpatterns = [
     path('config/', form_views.ConfFormView.as_view(), name='config'),
     path('help/', help_views.HelpView.as_view(), name='help'),
     path('deviceCount/', device_views.DeviceCountView.as_view(), name='device_count'),
-    path('accounts/', include(('app.urls', 'auth'), namespace='auth')),  # Modification ici
+    path('auth/', include('app.urls', namespace='auth')),
 ]
 
-urlpatterns += static(settings.MEDIA_URL + "conf/", document_root=settings.MEDIA_ROOT / "conf")
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
