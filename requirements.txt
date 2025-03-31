@@ -6,3 +6,5 @@ crispy-bootstrap5
 django-allauth
 jinja2
 Pillow
+psycopg2-binary
+dj-database-url

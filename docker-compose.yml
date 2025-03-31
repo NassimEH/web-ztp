@@ -16,6 +16,20 @@ services:
       - django-docker_static:/django-docker/staticfiles  # Volume partagé avec Django
     working_dir: /srv
 
+  db:
+    container_name: postgres
+    image: postgres:15
+    networks:
+      - web
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=webztp_db
+      - POSTGRES_USER=webztp_user
+      - POSTGRES_PASSWORD=webztp_password
+    ports:
+      - "5432:5432"
+
   web:
     container_name: web
     hostname: web
@@ -30,6 +44,10 @@ services:
       - ".:/app"  # Monte le code source
       - "./docker-data/sqlite:/app/db"  # Pour stocker la base SQLite
       - "django-docker_static:/app/staticfiles"  # Correspond à STATIC_ROOT dans Django
+    environment:
+      - DATABASE_URL=postgresql://webztp_user:webztp_password@db:5432/webztp_db
+    depends_on:
+      - db
 
   dhcp:
     container_name: dhcp
@@ -41,13 +59,17 @@ services:
     privileged: true  # Nécessaire pour sudo et les opérations DHCP
     volumes:
       - ".:/app"
-      - "./docker-data/sqlite:/app/db"  # Partage la même base SQLite
+    environment:
+      - DATABASE_URL=postgresql://webztp_user:webztp_password@db:5432/webztp_db
+    depends_on:
+      - db
 
 volumes:
   caddy_data: 
   caddy_config:
   django-docker_media:
   django-docker_static:
+  postgres_data:
 
 networks:
   web:
