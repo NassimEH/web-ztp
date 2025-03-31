@@ -8,6 +8,9 @@ from django.views.generic import TemplateView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from app.models import Device
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+import os
 
 def login_view(request):
     if request.method == 'POST':
@@ -58,6 +61,24 @@ def logout_view(request):
 def profile_view(request):
     if request.method == 'POST':
         user = request.user
+        
+        # Gestion de l'upload de la photo de profil
+        if 'avatar' in request.FILES:
+            avatar = request.FILES['avatar']
+            # Supprimer l'ancienne photo si elle existe
+            if hasattr(user, 'profile') and user.profile.avatar:
+                default_storage.delete(user.profile.avatar.path)
+            
+            # Sauvegarder la nouvelle photo
+            ext = os.path.splitext(avatar.name)[1]
+            filename = f'avatars/{user.id}{ext}'
+            path = default_storage.save(filename, ContentFile(avatar.read()))
+            user.profile.avatar = path
+            user.profile.save()
+            messages.success(request, 'Votre photo de profil a été mise à jour.')
+            return redirect('app:profile')
+        
+        # Mise à jour des informations utilisateur
         user.username = request.POST.get('username')
         user.email = request.POST.get('email')
         user.first_name = request.POST.get('first_name')
