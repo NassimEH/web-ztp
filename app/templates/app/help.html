@@ -1,259 +1,113 @@
-{% extends 'app/base.html' %}
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}Aide - ZTP{% endblock %}
+
 {% block content %}
-    <div class="search">
-        <label>
-            <input type="text" placeholder="Rechercher une information...">
-            <ion-icon name="search-outline"></ion-icon>
-        </label>
+<div class="help-section">
+    <div class="help-header">
+        <h1>Centre d'aide</h1>
+        <p>Trouvez toutes les informations nécessaires pour configurer et gérer vos appareils de manière efficace.</p>
     </div>
 
-    <!-- ========== Section d'Aide Modernisée ========== -->
-    <div class="help-section">
-        <h2 class="section-title">Centre de Connaissances</h2>
-        <p class="section-description">Explorez nos ressources pour mieux comprendre la gestion réseau, le DHCP et le ZTP</p>
-        
-        <div class="help-categories">
-            <!-- Catégorie 1: Concepts de base -->
-            <div class="help-category">
-                <div class="category-header">
-                    <ion-icon name="school-outline"></ion-icon>
-                    <h3>Concepts fondamentaux</h3>
+    <div class="help-categories">
+        <div class="help-category">
+            <h2>
+                <ion-icon name="settings-outline"></ion-icon>
+                Configuration des appareils
+            </h2>
+            <p>Apprenez à configurer vos appareils de manière automatisée avec notre système ZTP.</p>
+            <div class="help-cards">
+                <div class="help-card">
+                    <h3>
+                        <ion-icon name="hardware-chip-outline"></ion-icon>
+                        Ajout d'un appareil
+                    </h3>
+                    <p>Découvrez comment ajouter un nouvel appareil à votre réseau et le configurer automatiquement.</p>
+                    <a href="#" class="card-link">
+                        En savoir plus
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </a>
                 </div>
-                <div class="cards-container">
-                    <!-- Carte IP -->
-                    <div class="info-card">
-                        <div class="card-front">
-                            <div class="card-icon"><ion-icon name="globe-outline"></ion-icon></div>
-                            <h4>Adresse IP</h4>
-                        </div>
-                        <div class="card-back">
-                            <h4>Adresse IP</h4>
-                            <p>Identifiant numérique unique attribué à chaque appareil sur un réseau. Format standard IPv4: 192.168.1.1</p>
-                            <ul class="card-details">
-                                <li>Permet l'identification sur le réseau</li>
-                                <li>Peut être statique ou dynamique</li>
-                                <li>Essentielle pour la communication réseau</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Carte Sous-réseau -->
-                    <div class="info-card">
-                        <div class="card-front">
-                            <div class="card-icon"><ion-icon name="git-network-outline"></ion-icon></div>
-                            <h4>Sous-réseau</h4>
-                        </div>
-                        <div class="card-back">
-                            <h4>Sous-réseau</h4>
-                            <p>Division logique d'un réseau IP en segments distincts pour améliorer la gestion et la sécurité.</p>
-                            <ul class="card-details">
-                                <li>Optimise la performance du réseau</li>
-                                <li>Utilise un masque de sous-réseau</li>
-                                <li>Facilite l'administration du réseau</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Carte VLAN -->
-                    <div class="info-card">
-                        <div class="card-front">
-                            <div class="card-icon"><ion-icon name="layers-outline"></ion-icon></div>
-                            <h4>VLAN</h4>
-                        </div>
-                        <div class="card-back">
-                            <h4>VLAN</h4>
-                            <p>Réseau local virtuel permettant de segmenter un réseau physique en plusieurs réseaux logiques isolés.</p>
-                            <ul class="card-details">
-                                <li>Améliore la sécurité et les performances</li>
-                                <li>Réduit le trafic de diffusion</li>
-                                <li>Facilite la gestion des ressources réseau</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="help-card">
+                    <h3>
+                        <ion-icon name="document-text-outline"></ion-icon>
+                        Templates de configuration
+                    </h3>
+                    <p>Créez et gérez des templates de configuration pour automatiser la mise en place de vos appareils.</p>
+                    <a href="#" class="card-link">
+                        En savoir plus
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </a>
                 </div>
             </div>
-            
-            <!-- Catégorie 2: DHCP -->
-            <div class="help-category">
-                <div class="category-header">
-                    <ion-icon name="server-outline"></ion-icon>
-                    <h3>DHCP - Attribution Dynamique</h3>
+        </div>
+
+        <div class="help-category">
+            <h2>
+                <ion-icon name="shield-checkmark-outline"></ion-icon>
+                Sécurité
+            </h2>
+            <p>Assurez la sécurité de votre réseau et de vos appareils avec nos fonctionnalités avancées.</p>
+            <div class="help-cards">
+                <div class="help-card">
+                    <h3>
+                        <ion-icon name="key-outline"></ion-icon>
+                        Authentification
+                    </h3>
+                    <p>Gérez les accès et les permissions pour protéger votre infrastructure.</p>
+                    <a href="#" class="card-link">
+                        En savoir plus
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </a>
                 </div>
-                <div class="cards-container">
-                    <!-- Carte Principes DHCP -->
-                    <div class="info-card">
-                        <div class="card-front">
-                            <div class="card-icon"><ion-icon name="flash-outline"></ion-icon></div>
-                            <h4>Principes DHCP</h4>
-                        </div>
-                        <div class="card-back">
-                            <h4>Principes DHCP</h4>
-                            <p>Protocole permettant l'attribution automatique d'adresses IP et d'autres paramètres réseau.</p>
-                            <ul class="card-details">
-                                <li>Simplifie la gestion des adresses IP</li>
-                                <li>Réduit les conflits d'adressage</li>
-                                <li>Centralise la configuration réseau</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Carte Plages DHCP -->
-                    <div class="info-card">
-                        <div class="card-front">
-                            <div class="card-icon"><ion-icon name="list-outline"></ion-icon></div>
-                            <h4>Plages DHCP</h4>
-                        </div>
-                        <div class="card-back">
-                            <h4>Plages DHCP</h4>
-                            <p>Ensembles d'adresses IP disponibles pour attribution aux clients du réseau.</p>
-                            <ul class="card-details">
-                                <li>Définit les adresses disponibles</li>
-                                <li>Permet des exclusions spécifiques</li>
-                                <li>Optimise l'utilisation des ressources</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Carte Réservations -->
-                    <div class="info-card">
-                        <div class="card-front">
-                            <div class="card-icon"><ion-icon name="bookmark-outline"></ion-icon></div>
-                            <h4>Réservations</h4>
-                        </div>
-                        <div class="card-back">
-                            <h4>Réservations</h4>
-                            <p>Attribution permanente d'une adresse IP spécifique à un appareil identifié par son adresse MAC.</p>
-                            <ul class="card-details">
-                                <li>Garantit une adresse IP stable</li>
-                                <li>Idéal pour les serveurs et imprimantes</li>
-                                <li>Combine avantages IP statique et dynamique</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="help-card">
+                    <h3>
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        Sécurité réseau
+                    </h3>
+                    <p>Configurez les paramètres de sécurité pour protéger votre réseau.</p>
+                    <a href="#" class="card-link">
+                        En savoir plus
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </a>
                 </div>
             </div>
-            
-            <!-- Catégorie 3: ZTP -->
-            <div class="help-category">
-                <div class="category-header">
-                    <ion-icon name="cloud-download-outline"></ion-icon>
-                    <h3>ZTP - Provisionnement automatique</h3>
+        </div>
+
+        <div class="help-category">
+            <h2>
+                <ion-icon name="analytics-outline"></ion-icon>
+                Monitoring
+            </h2>
+            <p>Surveillez et gérez vos appareils en temps réel avec nos outils de monitoring.</p>
+            <div class="help-cards">
+                <div class="help-card">
+                    <h3>
+                        <ion-icon name="pulse-outline"></ion-icon>
+                        État des appareils
+                    </h3>
+                    <p>Suivez l'état de vos appareils et leur configuration en temps réel.</p>
+                    <a href="#" class="card-link">
+                        En savoir plus
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </a>
                 </div>
-                <div class="cards-container">
-                    <!-- Carte Principes ZTP -->
-                    <div class="info-card">
-                        <div class="card-front">
-                            <div class="card-icon"><ion-icon name="rocket-outline"></ion-icon></div>
-                            <h4>Principes ZTP</h4>
-                        </div>
-                        <div class="card-back">
-                            <h4>Principes ZTP</h4>
-                            <p>Méthode de configuration automatique des équipements réseau sans intervention manuelle.</p>
-                            <ul class="card-details">
-                                <li>Réduit les erreurs de configuration</li>
-                                <li>Accélère le déploiement de nouveaux appareils</li>
-                                <li>Standardise les configurations</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Carte Scripts ZTP -->
-                    <div class="info-card">
-                        <div class="card-front">
-                            <div class="card-icon"><ion-icon name="code-outline"></ion-icon></div>
-                            <h4>Scripts ZTP</h4>
-                        </div>
-                        <div class="card-back">
-                            <h4>Scripts ZTP</h4>
-                            <p>Fichiers de scripts qui automatisent la configuration complète d'un équipement réseau.</p>
-                            <ul class="card-details">
-                                <li>Configuration automatisée</li>
-                                <li>Mise à jour des firmwares</li>
-                                <li>Installation des certificats et configurations</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Carte TFTP/HTTP -->
-                    <div class="info-card">
-                        <div class="card-front">
-                            <div class="card-icon"><ion-icon name="download-outline"></ion-icon></div>
-                            <h4>TFTP/HTTP</h4>
-                        </div>
-                        <div class="card-back">
-                            <h4>TFTP/HTTP</h4>
-                            <p>Protocoles utilisés par ZTP pour télécharger les fichiers de configuration et les images système.</p>
-                            <ul class="card-details">
-                                <li>Transfert des configurations</li>
-                                <li>Téléchargement des firmwares</li>
-                                <li>Communication sécurisée (HTTPS)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Catégorie 4: Architecture réseau -->
-            <div class="help-category">
-                <div class="category-header">
-                    <ion-icon name="construct-outline"></ion-icon>
-                    <h3>Architecture réseau</h3>
-                </div>
-                <div class="cards-container">
-                    <!-- Carte Topologie -->
-                    <div class="info-card">
-                        <div class="card-front">
-                            <div class="card-icon"><ion-icon name="prism-outline"></ion-icon></div>
-                            <h4>Topologie</h4>
-                        </div>
-                        <div class="card-back">
-                            <h4>Topologie</h4>
-                            <p>Organisation physique ou logique des éléments d'un réseau informatique.</p>
-                            <ul class="card-details">
-                                <li>Topologie en étoile, en arbre, en maille</li>
-                                <li>Impact sur la redondance et la résilience</li>
-                                <li>Influence la performance et la sécurité</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Carte Haute disponibilité -->
-                    <div class="info-card">
-                        <div class="card-front">
-                            <div class="card-icon"><ion-icon name="shield-checkmark-outline"></ion-icon></div>
-                            <h4>Haute disponibilité</h4>
-                        </div>
-                        <div class="card-back">
-                            <h4>Haute disponibilité</h4>
-                            <p>Conception réseau assurant une continuité de service optimale, même en cas de défaillance.</p>
-                            <ul class="card-details">
-                                <li>Redondance des équipements et liaisons</li>
-                                <li>Équilibrage de charge</li>
-                                <li>Failover automatique</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Carte Sécurité réseau -->
-                    <div class="info-card">
-                        <div class="card-front">
-                            <div class="card-icon"><ion-icon name="lock-closed-outline"></ion-icon></div>
-                            <h4>Sécurité réseau</h4>
-                        </div>
-                        <div class="card-back">
-                            <h4>Sécurité réseau</h4>
-                            <p>Ensemble de pratiques et technologies protégeant l'intégrité et la confidentialité du réseau.</p>
-                            <ul class="card-details">
-                                <li>Firewalls et filtrage</li>
-                                <li>Segmentation et isolation</li>
-                                <li>Authentification et autorisation</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="help-card">
+                    <h3>
+                        <ion-icon name="stats-chart-outline"></ion-icon>
+                        Tableau de bord
+                    </h3>
+                    <p>Visualisez les statistiques et les performances de votre réseau.</p>
+                    <a href="#" class="card-link">
+                        En savoir plus
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
 
 {% block script %}

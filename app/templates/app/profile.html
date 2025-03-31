@@ -1,36 +1,70 @@
 {% extends "app/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}Profil - ZTP{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="text-center">Profil</h2>
+<div class="profile-container">
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="profile-form">
+        <div class="card-header">
+            <h2>Mon Profil</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.username|as_crispy_field }}
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4>Informations personnelles</h4>
-                            <p><strong>Nom d'utilisateur :</strong> {{ user.username }}</p>
-                            <p><strong>Email :</strong> {{ user.email }}</p>
-                            <p><strong>Prénom :</strong> {{ user.first_name }}</p>
-                            <p><strong>Nom :</strong> {{ user.last_name }}</p>
+                <div class="form-group">
+                    {{ form.email|as_crispy_field }}
+                </div>
+                <div class="form-group">
+                    {{ form.first_name|as_crispy_field }}
+                </div>
+                <div class="form-group">
+                    {{ form.last_name|as_crispy_field }}
+                </div>
+
+                <div class="roles-section">
+                    <h4>Rôles</h4>
+                    <div class="roles-grid">
+                        <div class="role-item">
+                            <span>Administrateur</span>
+                            <span class="role-value {% if user.is_staff %}active{% else %}inactive{% endif %}">
+                                {% if user.is_staff %}Oui{% else %}Non{% endif %}
+                            </span>
                         </div>
-                        <div class="col-md-6">
-                            <h4>Rôles</h4>
-                            <p><strong>Administrateur :</strong> {% if user.is_staff %}Oui{% else %}Non{% endif %}</p>
-                            <p><strong>Super utilisateur :</strong> {% if user.is_superuser %}Oui{% else %}Non{% endif %}</p>
+                        <div class="role-item">
+                            <span>Super Utilisateur</span>
+                            <span class="role-value {% if user.is_superuser %}active{% else %}inactive{% endif %}">
+                                {% if user.is_superuser %}Oui{% else %}Non{% endif %}
+                            </span>
                         </div>
                     </div>
-                    <div class="text-center mt-4">
-                        <a href="{% url 'dashboard' %}" class="btn btn-primary">Retour au tableau de bord</a>
-                    </div>
                 </div>
-            </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="/dashboard" class="btn btn-secondary">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                        Retour au tableau de bord
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <ion-icon name="save-outline"></ion-icon>
+                        Enregistrer les modifications
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

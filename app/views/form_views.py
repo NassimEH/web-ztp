@@ -2,6 +2,8 @@ from django.views.generic.edit import FormView
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.template.loader import render_to_string
 from app.forms import DeviceForm, TemplateForm, DHCPConfigUpdateForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 class AddView(FormView):
@@ -47,6 +49,7 @@ class ChangeDHCPConfig(AddView):
     form_class = DHCPConfigUpdateForm
 
 
+@method_decorator(login_required, name='dispatch')
 class ConfFormView(FormView):
    def dispatch(self, request, *args, **kwargs):
         form_type = request.POST.get('form_type')

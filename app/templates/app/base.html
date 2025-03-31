@@ -18,40 +18,14 @@
 </head>
 
 <body>
-    <!-- Assurez-vous que cette section n'est présente qu'une seule fois -->
-    <div class="topbar">
-        <div class="toggle">
-            <ion-icon name="menu-outline"></ion-icon>
-        </div>
-        <div class="user-menu">
-            {% if user.is_authenticated %}
-                <div class="user-info">
-                    <span class="user-name">
-                        <i class="fas fa-user-circle me-2"></i>
-                        {{ user.username }}
-                    </span>
-                    <a href="{% url 'auth:logout' %}" class="logout-btn" title="Se déconnecter">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
-                </div>
-            {% else %}
-                <div class="auth-buttons">
-                    <a href="{% url 'auth:login' %}" class="auth-btn" title="Se connecter">
-                        <i class="fas fa-sign-in-alt"></i>
-                    </a>
-                    <a href="{% url 'auth:register' %}" class="auth-btn" title="S'inscrire">
-                        <i class="fas fa-user-plus"></i>
-                    </a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <!-- Assurez-vous que le menu latéral est correctement inclus -->
-    {% include 'app/components/menu.html' %}
-
+    {% include "app/components/menu.html" %}
+    
     <div class="main">
-        <!-- ========================= Main Content ==================== -->
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+        </div>
         <div class="content-wrapper">
             {% if messages %}
                 <div class="container mt-3">
@@ -68,77 +42,77 @@
         </div>
         
         <!-- =============== Footer ================ -->
-<footer class="footer">
-  <div class="container">
-      <div class="footer-container">
-          <div class="footer-logo">
-              <h3>ConfigZTP</h3>
-              <p>Solutions de configuration réseau avancées</p>
-          </div>
-          
-          <div class="footer-links">
-              <h4>Liens rapides</h4>
-              <ul>
-                  <li><a href="#">Accueil</a></li>
-                  <li><a href="/devices">Mes Appareils</a></li>
-                  <li><a href="/config">Configurer un appareil</a></li>
-                  <li><a href="/help">Aide</a></li>
-              </ul>
-          </div>
-          
-          <div class="footer-contact">
-              <h4>Contact</h4>
-              <p><ion-icon name="mail-outline"></ion-icon> support@configztp.com</p>
-              <p><ion-icon name="call-outline"></ion-icon> +33 1 23 45 67 89</p>
-          </div>
-          
-          <div class="footer-social">
-              <h4>Suivez-nous</h4>
-              <ul>
-                  <li>
-                      <span>Nassim</span>
-                      <div class="member-icons">
-                          <a href="https://github.com/NassimEH" class="social-icon" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
-                          <a href="https://www.linkedin.com/in/nassim-elhaddad/" class="social-icon" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
-                      </div>
-                  </li>
-                  <li>
-                      <span>Chadi</span>
-                      <div class="member-icons">
-                          <a href="https://github.com/Chadi-Mangle" class="social-icon" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
-                          <a href="https://www.linkedin.com/in/chadi-mangle/" class="social-icon" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
-                      </div>
-                  </li>
-                  <li>
-                      <span>Ilyes</span>
-                      <div class="member-icons">
-                          <a href="https://github.com/SeyyLii" class="social-icon" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
-                          <a href="https://www.linkedin.com/in/ilyes-belkhir/" class="social-icon" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
-                      </div>
-                  </li>
-                  <li>
-                      <span>Lucas</span>
-                      <div class="member-icons">
-                          <a href="https://github.com/DreanoLucas" class="social-icon" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
-                          <a href="https://www.linkedin.com/in/lucas-dreano-9b3bab259/" class="social-icon" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
-                      </div>
-                  </li>
-              </ul>
-          </div>
-      </div>
-      
-      <div class="footer-bottom">
-          <div class="footer-copyright">
-              <p>&copy; {% now "Y" %} ConfigZTP. Tous droits réservés.</p>
-          </div>
-          <div class="footer-legal">
-              <a href="#">Conditions d'utilisation</a>
-              <span class="divider">|</span>
-              <a href="#">Politique de confidentialité</a>
-          </div>
-      </div>
-  </div>
-</footer>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-container">
+                    <div class="footer-logo">
+                        <h3>ConfigZTP</h3>
+                        <p>Solutions de configuration réseau avancées</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h4>Liens rapides</h4>
+                        <ul>
+                            <li><a href="#">Accueil</a></li>
+                            <li><a href="/devices">Mes Appareils</a></li>
+                            <li><a href="/config">Configurer un appareil</a></li>
+                            <li><a href="/help">Aide</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-contact">
+                        <h4>Contact</h4>
+                        <p><ion-icon name="mail-outline"></ion-icon> support@configztp.com</p>
+                        <p><ion-icon name="call-outline"></ion-icon> +33 1 23 45 67 89</p>
+                    </div>
+                    
+                    <div class="footer-social">
+                        <h4>Suivez-nous</h4>
+                        <ul>
+                            <li>
+                                <span>Nassim</span>
+                                <div class="member-icons">
+                                    <a href="https://github.com/NassimEH" class="social-icon" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
+                                    <a href="https://www.linkedin.com/in/nassim-elhaddad/" class="social-icon" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Chadi</span>
+                                <div class="member-icons">
+                                    <a href="https://github.com/Chadi-Mangle" class="social-icon" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
+                                    <a href="https://www.linkedin.com/in/chadi-mangle/" class="social-icon" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Ilyes</span>
+                                <div class="member-icons">
+                                    <a href="https://github.com/SeyyLii" class="social-icon" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
+                                    <a href="https://www.linkedin.com/in/ilyes-belkhir/" class="social-icon" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Lucas</span>
+                                <div class="member-icons">
+                                    <a href="https://github.com/DreanoLucas" class="social-icon" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
+                                    <a href="https://www.linkedin.com/in/lucas-dreano-9b3bab259/" class="social-icon" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="footer-copyright">
+                        <p>&copy; {% now "Y" %} ConfigZTP. Tous droits réservés.</p>
+                    </div>
+                    <div class="footer-legal">
+                        <a href="#">Conditions d'utilisation</a>
+                        <span class="divider">|</span>
+                        <a href="#">Politique de confidentialité</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <!-- =========== Scripts =========  -->
@@ -164,12 +138,13 @@
         };
     </script>
     
-    {% block script %}
+    {% block scripts %}
     {% endblock %}
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- ====== ionicons ======= -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

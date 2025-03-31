@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'app',
-    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -114,21 +113,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Authentication settings
-AUTH_USER_MODEL = 'accounts.User'
-
-# Crispy Forms settings
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
-
-LOGIN_REDIRECT_URL = 'dashboard'
-LOGOUT_REDIRECT_URL = 'auth:login'
-LOGIN_URL = 'auth:login'
+LOGIN_REDIRECT_URL = 'app:dashboard'
+LOGOUT_REDIRECT_URL = 'app:login'
+LOGIN_URL = 'app:login'
 
 SITE_ID = 1
 
-ACCOUNT_EMAIL_REQUIRED = False
-ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_LOGIN_METHODS = {'username'}
+ACCOUNT_SIGNUP_FIELDS = ['email', 'username*', 'password1*', 'password2*']
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Internationalization
