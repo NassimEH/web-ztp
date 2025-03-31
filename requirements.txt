@@ -4,3 +4,5 @@ gunicorn
 django-crispy-forms
 crispy-bootstrap5
 django-allauth
+jinja2
+Pillow
