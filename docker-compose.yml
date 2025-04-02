@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   caddy:
     container_name: caddy
@@ -33,17 +35,15 @@ services:
   web:
     container_name: web
     hostname: web
-    build:
-      context: "."  # Utilise le Dockerfile dans le répertoire courant
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
     networks:
       - web
     ports:
-      - "8000:8000"  # Expose le port Django
+      - "8000:8000"
     restart: unless-stopped
     volumes:
-      - ".:/app"  # Monte le code source
-      - "./docker-data/sqlite:/app/db"  # Pour stocker la base SQLite
-      - "django-docker_static:/app/staticfiles"  # Correspond à STATIC_ROOT dans Django
+      - .:/app
     environment:
       - DATABASE_URL=postgresql://webztp_user:webztp_password@db:5432/webztp_db
     depends_on:

@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'webZtp.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://webztp_user:webztp_password@localhost:5432/webztp_db',
+        default='postgresql://webztp_user:webztp_password@db:5432/webztp_db',
         conn_max_age=600
     )
 }
