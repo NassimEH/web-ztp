@@ -2,18 +2,19 @@
     <div class="footer-container">
         <div class="footer-links">
             <ul>
-                <li><a href="#">À propos</a></li>
-                <li><a href="#">Mentions légales</a></li>
-                <li><a href="#">Politique de confidentialité</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="{{ url_for('dashboard') }}">Accueil</a></li>
+                <li><a href="{{ url_for('devices') }}">Appareils</a></li>
+                <li><a href="{{ url_for('templates') }}">Templates</a></li>
+                <li><a href="{{ url_for('profiles') }}">Profils</a></li>
+                <li><a href="{{ url_for('settings') }}">Paramètres</a></li>
+                <li><a href="/docs" target="_blank">Documentation</a></li>
             </ul>
         </div>
         <div class="footer-social">
             <ul>
-                <li><a href="#" class="social-icon"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="#" class="social-icon"><i class="fab fa-github"></i></a></li>
                 <li><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></li>
                 <li><a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a></li>
             </ul>
         </div>
     </div>
