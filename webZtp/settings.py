@@ -90,11 +90,10 @@ WSGI_APPLICATION = 'webZtp.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+    'default': dj_database_url.config(
+        default='postgresql://webztp_user:webztp_password@localhost:5432/webztp_db',
+        conn_max_age=600
+    )
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
