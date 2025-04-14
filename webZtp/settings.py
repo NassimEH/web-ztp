@@ -90,10 +90,11 @@ WSGI_APPLICATION = 'webZtp.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://webztp_user:webztp_password@localhost:5432/webztp_db',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -139,10 +140,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATIC_URL = "app/static/"
-# STATICFILES_DIRS = [BASE_DIR / "static"]
-#STATICFILES_DIRS = [ BASE_DIR / "static", ]
+STATICFILES_DIRS = [
+    BASE_DIR / 'app' / 'static',
+]
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Configuration pour servir les fichiers statiques en développement
+if DEBUG:
+    MIDDLEWARE += ['django.middleware.security.SecurityMiddleware']
+    MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware']
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
