@@ -47,17 +47,38 @@
   --card-bg: #1e1e1e;
   --border-color: #2d2d2d;
   --hover-bg: #2d2d2d;
-  --nav-bg: #1e1e1e;
+  --nav-bg: #1a1a1a;
   --nav-text: #ffffff;
   --nav-hover: var(--blue);
-  --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  --footer-bg: #1e1e1e;
+  --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --footer-bg: #1a1a1a;
   --footer-text: #ffffff;
   --input-bg: #2d2d2d;
   --input-border: #3a3a3a;
+  --input-placeholder: #a0a0a0;
   --table-header: #2d2d2d;
   --table-row: #1e1e1e;
   --table-hover: #2d2d2d;
+  --form-bg: #1e1e1e;
+  --form-border: #3a3a3a;
+  --help-card-bg: #1e1e1e;
+  --help-card-hover: #2d2d2d;
+  --profile-card-bg: #1e1e1e;
+  --profile-card-header: #2d2d2d;
+  --search-bg: #2d2d2d;
+  --search-border: #3a3a3a;
+  --search-text: #ffffff;
+  --search-placeholder: #a0a0a0;
+  --alert-bg: #2d2d2d;
+  --alert-border: #3a3a3a;
+  --alert-text: #ffffff;
+  --button-bg: #2d2d2d;
+  --button-text: #ffffff;
+  --button-hover: #3a3a3a;
+  --button-border: #3a3a3a;
+  --label-text: #ffffff;
+  --section-bg: #1a1a1a;
+  --section-border: #2d2d2d;
 }
 
 html, body {
@@ -97,6 +118,7 @@ body {
   border-radius: 0 15px 15px 0;
   left: 0;
   top: 0;
+  border-right: 1px solid var(--border-color);
 }
 
 /* Masquer la scrollbar horizontale */
@@ -129,12 +151,12 @@ body {
 
 .navigation ul li:hover,
 .navigation ul li.hovered {
-  background: var(--gray-light);
+  background: var(--hover-bg);
   transform: translateX(5px);
 }
 
 .navigation ul li.active {
-  background: var(--blue-light);
+  background: var(--hover-bg);
 }
 
 .navigation ul li.active::before {
@@ -360,7 +382,7 @@ body {
   width: calc(100% - 300px);
   margin-left: 300px;
   min-height: 100vh;
-  background: var(--card-bg);
+  background: var(--bg-color);
   transition: 0.5s;
   display: flex;
   flex-direction: column;
@@ -377,6 +399,7 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
+  background: var(--bg-color);
 }
 
 /* ===================== Topbar ===================== */
@@ -432,7 +455,13 @@ body {
   padding: 5px 20px 5px 40px;
   font-size: 16px;
   outline: none;
-  border: 1px solid var(--black2);
+  border: 1px solid var(--search-border);
+  background: var(--search-bg);
+  color: var(--search-text);
+}
+
+.search label input::placeholder {
+  color: var(--search-placeholder);
 }
 
 .search label ion-icon {
@@ -910,9 +939,9 @@ body {
 }
 
 .profile-form {
-  background: var(--white);
+  background: var(--profile-card-bg);
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
   overflow: hidden;
   transition: all 0.3s ease;
 }
@@ -923,7 +952,7 @@ body {
 }
 
 .profile-form .card-header {
-  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  background: var(--profile-card-header);
   padding: 25px;
   border: none;
 }
@@ -945,19 +974,18 @@ body {
 
 .profile-form .form-label {
   font-weight: 500;
-  color: var(--gray-dark);
+  color: var(--label-text);
   margin-bottom: 10px;
   font-size: 1rem;
 }
 
 .profile-form .form-control {
-  height: 55px;
+  background: var(--input-bg);
   border: 2px solid var(--input-border);
   border-radius: 12px;
   padding: 0 20px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background: var(--input-bg);
   color: var(--text-color);
 }
 
@@ -967,8 +995,12 @@ body {
   outline: none;
 }
 
+.profile-form .form-control::placeholder {
+  color: var(--input-placeholder);
+}
+
 .roles-section {
-  background: var(--gray-light);
+  background: var(--section-bg);
   border-radius: 15px;
   padding: 25px;
   margin-top: 30px;
@@ -981,7 +1013,7 @@ body {
 }
 
 .roles-section h4 {
-  color: var(--gray-dark);
+  color: var(--text-color);
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 20px;
@@ -994,7 +1026,7 @@ body {
 }
 
 .role-item {
-  background: var(--white);
+  background: var(--card-bg);
   padding: 20px;
   border-radius: 12px;
   display: flex;
@@ -1039,8 +1071,9 @@ body {
 }
 
 .profile-form .btn-primary {
-  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
-  border: none;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: 1px solid var(--button-border);
 }
 
 .profile-form .btn-primary:hover {
@@ -1049,15 +1082,14 @@ body {
 }
 
 .profile-form .btn-secondary {
-  background: var(--gray-light);
-  color: var(--gray-dark);
-  border: none;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: 1px solid var(--button-border);
 }
 
 .profile-form .btn-secondary:hover {
-  background: var(--gray);
-  color: var(--white);
   transform: translateY(-2px);
+  background: var(--button-hover);
 }
 
 .alert {
@@ -1067,8 +1099,8 @@ body {
   border: none;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   animation: slideIn 0.3s ease-out;
-  background: var(--card-bg);
-  color: var(--text-color);
+  background: var(--alert-bg);
+  color: var(--alert-text);
   border-left: 4px solid var(--success);
 }
 
@@ -1101,10 +1133,11 @@ body {
   width: 100%;
   margin: 2rem auto;
   padding: 3rem;
-  background: var(--white);
+  background: var(--form-bg);
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
   transition: all 0.3s ease;
+  border: 1px solid var(--form-border);
 }
 
 .auth-form-container:hover {
@@ -1113,7 +1146,7 @@ body {
 }
 
 .auth-form-container .card-header {
-  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  background: var(--profile-card-header);
   padding: 25px;
   border: none;
   border-radius: 20px 20px 0 0;
@@ -1137,7 +1170,7 @@ body {
 
 .auth-form-container .form-label {
   font-weight: 500;
-  color: var(--gray-dark);
+  color: var(--label-text);
   margin-bottom: 10px;
   font-size: 1.1rem;
   display: flex;
@@ -1151,13 +1184,12 @@ body {
 }
 
 .auth-form-container .form-control {
-  height: 60px;
+  background: var(--input-bg);
   border: 2px solid var(--input-border);
   border-radius: 12px;
   padding: 0 20px;
   font-size: 1.1rem;
   transition: all 0.3s ease;
-  background: var(--input-bg);
   color: var(--text-color);
 }
 
@@ -1167,12 +1199,17 @@ body {
   outline: none;
 }
 
+.auth-form-container .form-control::placeholder {
+  color: var(--input-placeholder);
+}
+
 .auth-form-container .btn-primary {
   height: 60px;
   font-size: 1.1rem;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
-  border: none;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: 1px solid var(--button-border);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
@@ -1193,7 +1230,7 @@ body {
 .auth-form-container .mt-3 {
   text-align: center;
   font-size: 1.1rem;
-  color: var(--gray-dark);
+  color: var(--text-color);
 }
 
 .auth-form-container .mt-3 a {
@@ -1230,6 +1267,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
+  background: var(--bg-color);
 }
 
 .help-header {
@@ -1240,7 +1278,7 @@ body {
 .help-header h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--gray-dark);
+  color: var(--text-color);
   margin-bottom: 15px;
   background: linear-gradient(135deg, var(--gray-dark), var(--blue));
   -webkit-background-clip: text;
@@ -1249,7 +1287,7 @@ body {
 
 .help-header p {
   font-size: 1.1rem;
-  color: var(--gray);
+  color: var(--text-color);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -1263,13 +1301,14 @@ body {
 }
 
 .help-category {
-  background: var(--white);
+  background: var(--help-card-bg);
   border-radius: 20px;
   padding: 30px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  border: 1px solid var(--border-color);
 }
 
 .help-category::before {
@@ -1287,6 +1326,7 @@ body {
 .help-category:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  background: var(--help-card-hover);
 }
 
 .help-category:hover::before {
@@ -1295,7 +1335,7 @@ body {
 
 .help-category h2 {
   font-size: 1.5rem;
-  color: var(--gray-dark);
+  color: var(--text-color);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -1308,7 +1348,7 @@ body {
 }
 
 .help-category p {
-  color: var(--gray);
+  color: var(--text-color);
   line-height: 1.6;
   margin-bottom: 25px;
 }
@@ -1321,7 +1361,7 @@ body {
 }
 
 .help-card {
-  background: var(--card-bg);
+  background: var(--help-card-bg);
   border-radius: 15px;
   padding: 25px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -1347,6 +1387,7 @@ body {
 .help-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  background: var(--help-card-hover);
 }
 
 .help-card:hover::after {
