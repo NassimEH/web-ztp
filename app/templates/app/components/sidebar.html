@@ -1,0 +1,59 @@
+<!-- Logo -->
+<div class="logo-container">
+    <div class="logo-icon">
+        <ion-icon name="server-outline"></ion-icon>
+    </div>
+    <div class="title">ZTP Manager</div>
+</div>
+
+<!-- Menu Items -->
+<ul>
+    <li class="{% if request.endpoint == 'dashboard' %}active{% endif %}">
+        <a href="{{ url_for('dashboard') }}">
+            <div class="icon-container">
+                <ion-icon name="home-outline"></ion-icon>
+            </div>
+            <span class="title">Dashboard</span>
+        </a>
+    </li>
+    <li class="{% if request.endpoint == 'devices' %}active{% endif %}">
+        <a href="{{ url_for('devices') }}">
+            <div class="icon-container">
+                <ion-icon name="hardware-chip-outline"></ion-icon>
+            </div>
+            <span class="title">Devices</span>
+        </a>
+    </li>
+    <li class="{% if request.endpoint == 'templates' %}active{% endif %}">
+        <a href="{{ url_for('templates') }}">
+            <div class="icon-container">
+                <ion-icon name="document-text-outline"></ion-icon>
+            </div>
+            <span class="title">Templates</span>
+        </a>
+    </li>
+    <li class="{% if request.endpoint == 'profiles' %}active{% endif %}">
+        <a href="{{ url_for('profiles') }}">
+            <div class="icon-container">
+                <ion-icon name="people-outline"></ion-icon>
+            </div>
+            <span class="title">Profiles</span>
+        </a>
+    </li>
+    <li class="{% if request.endpoint == 'settings' %}active{% endif %}">
+        <a href="{{ url_for('settings') }}">
+            <div class="icon-container">
+                <ion-icon name="settings-outline"></ion-icon>
+            </div>
+            <span class="title">Settings</span>
+        </a>
+    </li>
+    <li>
+        <a href="/docs" target="_blank">
+            <div class="icon-container">
+                <ion-icon name="book-outline"></ion-icon>
+            </div>
+            <span class="title">Documentation</span>
+        </a>
+    </li>
+</ul> 
