@@ -1,0 +1,63 @@
+Introduction
+============
+
+WebZTP est une application web moderne pour la configuration automatique des appareils réseau (Zero Touch Provisioning). Cette documentation vous guidera à travers l'installation, la configuration et l'utilisation de WebZTP.
+
+Fonctionnalités principales
+--------------------------
+
+* Configuration automatique des appareils réseau
+* Interface utilisateur intuitive
+* Gestion des modèles de configuration
+* Support multi-vendeurs
+* Tableau de bord en temps réel
+* Gestion des utilisateurs et des permissions
+
+Architecture
+-----------
+
+WebZTP est construit avec :
+
+* Django 5.1.6 comme framework backend
+* Interface utilisateur moderne et responsive
+* Base de données PostgreSQL
+* API RESTful pour l'intégration
+
+Public cible
+-----------
+
+Cette documentation est destinée aux :
+
+* Administrateurs réseau
+* Ingénieurs système
+* Développeurs
+* Utilisateurs finaux
+
+Qu'est-ce que le ZTP ?
+---------------------
+
+Le Zero Touch Provisioning (ZTP) est un processus qui permet aux équipements réseau de se configurer automatiquement lorsqu'ils sont connectés au réseau pour la première fois. Cela élimine le besoin d'une configuration manuelle initiale, réduisant ainsi les erreurs et le temps de déploiement.
+
+Architecture
+-----------
+
+.. mermaid::
+   :align: center
+
+   graph TD
+      A[Client] --> B[ZTP Manager]
+      B --> C[DHCP Server]
+      B --> D[TFTP Server]
+      B --> E[Database]
+      B --> F[API Gateway]
+      F --> G[Microservices]
+
+Commencer
+---------
+
+Pour commencer à utiliser ZTP Manager, suivez notre guide d'installation :doc:`installation`.
+
+Besoin d'aide ?
+--------------
+
+Si vous avez des questions ou rencontrez des problèmes, consultez notre :doc:`faq` ou contactez notre équipe de support. 

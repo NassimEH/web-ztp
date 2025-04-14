@@ -1,0 +1,279 @@
+API Reference
+============
+
+Cette section décrit l'API REST de WebZTP.
+
+Authentication
+-------------
+
+L'API utilise l'authentification par token JWT.
+
+Pour obtenir un token :
+
+.. code-block:: http
+
+   POST /api/token/
+   Content-Type: application/json
+
+   {
+       "username": "votre_utilisateur",
+       "password": "votre_mot_de_passe"
+   }
+
+Réponse :
+
+.. code-block:: json
+
+   {
+       "access": "votre_token_jwt",
+       "refresh": "votre_token_refresh"
+   }
+
+Utilisation du token :
+
+.. code-block:: http
+
+   GET /api/devices/
+   Authorization: Bearer votre_token_jwt
+
+Endpoints
+--------
+
+Devices
+~~~~~~~
+
+Liste des appareils :
+
+.. code-block:: http
+
+   GET /api/devices/
+
+Réponse :
+
+.. code-block:: json
+
+   {
+       "count": 2,
+       "next": null,
+       "previous": null,
+       "results": [
+           {
+               "id": 1,
+               "hostname": "SW01",
+               "mac_address": "00:11:22:33:44:55",
+               "status": "configured",
+               "created_at": "2024-04-14T11:05:32Z",
+               "updated_at": "2024-04-14T11:06:45Z"
+           },
+           {
+               "id": 2,
+               "hostname": "SW02",
+               "mac_address": "00:11:22:33:44:66",
+               "status": "pending",
+               "created_at": "2024-04-14T11:07:12Z",
+               "updated_at": "2024-04-14T11:07:12Z"
+           }
+       ]
+   }
+
+Détails d'un appareil :
+
+.. code-block:: http
+
+   GET /api/devices/{id}/
+
+Création d'un appareil :
+
+.. code-block:: http
+
+   POST /api/devices/
+   Content-Type: application/json
+
+   {
+       "hostname": "SW03",
+       "mac_address": "00:11:22:33:44:77",
+       "template": 1,
+       "variables": {
+           "IP_ADDRESS": "192.168.1.10",
+           "NETMASK": "255.255.255.0",
+           "GATEWAY": "192.168.1.1"
+       }
+   }
+
+Templates
+~~~~~~~~
+
+Liste des modèles :
+
+.. code-block:: http
+
+   GET /api/templates/
+
+Réponse :
+
+.. code-block:: json
+
+   {
+       "count": 2,
+       "next": null,
+       "previous": null,
+       "results": [
+           {
+               "id": 1,
+               "name": "Base Configuration",
+               "description": "Configuration de base pour commutateurs",
+               "version": "1.0",
+               "created_at": "2024-04-14T11:00:00Z",
+               "updated_at": "2024-04-14T11:00:00Z"
+           },
+           {
+               "id": 2,
+               "name": "Secure Configuration",
+               "description": "Configuration sécurisée pour commutateurs",
+               "version": "1.0",
+               "created_at": "2024-04-14T11:01:00Z",
+               "updated_at": "2024-04-14T11:01:00Z"
+           }
+       ]
+   }
+
+Création d'un modèle :
+
+.. code-block:: http
+
+   POST /api/templates/
+   Content-Type: application/json
+
+   {
+       "name": "VLAN Configuration",
+       "description": "Configuration VLAN pour commutateurs",
+       "version": "1.0",
+       "content": "vlan ${VLAN_ID}\n name ${VLAN_NAME}\n!"
+   }
+
+Deployments
+~~~~~~~~~~
+
+Liste des déploiements :
+
+.. code-block:: http
+
+   GET /api/deployments/
+
+Réponse :
+
+.. code-block:: json
+
+   {
+       "count": 2,
+       "next": null,
+       "previous": null,
+       "results": [
+           {
+               "id": 1,
+               "device": 1,
+               "status": "success",
+               "started_at": "2024-04-14T11:05:32Z",
+               "completed_at": "2024-04-14T11:06:45Z"
+           },
+           {
+               "id": 2,
+               "device": 2,
+               "status": "pending",
+               "started_at": "2024-04-14T11:07:12Z",
+               "completed_at": null
+           }
+       ]
+   }
+
+Création d'un déploiement :
+
+.. code-block:: http
+
+   POST /api/deployments/
+   Content-Type: application/json
+
+   {
+       "device": 1,
+       "template": 1,
+       "variables": {
+           "IP_ADDRESS": "192.168.1.10",
+           "NETMASK": "255.255.255.0",
+           "GATEWAY": "192.168.1.1"
+       }
+   }
+
+Codes d'erreur
+------------
+
+L'API utilise les codes d'erreur HTTP standard :
+
+* 200 : Succès
+* 201 : Créé
+* 400 : Requête invalide
+* 401 : Non authentifié
+* 403 : Non autorisé
+* 404 : Non trouvé
+* 500 : Erreur serveur
+
+Exemple d'erreur :
+
+.. code-block:: json
+
+   {
+       "error": "validation_error",
+       "message": "Le champ hostname est requis",
+       "details": {
+           "hostname": ["Ce champ est obligatoire."]
+       }
+   }
+
+Pagination
+---------
+
+L'API utilise la pagination par défaut :
+
+* ``count`` : Nombre total d'éléments
+* ``next`` : URL de la page suivante
+* ``previous`` : URL de la page précédente
+* ``results`` : Liste des éléments
+
+Paramètres de pagination :
+
+* ``page`` : Numéro de page
+* ``page_size`` : Nombre d'éléments par page
+
+Exemple :
+
+.. code-block:: http
+
+   GET /api/devices/?page=2&page_size=10
+
+Filtrage
+-------
+
+L'API supporte le filtrage des résultats :
+
+* ``search`` : Recherche textuelle
+* ``status`` : Filtrage par statut
+* ``created_after`` : Date de création après
+* ``created_before`` : Date de création avant
+
+Exemple :
+
+.. code-block:: http
+
+   GET /api/devices/?status=pending&created_after=2024-04-14
+
+Tri
+---
+
+L'API supporte le tri des résultats :
+
+* ``ordering`` : Champ de tri (préfixé par - pour ordre décroissant)
+
+Exemple :
+
+.. code-block:: http
+
+   GET /api/devices/?ordering=-created_at 

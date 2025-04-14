@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration &mdash; WebZTP  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=02933730" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=02933730" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Utilisation" href="usage.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WebZTP
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#fonctionnalites-principales">Fonctionnalités principales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#public-cible">Public cible</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#qu-est-ce-que-le-ztp">Qu’est-ce que le ZTP ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id1">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#commencer">Commencer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#besoin-d-aide">Besoin d’aide ?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequis">Prérequis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-depuis-github">Installation depuis GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#configuration-de-la-base-de-donnees">Configuration de la base de données</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#lancement-du-serveur">Lancement du serveur</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#deploiement-en-production">Déploiement en production</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-du-serveur-dhcp">Configuration du serveur DHCP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-des-modeles">Configuration des modèles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#securite">Sécurité</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#journalisation">Journalisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sauvegarde-et-restauration">Sauvegarde et restauration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Utilisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#interface-utilisateur">Interface utilisateur</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#ajout-d-un-appareil">Ajout d’un appareil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#deploiement-de-configuration">Déploiement de configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#surveillance-des-deploiements">Surveillance des déploiements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#gestion-des-modeles">Gestion des modèles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#depannage">Dépannage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#devices">Devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#templates">Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#deployments">Deployments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#codes-d-erreur">Codes d’erreur</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pagination">Pagination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#filtrage">Filtrage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#tri">Tri</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Dépannage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#problemes-de-connexion">Problèmes de connexion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#erreur-d-authentification">Erreur d’authentification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#erreur-de-session">Erreur de session</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#problemes-dhcp">Problèmes DHCP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#le-serveur-dhcp-ne-repond-pas">Le serveur DHCP ne répond pas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#conflit-d-adresses-ip">Conflit d’adresses IP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#problemes-tftp">Problèmes TFTP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#le-serveur-tftp-ne-demarre-pas">Le serveur TFTP ne démarre pas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#fichiers-non-transferes">Fichiers non transférés</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#problemes-de-configuration">Problèmes de configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#erreur-de-syntaxe">Erreur de syntaxe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#variables-manquantes">Variables manquantes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#problemes-de-base-de-donnees">Problèmes de base de données</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#erreurs-de-migration">Erreurs de migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#connexion-a-la-base-de-donnees">Connexion à la base de données</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#problemes-de-performance">Problèmes de performance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#temps-de-reponse-lents">Temps de réponse lents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#fuites-de-memoire">Fuites de mémoire</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#general">Général</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#qu-est-ce-que-webztp">Qu’est-ce que WebZTP ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#quels-equipements-sont-supportes">Quels équipements sont supportés ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-fonctionne-le-ztp">Comment fonctionne le ZTP ?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#quels-sont-les-prerequis">Quels sont les prérequis ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-installer-webztp">Comment installer WebZTP ?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-configurer-le-serveur-dhcp">Comment configurer le serveur DHCP ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-creer-un-modele">Comment créer un modèle ?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#utilisation">Utilisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-ajouter-un-appareil">Comment ajouter un appareil ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-surveiller-les-deploiements">Comment surveiller les déploiements ?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#securite">Sécurité</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-securiser-webztp">Comment sécuriser WebZTP ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-gerer-les-utilisateurs">Comment gérer les utilisateurs ?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#depannage">Dépannage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#que-faire-en-cas-d-erreur">Que faire en cas d’erreur ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-obtenir-de-l-aide">Comment obtenir de l’aide ?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#api">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-utiliser-l-api">Comment utiliser l’API ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-authentifier-les-requetes-api">Comment authentifier les requêtes API ?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#performance">Performance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-optimiser-les-performances">Comment optimiser les performances ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-faire-une-sauvegarde">Comment faire une sauvegarde ?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#mise-a-jour">Mise à jour</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#comment-mettre-a-jour-webztp">Comment mettre à jour WebZTP ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html#quand-mettre-a-jour">Quand mettre à jour ?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WebZTP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/votre_utilisateur/web-ztp/blob/main/docs/source/configuration.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h1>
+<p>Cette section détaille la configuration de WebZTP.</p>
+<section id="configuration-du-serveur-dhcp">
+<h2>Configuration du serveur DHCP<a class="headerlink" href="#configuration-du-serveur-dhcp" title="Link to this heading"></a></h2>
+<p>Le serveur DHCP est essentiel pour le fonctionnement du ZTP. Voici comment le configurer :</p>
+<ol class="arabic simple">
+<li><p>Accédez à la section “Configuration DHCP” dans l’interface d’administration</p></li>
+<li><p>Configurez les paramètres suivants :</p>
+<ul class="simple">
+<li><p>Plage d’adresses IP</p></li>
+<li><p>Masque de sous-réseau</p></li>
+<li><p>Passerelle par défaut</p></li>
+<li><p>Serveur TFTP</p></li>
+<li><p>Options ZTP spécifiques au vendeur</p></li>
+</ul>
+</li>
+</ol>
+<p>Exemple de configuration DHCP :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>subnet 192.168.1.0 netmask 255.255.255.0 {
+    range 192.168.1.100 192.168.1.200;
+    option routers 192.168.1.1;
+    option tftp-server-name &quot;192.168.1.2&quot;;
+    option bootfile-name &quot;ztp-config&quot;;
+}
+</pre></div>
+</div>
+</section>
+<section id="configuration-des-modeles">
+<h2>Configuration des modèles<a class="headerlink" href="#configuration-des-modeles" title="Link to this heading"></a></h2>
+<p>Les modèles permettent de définir des configurations standard pour différents types d’appareils :</p>
+<ol class="arabic simple">
+<li><p>Types de modèles :</p>
+<ul class="simple">
+<li><p>Configuration de base</p></li>
+<li><p>Configuration de sécurité</p></li>
+<li><p>Configuration VLAN</p></li>
+<li><p>Configuration routage</p></li>
+</ul>
+</li>
+<li><p>Variables disponibles :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">${HOSTNAME}</span></code> - Nom de l’appareil</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">${IP_ADDRESS}</span></code> - Adresse IP</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">${NETMASK}</span></code> - Masque de sous-réseau</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">${GATEWAY}</span></code> - Passerelle par défaut</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">${LOCATION}</span></code> - Emplacement de l’appareil</p></li>
+</ul>
+</li>
+</ol>
+<p>Exemple de modèle :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hostname ${HOSTNAME}
+!
+interface Vlan1
+ ip address ${IP_ADDRESS} ${NETMASK}
+!
+ip default-gateway ${GATEWAY}
+!
+location ${LOCATION}
+</pre></div>
+</div>
+</section>
+<section id="securite">
+<h2>Sécurité<a class="headerlink" href="#securite" title="Link to this heading"></a></h2>
+<p>Configuration des paramètres de sécurité :</p>
+<ol class="arabic simple">
+<li><p>Authentification :</p>
+<ul class="simple">
+<li><p>RADIUS</p></li>
+<li><p>TACACS+</p></li>
+<li><p>Authentification locale</p></li>
+</ul>
+</li>
+<li><p>Autorisations :</p>
+<ul class="simple">
+<li><p>Rôles utilisateur</p></li>
+<li><p>Permissions d’accès</p></li>
+<li><p>Journalisation des actions</p></li>
+</ul>
+</li>
+<li><p>Chiffrement :</p>
+<ul class="simple">
+<li><p>HTTPS</p></li>
+<li><p>SSH</p></li>
+<li><p>SNMPv3</p></li>
+</ul>
+</li>
+</ol>
+<p>Exemple de configuration RADIUS :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>aaa new-model
+radius-server host 192.168.1.10 auth-port 1812 acct-port 1813
+radius-server key your_secret_key
+</pre></div>
+</div>
+</section>
+<section id="journalisation">
+<h2>Journalisation<a class="headerlink" href="#journalisation" title="Link to this heading"></a></h2>
+<p>Configuration de la journalisation :</p>
+<ol class="arabic simple">
+<li><p>Niveaux de journalisation :</p>
+<ul class="simple">
+<li><p>DEBUG</p></li>
+<li><p>INFO</p></li>
+<li><p>WARNING</p></li>
+<li><p>ERROR</p></li>
+<li><p>CRITICAL</p></li>
+</ul>
+</li>
+<li><p>Destinations :</p>
+<ul class="simple">
+<li><p>Fichier local</p></li>
+<li><p>Syslog</p></li>
+<li><p>Base de données</p></li>
+</ul>
+</li>
+</ol>
+<p>Exemple de configuration syslog :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">LOGGING</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;disable_existing_loggers&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;logging.FileHandler&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="s1">&#39;/var/log/webztp.log&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;syslog&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;logging.handlers.SysLogHandler&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;facility&#39;</span><span class="p">:</span> <span class="s1">&#39;local7&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;loggers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;django&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="s1">&#39;syslog&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;propagate&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sauvegarde-et-restauration">
+<h2>Sauvegarde et restauration<a class="headerlink" href="#sauvegarde-et-restauration" title="Link to this heading"></a></h2>
+<p>Configuration des sauvegardes :</p>
+<ol class="arabic simple">
+<li><p>Types de sauvegarde :</p>
+<ul class="simple">
+<li><p>Base de données</p></li>
+<li><p>Fichiers de configuration</p></li>
+<li><p>Modèles</p></li>
+<li><p>Journaux</p></li>
+</ul>
+</li>
+<li><p>Planification :</p>
+<ul class="simple">
+<li><p>Quotidienne</p></li>
+<li><p>Hebdomadaire</p></li>
+<li><p>Mensuelle</p></li>
+</ul>
+</li>
+<li><p>Stockage :</p>
+<ul class="simple">
+<li><p>Local</p></li>
+<li><p>NFS</p></li>
+<li><p>S3</p></li>
+<li><p>FTP</p></li>
+</ul>
+</li>
+</ol>
+<p>Exemple de script de sauvegarde :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># Sauvegarde de la base de données</span>
+pg_dump<span class="w"> </span>webztp<span class="w"> </span>&gt;<span class="w"> </span>/backup/db/webztp_<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>.sql
+
+<span class="c1"># Sauvegarde des fichiers de configuration</span>
+tar<span class="w"> </span>-czf<span class="w"> </span>/backup/config/webztp_<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>.tar.gz<span class="w"> </span>/etc/webztp/
+
+<span class="c1"># Rotation des sauvegardes (garde les 7 derniers jours)</span>
+find<span class="w"> </span>/backup<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-mtime<span class="w"> </span>+7<span class="w"> </span>-delete
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Utilisation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, WebZTP Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
