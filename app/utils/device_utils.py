@@ -36,7 +36,7 @@ def get_device_by_serial(serial_number):
 def get_template_url(serial_number):
     try:
         device = Device.objects.get(serial_number=serial_number)
-        if device.template.file: 
+        if device.template: 
             return f"{get_site_url()}{device.template.file.url}"
     except ObjectDoesNotExist:
         return None
