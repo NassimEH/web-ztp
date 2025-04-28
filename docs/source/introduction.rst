@@ -1,15 +1,32 @@
 Introduction
 ============
 
-ZTP Manager est une solution complète pour la gestion du Zero Touch Provisioning (ZTP) des équipements réseau. Cette documentation vous guidera à travers toutes les fonctionnalités et les meilleures pratiques pour utiliser efficacement notre plateforme.
+WebZTP est une application web moderne pour la gestion de la configuration Zero Touch Provisioning (ZTP) des équipements réseau.
+
+Fonctionnalités principales
+--------------------------
+
+* Gestion des appareils réseau
+* Configuration automatique via ZTP
+* Interface utilisateur intuitive
+* Support multi-utilisateurs
+* Mode sombre/clair
+* Documentation complète
+
+Architecture
+-----------
+
+L'application est construite avec :
+
+* Django comme framework backend
+* Bootstrap 5 pour l'interface utilisateur
+* PostgreSQL comme base de données
+* Sphinx pour la documentation
 
 Qu'est-ce que le ZTP ?
 ---------------------
 
 Le Zero Touch Provisioning (ZTP) est un processus qui permet aux équipements réseau de se configurer automatiquement lorsqu'ils sont connectés au réseau pour la première fois. Cela élimine le besoin d'une configuration manuelle initiale, réduisant ainsi les erreurs et le temps de déploiement.
-
-Fonctionnalités principales
---------------------------
 
 .. panels::
    :container: container-lg

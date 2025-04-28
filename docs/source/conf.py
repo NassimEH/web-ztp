@@ -2,15 +2,15 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
 
-project = 'ZTP Manager'
-copyright = '2024, ZTP Manager Team'
-author = 'ZTP Manager Team'
+project = 'WebZTP'
+copyright = '2024, WebZTP Team'
+author = 'WebZTP Team'
 
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
-    'sphinx.ext.intersphinx',
+    'sphinx.ext.napoleon',
+    'sphinx_rtd_theme',
     'sphinx_copybutton',
     'sphinx_design',
     'myst_parser',
@@ -19,25 +19,30 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
-html_theme = 'sphinx_book_theme'
-html_theme_options = {
-    'repository_url': 'https://github.com/yourusername/ztp-manager',
-    'use_repository_button': True,
-    'use_edit_page_button': True,
-    'use_issues_button': True,
-    'use_download_button': True,
-    'home_page_in_toc': True,
-    'show_navbar_depth': 2,
-    'show_toc_level': 2,
-    'logo_only': True,
+html_theme = 'sphinx_rtd_theme'
+html_static_path = ['_static']
+
+# Configuration pour l'extension autodoc
+autodoc_default_options = {
+    'members': True,
+    'member-order': 'bysource',
+    'special-members': '__init__',
+    'undoc-members': True,
+    'exclude-members': '__weakref__'
 }
 
-html_static_path = ['_static']
-html_css_files = ['custom.css']
-html_js_files = ['custom.js']
-
-html_logo = '_static/logo.png'
-html_favicon = '_static/favicon.ico'
+# Configuration pour myst-parser
+myst_enable_extensions = [
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    "replacements",
+    "smartquotes",
+    "tasklist",
+]
 
 # Napoleon settings
 napoleon_google_docstring = True

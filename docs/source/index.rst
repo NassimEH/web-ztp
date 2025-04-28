@@ -1,5 +1,8 @@
-Welcome to ZTP Manager's documentation!
-====================================
+.. WebZTP documentation master file, created by
+   sphinx-quickstart on Tue Mar 19 2024.
+
+Welcome to WebZTP's documentation!
+================================
 
 .. toctree::
    :maxdepth: 2

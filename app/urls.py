@@ -1,4 +1,9 @@
-from django.urls import path
+from django.urls import path, include
+from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.static import serve
+from django.urls import re_path
 from app.views import (
     index_views, device_views, help_views, dashboard_views, form_views,
     auth_views
@@ -26,4 +31,10 @@ urlpatterns = [
     path('logout/', auth_views.logout_view, name='logout'),
     path('profile/', auth_views.profile_view, name='profile'),
     path('profile/change-password/', auth_views.change_password_view, name='change_password'),
-] 
+    
+    # URLs admin et documentation
+    path('admin/', admin.site.urls),
+    re_path(r'^docs/(?P<path>.*)$', serve, {
+        'document_root': str(settings.BASE_DIR / 'docs/_build/html'),
+    }),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
