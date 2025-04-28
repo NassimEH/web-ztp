@@ -1,0 +1,73 @@
+site_name: WEB-ZTP
+site_description: Interface web complète avec serveur DHCP et ZTP
+site_author: Chadi, Nassim, Ilyes, Lucas
+site_url: https://github.com/Chadi-Mangle/web-ztp
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotate
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+repo_name: Chadi-Mangle/web-ztp
+repo_url: https://github.com/Chadi-Mangle/web-ztp
+
+nav:
+  - Accueil: index.md
+  - Présentation: presentation.md
+  - Fonctionnalités: fonctionnalites.md
+  - Installation:
+    - Prérequis: installation/prerequis.md
+    - Installation: installation/installation.md
+    - Utilisation: installation/utilisation.md
+  - Structure du projet: structure.md
+  - API: api.md
+  - Développement:
+    - Contribution: developpement/contribution.md
+    - Architecture: developpement/architecture.md
+  - FAQ: faq.md
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde 
