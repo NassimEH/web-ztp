@@ -57,7 +57,28 @@ class DeviceForm(AddForm):
 
     class Meta:
         model = Device
-        fields = ["serial_number", "ip", "hostname", "template"]
+
+        principal_fields = [
+            "serial_number",
+            "ip",
+            "hostname"
+            ,"template"
+        ]
+
+        ztp_fields = [
+            "subnet_mask",
+            "default_gateway",
+            "username",
+            "password"
+            ]
+
+        fields = principal_fields + ztp_fields
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Ajouter des classes CSS spécifiques pour les champs du template Jinja
+        for field_name in self.Meta.ztp_fields:
+            self.fields[field_name].widget.attrs.update({"class": "jinja-variable"})
 
 
 class TemplateForm(AddForm):

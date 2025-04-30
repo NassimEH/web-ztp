@@ -28,7 +28,6 @@ class Device(models.Model):
     )
 
     # Variables pour les templates Jinja
-    ip_address = models.GenericIPAddressField(null=True, blank=True)
     subnet_mask = models.CharField(max_length=255, null=True, blank=True)
     default_gateway = models.GenericIPAddressField(null=True, blank=True)
     username = models.CharField(max_length=255, null=True, blank=True)
