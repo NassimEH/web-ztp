@@ -82,6 +82,412 @@ body.dark {
   --section-border: #2d2d2d;
 }
 
+body.dark .card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .table {
+  color: var(--text-color);
+}
+
+body.dark .table thead th {
+  background-color: var(--table-header);
+  color: var(--text-color);
+}
+
+body.dark .table tbody tr:hover {
+  background-color: var(--table-hover);
+}
+
+body.dark .form-control {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-color);
+}
+
+body.dark .form-control:focus {
+  background-color: var(--input-bg);
+  border-color: var(--blue);
+  color: var(--text-color);
+}
+
+body.dark .btn-primary {
+  background-color: var(--button-bg);
+  border-color: var(--button-border);
+  color: var(--button-text);
+}
+
+body.dark .btn-primary:hover {
+  background-color: var(--button-hover);
+  border-color: var(--button-hover);
+}
+
+body.dark .alert {
+  background-color: var(--alert-bg);
+  border-color: var(--alert-border);
+  color: var(--alert-text);
+}
+
+body.dark .modal-content {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .modal-footer {
+  border-top-color: var(--border-color);
+}
+
+body.dark .dropdown-menu {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .dropdown-item {
+  color: var(--text-color);
+}
+
+body.dark .dropdown-item:hover {
+  background-color: var(--hover-bg);
+  color: var(--text-color);
+}
+
+body.dark .navigation {
+  background: var(--nav-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .navigation ul li a {
+  color: var(--nav-text);
+}
+
+body.dark .navigation ul li:hover {
+  background: var(--hover-bg);
+}
+
+body.dark .footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  border-top: 1px solid var(--border-color);
+}
+
+body.dark .profile-section {
+  background: var(--profile-card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .profile-form {
+  background: var(--form-bg);
+  border-color: var(--form-border);
+}
+
+body.dark .profile-form .card-header {
+  background: var(--profile-card-header);
+}
+
+body.dark .profile-form .form-label {
+  color: var(--label-text);
+}
+
+body.dark .roles-section {
+  background: var(--section-bg);
+  border-color: var(--section-border);
+}
+
+body.dark .help-category {
+  background: var(--help-card-bg);
+}
+
+body.dark .help-category:hover {
+  background: var(--help-card-hover);
+}
+
+body.dark .help-card {
+  background: var(--help-card-bg);
+}
+
+body.dark .help-card:hover {
+  background: var(--help-card-hover);
+}
+
+body.dark .search label input {
+  background: var(--search-bg);
+  border-color: var(--search-border);
+  color: var(--search-text);
+}
+
+body.dark .search label input::placeholder {
+  color: var(--search-placeholder);
+}
+
+body.dark .welcome-panel {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+body.dark .welcome-panel .welcome-title,
+body.dark .welcome-panel .welcome-message {
+  color: var(--text-color);
+}
+
+body.dark .welcome-panel .close-btn {
+  color: var(--text-color);
+}
+
+body.dark .theme-toggle {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .theme-toggle ion-icon {
+  color: var(--text-color);
+}
+
+body.dark .theme-toggle:hover {
+  background: var(--hover-bg);
+}
+
+body.dark .stat-card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .stat-card h3,
+body.dark .stat-card .stat-label {
+  color: var(--text-color);
+}
+
+body.dark .stat-card .stat-value {
+  color: var(--blue);
+}
+
+body.dark .profile-avatar {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+
+body.dark .profile-info h2,
+body.dark .profile-info p {
+  color: var(--text-color);
+}
+
+body.dark .form-group label {
+  color: var(--text-color);
+}
+
+body.dark .form-group input {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-color);
+}
+
+body.dark .form-group input::placeholder {
+  color: var(--input-placeholder);
+}
+
+body.dark .btn {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--button-border);
+}
+
+body.dark .btn:hover {
+  background: var(--button-hover);
+}
+
+body.dark .section-header h2 {
+  color: var(--text-color);
+}
+
+body.dark .section-header ion-icon {
+  color: var(--blue);
+}
+
+body.dark .alert {
+  background: var(--alert-bg);
+  color: var(--alert-text);
+  border-color: var(--alert-border);
+}
+
+body.dark .table {
+  color: var(--text-color);
+}
+
+body.dark .table thead th {
+  background: var(--table-header);
+  color: var(--text-color);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .table tbody tr {
+  background: var(--table-row);
+}
+
+body.dark .table tbody tr:hover {
+  background: var(--table-hover);
+}
+
+body.dark .modal-content {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .modal-footer {
+  border-top-color: var(--border-color);
+}
+
+body.dark .dropdown-menu {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .dropdown-item {
+  color: var(--text-color);
+}
+
+body.dark .dropdown-item:hover {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+body.dark .tooltip {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .badge {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .pagination {
+  background: var(--card-bg);
+}
+
+body.dark .pagination .page-link {
+  color: var(--text-color);
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .pagination .page-item.active .page-link {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+body.dark .breadcrumb {
+  background: var(--card-bg);
+  color: var(--text-color);
+}
+
+body.dark .breadcrumb-item a {
+  color: var(--text-color);
+}
+
+body.dark .breadcrumb-item.active {
+  color: var(--text-color);
+}
+
+body.dark .list-group {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .list-group-item {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .list-group-item:hover {
+  background: var(--hover-bg);
+}
+
+body.dark .progress {
+  background: var(--card-bg);
+}
+
+body.dark .progress-bar {
+  background: var(--blue);
+}
+
+body.dark .spinner-border {
+  color: var(--blue);
+}
+
+body.dark .toast {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .toast-header {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .popover {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .popover-header {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .carousel {
+  background: var(--card-bg);
+}
+
+body.dark .carousel-control-prev,
+body.dark .carousel-control-next {
+  color: var(--text-color);
+}
+
+body.dark .carousel-indicators li {
+  background: var(--text-color);
+}
+
+body.dark .accordion {
+  background: var(--card-bg);
+}
+
+body.dark .accordion-item {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .accordion-button {
+  background: var(--card-bg);
+  color: var(--text-color);
+}
+
+body.dark .accordion-button:not(.collapsed) {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+body.dark .accordion-body {
+  background: var(--card-bg);
+  color: var(--text-color);
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -114,7 +520,7 @@ body {
   position: fixed;
   width: 300px;
   height: 100vh;
-  background: var(--nav-bg) !important;
+  background: var(--card-bg);
   box-shadow: var(--card-shadow);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow-y: auto;
@@ -216,12 +622,12 @@ body {
 
 .navigation ul li:hover,
 .navigation ul li.hovered {
-  background: var(--hover-bg);
+  background: var(--hover-color);
   transform: translateX(5px);
 }
 
 .navigation ul li.active {
-  background: var(--hover-bg);
+  background: var(--hover-color);
 }
 
 .navigation ul li.active::before {
@@ -246,7 +652,7 @@ body {
   align-items: center;
   width: 100%;
   text-decoration: none;
-  color: var(--nav-text);
+  color: var(--text-color);
   padding: 12px;
 }
 
@@ -297,7 +703,7 @@ body {
 .navigation ul li a .icon {
   position: relative;
   font-size: 22px;
-  color: var(--nav-text);
+  color: var(--text-color);
 }
 
 .navigation ul li a .title {
@@ -325,7 +731,7 @@ body {
 }
 
 .logo-container:hover {
-  background: var(--hover-bg);
+  background: var(--hover-color);
   transform: translateX(5px);
 }
 
@@ -349,7 +755,7 @@ body {
 .logo-container .title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--nav-text);
+  color: var(--text-color);
   margin-left: 5px;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
@@ -362,8 +768,8 @@ body {
   top: 50%;
   transform: translateY(-50%);
   padding: 8px 12px;
-  background: var(--gray-dark);
-  color: var(--white);
+  background: var(--card-bg);
+  color: var(--text-color);
   border-radius: 5px;
   font-size: 14px;
   font-weight: 500;
@@ -385,7 +791,7 @@ body {
   height: 0;
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
-  border-right: 6px solid var(--gray-dark);
+  border-right: 6px solid var(--card-bg);
 }
 
 .navigation.active ul li:hover .tooltip {
@@ -497,7 +903,7 @@ body {
 }
 
 .toggle:hover {
-  background: var(--hover-bg);
+  background: var(--hover-color);
 }
 
 .search {
@@ -601,7 +1007,7 @@ body {
 }
 
 .cardBox .card:hover {
-  background: var(--hover-bg);
+  background: var(--hover-color);
   transform: translateY(-5px);
 }
 
@@ -935,8 +1341,8 @@ body {
 
 /* =============== Footer ================ */
 .footer {
-  background: #FFFFFF !important;
-  color: var(--text-color) !important;
+  background: var(--card-bg);
+  color: var(--text-color);
   padding: 2rem 0;
   margin-top: auto;
   border-top: 1px solid var(--border-color);
@@ -1007,7 +1413,7 @@ body {
 }
 
 .profile-form {
-  background: var(--profile-card-bg);
+  background: var(--card-bg);
   border-radius: 20px;
   box-shadow: var(--card-shadow);
   overflow: hidden;
@@ -1020,7 +1426,7 @@ body {
 }
 
 .profile-form .card-header {
-  background: var(--profile-card-header);
+  background: var(--card-bg);
   padding: 25px;
   border: none;
 }
@@ -1042,7 +1448,7 @@ body {
 
 .profile-form .form-label {
   font-weight: 500;
-  color: var(--label-text);
+  color: var(--text-color);
   margin-bottom: 10px;
   font-size: 1rem;
 }
@@ -1068,7 +1474,7 @@ body {
 }
 
 .roles-section {
-  background: var(--section-bg);
+  background: var(--card-bg);
   border-radius: 15px;
   padding: 25px;
   margin-top: 30px;
@@ -1139,9 +1545,9 @@ body {
 }
 
 .profile-form .btn-primary {
-  background: var(--button-bg);
-  color: var(--button-text);
-  border: 1px solid var(--button-border);
+  background: var(--blue);
+  color: var(--white);
+  border: 1px solid var(--border-color);
 }
 
 .profile-form .btn-primary:hover {
@@ -1150,26 +1556,24 @@ body {
 }
 
 .profile-form .btn-secondary {
-  background: var(--button-bg);
-  color: var(--button-text);
-  border: 1px solid var(--button-border);
+  background: var(--blue);
+  color: var(--white);
+  border: 1px solid var(--border-color);
 }
 
 .profile-form .btn-secondary:hover {
   transform: translateY(-2px);
-  background: var(--button-hover);
+  background: var(--blue-dark);
 }
 
 .alert {
   border-radius: 12px;
   padding: 15px 20px;
   margin-bottom: 25px;
-  border: none;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
   animation: slideIn 0.3s ease-out;
-  background: var(--alert-bg);
-  color: var(--alert-text);
-  border-left: 4px solid var(--success);
+  background: var(--card-bg);
+  color: var(--text-color);
 }
 
 @keyframes slideIn {
@@ -1201,11 +1605,11 @@ body {
   width: 100%;
   margin: 2rem auto;
   padding: 3rem;
-  background: var(--form-bg);
+  background: var(--card-bg);
   border-radius: 20px;
   box-shadow: var(--card-shadow);
   transition: all 0.3s ease;
-  border: 1px solid var(--form-border);
+  border: 1px solid var(--border-color);
 }
 
 .auth-form-container:hover {
@@ -1214,7 +1618,7 @@ body {
 }
 
 .auth-form-container .card-header {
-  background: var(--profile-card-header);
+  background: var(--card-bg);
   padding: 25px;
   border: none;
   border-radius: 20px 20px 0 0;
@@ -1238,7 +1642,7 @@ body {
 
 .auth-form-container .form-label {
   font-weight: 500;
-  color: var(--label-text);
+  color: var(--text-color);
   margin-bottom: 10px;
   font-size: 1.1rem;
   display: flex;
@@ -1275,9 +1679,9 @@ body {
   height: 60px;
   font-size: 1.1rem;
   border-radius: 12px;
-  background: var(--button-bg);
-  color: var(--button-text);
-  border: 1px solid var(--button-border);
+  background: var(--blue);
+  color: var(--white);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
@@ -1369,7 +1773,7 @@ body {
 }
 
 .help-category {
-  background: var(--help-card-bg);
+  background: var(--card-bg);
   border-radius: 20px;
   padding: 30px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
@@ -1394,7 +1798,7 @@ body {
 .help-category:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-  background: var(--help-card-hover);
+  background: var(--card-bg);
 }
 
 .help-category:hover::before {
@@ -1429,7 +1833,7 @@ body {
 }
 
 .help-card {
-  background: var(--help-card-bg);
+  background: var(--card-bg);
   border-radius: 15px;
   padding: 25px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -1455,7 +1859,7 @@ body {
 .help-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  background: var(--help-card-hover);
+  background: var(--card-bg);
 }
 
 .help-card:hover::after {
@@ -1556,124 +1960,35 @@ body {
   top: 20px;
   right: 20px;
   z-index: 1000;
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--card-bg);
   border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
   border: 1px solid var(--border-color);
   padding: 0;
   margin: 0;
 }
 
 .theme-toggle:hover {
-  transform: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background: var(--card-bg);
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  background: var(--hover-color);
 }
 
 .theme-toggle ion-icon {
-  font-size: 16px;
+  font-size: 24px;
   color: var(--text-color);
   margin: 0;
   padding: 0;
 }
 
 [data-theme="dark"] .theme-toggle ion-icon {
-  color: var(--text-color);
-}
-
-/* ===== Dark Mode ===== */
-body.dark {
-  --primary-color: #1a1a1a;
-  --secondary-color: #2d2d2d;
-  --text-color: #ffffff;
-  --text-color-light: #cccccc;
-  --background-color: #121212;
-  --card-background: #1e1e1e;
-  --border-color: #333333;
-  --hover-color: #3a3a3a;
-  --success-color: #4caf50;
-  --error-color: #f44336;
-  --warning-color: #ff9800;
-  --info-color: #2196f3;
-}
-
-body.dark .card {
-  background: var(--card-background);
-  border-color: var(--border-color);
-}
-
-body.dark .table {
-  color: var(--text-color);
-}
-
-body.dark .table thead th {
-  background-color: var(--secondary-color);
-  color: var(--text-color);
-}
-
-body.dark .table tbody tr:hover {
-  background-color: var(--hover-color);
-}
-
-body.dark .form-control {
-  background-color: var(--secondary-color);
-  border-color: var(--border-color);
-  color: var(--text-color);
-}
-
-body.dark .form-control:focus {
-  background-color: var(--secondary-color);
-  border-color: var(--primary-color);
-  color: var(--text-color);
-}
-
-body.dark .btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-}
-
-body.dark .btn-primary:hover {
-  background-color: var(--hover-color);
-  border-color: var(--hover-color);
-}
-
-body.dark .alert {
-  background-color: var(--secondary-color);
-  border-color: var(--border-color);
-  color: var(--text-color);
-}
-
-body.dark .modal-content {
-  background-color: var(--card-background);
-  border-color: var(--border-color);
-}
-
-body.dark .modal-header {
-  border-bottom-color: var(--border-color);
-}
-
-body.dark .modal-footer {
-  border-top-color: var(--border-color);
-}
-
-body.dark .dropdown-menu {
-  background-color: var(--card-background);
-  border-color: var(--border-color);
-}
-
-body.dark .dropdown-item {
-  color: var(--text-color);
-}
-
-body.dark .dropdown-item:hover {
-  background-color: var(--hover-color);
   color: var(--text-color);
 }
 
@@ -1756,17 +2071,963 @@ body.dark .dropdown-item:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--blue);
+    background: #000000;
     border-radius: 4px;
     transition: background 0.3s ease;
 }
 
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: var(--blue);
+}
+
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--blue-dark);
+    background: #333333;
 }
 
 /* Firefox */
 * {
     scrollbar-width: thin;
+    scrollbar-color: #000000 var(--card-bg);
+}
+
+[data-theme="dark"] * {
     scrollbar-color: var(--blue) var(--card-bg);
+}
+
+/* Amélioration de la section profil */
+.profile-section {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--blue-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--blue);
+    font-weight: 500;
+}
+
+.profile-info h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.profile-info p {
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--blue);
+}
+
+.stat-card .stat-label {
+    color: var(--text-color);
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.profile-actions .btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.profile-actions .btn-primary {
+    background: var(--blue);
+    border: none;
+}
+
+.profile-actions .btn-primary:hover {
+    background: var(--blue-dark);
+    transform: translateY(-2px);
+}
+
+.profile-actions .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.profile-actions .btn-outline:hover {
+    background: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+/* Styles des formulaires */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.form-group input {
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--input-bg);
+    color: var(--text-color);
+    width: 100%;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 2px var(--blue-light);
+}
+
+.form-group input::placeholder {
+    color: var(--input-placeholder);
+}
+
+/* Styles des cartes de profil */
+.profile-section {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.stat-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-primary {
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: var(--blue-dark);
+    transform: translateY(-2px);
+}
+
+/* Styles de la navigation */
+.navigation {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+.navigation ul li a {
+    color: var(--text-color);
+}
+
+.navigation ul li:hover {
+    background: var(--hover-color);
+}
+
+/* Styles du footer */
+.footer {
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 2rem 0;
+    margin-top: auto;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Styles des alertes */
+.alert {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* Styles des tableaux */
+.table {
+    color: var(--text-color);
+}
+
+.table thead th {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table tbody tr {
+    background: var(--card-bg);
+}
+
+.table tbody tr:hover {
+    background: var(--hover-color);
+}
+
+/* Styles des modales */
+.modal-content {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border-color);
+}
+
+/* Styles des dropdowns */
+.dropdown-menu {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.dropdown-item {
+    color: var(--text-color);
+}
+
+.dropdown-item:hover {
+    background: var(--hover-color);
+    color: var(--text-color);
+}
+
+/* Styles des tooltips */
+.tooltip {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+/* Styles des badges */
+.badge {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+/* Styles des paginations */
+.pagination {
+    background: var(--card-bg);
+}
+
+.pagination .page-link {
+    color: var(--text-color);
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--blue);
+    border-color: var(--blue);
+}
+
+/* Styles des breadcrumbs */
+.breadcrumb {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+.breadcrumb-item a {
+    color: var(--text-color);
+}
+
+.breadcrumb-item.active {
+    color: var(--text-color-light);
+}
+
+/* Styles des listes */
+.list-group {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.list-group-item {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.list-group-item:hover {
+    background: var(--hover-color);
+}
+
+/* Styles des progress bars */
+.progress {
+    background: var(--card-bg);
+}
+
+.progress-bar {
+    background: var(--blue);
+}
+
+/* Styles des spinners */
+.spinner-border {
+    color: var(--blue);
+}
+
+/* Styles des toasts */
+.toast {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.toast-header {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Styles des popovers */
+.popover {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.popover-header {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Styles des carousels */
+.carousel {
+    background: var(--card-bg);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    color: var(--text-color);
+}
+
+.carousel-indicators li {
+    background: var(--text-color);
+}
+
+/* Styles des accordions */
+.accordion {
+    background: var(--card-bg);
+}
+
+.accordion-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.accordion-button {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+.accordion-button:not(.collapsed) {
+    background: var(--hover-color);
+    color: var(--text-color);
+}
+
+.accordion-body {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+/* Styles des tooltips */
+.tooltip {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+.tooltip-arrow {
+    border-color: var(--card-bg) transparent transparent transparent;
+}
+
+/* Styles des badges */
+.badge {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+/* Styles des spinners */
+.spinner-border {
+    color: var(--blue);
+}
+
+/* Styles des toasts */
+.toast {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.toast-header {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Styles des popovers */
+.popover {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.popover-header {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Styles des carousels */
+.carousel {
+    background: var(--card-bg);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    color: var(--text-color);
+}
+
+.carousel-indicators li {
+    background: var(--text-color);
+}
+
+/* Styles des accordions */
+.accordion {
+    background: var(--card-bg);
+}
+
+.accordion-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.accordion-button {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+.accordion-button:not(.collapsed) {
+    background: var(--hover-color);
+    color: var(--text-color);
+}
+
+.accordion-body {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+/* Style pour le bouton "Tout voir" */
+.view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.35rem 0.75rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    width: fit-content;
+    letter-spacing: -0.01em;
+    opacity: 0.8;
+}
+
+.view-all-btn:hover {
+    background: var(--hover-bg);
+    border-color: var(--blue);
+    color: var(--blue);
+    opacity: 1;
+}
+
+.view-all-btn ion-icon {
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+}
+
+.view-all-btn:hover ion-icon {
+    transform: translateX(2px);
+}
+
+/* Dark mode spécifique pour le bouton */
+body.dark .view-all-btn {
+    border-color: var(--border-color);
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+body.dark .view-all-btn:hover {
+    background: var(--hover-bg);
+    border-color: var(--blue);
+    color: var(--blue);
+    opacity: 1;
+}
+
+/* Styles pour les pages légales */
+.terms-section,
+.privacy-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.last-updated {
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.terms-content,
+.privacy-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.terms-block,
+.privacy-block {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.terms-block:hover,
+.privacy-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.terms-block h2,
+.privacy-block h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.terms-block p,
+.privacy-block p {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.terms-block ul,
+.privacy-block ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+}
+
+.terms-block ul li,
+.privacy-block ul li {
+    color: var(--text-color);
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.terms-block ul li::before,
+.privacy-block ul li::before {
+    content: "•";
+    color: var(--blue);
+    position: absolute;
+    left: 0;
+}
+
+.terms-block a,
+.privacy-block a {
+    color: var(--blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.terms-block a:hover,
+.privacy-block a:hover {
+    color: var(--blue-dark);
+    text-decoration: underline;
+}
+
+/* Dark mode spécifique */
+body.dark .terms-section,
+body.dark .privacy-section {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+body.dark .terms-block,
+body.dark .privacy-block {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+body.dark .terms-block:hover,
+body.dark .privacy-block:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+body.dark .section-title,
+body.dark .terms-block h2,
+body.dark .privacy-block h2 {
+    color: var(--text-color);
+}
+
+body.dark .terms-block p,
+body.dark .privacy-block p,
+body.dark .terms-block ul li,
+body.dark .privacy-block ul li {
+    color: var(--text-color);
+}
+
+body.dark .terms-block a,
+body.dark .privacy-block a {
+    color: var(--blue);
+}
+
+body.dark .terms-block a:hover,
+body.dark .privacy-block a:hover {
+    color: var(--blue-light);
+}
+
+/* Styles pour la page de configuration des appareils */
+.device-config-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.device-config-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.device-config-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.device-config-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.device-form {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+
+.device-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.device-form-title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.device-form-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 2px var(--blue-light);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--input-placeholder);
+}
+
+.device-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Styles des boutons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: var(--blue-dark);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: var(--hover-bg);
+    border-color: var(--blue);
+    color: var(--blue);
+}
+
+.btn-danger {
+    background: var(--error);
+    color: var(--white);
+}
+
+.btn-danger:hover {
+    background: #d32f2f;
+    transform: translateY(-1px);
+}
+
+.btn-icon {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover .btn-icon {
+    transform: translateX(2px);
+}
+
+/* Styles des cartes d'appareils */
+.device-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.device-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.device-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.device-card-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.device-card-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.device-card-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.device-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.device-info-label {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+.device-info-value {
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* Dark mode spécifique */
+body.dark .device-form,
+body.dark .device-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+body.dark .device-form:hover,
+body.dark .device-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+body.dark .form-group input,
+body.dark .form-group select,
+body.dark .form-group textarea {
+    background: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-color);
+}
+
+body.dark .form-group input:focus,
+body.dark .form-group select:focus,
+body.dark .form-group textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 2px var(--blue-light);
+}
+
+body.dark .btn-secondary:hover {
+    background: var(--hover-bg);
+    border-color: var(--blue);
+    color: var(--blue);
 }

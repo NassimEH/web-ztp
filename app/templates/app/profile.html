@@ -4,99 +4,110 @@
 {% block title %}Profil - ZTP{% endblock %}
 
 {% block content %}
-<div class="profile-container">
-    <div class="profile-header">
-        <div class="profile-avatar-container">
-            <div class="profile-avatar">
-                {% if user.profile.avatar %}
-                    <img src="{{ user.profile.avatar.url }}" alt="Photo de profil" class="avatar-image">
-                {% else %}
-                    <ion-icon name="person-circle-outline"></ion-icon>
-                {% endif %}
-                <form method="post" enctype="multipart/form-data" class="avatar-form">
+<div class="container mt-5">
+    <div class="profile-section">
+        <div class="profile-header">
+            <div class="profile-avatar-container">
+                <div class="profile-avatar">
+                    {% if user.profile.avatar %}
+                        <img src="{{ user.profile.avatar.url }}" alt="Photo de profil" class="avatar-image">
+                    {% else %}
+                        {{ user.username|first|upper }}
+                    {% endif %}
+                    <form method="post" enctype="multipart/form-data" class="avatar-form">
+                        {% csrf_token %}
+                        <label for="avatar" class="avatar-upload">
+                            <ion-icon name="camera-outline"></ion-icon>
+                        </label>
+                        <input type="file" id="avatar" name="avatar" accept="image/*" style="display: none;">
+                    </form>
+                </div>
+                <div class="profile-info">
+                    <h2>{{ user.username }}</h2>
+                    <p>{{ user.email }}</p>
+                    <p>Membre depuis {{ user.date_joined|date:"d/m/Y" }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-stats">
+            <div class="stat-card">
+                <h3>Appareils Configurés</h3>
+                <div class="stat-value">{{ device_count }}</div>
+                <div class="stat-label">Total des appareils</div>
+            </div>
+            <div class="stat-card">
+                <h3>Templates Créés</h3>
+                <div class="stat-value">{{ template_count }}</div>
+                <div class="stat-label">Configurations sauvegardées</div>
+            </div>
+            <div class="stat-card">
+                <h3>Dernière Activité</h3>
+                <div class="stat-value">{{ last_activity|date:"d/m/Y" }}</div>
+                <div class="stat-label">Date de dernière connexion</div>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <div class="profile-section account-info">
+                <div class="section-header">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <h2>Informations du compte</h2>
+                </div>
+                <form method="post" class="profile-form">
                     {% csrf_token %}
-                    <label for="avatar" class="avatar-upload">
-                        <ion-icon name="camera-outline"></ion-icon>
-                    </label>
-                    <input type="file" id="avatar" name="avatar" accept="image/*" style="display: none;">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="username">Nom d'utilisateur</label>
+                            <input type="text" id="username" name="username" value="{{ user.username }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Adresse e-mail</label>
+                            <input type="email" id="email" name="email" value="{{ user.email }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="first_name">Prénom</label>
+                            <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Nom</label>
+                            <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <ion-icon name="save-outline"></ion-icon>
+                        Enregistrer les modifications
+                    </button>
                 </form>
             </div>
-            <div class="profile-info">
-                <h1>{{ user.username }}</h1>
-                <p>{{ user.email }}</p>
-            </div>
-        </div>
-        <div class="profile-stats">
-            <div class="stat-item">
-                <span class="stat-number">{{ device_count }}</span>
-                <span class="stat-label">Appareils configurés</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">{{ user.date_joined|date:"d/m/Y" }}</span>
-                <span class="stat-label">Membre depuis</span>
-            </div>
-        </div>
-    </div>
 
-    <div class="profile-content">
-        <div class="profile-section account-info">
-            <div class="section-header">
-                <ion-icon name="person-outline"></ion-icon>
-                <h2>Informations du compte</h2>
-            </div>
-            <form method="post" class="profile-form">
-                {% csrf_token %}
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="username">Nom d'utilisateur</label>
-                        <input type="text" id="username" name="username" value="{{ user.username }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Adresse e-mail</label>
-                        <input type="email" id="email" name="email" value="{{ user.email }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="first_name">Prénom</label>
-                        <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="last_name">Nom</label>
-                        <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
-                    </div>
+            <div class="profile-section security">
+                <div class="section-header">
+                    <ion-icon name="shield-outline"></ion-icon>
+                    <h2>Sécurité</h2>
                 </div>
-                <button type="submit" class="btn-save">
-                    <ion-icon name="save-outline"></ion-icon>
-                    Enregistrer les modifications
-                </button>
-            </form>
-        </div>
-
-        <div class="profile-section security">
-            <div class="section-header">
-                <ion-icon name="shield-outline"></ion-icon>
-                <h2>Sécurité</h2>
+                <form method="post" action="{% url 'app:change_password' %}" class="profile-form">
+                    {% csrf_token %}
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="old_password">Mot de passe actuel</label>
+                            <input type="password" id="old_password" name="old_password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password1">Nouveau mot de passe</label>
+                            <input type="password" id="new_password1" name="new_password1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password2">Confirmer le mot de passe</label>
+                            <input type="password" id="new_password2" name="new_password2" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <ion-icon name="key-outline"></ion-icon>
+                        Mettre à jour le mot de passe
+                    </button>
+                </form>
             </div>
-            <form method="post" action="{% url 'app:change_password' %}" class="profile-form">
-                {% csrf_token %}
-                <div class="form-grid">
-                    <div class="form-group full-width">
-                        <label for="old_password">Mot de passe actuel</label>
-                        <input type="password" id="old_password" name="old_password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="new_password1">Nouveau mot de passe</label>
-                        <input type="password" id="new_password1" name="new_password1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="new_password2">Confirmer le mot de passe</label>
-                        <input type="password" id="new_password2" name="new_password2" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn-save">
-                    <ion-icon name="key-outline"></ion-icon>
-                    Mettre à jour le mot de passe
-                </button>
-            </form>
         </div>
     </div>
 </div>
