@@ -1552,43 +1552,34 @@ body {
 
 /* Style pour le toggle du mode sombre */
 .theme-toggle {
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 20px;
+  z-index: 1000;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--nav-bg);
-  border: 1px solid var(--border-color);
+  background: var(--card-bg);
   border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 0.3s ease;
-  z-index: 1000;
 }
 
 .theme-toggle:hover {
-  transform: scale(1.1);
-  background: var(--nav-hover);
+  transform: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .theme-toggle ion-icon {
-  font-size: 1.5rem;
-  color: var(--nav-text);
+  font-size: 20px;
+  color: var(--text-color);
 }
 
-body.dark .theme-toggle {
-  background: var(--nav-bg);
-  border-color: var(--border-color);
-}
-
-body.dark .theme-toggle:hover {
-  background: var(--nav-hover);
-}
-
-body.dark .theme-toggle ion-icon {
-  color: var(--nav-text);
+[data-theme="dark"] .theme-toggle ion-icon {
+  color: var(--text-color);
 }
 
 /* ===== Dark Mode ===== */
@@ -1678,41 +1669,4 @@ body.dark .dropdown-item {
 body.dark .dropdown-item:hover {
   background-color: var(--hover-color);
   color: var(--text-color);
-}
-
-.theme-toggle-item {
-    margin-top: auto;
-}
-
-.theme-toggle {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-    color: var(--nav-text);
-    transition: all 0.3s ease;
-}
-
-.theme-toggle:hover {
-    color: var(--nav-hover);
-}
-
-.theme-toggle .icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.theme-toggle .title {
-    margin-left: 0.5rem;
-}
-
-body.dark .theme-toggle ion-icon {
-    color: var(--nav-text);
-}
-
-body.dark .theme-toggle:hover ion-icon {
-    color: var(--nav-hover);
 }
