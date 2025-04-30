@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+# A voir si on garde parce qu'on a qu'un seul template
 class Template(models.Model):
     """Modèle de données pour un template de configuration ZTP"""
 
@@ -25,6 +26,13 @@ class Device(models.Model):
     template = models.ForeignKey(
         Template, on_delete=models.SET_NULL, null=True, related_name="devices"
     )
+
+    # Variables pour les templates Jinja
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    subnet_mask = models.CharField(max_length=255, null=True, blank=True)
+    default_gateway = models.GenericIPAddressField(null=True, blank=True)
+    username = models.CharField(max_length=255, null=True, blank=True)
+    password = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return f"{self.hostname} ({self.ip})"
