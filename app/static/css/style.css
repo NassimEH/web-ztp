@@ -935,8 +935,8 @@ body {
 
 /* =============== Footer ================ */
 .footer {
-  background: var(--footer-bg) !important;
-  color: var(--footer-text) !important;
+  background: #FFFFFF !important;
+  color: var(--text-color) !important;
   padding: 2rem 0;
   margin-top: auto;
   border-top: 1px solid var(--border-color);
