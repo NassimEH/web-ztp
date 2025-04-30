@@ -24,5 +24,3 @@ class DeviceCountView(LoginRequiredMixin, View):
     def get(self, request):
         count = Device.objects.count()
         return render(request, "app/device_count.html", {"count": count})
-
-

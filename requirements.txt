@@ -8,6 +8,7 @@ jinja2
 Pillow
 psycopg2-binary
 dj-database-url
+black
 whitenoise
 sphinx==7.2.6
 sphinx-rtd-theme==2.0.0

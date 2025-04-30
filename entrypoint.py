@@ -1,4 +1,5 @@
-'''Pour attentre que la bd se lance avant l'execution de Django'''
+"""Pour attentre que la bd se lance avant l'execution de Django"""
+
 import os
 import time
 import psycopg2
@@ -8,6 +9,7 @@ DB_USER = os.getenv("POSTGRES_USER", "webztp_user")
 DB_PASSWORD = os.getenv("POSTGRES_PASSWORD", "webztp_password")
 DB_HOST = "db"
 DB_PORT = 5432
+
 
 def wait_for_db():
     """Attend que la base de données PostgreSQL soit prête."""
@@ -19,7 +21,7 @@ def wait_for_db():
                 user=DB_USER,
                 password=DB_PASSWORD,
                 host=DB_HOST,
-                port=DB_PORT
+                port=DB_PORT,
             )
             conn.close()
             print("✅ Base de données prête !")
@@ -27,6 +29,7 @@ def wait_for_db():
         except psycopg2.OperationalError:
             print("⏳ Base non disponible, nouvelle tentative dans 2 secondes...")
             time.sleep(2)
+
 
 if __name__ == "__main__":
     wait_for_db()

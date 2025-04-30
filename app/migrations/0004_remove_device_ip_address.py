@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0003_device_default_gateway_device_ip_address_and_more'),
+        ("app", "0003_device_default_gateway_device_ip_address_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='device',
-            name='ip_address',
+            model_name="device",
+            name="ip_address",
         ),
     ]

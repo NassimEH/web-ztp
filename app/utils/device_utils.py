@@ -4,8 +4,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from app.models import Device
 from app.utils.media_utils import get_site_url
 
+
 def get_devices():
     return Device
+
 
 def get_device_count():
     return Device.objects.count()
@@ -36,7 +38,7 @@ def get_device_by_serial(serial_number):
 def get_template_url(serial_number):
     try:
         device = Device.objects.get(serial_number=serial_number)
-        if device.template: 
+        if device.template:
             return f"{get_site_url()}{device.template.file.url}"
     except ObjectDoesNotExist:
         return None

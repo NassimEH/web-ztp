@@ -1,37 +1,9 @@
-from django.views.generic.edit import FormView
-from django.http import HttpResponse, HttpResponseNotAllowed
-from django.template.loader import render_to_string
 from app.forms import DeviceForm, TemplateForm, DHCPConfigUpdateForm
+from app.formset import ZTPVariableFormSet
+from app.utils.view_utils import AddView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
-
-class AddView(FormView):
-    def get(self, request, *args, **kwargs):
-        return HttpResponseNotAllowed(['POST'])
-
-    def form_valid(self, form):
-        modele = form.save()
-        html = render_to_string(
-            "app/components/formResponse.html",
-            {
-                "success": True,
-                "modele": modele,
-            },
-        )
-
-        return HttpResponse(html, status=200)
-
-    def form_invalid(self, form):
-        html = render_to_string(
-            "app/components/formResponse.html",
-            {
-                "success": False,
-                "form": form,
-            },
-        )
-
-        return HttpResponse(html, status=200)
+from django.views.generic.edit import FormView
 
 
 class AddDeviceView(AddView):
@@ -49,14 +21,14 @@ class ChangeDHCPConfig(AddView):
     form_class = DHCPConfigUpdateForm
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name="dispatch")
 class ConfFormView(FormView):
-   def dispatch(self, request, *args, **kwargs):
-        form_type = request.POST.get('form_type')
-        if form_type == 'template':
+    def dispatch(self, request, *args, **kwargs):
+        form_type = request.POST.get("form_type")
+        if form_type == "template":
             self.template_name = "app/templateForm.html"
             self.form_class = TemplateForm
-        elif form_type == 'dhcp':
+        elif form_type == "dhcp":
             self.template_name = "app/dhcpconfigForm.html"
             self.form_class = DHCPConfigUpdateForm
         else:

@@ -1,50 +1,9 @@
-from django import forms
 from app.models import Device, Template, DHCPConfig
+from app.utils.form_utils import AddForm, UpdateForm
+from django import forms
 from django.db import models
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
-
-class AddForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs.update(
-                {"class": "input-box", "placeholder": field.label}
-            )
-
-
-class UpdateForm(forms.ModelForm):
-    class Meta:
-        model = None  # Doit être redéfini dans les sous-classes
-        fields = []
-
-    def __init__(self, *args, **kwargs):
-        # Préremplir automatiquement avec la première instance existante
-        if "instance" not in kwargs:
-            instance = self._meta.model.objects.first()
-            if instance:
-                kwargs["instance"] = instance
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs.update(
-                {"class": "input-box", "placeholder": field.label}
-            )
-
-    def save(self, commit=True):
-        """
-        Surcharge de la méthode save pour s'assurer que la première instance existante
-        est mise à jour au lieu de créer une nouvelle instance.
-        """
-        instance = self._meta.model.objects.first()
-        if instance:
-            for field in self.Meta.fields:
-                setattr(instance, field, self.cleaned_data.get(field))
-            if commit:
-                instance.save()
-            return instance
-        else:
-            return super().save(commit=commit)
 
 
 class DeviceForm(AddForm):
@@ -57,28 +16,7 @@ class DeviceForm(AddForm):
 
     class Meta:
         model = Device
-
-        principal_fields = [
-            "serial_number",
-            "ip",
-            "hostname"
-            ,"template"
-        ]
-
-        ztp_fields = [
-            "subnet_mask",
-            "default_gateway",
-            "username",
-            "password"
-            ]
-
-        fields = principal_fields + ztp_fields
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Ajouter des classes CSS spécifiques pour les champs du template Jinja
-        for field_name in self.Meta.ztp_fields:
-            self.fields[field_name].widget.attrs.update({"class": "jinja-variable"})
+        fields = ["serial_number", "ip", "hostname", "template"]
 
 
 class TemplateForm(AddForm):
@@ -97,11 +35,11 @@ class DHCPConfigUpdateForm(UpdateForm):
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    
+
     class Meta:
         model = User
         fields = ("username", "email", "password1", "password2")
-    
+
     def save(self, commit=True):
         user = super().save(commit=False)
         user.email = self.cleaned_data["email"]

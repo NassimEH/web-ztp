@@ -18,4 +18,4 @@ def render_card(title, value, icon):
 @register.inclusion_tag("app/components/deviceRows.html")
 def render_device_rows(order_by="hostname", order=""):
     devices = device_utils.get_all_device_order_by(order_by, order)
-    return { "devices" : devices }
+    return {"devices": devices}

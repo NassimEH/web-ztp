@@ -4,6 +4,7 @@ from scapy.all import packet, BOOTP, DHCP
 from dhcp_server.dhcp_db import DHCPData
 from app.utils import device_utils
 
+
 class DHCPServer:
     def __init__(self, ip_address: str, bind_port=67, buffer_size=1024):
         self.ip_address = ip_address
@@ -33,7 +34,9 @@ class DHCPServer:
         if client_id:
             try:
                 serial_number = client_id.decode("utf-8")
-                serial_number = ''.join(c for c in serial_number if c.isprintable()).strip()
+                serial_number = "".join(
+                    c for c in serial_number if c.isprintable()
+                ).strip()
                 return serial_number
             except:
                 pass

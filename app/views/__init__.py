@@ -11,27 +11,33 @@ from .device_views import DeviceListView, DeviceCountView
 from .help_views import HelpView
 from .dashboard_views import DashboardView
 from .form_views import AddDeviceView, AddTemplateView, ChangeDHCPConfig, ConfFormView
-from .auth_views import login_view, register_view, logout_view, profile_view, change_password_view
+from .auth_views import (
+    login_view,
+    register_view,
+    logout_view,
+    profile_view,
+    change_password_view,
+)
 from .privacy_views import privacy_view, PrivacyView
 from .terms_views import terms_view, TermsView
 
 __all__ = [
-    'IndexView',
-    'DeviceListView',
-    'DeviceCountView',
-    'HelpView',
-    'DashboardView',
-    'AddDeviceView',
-    'AddTemplateView',
-    'ChangeDHCPConfig',
-    'ConfFormView',
-    'login_view',
-    'register_view',
-    'logout_view',
-    'profile_view',
-    'change_password_view',
-    'privacy_view',
-    'terms_view',
-    'PrivacyView',
-    'TermsView'
-] 
+    "IndexView",
+    "DeviceListView",
+    "DeviceCountView",
+    "HelpView",
+    "DashboardView",
+    "AddDeviceView",
+    "AddTemplateView",
+    "ChangeDHCPConfig",
+    "ConfFormView",
+    "login_view",
+    "register_view",
+    "logout_view",
+    "profile_view",
+    "change_password_view",
+    "privacy_view",
+    "terms_view",
+    "PrivacyView",
+    "TermsView",
+]
