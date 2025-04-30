@@ -1,0 +1,8 @@
+hostname {{ device.hostname }}
+interface GigabitEthernet0/0
+ ip address {{ device.ip }} 255.255.255.0
+ no shutdown
+!
+ip default-gateway 192.168.0.1
+!
+end
