@@ -1565,7 +1565,8 @@ body {
   border-radius: 50%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease;
+  border: 1px solid var(--border-color);
 }
 
 .theme-toggle:hover {
@@ -1736,4 +1737,31 @@ body.dark .dropdown-item:hover {
 
 .welcome-panel .close-btn:hover {
     opacity: 1;
+}
+
+/* Personnalisation de la scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--card-bg);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--blue);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--blue-dark);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--blue) var(--card-bg);
 }
