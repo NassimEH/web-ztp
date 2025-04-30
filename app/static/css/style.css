@@ -2264,8 +2264,8 @@ body.dark .stat-card .stat-label {
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
-    margin-bottom: 1.2rem;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
     position: relative;
 }
 
@@ -2273,13 +2273,13 @@ body.dark .stat-card .stat-label {
     color: var(--text-color);
     font-weight: 400;
     font-size: 0.9rem;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.25rem;
     letter-spacing: -0.01em;
     opacity: 0.9;
 }
 
 .form-group input {
-    padding: 0.75rem 1rem;
+    padding: 0.8rem 1rem;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     font-size: 0.95rem;
@@ -2310,7 +2310,7 @@ body.dark .stat-card .stat-label {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
+    padding: 0.8rem 1.5rem;
     border-radius: 8px;
     font-size: 0.95rem;
     font-weight: 500;
@@ -2419,9 +2419,9 @@ body.dark .btn-outline:hover {
 }
 
 .action-buttons .btn-outline {
-    padding: 0.7rem 1.2rem;
+    padding: 0.8rem 1.5rem;
 }
 
 .action-buttons .btn-primary {
-    padding: 0.7rem 1.2rem;
+    padding: 0.8rem 1.5rem;
 }
