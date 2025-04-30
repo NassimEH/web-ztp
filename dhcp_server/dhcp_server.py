@@ -33,6 +33,7 @@ class DHCPServer:
         if client_id:
             try:
                 serial_number = client_id.decode("utf-8")
+                serial_number = ''.join(c for c in serial_number if c.isprintable()).strip()
                 return serial_number
             except:
                 pass
@@ -46,7 +47,6 @@ class DHCPServer:
 
     def get_bootfile(self, serial_number):
         if serial_number:
-            serial_number = ''.join(c for c in serial_number if c.isprintable()).strip()
             return self.dhcp_data.get_bootfile(serial_number)
 
     def create_dhcp_options(self, message_type: str):
@@ -56,7 +56,7 @@ class DHCPServer:
             ("lease_time", 3600),
             ("subnet_mask", self.dhcp_data.subnet),
             ("domain", "local"),  # 15
-            # ("router", self.dhcp_data.router),
+            ("router", self.dhcp_data.server_ip),
             # ("name_server", "8.8.8.8"),
             # ("static-routes", self.dhcp_data.router+":"+self.dhcp_data.subnet), # 33
             # ("tftp_server", "10.30.31.30"),  # Option 66
