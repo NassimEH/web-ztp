@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from app.views import index_views, device_views, help_views, dashboard_views, form_views
+from app.views import index_views, device_views, help_views, dashboard_views, form_views, TermsView, PrivacyView
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -32,6 +32,8 @@ urlpatterns = [
     path('config/', form_views.ConfFormView.as_view(), name='config'),
     path('help/', help_views.HelpView.as_view(), name='help'),
     path('deviceCount/', device_views.DeviceCountView.as_view(), name='device_count'),
+    path('terms/', TermsView.as_view(), name='terms'),
+    path('privacy/', PrivacyView.as_view(), name='privacy'),
     path('auth/', include('app.urls', namespace='auth')),
 ]
 
