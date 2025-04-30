@@ -51,7 +51,7 @@
             </div>
             <div class="stat-card">
                 <h3>Dernière Activité</h3>
-                <div class="stat-value">
+                <div class="stat-value date">
                     {% if user.last_login %}
                         {{ user.last_login|date:"d/m/Y à H:i" }}
                     {% else %}
@@ -62,7 +62,7 @@
             </div>
             <div class="stat-card">
                 <h3>Compte Créé</h3>
-                <div class="stat-value">{{ user.date_joined|date:"d/m/Y" }}</div>
+                <div class="stat-value date">{{ user.date_joined|date:"d/m/Y" }}</div>
                 <div class="stat-label">Date de création du compte</div>
             </div>
         </div>
