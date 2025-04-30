@@ -154,5 +154,39 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/theme.js' %}"></script>
+    
+    <div class="welcome-panel" id="welcomePanel">
+        <button class="close-btn" onclick="closeWelcomePanel()">
+            <ion-icon name="close-outline"></ion-icon>
+        </button>
+        <ion-icon name="hand-left-outline" class="welcome-icon"></ion-icon>
+        <div class="welcome-content">
+            <span class="welcome-title">Bienvenue sur ConfigZTP</span>
+            <span class="welcome-message">Commencez à configurer vos appareils réseau en toute simplicité</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Vérifier si le panneau a déjà été fermé
+            if (!localStorage.getItem('welcomePanelClosed')) {
+                setTimeout(function() {
+                    const welcomePanel = document.getElementById('welcomePanel');
+                    if (welcomePanel) {
+                        welcomePanel.classList.add('show');
+                    }
+                }, 1000);
+            }
+        });
+
+        function closeWelcomePanel() {
+            const welcomePanel = document.getElementById('welcomePanel');
+            if (welcomePanel) {
+                welcomePanel.classList.remove('show');
+                // Sauvegarder l'état dans le localStorage
+                localStorage.setItem('welcomePanelClosed', 'true');
+            }
+        }
+    </script>
 </body>
 </html>
