@@ -6,7 +6,7 @@ from django.views.static import serve
 from django.urls import re_path
 from app.views import (
     index_views, device_views, help_views, dashboard_views, form_views,
-    auth_views
+    auth_views, privacy_view, terms_view
 )
 
 app_name = 'app'
@@ -37,4 +37,6 @@ urlpatterns = [
     re_path(r'^docs/(?P<path>.*)$', serve, {
         'document_root': str(settings.BASE_DIR / 'docs/_build/html'),
     }),
+    path('privacy/', privacy_view, name='privacy'),
+    path('terms/', terms_view, name='terms'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
