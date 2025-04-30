@@ -25,7 +25,15 @@
                 <div class="profile-info">
                     <h2>{{ user.username }}</h2>
                     <p>{{ user.email }}</p>
-                    <p>Membre depuis {{ user.date_joined|date:"d/m/Y" }}</p>
+                    <p class="last-login">
+                        <ion-icon name="time-outline"></ion-icon>
+                        Dernière connexion : 
+                        {% if user.last_login %}
+                            {{ user.last_login|date:"d/m/Y à H:i" }}
+                        {% else %}
+                            Jamais
+                        {% endif %}
+                    </p>
                 </div>
             </div>
         </div>
@@ -43,8 +51,19 @@
             </div>
             <div class="stat-card">
                 <h3>Dernière Activité</h3>
-                <div class="stat-value">{{ last_activity|date:"d/m/Y" }}</div>
+                <div class="stat-value">
+                    {% if user.last_login %}
+                        {{ user.last_login|date:"d/m/Y à H:i" }}
+                    {% else %}
+                        Jamais
+                    {% endif %}
+                </div>
                 <div class="stat-label">Date de dernière connexion</div>
+            </div>
+            <div class="stat-card">
+                <h3>Compte Créé</h3>
+                <div class="stat-value">{{ user.date_joined|date:"d/m/Y" }}</div>
+                <div class="stat-label">Date de création du compte</div>
             </div>
         </div>
 

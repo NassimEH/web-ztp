@@ -2138,6 +2138,30 @@ body {
     margin-bottom: 0.5rem;
 }
 
+.profile-info .last-login {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.profile-info .last-login ion-icon {
+    font-size: 1.1rem;
+    color: var(--blue);
+}
+
+/* Dark mode spécifique */
+body.dark .profile-info .last-login {
+    opacity: 0.7;
+}
+
+body.dark .profile-info .last-login ion-icon {
+    color: var(--blue-light);
+}
+
 .profile-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -2597,31 +2621,40 @@ body {
 .view-all-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
-    padding: 0.35rem 0.75rem;
+    gap: 0.35rem;
+    padding: 0.45rem 0.85rem;
     background: transparent;
     border: 1px solid var(--border-color);
-    border-radius: 6px;
+    border-radius: 8px;
     color: var(--text-color);
     font-size: 0.85rem;
     font-weight: 400;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     width: fit-content;
     letter-spacing: -0.01em;
-    opacity: 0.8;
+    opacity: 0.85;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .view-all-btn:hover {
-    background: var(--hover-bg);
+    background: rgba(0, 122, 255, 0.1);
     border-color: var(--blue);
     color: var(--blue);
     opacity: 1;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 122, 255, 0.15);
+}
+
+.view-all-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
 }
 
 .view-all-btn ion-icon {
     font-size: 0.9rem;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .view-all-btn:hover ion-icon {
@@ -2630,404 +2663,33 @@ body {
 
 /* Dark mode spécifique pour le bouton */
 body.dark .view-all-btn {
-    border-color: var(--border-color);
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     color: var(--text-color);
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 body.dark .view-all-btn:hover {
-    background: var(--hover-bg);
+    background: rgba(0, 122, 255, 0.15);
     border-color: var(--blue);
     color: var(--blue);
     opacity: 1;
+    box-shadow: 0 2px 8px rgba(0, 122, 255, 0.2);
 }
 
-/* Styles pour les pages légales */
-.terms-section,
-.privacy-section {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    background: var(--card-bg);
-    border-radius: 12px;
-    box-shadow: var(--card-shadow);
-    border: 1px solid var(--border-color);
+/* Animation subtile au survol */
+@keyframes subtleHover {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-1px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
-.section-title {
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.last-updated {
-    color: var(--text-color);
-    opacity: 0.7;
-    font-size: 0.9rem;
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.terms-content,
-.privacy-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.terms-block,
-.privacy-block {
-    background: var(--card-bg);
-    padding: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    transition: all 0.3s ease;
-}
-
-.terms-block:hover,
-.privacy-block:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.terms-block h2,
-.privacy-block h2 {
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-}
-
-.terms-block p,
-.privacy-block p {
-    color: var(--text-color);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-}
-
-.terms-block ul,
-.privacy-block ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin-bottom: 1rem;
-}
-
-.terms-block ul li,
-.privacy-block ul li {
-    color: var(--text-color);
-    padding: 0.5rem 0;
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.terms-block ul li::before,
-.privacy-block ul li::before {
-    content: "•";
-    color: var(--blue);
-    position: absolute;
-    left: 0;
-}
-
-.terms-block a,
-.privacy-block a {
-    color: var(--blue);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.terms-block a:hover,
-.privacy-block a:hover {
-    color: var(--blue-dark);
-    text-decoration: underline;
-}
-
-/* Dark mode spécifique */
-body.dark .terms-section,
-body.dark .privacy-section {
-    background: var(--card-bg);
-    border-color: var(--border-color);
-}
-
-body.dark .terms-block,
-body.dark .privacy-block {
-    background: var(--card-bg);
-    border-color: var(--border-color);
-}
-
-body.dark .terms-block:hover,
-body.dark .privacy-block:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-body.dark .section-title,
-body.dark .terms-block h2,
-body.dark .privacy-block h2 {
-    color: var(--text-color);
-}
-
-body.dark .terms-block p,
-body.dark .privacy-block p,
-body.dark .terms-block ul li,
-body.dark .privacy-block ul li {
-    color: var(--text-color);
-}
-
-body.dark .terms-block a,
-body.dark .privacy-block a {
-    color: var(--blue);
-}
-
-body.dark .terms-block a:hover,
-body.dark .privacy-block a:hover {
-    color: var(--blue-light);
-}
-
-/* Styles pour la page de configuration des appareils */
-.device-config-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-.device-config-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.device-config-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-.device-config-actions {
-    display: flex;
-    gap: 1rem;
-}
-
-.device-form {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: var(--card-shadow);
-    border: 1px solid var(--border-color);
-    margin-bottom: 2rem;
-}
-
-.device-form-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.device-form-title {
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: var(--text-color);
-}
-
-.device-form-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.form-group label {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--text-color);
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    padding: 0.8rem;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    background: var(--input-bg);
-    color: var(--text-color);
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--blue);
-    box-shadow: 0 0 0 2px var(--blue-light);
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: var(--input-placeholder);
-}
-
-.device-form-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border-color);
-}
-
-/* Styles des boutons */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.5rem;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-}
-
-.btn-primary {
-    background: var(--blue);
-    color: var(--white);
-    border: none;
-}
-
-.btn-primary:hover {
-    background: var(--blue-dark);
-    transform: translateY(-1px);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-}
-
-.btn-secondary:hover {
-    background: var(--hover-bg);
-    border-color: var(--blue);
-    color: var(--blue);
-}
-
-.btn-danger {
-    background: var(--error);
-    color: var(--white);
-}
-
-.btn-danger:hover {
-    background: #d32f2f;
-    transform: translateY(-1px);
-}
-
-.btn-icon {
-    font-size: 1.1rem;
-    transition: transform 0.3s ease;
-}
-
-.btn:hover .btn-icon {
-    transform: translateX(2px);
-}
-
-/* Styles des cartes d'appareils */
-.device-card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: var(--card-shadow);
-    border: 1px solid var(--border-color);
-    transition: all 0.3s ease;
-}
-
-.device-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.device-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.device-card-title {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--text-color);
-}
-
-.device-card-actions {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.device-card-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-}
-
-.device-info-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.device-info-label {
-    font-size: 0.85rem;
-    color: var(--text-color);
-    opacity: 0.7;
-}
-
-.device-info-value {
-    font-size: 1rem;
-    color: var(--text-color);
-    font-weight: 500;
-}
-
-/* Dark mode spécifique */
-body.dark .device-form,
-body.dark .device-card {
-    background: var(--card-bg);
-    border-color: var(--border-color);
-}
-
-body.dark .device-form:hover,
-body.dark .device-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-body.dark .form-group input,
-body.dark .form-group select,
-body.dark .form-group textarea {
-    background: var(--input-bg);
-    border-color: var(--input-border);
-    color: var(--text-color);
-}
-
-body.dark .form-group input:focus,
-body.dark .form-group select:focus,
-body.dark .form-group textarea:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 2px var(--blue-light);
-}
-
-body.dark .btn-secondary:hover {
-    background: var(--hover-bg);
-    border-color: var(--blue);
-    color: var(--blue);
+.view-all-btn:hover {
+    animation: subtleHover 0.3s ease-in-out;
 }
