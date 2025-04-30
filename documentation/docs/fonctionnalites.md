@@ -4,10 +4,9 @@
 
 ### Fichier .env
 
-Le fichier `.env` contient les variables d'environnement essentielles pour le fonctionnemment de postgresql:
+Le fichier `.env` contient les variables d'environnement essentielles :
 
 ```env
-C'EST UN EXEMPLE A CHANGER A LA FIN DU PROJET
 # Django
 DJANGO_SECRET_KEY=votre_clé_secrète
 DEBUG=True
@@ -60,7 +59,7 @@ TEMPLATES = [
 
 ### Fichier dhcpd.conf
 
-Le fichier de configuration DHCP se trouve dans `dhcp_server/dhcpd_server.py` :
+Le fichier de configuration DHCP se trouve dans `dhcp/dhcpd.conf` :
 
 ```conf
 # Configuration globale
@@ -97,7 +96,7 @@ option config-file "config.txt";
 
 ### Templates de configuration
 
-Les templates sont stockés dans `????` :
+Les templates sont stockés dans `templates/` :
 
 ```jinja
 # Template pour switch Cisco
@@ -110,7 +109,30 @@ interface {{ interface }}
 !
 ```
 
+### Variables d'environnement
+
+Les variables d'environnement pour les équipements sont définies dans `equipment/models.py` :
+
+```python
+class Equipment(models.Model):
+    name = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+    ip_address = models.GenericIPAddressField()
+    mac_address = models.CharField(max_length=17)
+    configuration = models.TextField()
+```
+
 ## Sécurité
+
+### Configuration SSL/TLS
+
+Pour activer HTTPS, modifiez `web_ztp/settings.py` :
+
+```python
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+```
 
 ### Authentification
 
@@ -129,5 +151,43 @@ LOGOUT_REDIRECT_URL = '/login/'
 ## Monitoring
 
 ### Configuration des logs
- localisation : '???????'
- a ajouter bientôt
+
+Les logs sont configurés dans `web_ztp/settings.py` :
+
+```python
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+```
+
+### Configuration des alertes
+
+Les alertes sont configurées dans `monitoring/settings.py` :
+
+```python
+ALERT_SETTINGS = {
+    'email': {
+        'enabled': True,
+        'recipients': ['admin@example.com'],
+    },
+    'slack': {
+        'enabled': False,
+        'webhook_url': 'your-webhook-url',
+    },
+}
+```

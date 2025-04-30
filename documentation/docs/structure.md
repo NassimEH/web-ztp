@@ -15,16 +15,16 @@ WEB-ZTP est né d'un besoin spécifique dans le domaine de la gestion de réseau
 
 Le projet est construit autour de plusieurs composants majeurs :
 
-1. **Interface Web** : Développée avec Django
+1. **Interface Web** : Développée avec Django, offrant une expérience utilisateur moderne
 2. **Serveur DHCP** : Implémentation personnalisée pour la gestion des adresses IP
-3. **Système ZTP** : Mécanisme de configuration automatique des équipements sur une base de template stockée dans une "vue" template ZTP
+3. **Système ZTP** : Mécanisme de configuration automatique des équipements
 4. **Base de données** : Stockage des configurations et des données d'équipement
 
 ## Technologies utilisées
 
 - **Backend** : Python, Django, PostgreSQL
-- **Frontend** : HTML, CSS
-- **Déploiement** : Docker
+- **Frontend** : HTML, CSS, JavaScript, Bootstrap
+- **Déploiement** : Docker, Nginx
 - **Sécurité** : HTTPS, Authentification
 
 ## Public cible

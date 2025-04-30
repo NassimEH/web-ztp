@@ -39,10 +39,6 @@ nav:
     - Installation: installation/installation.md
     - Utilisation: installation/utilisation.md
   - Structure du projet: structure.md
-  - API: api.md
-  - Développement:
-    - Contribution: developpement/contribution.md
-    - Architecture: developpement/architecture.md
   - FAQ: faq.md
 
 markdown_extensions:
