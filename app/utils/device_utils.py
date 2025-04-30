@@ -28,7 +28,7 @@ def get_used_ips() -> set:
 def get_device_by_serial(serial_number):
     try:
         device = Device.objects.get(serial_number=serial_number)
-        return device.ip
+        return device
     except ObjectDoesNotExist:
         return None
 
