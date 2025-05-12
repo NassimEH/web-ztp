@@ -4,11 +4,18 @@ from app.utils.view_utils import AddView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import FormView
+from django.shortcuts import render, redirect
 
 
-class AddDeviceView(AddView):
+# class AddDeviceView(AddView):
+#     template_name = "app/deviceForm.html"
+#     form_class = DeviceForm
+
+
+class AddDeviceViewZTP(AddView):
     template_name = "app/deviceForm.html"
     form_class = DeviceForm
+    formset_class = ZTPVariableFormSet
 
 
 class AddTemplateView(AddView):

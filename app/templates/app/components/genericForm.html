@@ -12,6 +12,11 @@
         {{ field }}
     </div>
     {% endfor %}
+
+    {% if formset %}
+        <p>Stp marche</p>
+    {% endif %}
+
     <br>
     <button type="submit" class="btn">{{ submit_text }}</button>
 </form>

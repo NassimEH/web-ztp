@@ -24,7 +24,7 @@ urlpatterns = [
     # URLs protégées
     path("dashboard/", dashboard_views.DashboardView.as_view(), name="dashboard"),
     path("devices/", device_views.DeviceListView.as_view(), name="devices"),
-    path("deviceForm/", form_views.AddDeviceView.as_view(), name="device_form"),
+    path("deviceForm/", form_views.AddDeviceViewZTP.as_view(), name="device_form"),
     path("templateForm/", form_views.AddTemplateView.as_view(), name="template_form"),
     path(
         "dhcpconfigForm/", form_views.ChangeDHCPConfig.as_view(), name="dhcpconfig_form"

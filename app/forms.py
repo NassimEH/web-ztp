@@ -1,7 +1,6 @@
 from app.models import Device, Template, DHCPConfig
 from app.utils.form_utils import AddForm, UpdateForm
 from django import forms
-from django.db import models
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 

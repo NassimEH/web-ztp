@@ -10,7 +10,12 @@ from .index_views import IndexView
 from .device_views import DeviceListView, DeviceCountView
 from .help_views import HelpView
 from .dashboard_views import DashboardView
-from .form_views import AddDeviceView, AddTemplateView, ChangeDHCPConfig, ConfFormView
+from .form_views import (
+    AddDeviceViewZTP,
+    AddTemplateView,
+    ChangeDHCPConfig,
+    ConfFormView,
+)
 from .auth_views import (
     login_view,
     register_view,
@@ -27,7 +32,7 @@ __all__ = [
     "DeviceCountView",
     "HelpView",
     "DashboardView",
-    "AddDeviceView",
+    "AddDeviceViewZTP",
     "AddTemplateView",
     "ChangeDHCPConfig",
     "ConfFormView",
