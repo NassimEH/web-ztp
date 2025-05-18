@@ -15,7 +15,12 @@ class DeviceForm(AddForm):
 
     class Meta:
         model = Device
-        fields = ["serial_number", "ip", "hostname", "template"]
+        fields = ["serial_number", "ip", "hostname", "template"] + [
+            "subnet_mask",
+            "default_gateway",
+            "username",
+            "password",
+        ]
 
 
 class TemplateForm(AddForm):
