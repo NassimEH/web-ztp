@@ -73,7 +73,8 @@ def profile_view(request):
             avatar = request.FILES["avatar"]
             # Supprimer l'ancienne photo si elle existe
             if hasattr(user, "profile") and user.profile.avatar:
-                default_storage.delete(user.profile.avatar.path)
+                if os.path.exists(user.profile.avatar.path):
+                    os.remove(user.profile.avatar.path)
 
             # Sauvegarder la nouvelle photo
             ext = os.path.splitext(avatar.name)[1]

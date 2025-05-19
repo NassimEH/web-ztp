@@ -152,6 +152,9 @@ if DEBUG:
     MIDDLEWARE += ["django.middleware.security.SecurityMiddleware"]
     MIDDLEWARE += ["whitenoise.middleware.WhiteNoiseMiddleware"]
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    # Configuration pour servir les fichiers médias en développement
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

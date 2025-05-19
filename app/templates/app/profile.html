@@ -14,13 +14,9 @@
                     {% else %}
                         {{ user.username|first|upper }}
                     {% endif %}
-                    <form method="post" enctype="multipart/form-data" class="avatar-form">
-                        {% csrf_token %}
-                        <label for="avatar" class="avatar-upload">
-                            <ion-icon name="camera-outline"></ion-icon>
-                        </label>
-                        <input type="file" id="avatar" name="avatar" accept="image/*" style="display: none;">
-                    </form>
+                    <label for="avatar" class="avatar-upload">
+                        <ion-icon name="camera-outline"></ion-icon>
+                    </label>
                 </div>
                 <div class="profile-info">
                     <h2>{{ user.username }}</h2>
@@ -73,8 +69,9 @@
                     <ion-icon name="person-outline"></ion-icon>
                     <h2>Informations du compte</h2>
                 </div>
-                <form method="post" class="profile-form">
+                <form method="post" class="profile-form" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <input type="file" id="avatar" name="avatar" accept="image/*" style="display: none;">
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="username">Nom d'utilisateur</label>
@@ -382,7 +379,7 @@
 <script>
     document.getElementById('avatar').addEventListener('change', function(e) {
         if (this.files && this.files[0]) {
-            this.form.submit();
+            this.closest('form').submit();
         }
     });
 </script>
