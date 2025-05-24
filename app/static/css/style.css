@@ -7,7 +7,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  transition: background-color var(--transition-speed) ease,
+              color var(--transition-speed) ease,
+              border-color var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
 }
 
 :root {
@@ -40,6 +43,49 @@
   --table-header: var(--gray-light);
   --table-row: var(--white);
   --table-hover: var(--blue-light);
+  --transition-speed: 0.3s;
+}
+
+body.dark-theme {
+  /* Mode sombre */
+  --bg-color: #121212;
+  --text-color: #E0E0E0;
+  --card-bg: #1E1E1E;
+  --border-color: #2D2D2D;
+  --hover-bg: #2D2D2D;
+  --nav-bg: #1A1A1A;
+  --nav-text: #E0E0E0;
+  --nav-hover: #4A90E2;
+  --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --footer-bg: #1A1A1A;
+  --footer-text: #E0E0E0;
+  --input-bg: #2D2D2D;
+  --input-border: #3A3A3A;
+  --input-placeholder: #A0A0A0;
+  --table-header: #2D2D2D;
+  --table-row: #1E1E1E;
+  --table-hover: #2D2D2D;
+  --form-bg: #1E1E1E;
+  --form-border: #3A3A3A;
+  --help-card-bg: #1E1E1E;
+  --help-card-hover: #2D2D2D;
+  --profile-card-bg: #1E1E1E;
+  --profile-card-header: #2D2D2D;
+  --search-bg: #2D2D2D;
+  --search-border: #3A3A3A;
+  --search-text: #E0E0E0;
+  --search-placeholder: #A0A0A0;
+  --alert-bg: #2D2D2D;
+  --alert-border: #3A3A3A;
+  --alert-text: #E0E0E0;
+  --button-bg: #2D2D2D;
+  --button-text: #E0E0E0;
+  --button-hover: #3A3A3A;
+  --button-border: #3A3A3A;
+  --label-text: #E0E0E0;
+  --section-bg: #1A1A1A;
+  --section-border: #2D2D2D;
+  --transition-speed: 0.3s;
 }
 
 body.dark {
@@ -2624,4 +2670,111 @@ body.dark .form-actions .btn-danger:hover {
         opacity: 0;
         transform: scale(40, 40);
     }
+}
+
+/* Thème sombre */
+.dark-theme {
+    --white: #1a1a1a;
+    --gray: #a0a0a0;
+    --gray-dark: #e0e0e0;
+    --blue: #4a90e2;
+    --blue-dark: #357abd;
+    --blue-light: #6ba4e7;
+    --blue-rgb: 74, 144, 226;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --card-bg: #2d2d2d;
+    --border-color: #404040;
+}
+
+.dark-theme .navigation {
+    background: var(--card-bg);
+    border-right: 1px solid var(--border-color);
+}
+
+.dark-theme .navigation ul li a {
+    color: var(--gray);
+}
+
+.dark-theme .navigation ul li a:hover {
+    color: var(--white);
+}
+
+.dark-theme .navigation ul li.active a {
+    color: var(--white);
+    background: var(--blue);
+}
+
+.dark-theme .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.dark-theme .cardName {
+    color: var(--gray);
+}
+
+.dark-theme .details {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.dark-theme .details table thead tr {
+    background: var(--blue);
+}
+
+.dark-theme .details table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dark-theme .details table tbody tr:hover {
+    background: rgba(var(--blue-rgb), 0.1);
+}
+
+.dark-theme .status {
+    background: var(--card-bg);
+}
+
+.dark-theme .theme-toggle {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.dark-theme .theme-toggle:hover {
+    background: var(--blue);
+}
+
+.dark-theme .theme-toggle ion-icon {
+    color: var(--gray);
+}
+
+.dark-theme .theme-toggle:hover ion-icon {
+    color: var(--white);
+}
+
+/* Style du bouton de thème */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px var(--shadow);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+.theme-toggle ion-icon {
+    font-size: 20px;
+    color: var(--gray-dark);
+    transition: all 0.3s ease;
 }
