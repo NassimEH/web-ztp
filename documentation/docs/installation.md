@@ -2,67 +2,56 @@
 
 ## Prérequis
 
-- Docker et Docker Compose installés
-- Python 3.8 ou supérieur
-- PostgreSQL 12 ou supérieur
-- Git
+L'ins## Accès à l'application
 
-## Installation avec Docker (Recommandé)
+Une fois l'installation terminée, vous pouvez accéder à l'interface web de Web-ZTP :
 
-1. Clonez le dépôt :
+- **URL par défaut** : https://localhost (en local) ou l'adresse IP du serveur
+- **Identifiants** : Les identifiants doivent être définis lors de l'installation initialeion de Web-ZTP est très simple grâce à Docker. Vous aurez besoin de :
+
+- Docker et Docker Compose installés sur votre système
+- Un accès réseau pour que les équipements puissent communiquer avec le serveur Web-ZTP
+- Environ 500 Mo d'espace disque libre
+
+## Installation avec Docker
+
+L'installation complète du système Web-ZTP se fait en une seule commande :
+
 ```bash
-git clone https://github.com/votre-username/WEB-ZTP.git
-cd WEB-ZTP
+docker compose up -d
 ```
 
-2. Configurez les variables d'environnement :
+Cette commande va démarrer les quatre conteneurs Docker qui composent l'application :
+
+1. **Application Web Django** : L'interface utilisateur web
+2. **Serveur DHCP** : Pour l'attribution automatique des adresses IP
+3. **Caddy** : Serveur proxy inverse qui fournit le support HTTPS
+4. **PostgreSQL** : Base de données pour stocker les configurations et les informations des appareils
+
+## Vérification de l'installation
+
+Après le démarrage des conteneurs, vous pouvez vérifier que tout fonctionne correctement :
+
 ```bash
-cp .env.example .env
-# Modifiez les valeurs dans .env selon votre configuration
+docker compose ps
 ```
 
-3. Lancez les conteneurs :
+Tous les services devraient être à l'état "Up".
+
+## Accès à l'application
+
+Une fois l'installation terminée, vous pouvez accéder à l'interface web de Web-ZTP :
+
+- **URL par défaut** : `https://localhost` (en local) ou l'adresse IP du serveur
+- **Identifiants par défaut** : Admin / (demandez le mot de passe à votre administrateur)
+
+## Mise à jour de l'application
+
+Pour mettre à jour Web-ZTP vers la dernière version :
+
 ```bash
-docker-compose up -d
-```
-
-4. Accédez à l'interface web :
-```
-http://localhost:8000
-```
-
-## Installation manuelle
-
-1. Clonez le dépôt :
-```bash
-git clone https://github.com/votre-username/WEB-ZTP.git
-cd WEB-ZTP
-```
-
-2. Créez un environnement virtuel :
-```bash
-python -m venv venv
-source venv/bin/activate  # Sur Windows : venv\Scripts\activate
-```
-
-3. Installez les dépendances :
-```bash
-pip install -r requirements.txt
-```
-
-4. Configurez la base de données :
-```bash
-python manage.py migrate
-```
-
-5. Créez un superutilisateur :
-```bash
-python manage.py createsuperuser
-```
-
-6. Lancez le serveur :
-```bash
-python manage.py runserver
+docker compose pull
+docker compose up -d
 ```
 
 ## Configuration

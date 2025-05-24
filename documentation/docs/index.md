@@ -1,46 +1,56 @@
-# WEB-ZTP
+# Web-ZTP
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/Chadi-Mangle/web-ztp/refs/heads/main/logo.png" align="center" width="30%">
+    <img src="img/logo.png" align="center" width="30%" alt="Logo Web-ZTP">
 </p>
 
-## Bienvenue dans la documentation de WEB-ZTP
+## Bienvenue dans la documentation de Web-ZTP
 
-WEB-ZTP est une interface web complète intégrant un serveur DHCP développé en interne, ainsi qu'une implémentation personnalisée de la fonctionnalité Zero Touch Provisioning (ZTP). Cette plateforme permet aux utilisateurs d'ajouter et de configurer des appareils de manière automatisée via une interface intuitive et ergonomique.
+Web-ZTP est une solution simple et efficace permettant la configuration automatique des équipements réseau Cisco (routeurs et switches) dès leur premier démarrage. Grâce à son interface web intuitive et son serveur DHCP intégré, Web-ZTP permet aux administrateurs réseau d'économiser du temps et d'éliminer les erreurs de configuration manuelle.
+
+### À propos de Zero Touch Provisioning
+
+Le Zero Touch Provisioning (ZTP) est une fonctionnalité qui permet aux équipements réseau d'être automatiquement configurés lors de leur première mise sous tension, sans nécessiter d'intervention manuelle sur chaque appareil.
 
 ### Fonctionnalités principales
 
-- **Dashboard** : Vue d'ensemble des configurations en place
-- **Configuration d'appareils** : Ajout et configuration automatisée d'appareils
-- **Serveur DHCP intégré** : Gestion complète des adresses IP
-- **ZTP (Zero Touch Provisioning)** : Configuration automatique des équipements
-- **Interface intuitive** : Navigation fluide et ergonomique
+- **Interface web intuitive** : Formulaires simples pour la configuration des équipements
+- **Dashboard** : Vue d'ensemble des équipements en un coup d'œil
+- **Serveur DHCP intégré** : Configuration automatique des adresses IP
+- **Templates de configuration** : Création et gestion de modèles pour standardiser vos configurations
+- **Sécurité HTTPS** : Communications sécurisées via le proxy Caddy
 
-### Dernières mises à jour
+### Pour qui est conçu Web-ZTP ?
 
-- Migration vers PostgreSQL pour la production
-- Amélioration de la sécurité avec HTTPS
-- Optimisation des performances du serveur DHCP
+- Administrateurs réseau cherchant à automatiser la configuration d'équipements
+- Techniciens déployant régulièrement de nouveaux équipements Cisco
+- Entreprises souhaitant gagner du temps sur la mise en place de leur infrastructure réseau
 
 ### Commencer rapidement
 
-```bash
-# Installation avec Docker
-docker compose up --build -d
+Installation rapide avec Docker :
 
-# Installation manuelle
-python manage.py migrate
-python manage.py loaddata dhcp_config.json
-python manage.py runserver
+```bash
+# Installation en une commande
+docker compose up -d
 ```
 
-### Auteurs
+Accès à l'application :
+- URL : `https://localhost` ou l'adresse IP du serveur
+- Connectez-vous avec les identifiants fournis par votre administrateur
 
-- Nassim El Haddad
-- Chadi Manglé
-- Ilyes Belkhir
-- Lucas Dréano
+### Architecture
 
----
+Web-ZTP est basé sur une architecture moderne en conteneurs Docker comprenant :
 
-Ce projet est réalisé dans le cadre du cursus ingénieur à Télécom SudParis.
+- Une application web Django pour l'interface utilisateur
+- Un serveur DHCP dédié pour la gestion des adresses IP
+- Un proxy Caddy pour sécuriser les communications
+- Une base de données PostgreSQL pour le stockage des configurations
+
+### Parcourez la documentation
+
+- **[Fonctionnalités](features.md)** : Découvrez les capacités de Web-ZTP
+- **[Installation](installation.md)** : Comment installer et déployer l'application
+- **[Configuration](configuration.md)** : Configurer Web-ZTP selon vos besoins
+- **[Structure du projet](structure.md)** : Comprendre l'architecture technique
