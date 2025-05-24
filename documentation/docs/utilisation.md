@@ -1,3 +1,4 @@
+<!-- filepath: /home/udach/web-ztp/documentation/docs/utilisation.md -->
 # Utilisation
 
 ## Premiers pas
@@ -6,141 +7,87 @@
 
 1. Accédez à l'interface web :
 ```
-http://localhost:8000
+https://localhost
 ```
+ou utilisez l'adresse IP du serveur où Web-ZTP est installé.
 
 2. Connectez-vous avec vos identifiants :
 - Utilisateur : admin
-- Mot de passe : (celui défini lors de l'installation)
+- Mot de passe : (celui fourni par votre administrateur)
 
-### Configuration initiale
+### Dashboard
 
-1. Configurez le serveur DHCP :
-   - Accédez à "Configuration" > "Serveur DHCP"
-   - Définissez les plages d'adresses IP
-   - Configurez les options DHCP
+Le dashboard est la page d'accueil de Web-ZTP. Il vous donne un aperçu rapide de :
 
-2. Définissez les templates de configuration :
-   - Accédez à "Configuration" > "Templates"
-   - Créez des templates pour vos équipements
+- Le nombre total d'appareils configurés
+- L'état des appareils (configurés, en attente, erreur)
+- Les activités récentes du système
 
-## Gestion des équipements
+## Configuration ZTP
 
-### Ajout d'un équipement
+### Création de templates
 
-1. Accédez à "Équipements" > "Ajouter"
-2. Remplissez les informations :
-   - Nom de l'équipement
-   - Modèle
-   - Adresse MAC
-   - Template de configuration
+1. Accédez à **Configuration** dans le menu principal
+2. Cliquez sur **Ajouter un template**
+3. Donnez un nom à votre template
+4. Téléchargez ou créez votre fichier de configuration
+5. Enregistrez le template
 
-3. Cliquez sur "Enregistrer"
+Les templates peuvent contenir des variables qui seront remplacées par les valeurs spécifiques à chaque appareil lors du provisionnement. Par exemple :
 
-### Configuration automatique (ZTP)
-
-1. Branchez le nouvel équipement au réseau
-2. L'équipement recevra automatiquement :
-   - Une adresse IP via DHCP
-   - Sa configuration via TFTP
-   - Les paramètres réseau nécessaires
-
-3. Vérifiez le statut dans "Équipements" > "Statut"
-
-## Gestion du réseau
-
-### Surveillance
-
-1. Tableau de bord :
-   - Vue d'ensemble des équipements
-   - Statut des configurations
-   - Alertes en temps réel
-
-2. Logs :
-   - Accédez à "Monitoring" > "Logs"
-   - Filtrez par type d'événement
-   - Exportez les logs si nécessaire
-
-### Maintenance
-
-1. Mise à jour des configurations :
-   - Modifiez les templates
-   - Appliquez aux équipements concernés
-   - Vérifiez les changements
-
-2. Sauvegarde :
-   - Exportez les configurations
-   - Sauvegardez la base de données
-   - Archivez les logs
-
-## Fonctionnalités avancées
-
-### API REST
-
-1. Authentification :
-```bash
-curl -X POST http://localhost:8000/api/token/
-  -H "Content-Type: application/json"
-  -d '{"username":"admin","password":"votre_mot_de_passe"}'
+```
+hostname {{hostname}}
+ip address {{ip}} {{subnet_mask}}
+ip default-gateway {{default_gateway}}
+username {{username}} privilege 15 secret {{password}}
 ```
 
-2. Exemple d'utilisation :
-```bash
-# Récupérer la liste des équipements
-curl -H "Authorization: Bearer votre_token" http://localhost:8000/api/equipment/
+### Configuration du serveur DHCP
 
-# Ajouter un équipement
-curl -X POST http://localhost:8000/api/equipment/
-  -H "Authorization: Bearer votre_token"
-  -H "Content-Type: application/json"
-  -d '{"name":"switch1","model":"Cisco","mac_address":"00:11:22:33:44:55"}'
-```
+1. Accédez à **Configuration** dans le menu principal
+2. Configurez la plage d'adresses IP pour le serveur DHCP
+3. Enregistrez la configuration
 
-### Automatisation
+## Gestion des appareils
 
-1. Scripts Python :
-```python
-from web_ztp.client import WebZTPClient
+### Ajout d'un appareil
 
-client = WebZTPClient(api_url="http://localhost:8000/api/")
-client.authenticate("admin", "mot_de_passe")
+1. Accédez à **Appareils** dans le menu principal
+2. Cliquez sur **Ajouter un appareil**
+3. Saisissez les informations requises :
+   - Numéro de série de l'appareil
+   - Adresse IP
+   - Nom d'hôte
+   - Sélectionnez un template (optionnel)
+4. Pour les paramètres avancés, configurez :
+   - Masque de sous-réseau
+   - Passerelle par défaut
+   - Nom d'utilisateur
+   - Mot de passe
+5. Cliquez sur **Enregistrer**
 
-# Ajouter un équipement
-equipment = {
-    "name": "switch1",
-    "model": "Cisco",
-    "mac_address": "00:11:22:33:44:55"
-}
-client.add_equipment(equipment)
-```
+### Provisionnement d'un appareil
 
-2. Intégration avec d'autres outils :
-   - Ansible
-   - Puppet
-   - Chef
+Une fois l'appareil ajouté dans le système, le processus de provisionnement est entièrement automatique :
 
-## Dépannage
+1. Connectez l'appareil au réseau
+2. L'appareil démarre et demande une adresse IP via DHCP
+3. Le serveur DHCP fournit une adresse IP et les options ZTP
+4. L'appareil télécharge et applique automatiquement sa configuration
+5. Le statut de l'appareil est mis à jour dans l'interface Web-ZTP
 
-### Problèmes courants
+### Suivi des appareils
 
-1. Équipement non détecté :
-   - Vérifiez la connexion réseau
-   - Confirmez l'adresse MAC
-   - Vérifiez les logs DHCP
+Le dashboard de Web-ZTP vous permet de suivre en temps réel l'état de vos appareils :
 
-2. Configuration non appliquée :
-   - Vérifiez le template
-   - Confirmez les permissions TFTP
-   - Consultez les logs système
+- **Configuré** : L'appareil a été configuré avec succès
+- **En attente** : L'appareil est enregistré mais n'a pas encore été configuré
+- **Erreur** : Un problème est survenu lors de la configuration
 
-### Support
+## Sécurité
 
-1. Documentation :
-   - Guide d'utilisation
-   - FAQ
-   - Exemples de configuration
+Pour garantir la sécurité de votre installation Web-ZTP, suivez ces bonnes pratiques :
 
-2. Assistance :
-   - Forum communautaire
-   - Tickets de support
-   - Documentation en ligne
+1. Changez régulièrement le mot de passe administrateur
+2. Limitez l'accès au serveur Web-ZTP aux adresses IP autorisées
+3. Vérifiez régulièrement les journaux d'activité

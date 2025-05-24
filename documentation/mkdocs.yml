@@ -1,6 +1,6 @@
-site_name: WEB-ZTP
-site_description: Interface web complète avec serveur DHCP et ZTP
-site_author: Chadi, Nassim, Ilyes, Lucas
+site_name: Web-ZTP
+site_description: Solution simple pour la configuration Zero Touch Provisioning (ZTP) des équipements réseau Cisco
+site_author: Web-ZTP Team
 site_url: https://github.com/Chadi-Mangle/web-ztp
 
 theme:
@@ -32,14 +32,11 @@ repo_url: https://github.com/Chadi-Mangle/web-ztp
 
 nav:
   - Accueil: index.md
-  - Présentation: presentation.md
-  - Fonctionnalités: fonctionnalites.md
-  - Installation:
-    - Prérequis: installation/prerequis.md
-    - Installation: installation/installation.md
-    - Utilisation: installation/utilisation.md
+  - Fonctionnalités: features.md
+  - Installation: installation.md
+  - Configuration: configuration.md
+  - Utilisation: utilisation.md
   - Structure du projet: structure.md
-  - FAQ: faq.md
 
 markdown_extensions:
   - admonition

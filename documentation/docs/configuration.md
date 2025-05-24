@@ -1,133 +1,48 @@
 # Configuration
 
-## Configuration de base
+## Présentation générale
 
-### Fichier .env
+La configuration de Web-ZTP se fait entièrement via l'interface web. Aucune modification manuelle de fichiers n'est nécessaire après l'installation Docker. Toutes les fonctionnalités sont accessibles à travers des formulaires intuitifs dans l'interface utilisateur.
 
-Le fichier `.env` contient les variables d'environnement essentielles pour le fonctionnemment de postgresql:
+## Configuration initiale
 
-```env
-C'EST UN EXEMPLE A CHANGER A LA FIN DU PROJET
-# Django
-DJANGO_SECRET_KEY=votre_clé_secrète
-DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
+Après la première connexion à l'interface web, suivez ces étapes pour configurer votre environnement Web-ZTP :
 
-# Base de données
-DATABASE_URL=postgres://user:password@localhost:5432/web_ztp
-
-# DHCP
-DHCP_SERVER=192.168.1.1
-DHCP_PORT=67
-```
-
-### Configuration Django
-
-Les paramètres Django principaux sont dans `web_ztp/settings.py` :
-
-```python
-# Configuration de la base de données
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'web_ztp',
-        'USER': 'user',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
-# Configuration des templates
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-```
+1. Créez un compte administrateur si ce n'est pas déjà fait
+2. Configurez les paramètres du serveur DHCP dans la section Configuration
+3. Créez des templates de configuration pour vos équipements
 
 ## Configuration du serveur DHCP
 
-### Fichier dhcpd.conf
+Le serveur DHCP intégré peut être configuré directement depuis l'interface web :
 
-Le fichier de configuration DHCP se trouve dans `dhcp_server/dhcpd_server.py` :
+1. Naviguez vers la section **Configuration** du menu principal
+2. Configurez les paramètres du sous-réseau (plage d'adresses, passerelle par défaut)
+3. Enregistrez les modifications
 
-```conf
-# Configuration globale
-option domain-name "example.com";
-option domain-name-servers 8.8.8.8, 8.8.4.4;
-
-default-lease-time 600;
-max-lease-time 7200;
-
-# Sous-réseau
-subnet 192.168.1.0 netmask 255.255.255.0 {
-    range 192.168.1.100 192.168.1.200;
-    option routers 192.168.1.1;
-    option subnet-mask 255.255.255.0;
-    option broadcast-address 192.168.1.255;
-}
-```
-
-### Options DHCP personnalisées
-
-Pour ajouter des options DHCP personnalisées :
-
-```conf
-# Option personnalisée pour le serveur TFTP
-option tftp-server-name code 150 = string;
-option tftp-server-name "192.168.1.2";
-
-# Option pour le fichier de configuration
-option config-file code 67 = string;
-option config-file "config.txt";
-```
+Les paramètres DHCP seront automatiquement appliqués au serveur DHCP conteneurisé.
 
 ## Configuration des équipements
 
-### Templates de configuration
+La configuration des équipements réseau se fait en deux étapes principales :
 
-Les templates sont stockés dans `????` :
+1. **Création de templates** : Définissez les modèles de configuration que vous souhaitez appliquer
+2. **Ajout d'appareils** : Enregistrez vos appareils avec leurs paramètres spécifiques
 
-```jinja
-# Template pour switch Cisco
-hostname {{ hostname }}
-!
-interface {{ interface }}
- description {{ description }}
- switchport mode access
- switchport access vlan {{ vlan }}
-!
-```
+### Ajout d'un nouvel équipement
 
-## Sécurité
+Pour ajouter un nouvel équipement à provisionner :
 
-### Authentification
-
-Configuration de l'authentification dans `web_ztp/settings.py` :
-
-```python
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-]
-
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/dashboard/'
-LOGOUT_REDIRECT_URL = '/login/'
-```
-
-## Monitoring
-
-### Configuration des logs
- localisation : '???????'
- a ajouter bientôt
+1. Accédez à la section **Appareils** dans le menu principal
+2. Cliquez sur **Ajouter un appareil**
+3. Remplissez les informations requises :
+   - Numéro de série
+   - Adresse IP
+   - Nom d'hôte
+   - Template de configuration (optionnel)
+4. Pour les paramètres avancés, configurez :
+   - Masque de sous-réseau
+   - Passerelle par défaut
+   - Nom d'utilisateur
+   - Mot de passe
+5. Cliquez sur **Enregistrer**
