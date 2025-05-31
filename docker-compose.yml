@@ -39,13 +39,10 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     networks:
       - web
-    ports:
-      - "8000:8000"
     restart: unless-stopped
-    volumes:
-      - .:/app
     environment:
       - DATABASE_URL=postgresql://webztp_user:webztp_password@db:5432/webztp_db
+      - DJANGO_ENV=production
     depends_on:
       - db
 
