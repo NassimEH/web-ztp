@@ -1,0 +1,15 @@
+{
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.git": true
+  },
+  "search.exclude": {
+    "**/__pycache__": true,
+    "**/__init__.py": true,
+    "**/.git": true
+  }
+}

@@ -1,0 +1,15 @@
+http://127.0.0.1, http://localhost: {
+   handle_path /static/* {
+       root * /web/staticfiles
+       file_server
+   }
+
+   handle_path /media/* {
+       root * /web/media
+       file_server
+   }
+
+   handle {
+       reverse_proxy web:8000
+   }
+}
