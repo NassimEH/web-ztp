@@ -37,8 +37,8 @@ services:
     build: caddy
     restart: always
     ports:
-      - "8080:80"
-      - "443:443"
+      - "8080:8080"
+      - "44344:44344"
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./app/media:/web/media

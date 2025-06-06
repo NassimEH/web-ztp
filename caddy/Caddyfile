@@ -1,4 +1,8 @@
-http://127.0.0.1, http://localhost: {
+http://localhost:8080 {
+  redir https://{host}:44344{uri} permanent
+}
+
+https://localhost:44344 {
    handle_path /static/* {
        root * /web/staticfiles
        file_server
@@ -12,4 +16,6 @@ http://127.0.0.1, http://localhost: {
    handle {
        reverse_proxy web:8000
    }
+
+   tls internal
 }

@@ -3,5 +3,5 @@ from django.http import JsonResponse
 
 
 class WebStatusView(View):
-    def get(self, request):
+    def get(self, _request):
         return JsonResponse({"status": "ok"})
