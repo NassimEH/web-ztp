@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>429 - Too Many Requests</h1>
+<p>You have made too many requests in a given amount of time.</p>
+<a href="{% url 'home' %}">Back to Home</a>
+
+{% endblock %}
