@@ -1,0 +1,17 @@
+{% load crispy_forms_tags %}
+
+<div class="container">
+    <h2>{{ title }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        {{ button }}
+    </form>
+
+    <div class="mt-3 text-center">
+        {{ paragraph }}
+    </div>
+
+</div>
