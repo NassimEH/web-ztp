@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django_cotton",
     "crispy_forms",
     "crispy_bootstrap5",
+    "device",
     "monitoring",
     "user",
     "core",

@@ -26,6 +26,7 @@ urlpatterns = [
     path("", include("monitoring.urls")),
     path("", include("user.urls")),
     path("", include("core.urls")),
+    path("", include("device.urls")),
     # For showing all auth-related default endpoints :
     # path("", include("allauth.urls")),
 ]
