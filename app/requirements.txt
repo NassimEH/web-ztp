@@ -1,6 +1,7 @@
 Django
 gunicorn==21.2.0
 psycopg2-binary
+pillow
 django-crispy-forms
 crispy-bootstrap5
 django-allauth
