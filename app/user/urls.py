@@ -22,4 +22,9 @@ urlpatterns = [
         name="account_logout",
     ),
     path("me/", profile_views.ProfileView.as_view(), name="account_profile"),
+    path(
+        "change_password/",
+        profile_views.ChangePasswordView.as_view(),
+        name="account_change_password",
+    ),
 ]
