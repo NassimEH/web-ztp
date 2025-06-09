@@ -25,6 +25,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("monitoring.urls")),
     path("", include("user.urls")),
+    path("", include("core.urls")),
+    # For showing all auth-related default endpoints :
     # path("", include("allauth.urls")),
 ]
 
