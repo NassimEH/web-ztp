@@ -22,6 +22,10 @@ class DeviceForm(forms.ModelForm):
             "default_gateway",
             "login",
             "password",
+            "dhcp_enabled",
+            "dhcp_start_ip",
+            "dhcp_end_ip",
+            "dhcp_lease_time",
         ]
 
     def __init__(self, *args, **kwargs):
@@ -40,6 +44,14 @@ class DeviceForm(forms.ModelForm):
                     "default_gateway",
                     "login",
                     "password",
+                    css_class="accordion-item",
+                ),
+                AccordionGroup(
+                    "Configuration DHCP",
+                    "dhcp_enabled",
+                    "dhcp_start_ip",
+                    "dhcp_end_ip",
+                    "dhcp_lease_time",
                     css_class="accordion-item",
                 ),
             ),
