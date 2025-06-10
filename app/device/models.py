@@ -25,6 +25,7 @@ class Device(models.Model):
     default_gateway = models.GenericIPAddressField(null=True, blank=True)
     login = models.CharField(max_length=255, null=True, blank=True)
     password = models.CharField(max_length=255, null=True, blank=True)
+    
 
     def __str__(self):
         return f"{self.hostname} ({self.ip})"

@@ -22,10 +22,6 @@ class DeviceForm(forms.ModelForm):
             "default_gateway",
             "login",
             "password",
-            "dhcp_enabled",
-            "dhcp_start_ip",
-            "dhcp_end_ip",
-            "dhcp_lease_time",
         ]
 
     def __init__(self, *args, **kwargs):
@@ -46,12 +42,32 @@ class DeviceForm(forms.ModelForm):
                     "password",
                     css_class="accordion-item",
                 ),
+            ),
+            Submit("submit", "Enregistrer", css_class="mt-3"),
+        )
+
+class DHCPConfigForm(forms.ModelForm):
+    class Meta:
+        model = Device
+        fields = {
+            "subnet",
+            "min_ip_pool",
+            "max_ip_pool",
+        }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = "post"
+        self.helper.layout = Layout(
+            "subnet",
+            "min_ip_pool",
+            "max_ip_pool",
+            Accordion(
                 AccordionGroup(
-                    "Configuration DHCP",
-                    "dhcp_enabled",
-                    "dhcp_start_ip",
-                    "dhcp_end_ip",
-                    "dhcp_lease_time",
+                    "Champs de configuration DHCP",
+                    "subnet",
+                    "min_ip_pool",
+                    "max_ip_pool",
                     css_class="accordion-item",
                 ),
             ),
