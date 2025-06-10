@@ -2,7 +2,7 @@ from crispy_forms.bootstrap import Accordion, AccordionGroup
 from crispy_forms.layout import Layout, Submit
 from django import forms
 from crispy_forms.helper import FormHelper
-from .models import Device, Template
+from .models import Device, Template, DHCPConfig
 
 
 class DeviceForm(forms.ModelForm):
@@ -48,7 +48,7 @@ class DeviceForm(forms.ModelForm):
 
 class DHCPConfigForm(forms.ModelForm):
     class Meta:
-        model = Device
+        model = DHCPConfig
         fields = {
             "subnet",
             "min_ip_pool",
@@ -59,9 +59,6 @@ class DHCPConfigForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = "post"
         self.helper.layout = Layout(
-            "subnet",
-            "min_ip_pool",
-            "max_ip_pool",
             Accordion(
                 AccordionGroup(
                     "Champs de configuration DHCP",
