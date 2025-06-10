@@ -2,10 +2,15 @@ from crispy_forms.bootstrap import Accordion, AccordionGroup
 from crispy_forms.layout import Layout, Submit
 from django import forms
 from crispy_forms.helper import FormHelper
-from .models import Device
+from .models import Device, Template
 
 
 class DeviceForm(forms.ModelForm):
+    template = forms.ModelChoiceField(
+        queryset=Template.objects.all(),
+        required=False,
+    )
+
     class Meta:
         model = Device
         fields = [

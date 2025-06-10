@@ -5,7 +5,9 @@
 
     <form method="post">
         {% csrf_token %}
-        {% crispy form %}
+        {{ form|crispy }}
+
+        {{ button }}
     </form>
 
     <div class="mt-3 text-center">
