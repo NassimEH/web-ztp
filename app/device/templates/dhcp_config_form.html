@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Configurer le DHCP</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% crispy form %}
+    <div id="ip-range-container">
+        <div class="range-container mb-4">
+            <label class="form-label mb-3">Plage d'adresses IP</label>
+            <div class="range-slider-wrapper">
+                <div class="range-slider">
+                    <input type="range" min="0" max="255" class="form-range min-slider" id="minRange">
+                    <input type="range" min="0" max="255" class="form-range max-slider" id="maxRange">
+                </div>
+                <div class="range-values d-flex justify-content-between mt-2">
+                    <div class="min-value-container">
+                        <span class="value-label">Min:</span>
+                        <span class="value-badge bg-primary text-white px-2 rounded" id="minValue"></span>
+                    </div>
+                    <div class="max-value-container">
+                        <span class="value-label">Max:</span>
+                        <span class="value-badge bg-primary text-white px-2 rounded" id="maxValue"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </form>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/dhcp_range.js' %}"></script>
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/dhcp_range.css' %}">
+{% endblock %}
