@@ -46,6 +46,7 @@ class DeviceForm(forms.ModelForm):
             Submit("submit", "Enregistrer", css_class="mt-3"),
         )
 
+
 class DHCPConfigForm(forms.ModelForm):
     class Meta:
         model = DHCPConfig
@@ -55,25 +56,34 @@ class DHCPConfigForm(forms.ModelForm):
             "max_ip_pool",
         }
         widgets = {
-            'min_ip_pool': forms.HiddenInput(),
-            'max_ip_pool': forms.HiddenInput(),
+            "min_ip_pool": forms.HiddenInput(),
+            "max_ip_pool": forms.HiddenInput(),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = "post"
-        
-        initial_min = self.instance.min_ip_pool if self.instance and self.instance.min_ip_pool else 0
-        initial_max = self.instance.max_ip_pool if self.instance and self.instance.max_ip_pool else 255
-        
+
+        initial_min = (
+            self.instance.min_ip_pool
+            if self.instance and self.instance.min_ip_pool
+            else 0
+        )
+        initial_max = (
+            self.instance.max_ip_pool
+            if self.instance and self.instance.max_ip_pool
+            else 255
+        )
+
         self.helper.layout = Layout(
             Accordion(
                 AccordionGroup(
                     "Configuration DHCP",
                     "subnet",
                     Div(
-                        HTML(f"""
+                        HTML(
+                            f"""
                         <div class="range-container mb-4">
                             <label class="form-label mb-3">Plage d'adresses IP</label>
                             <div class="range-slider-wrapper">
@@ -95,8 +105,9 @@ class DHCPConfigForm(forms.ModelForm):
                                 </div>
                             </div>
                         </div>
-                        """),
-                        css_class="mb-3"
+                        """
+                        ),
+                        css_class="mb-3",
                     ),
                     "min_ip_pool",
                     "max_ip_pool",
@@ -104,7 +115,8 @@ class DHCPConfigForm(forms.ModelForm):
                 ),
             ),
             Submit("submit", "Enregistrer", css_class="btn-primary mt-3"),
-            HTML(f"""
+            HTML(
+                f"""
             <script>
                 document.addEventListener('DOMContentLoaded', function() {{
                     const minSlider = document.getElementById('minRange');
@@ -223,11 +235,28 @@ class DHCPConfigForm(forms.ModelForm):
                     display: inline-block;
                 }}
             </style>
-            """)
+            """
+            ),
         )
 
     def clean(self):
         cleaned_data = super().clean()
-        cleaned_data['min_ip_pool'] = self.data.get('min_ip_pool', 0)
-        cleaned_data['max_ip_pool'] = self.data.get('max_ip_pool', 255)
+        cleaned_data["min_ip_pool"] = self.data.get("min_ip_pool", 0)
+        cleaned_data["max_ip_pool"] = self.data.get("max_ip_pool", 255)
         return cleaned_data
+
+
+class TemplateForm(forms.ModelForm):
+    class Meta:
+        model = Template
+        fields = ["name", "file"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = "post"
+        self.helper.layout = Layout(
+            "name",
+            "file",
+            Submit("submit", "Enregistrer", css_class="mt-3"),
+        )

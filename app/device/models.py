@@ -31,7 +31,7 @@ class Device(models.Model):
 
 
 class DHCPConfig(models.Model):
-    """This model is used to store the DHCP server configuration
+    """This model is used to store the DHCP server configuration.
     Only one instance of this model should exist in the database (Singleton).
 
     The save method ensures that only one instance can be created
