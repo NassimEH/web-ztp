@@ -1,8 +1,8 @@
-http://localhost:8080 {
-  redir https://{host}:44344{uri} permanent
+${HTTP_URL} {
+  redir ${HTTPS_URL} permanent
 }
 
-https://localhost:44344 {
+${HTTPS_URL} {
    handle_path /static/* {
        root * /web/staticfiles
        file_server

@@ -20,6 +20,8 @@ services:
       - ./app/media:/app/media
       - static:/app/staticfiles
     environment:
+      HOSTNAME: ${HOSTNAME}
+
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -37,11 +39,17 @@ services:
     build: caddy
     restart: always
     ports:
-      - "8080:8080"
-      - "44344:44344"
+      - "${HTTP_PORT}:${HTTP_PORT}"
+      - "${HTTPS_PORT}:${HTTPS_PORT}"
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./app/media:/web/media
       - static:/web/staticfiles
+    environment:
+
+      HTTP_URL: http://${HOSTNAME}:${HTTP_PORT}
+      HTTPS_URL: https://${HOSTNAME}:${HTTPS_PORT}
+
+      HOSTNAME: ${HOSTNAME}
     depends_on:
       - web
