@@ -54,19 +54,30 @@ class DHCPConfigForm(forms.ModelForm):
         widgets = {
             "min_ip_pool": forms.HiddenInput(),
             "max_ip_pool": forms.HiddenInput(),
+            "subnet": forms.TextInput(attrs={'class': 'form-control'}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = "post"
+        self.helper.form_id = "dhcp-config-form"
+        self.helper.attrs = {
+            'data-subnet': self.instance.subnet if self.instance.pk else '192.168.1'
+        }
 
         self.helper.layout = Layout(
             Accordion(
                 AccordionGroup(
                     "Configuration DHCP",
                     "subnet",
-                    Div(css_class="ip-range-slider"),
+                    HTML("""
+                        <label for="ip-range">Plage d'IP:</label>
+                        <input type="text" id="ip-range" readonly 
+                               style="border:0; color:#f6931f; font-weight:bold;" 
+                               class="form-control-plaintext">
+                        <div id="slider-range" class="ip-range-slider mt-3 mb-3"></div>
+                    """),
                     "min_ip_pool",
                     "max_ip_pool",
                     css_class="accordion-item",

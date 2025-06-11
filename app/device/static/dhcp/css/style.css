@@ -1,0 +1,12 @@
+/* Style personnalisé pour le slider */
+#slider-range {
+    margin: 10px 0;
+}
+
+.ui-slider-handle {
+    cursor: pointer;
+}
+
+.ip-range-slider {
+    padding: 20px 0;
+}
