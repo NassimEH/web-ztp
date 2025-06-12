@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/device_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="deviceDashboard">
+    <div class="cardHeader">
+        <h2>Mes appareils</h2>
+        <a href="{% url 'device_add' %}" class="btn btn-primary">
+            Ajouter un appareil
+        </a>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <td> Hostname </td>
+                    <td> Adresse IP </td>
+                    <td> Serial Number </td>
+                    <td> Template </td>
+                    <td> Status </td>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for device in devices %}
+                <c-device-row :is=device />
+            {% empty %}
+                <tr>
+                    <td colspan="5" style="text-align: center;">Aucun appareil trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    {% if devices %}
+    <small class="text-muted">
+        {{ devices|length }} appareil{{ devices|length|pluralize }} au total
+    </small>
+    {% endif %}
+</div>
+
+{% endblock %}

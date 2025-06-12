@@ -1,0 +1,17 @@
+<tr class="align-middle">
+    <td class="fw-medium">{{ device.hostname }}</td>
+    <td>{{ device.ip }}</td>
+    <td class="text-center">{{ device.serial_number }}</td>
+    <td>
+    {% if device.template %}
+        <span>{{ device.template.name }}</span>
+    {% else %}
+        <span class="text-muted">Aucun</span>
+    {% endif %}
+    </td>
+    <td>
+        <span class="badge {% if device.configured %}bg-success{% else %}bg-warning{% endif %}">
+            {% if device.configured %}Configuré{% else %}Non configuré{% endif %}
+        </span>
+    </td>
+</tr>

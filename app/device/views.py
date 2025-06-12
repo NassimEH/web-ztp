@@ -2,6 +2,15 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from .forms import DeviceForm, TemplateForm, DHCPConfigForm
 from .models import Device, Template, DHCPConfig
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
+from django.views import View
+
+
+class DeviceListView(LoginRequiredMixin, View):
+    def get(self, request):
+        devices = Device.objects.all()
+        return render(request, "device/device_dashboard.html", {"devices": devices})
 
 
 class DeviceFormView(CreateView):

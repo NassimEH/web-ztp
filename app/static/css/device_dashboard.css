@@ -1,0 +1,71 @@
+.deviceDashboard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+  background: var(--card-bg);
+  padding: 20px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+}
+
+.deviceDashboard small {
+  margin-top: auto; 
+  padding-top: 15px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cardHeader h2 {
+  font-weight: 600;
+  color: var(--blue);
+}
+
+ table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+ table thead td {
+  font-weight: 600;
+  padding: 12px 10px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  background: var(--table-header);
+  color: var(--text-color);
+}
+
+.deviceDashboard table tr {
+  background: var(--table-row);
+  color: var(--text-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.deviceDashboard table tr:last-child {
+  border-bottom: none;
+}
+
+.deviceDashboard table tbody tr:hover {
+  background: var(--table-hover);
+}
+
+.deviceDashboard table tr td {
+  padding: 12px 10px;
+}
+
+.deviceDashboard table tr td:last-child {
+  text-align: end;
+}
+
+.deviceDashboard table tr td:nth-child(2) {
+  text-align: end;
+}
+
+.deviceDashboard table tr td:nth-child(3) {
+  text-align: center;
+}
