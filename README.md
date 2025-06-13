@@ -79,15 +79,47 @@
     │   │   └── urls.py
     │   ├── static
     │   │   ├── css
-    │   │   │     ├── device_dashboards.css
-    │   │   │     │   ├── me.css
-    │   │   │     │   └── style.css
+    │   │   │     └── device_dashboards.css
+    │   │   │          ├── me.css
+    │   │   │          └── style.css
     │   │   ├── img
-    │   │   │   └── favicon.png   
-    │   ├── tests.py
-    │   ├── url.py
-    │   ├── utils
-    │   └── views
+    │   │   │   └── favicon.png
+    │   │   └── js
+    │   │       ├── dhcp_slider.js
+    │   │       └── me.js          
+    │   ├── template
+    │   │   ├── cotton
+    │   │   │   ├── crispy_auth_form.html 
+    │   │   │   ├── crispy_file_form.html
+    │   │   │   ├── crispy_form.html
+    │   │   │   └── device_row.html
+    │   │   ├── 403.html
+    │   │   ├── 404.html
+    │   │   ├── 429.html
+    │   │   ├── 500.html
+    │   │   └── base.html                     
+    │   ├── user
+    │   │   ├── migrations
+    │   │       ├── 0001_inital.py    
+    │   │       └── __init__.py
+    │   │   ├── templates/user
+    │   │       ├── login.html
+    │   │       ├── me.html
+    │   │       └── signup.html
+    │   │   ├── views
+    │   │   │   ├── custom_auth_views.py
+    │   │   │   └── profile_views.py
+    │   │   ├── __init__.py
+    │   │   ├── _forms.py
+    │   │   ├── apps.py
+    │   │   ├── models.py
+    │   │   └── urls.Py   
+    │   └── webZtp
+    │       ├── __init__.py
+    │       ├── asgi.py
+    │       ├── settings.Py
+    │       ├── urls.py
+    │       └── wsgi.py  
     ├── dhcp_server
     │   ├── __init.py__
     │   ├── dhcp_db.py
