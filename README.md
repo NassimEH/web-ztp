@@ -32,7 +32,7 @@
 
 ##  Présentation
 
-<code>❯ Notre projet propose une interface web complète intégrant un serveur DHCP que nous avons développé nous-mêmes, ainsi qu’une implémentation personnalisée de la fonctionnalité Zero Touch Provisioning (ZTP). Cette plateforme permet aux utilisateurs d’ajouter et de configurer des appareils de manière automatisée, en renseignant les paramètres requis via des formulaires dédiés. L’ensemble a été conçu pour offrir une expérience utilisateur optimale, avec une interface intuitive, épurée et ergonomique, garantissant une gestion efficace des équipements et une mise en réseau simplifiée.</code>
+<code>❯ Notre projet propose une interface web complète intégrant un serveur DHCP que nous avons développé nous-mêmes, ainsi qu’une implémentation personnalisée de la fonctionnalité Zero Touch Provisioning (ZTP) day 0. Cette plateforme permet aux utilisateurs d’ajouter et de configurer des appareils de manière automatisée, en renseignant les paramètres requis via des formulaires dédiés. L’ensemble a été conçu pour offrir une expérience utilisateur optimale, avec une interface intuitive, épurée et ergonomique, garantissant une gestion efficace des équipements et une mise en réseau simplifiée.</code>
 
 ---
 
@@ -120,24 +120,16 @@
     │       ├── settings.Py
     │       ├── urls.py
     │       └── wsgi.py  
-    ├── dhcp_server
-    │   ├── __init.py__
-    │   ├── dhcp_db.py
-    │   ├── dhcp_server.py
-    │   ├── django_setup.py
-    │   └── requirements.txt
-    ├── docker-compose-exemple.yml
-    ├── docker-compose.yml
-    ├── entrypoint.py
-    ├── manage.py
-    ├── requirements.txt
-    └── webZtp
-        ├── __init__.py
-        ├── asgi.py
-        ├── log_views.html
-        ├── settings.py
-        ├── urls.py
-        └── wsgi.py
+    ├── caddy
+    │   ├── Caddyfile.tmpl
+    │   └── Dockerfile
+    ├── exemple_ztp_config
+        └── ztp-debug.py
+    ├── .env-example
+    ├── .gitignore
+    ├── README.md
+    └──  docker-compose.yml
+
 ```
 
 ---
@@ -148,6 +140,8 @@
 Vous aurez besoin de ces technologies :
 
 - **Technologie de conteneurisation:** Docker
+- **Système de gestion:** Git
+- **Langage de programmation:** Python (Version recommandée >3.10)  
 
 
 ###  Installation
