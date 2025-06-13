@@ -141,7 +141,6 @@ Vous aurez besoin de ces technologies :
 
 - **Technologie de conteneurisation:** Docker
 - **Système de gestion:** Git
-- **Langage de programmation:** Python (Version recommandée >3.10)  
 
 
 ###  Installation
@@ -173,16 +172,18 @@ On a remarqué que le docker compose ne fonctionne pas sur Windows ni sur Alma L
 
 ### Alternative
 
-Vous pouvez aussi utiliser les commandes suivantes pour run l'application : 
+Dans le cadre de l'utilisation de cette méthode vous aurez besoin de Python (Version recommandée >3.10).  
+
+Utilisez les commandes suivantes pour run l'application : 
 
 ```sh
-❯ python manage.py migrate
+❯ python app/manage.py migrate
 ```
 ```sh
-❯ python manage.py loaddata dhcp_config.json
+❯ python app/manage.py loaddata dhcp_config.json
 ```
 ```sh
-❯ python manage.py runserver
+❯ python app/manage.py runserver
 ```
 Si vous voulez charger des configs ZTP depuis Windows, exécutez cette commande en admin :
 ```sh
