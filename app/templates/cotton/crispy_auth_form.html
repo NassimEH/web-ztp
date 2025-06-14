@@ -3,7 +3,7 @@
 <div class="container">
     <h2>{{ title }}</h2>
 
-    <form method="post">
+    <form method="post" action="{{ action }}">
         {% csrf_token %}
         {{ form|crispy }}
 

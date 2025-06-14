@@ -1,13 +1,17 @@
-{% extends "base.html" %}
+{% extends "unpoly_auth_container.html" %}
 
-{% block content %}
+{% block fragment %}
 
-<c-crispy-auth-form :form="form" title="Se connecter"> 
+<c-crispy-auth-form :form="form" action="{% url 'account_login' %}" title="Se connecter"> 
     <c-slot name="button">
         <button type="submit" class="btn btn-primary">Se connecter</button>
     </c-slot>
     <c-slot name="paragraph">
-        <a href="{% url 'account_signup' %}" class="btn btn-link">Vous n'avez pas de compte ? Inscrivez-vous ici</a>
+        <a href="{% url 'account_signup' %}"
+        class="btn btn-link"
+        up-target="#unpoly-auth-container"
+        up-transition="cross-fade"
+        >Vous n'avez pas de compte ? Inscrivez-vous ici</a>
     </c-slot>
 </c-crispy-auth-form>
 

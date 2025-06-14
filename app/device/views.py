@@ -9,25 +9,25 @@ from django.views import View
 
 class DeviceListView(LoginRequiredMixin, View):
     def get(self, request):
-        devices = Device.objects.all()
+        devices = Device.objects.select_related("template").all()
         return render(request, "device/device_dashboard.html", {"devices": devices})
 
 
-class DeviceFormView(CreateView):
+class DeviceFormView(LoginRequiredMixin, CreateView):
     model = Device
     template_name = "device/device_form.html"
     form_class = DeviceForm
     success_url = reverse_lazy("device_add")
 
 
-class DHCPFormView(CreateView):
+class DHCPFormView(LoginRequiredMixin, CreateView):
     model = DHCPConfig
     template_name = "device/device_form.html"
     form_class = DHCPConfigForm
     success_url = reverse_lazy("dhcp_config_update")
 
 
-class TemplateFormView(CreateView):
+class TemplateFormView(LoginRequiredMixin, CreateView):
     model = Template
     template_name = "device/template_form.html"
     form_class = TemplateForm
