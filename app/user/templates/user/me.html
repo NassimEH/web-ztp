@@ -1,10 +1,4 @@
-{% extends "base.html" %}
-
-{% load static %}
-
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/me.css' %}">
-{% endblock %}
+{% extends "base_with_navbar.html" %}
 
 {% block extra_js %}
 <script> 
@@ -17,8 +11,8 @@ document.getElementById('avatar').addEventListener('change', function(e) {
 </script>
 {% endblock %}
 
-{% block content %}
-<div class="container mt-5">
+{% block fragment %}
+<div class="container">
     <div class="profile-section">
         <div class="profile-header">
             <div class="profile-avatar-container">

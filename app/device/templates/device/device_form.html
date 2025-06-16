@@ -1,7 +1,9 @@
-{% extends "base.html" %}
+{% extends "base_with_navbar.html" %}
 
-{% block content %}
+{% block fragment %}
 
+<div class="section">
 <c-crispy-form :form="form" title="Ajouter un appareil" /> 
+</div>
 
 {% endblock %}

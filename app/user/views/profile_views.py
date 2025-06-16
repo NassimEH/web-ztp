@@ -40,7 +40,7 @@ class ProfileView(LoginRequiredMixin, View):
         user.profile.avatar = path
         user.profile.save()
 
-        messages.success(request, "Your profile picture has been updated.")
+        messages.success(request, "Votre photo de profil a été mise à jour.")
 
     def update_user_info(self, request, user):
         user.username = request.POST.get("username")
@@ -49,7 +49,7 @@ class ProfileView(LoginRequiredMixin, View):
         user.last_name = request.POST.get("last_name")
         user.save()
 
-        messages.success(request, "Your information has been updated successfully.")
+        messages.success(request, "Vos informations ont été mises à jour avec succès.")
 
 
 class ChangePasswordView(LoginRequiredMixin, FormView):
@@ -69,9 +69,9 @@ class ChangePasswordView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         user = form.save()
         update_session_auth_hash(self.request, user)
-        messages.success(self.request, "Your password has been changed successfully.")
+        messages.success(self.request, "Votre mot de passe a été changé avec succès.")
         return redirect("account_profile")
 
     def form_invalid(self, form):
-        messages.error(self.request, "Please correct the errors below.")
+        messages.error(self.request, "Veuillez corriger les erreurs ci-dessous.")
         return super().form_invalid(form)

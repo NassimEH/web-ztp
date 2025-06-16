@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/device_dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/me.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="base">
+    {% include "components/nav_menu.html" %}
+    <div class="fragment-container">
+        {% block fragment %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
