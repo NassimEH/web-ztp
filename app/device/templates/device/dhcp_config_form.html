@@ -1,20 +1,92 @@
-{% extends "base.html" %}
+{% extends "base_with_navbar.html" %}
+{% load crispy_forms_tags %}
 
-{% load static crispy_forms_tags %}
-
-{% block extra_css %}
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
-
-{% endblock %}
-
-{% block content %}
-<div class="container">
+{% block fragment %}
+<div class="container mt-4">
     {% crispy form %}
 </div>
-{% endblock %}
 
-{% block extra_js %}
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
-<script src="{% static 'js/dhcp_slider.js' %}"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<script>
+$(document).ready(function() {
+    function updateIpRange() {
+        const subnet = $('#id_subnet').val().trim();
+        const subnetParts = subnet.split('.');
+        if (subnetParts.length < 3) return;
+        
+        const base = subnetParts.slice(0, 3).join('.') + '.';
+        const values = $("#slider-range").slider("values");
+        const minVal = values[0];
+        const maxVal = values[1];
+        
+        $("#ip-range-display").text(base + minVal + " - " + base + maxVal);
+        $("#id_min_ip_pool").val(base + minVal);
+        $("#id_max_ip_pool").val(base + maxVal);
+    }
+
+    function initSlider() {
+        const subnet = $('#id_subnet').val().trim();
+        const subnetParts = subnet.split('.');
+        
+        if (subnetParts.length >= 3) {
+            let currentMin = 100;
+            let currentMax = 200;
+            
+            const minIp = $("#id_min_ip_pool").val();
+            if (minIp) {
+                const minParts = minIp.split('.');
+                if (minParts.length === 4) currentMin = parseInt(minParts[3]) || currentMin;
+            }
+            
+            const maxIp = $("#id_max_ip_pool").val();
+            if (maxIp) {
+                const maxParts = maxIp.split('.');
+                if (maxParts.length === 4) currentMax = parseInt(maxParts[3]) || currentMax;
+            }
+            
+            $("#slider-range").slider({
+                range: true,
+                min: 2, 
+                max: 254,
+                values: [currentMin, currentMax],
+                slide: updateIpRange,
+                change: updateIpRange
+            });
+            
+            updateIpRange();
+        }
+    }
+    
+    initSlider();
+    $('#id_subnet').on('change input', initSlider);
+});
+</script>
+
+<style>
+.ip-range-slider {
+    margin: 10px 0;
+    height: 6px;
+}
+.ip-range-slider .ui-slider-handle {
+    width: 16px;
+    height: 16px;
+    top: -5px;
+    margin-left: -8px;
+    border-radius: 50%;
+    border: 2px solid #1f6af6;
+    background: white;
+}
+.ip-range-slider .ui-slider-range {
+    background: #1f95f6;
+    height: 6px;
+}
+#ip-range-display {
+    color: #1f75f6;
+    font-weight: bold;
+    padding: 5px 0;
+}
+</style>
 {% endblock %}

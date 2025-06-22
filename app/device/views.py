@@ -22,9 +22,13 @@ class DeviceFormView(LoginRequiredMixin, CreateView):
 
 class DHCPFormView(LoginRequiredMixin, CreateView):
     model = DHCPConfig
-    template_name = "device/device_form.html"
+    template_name = "device/dhcp_config_form.html"
     form_class = DHCPConfigForm
     success_url = reverse_lazy("dhcp_config_update")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 class TemplateFormView(LoginRequiredMixin, CreateView):
