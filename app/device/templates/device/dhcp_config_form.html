@@ -67,26 +67,42 @@ $(document).ready(function() {
 
 <style>
 .ip-range-slider {
-    margin: 10px 0;
-    height: 6px;
+    margin: 15px 0;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
 }
+
 .ip-range-slider .ui-slider-handle {
-    width: 16px;
-    height: 16px;
-    top: -5px;
-    margin-left: -8px;
+    width: 20px;
+    height: 20px;
+    top: -7px;
+    margin-left: -10px;
     border-radius: 50%;
-    border: 2px solid #1f6af6;
+    border: 2px solid #0D6EFD;  
     background: white;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s;
 }
+
+.ip-range-slider .ui-slider-handle:hover {
+    transform: scale(1.1);
+    border-color: #0a58ca; 
+}
+
 .ip-range-slider .ui-slider-range {
-    background: #1f95f6;
-    height: 6px;
+    background: #0D6EFD;  
+    height: 8px;
+    border-radius: 4px;
 }
+
 #ip-range-display {
-    color: #1f75f6;
+    color: #000000;  
     font-weight: bold;
-    padding: 5px 0;
+    padding: 8px 0;
+    font-size: 1rem;
 }
 </style>
 {% endblock %}
