@@ -3,7 +3,7 @@
 {% block fragment %}
 
 <div class="section">
-<c-crispy-form :form="form" title="Ajouter un appareil" /> 
+<c-crispy-form :form="form" action={% url 'device_add' %} title="Ajouter un appareil" /> 
 </div>
 
 {% endblock %}
