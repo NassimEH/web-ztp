@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block fragment %}
-<div class="container mt-4">
+<div class="section">
     {% crispy form %}
 </div>
 
@@ -11,98 +11,98 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 <script>
-$(document).ready(function() {
-    function updateIpRange() {
-        const subnet = $('#id_subnet').val().trim();
-        const subnetParts = subnet.split('.');
-        if (subnetParts.length < 3) return;
+function maskToHosts(mask) {
+    // Convertit le masque en nombre de bits réseau
+    const parts = mask.split('.');
+    let networkBits = 0;
+    
+    for (let part of parts) {
+        const byte = parseInt(part);
+        if (isNaN(byte)) return { min: 1, max: 254 }; 
         
-        const base = subnetParts.slice(0, 3).join('.') + '.';
-        const values = $("#slider-range").slider("values");
-        const minVal = values[0];
-        const maxVal = values[1];
-        
-        $("#ip-range-display").text(base + minVal + " - " + base + maxVal);
-        $("#id_min_ip_pool").val(base + minVal);
-        $("#id_max_ip_pool").val(base + maxVal);
-    }
 
-    function initSlider() {
-        const subnet = $('#id_subnet').val().trim();
-        const subnetParts = subnet.split('.');
-        
-        if (subnetParts.length >= 3) {
-            let currentMin = 100;
-            let currentMax = 200;
-            
-            const minIp = $("#id_min_ip_pool").val();
-            if (minIp) {
-                const minParts = minIp.split('.');
-                if (minParts.length === 4) currentMin = parseInt(minParts[3]) || currentMin;
-            }
-            
-            const maxIp = $("#id_max_ip_pool").val();
-            if (maxIp) {
-                const maxParts = maxIp.split('.');
-                if (maxParts.length === 4) currentMax = parseInt(maxParts[3]) || currentMax;
-            }
-            
-            $("#slider-range").slider({
-                range: true,
-                min: 2, 
-                max: 254,
-                values: [currentMin, currentMax],
-                slide: updateIpRange,
-                change: updateIpRange
-            });
-            
-            updateIpRange();
-        }
+        networkBits += (byte.toString(2).match(/1/g) || []).length;
     }
     
-    initSlider();
-    $('#id_subnet').on('change input', initSlider);
+    const hostBits = 32 - networkBits;
+    const maxHosts = Math.pow(2, hostBits) - 2;
+    
+    return {
+        min: 1,
+        max: maxHosts > 0 ? maxHosts : 254 
+    };
+}
+
+$(document).ready(function() {
+    function updateSlider() {
+        const mask = $('#id_subnet').val();
+        if (!mask || mask.split('.').length !== 4) return;
+        
+        const range = maskToHosts(mask);
+        console.log("Masque:", mask, "Plage calculée:", range); 
+        
+        const $slider = $("#slider-range");
+        $slider.slider("option", "min", range.min);
+        $slider.slider("option", "max", range.max);
+        
+        const values = $slider.slider("values");
+        const newValues = [
+            Math.max(range.min, values[0]),
+            Math.min(range.max, values[1])
+        ];
+        $slider.slider("values", newValues);
+        
+        $("#ip-range").val(newValues[0] + " - " + newValues[1]);
+        $("#id_min_ip_pool").val("0.0.0." + newValues[0]);
+        $("#id_max_ip_pool").val("0.0.0." + newValues[1]);
+    }
+
+    $("#slider-range").slider({
+        range: true,
+        min: 1,
+        max: 254,
+        values: [1, 254],
+        slide: function(event, ui) {
+            $("#ip-range").val(ui.values[0] + " - " + ui.values[1]);
+            $("#id_min_ip_pool").val("0.0.0." + ui.values[0]);
+            $("#id_max_ip_pool").val("0.0.0." + ui.values[1]);
+        }
+    });
+    
+    $('#id_subnet').on('input', updateSlider);
+    updateSlider(); 
 });
 </script>
 
 <style>
 .ip-range-slider {
-    margin: 15px 0;
-    height: 8px;
+    margin: 15px 0 40px; 
+    height: 6px;
     background: #e9ecef;
-    border-radius: 4px;
-    border: 1px solid #ced4da;
+    position: relative;
 }
-
 .ip-range-slider .ui-slider-handle {
-    width: 20px;
-    height: 20px;
-    top: -7px;
-    margin-left: -10px;
-    border-radius: 50%;
-    border: 2px solid #0D6EFD;  
+    width: 16px;
+    height: 16px;
+    top: -5px;
+    border: 2px solid #0D6EFD;
     background: white;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.2s;
+    border-radius: 50%;
 }
-
-.ip-range-slider .ui-slider-handle:hover {
-    transform: scale(1.1);
-    border-color: #0a58ca; 
-}
-
 .ip-range-slider .ui-slider-range {
-    background: #0D6EFD;  
-    height: 8px;
-    border-radius: 4px;
+    background: #0D6EFD;
 }
-
-#ip-range-display {
-    color: #000000;  
+.slider-min-label, .slider-max-label {
+    font-size: 0.8rem;
+    color: #6c757d;
     font-weight: bold;
-    padding: 8px 0;
-    font-size: 1rem;
+}
+#ip-range {
+    border: 0;
+    color: #000;
+    font-weight: bold;
+    background: transparent;
+    width: 100%;
 }
 </style>
 {% endblock %}

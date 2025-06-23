@@ -1,9 +1,9 @@
 from django import forms
 from crispy_forms.bootstrap import Accordion, AccordionGroup
-from crispy_forms.layout import Layout, Submit, Div, HTML
+from crispy_forms.layout import Layout, Submit, Div, HTML, Field
 from crispy_forms.helper import FormHelper
 from .models import Device, Template, DHCPConfig
-
+from django.core.exceptions import ValidationError
 
 class DeviceForm(forms.ModelForm):
     template = forms.ModelChoiceField(
@@ -46,7 +46,6 @@ class DeviceForm(forms.ModelForm):
             Submit("submit", "Enregistrer", css_class="mt-3"),
         )
 
-
 class DHCPConfigForm(forms.ModelForm):
     class Meta:
         model = DHCPConfig
@@ -54,39 +53,32 @@ class DHCPConfigForm(forms.ModelForm):
         widgets = {
             "min_ip_pool": forms.HiddenInput(),
             "max_ip_pool": forms.HiddenInput(),
-            "subnet": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "192.168.1"}
-            ),
+            "subnet": forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '255.255.255.0'
+            }),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = "post"
-        self.helper.form_id = "dhcp-config-form"
-
         self.helper.layout = Layout(
-            Div(
-                Div(
-                    HTML("<h3>Configuration DHCP</h3>"),
-                    Div("subnet", css_class="mb-3"),
-                    Div(
-                        HTML('<label class="form-label">Plage d\'IP</label>'),
-                        HTML('<div id="ip-range-display" class="mb-2"></div>'),
-                        HTML(
-                            '<div id="slider-range" class="ip-range-slider mb-3"></div>'
-                        ),
-                        "min_ip_pool",
-                        "max_ip_pool",
-                        css_class="mb-3",
-                    ),
-                    Submit("submit", "Enregistrer", css_class="btn-primary"),
-                    css_class="card-body",
-                ),
-                css_class="card",
-            )
+            Field("subnet"),
+            HTML("""
+                <div class="form-group">
+                    <label>Plage d'IP:</label>
+                    <input type="text" id="ip-range" readonly 
+                           class="form-control-plaintext mb-2">
+                    <div id="slider-range-container" style="position: relative;">
+                        <div id="slider-range" class="ip-range-slider mt-3 mb-4"></div>
+                    </div>
+                </div>
+            """),
+            Field("min_ip_pool", type="hidden"),
+            Field("max_ip_pool", type="hidden"),
+            Submit("submit", "Enregistrer", css_class="btn-primary mt-3")
         )
-
 
 class TemplateForm(forms.ModelForm):
     class Meta:
