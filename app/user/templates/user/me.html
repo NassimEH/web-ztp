@@ -75,7 +75,7 @@ document.getElementById('avatar').addEventListener('change', function(e) {
                     <ion-icon name="person-outline"></ion-icon>
                     <h2>Informations du compte</h2>
                 </div>
-                <form method="post" class="profile-form" enctype="multipart/form-data">
+                <form method="post" action="{% url 'account_profile' %}" class="profile-form" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="file" id="avatar" name="avatar" accept="image/*" style="display: none;">
                     <div class="form-grid">

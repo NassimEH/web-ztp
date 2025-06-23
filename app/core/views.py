@@ -7,6 +7,10 @@ class LandingPageView(TemplateView):
     template_name = "core/landing_page.html"
 
 
+class HelpPageView(TemplateView):
+    template_name = "core/help.html"
+
+
 class ConditionalRedirectView(View):
     def get(self, request):
         if request.user.is_authenticated:
