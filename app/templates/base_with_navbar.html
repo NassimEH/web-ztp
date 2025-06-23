@@ -10,6 +10,9 @@
 {% block content %}
 <div class="base">
     {% include "components/nav_menu.html" %}
+    <div class="theme-toggle" id="theme-toggle">
+        <ion-icon name="moon-outline"></ion-icon>
+    </div>    
     <div class="fragment-container">
         {% block fragment %}
         {% endblock %}

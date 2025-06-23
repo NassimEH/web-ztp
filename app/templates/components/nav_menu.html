@@ -8,7 +8,10 @@
 
     <ul>
         <li class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
-            <a href="/dashboard">
+            <a href="{% url 'dashboard' %}"
+            up-target=".fragment-container"
+            up-transition="cross-fade"
+            >
                 <div class="icon-container">
                     <span class="icon">
                         <ion-icon name="home-outline"></ion-icon>
@@ -51,7 +54,8 @@
         <li class="{% if request.resolver_match.url_name == 'help' %}active{% endif %}">
             <a href="{% url 'help_page' %}"
             up-target=".fragment-container"
-            up-transition="cross-fade">
+            up-transition="cross-fade"
+            >
                 <div class="icon-container">
                     <span class="icon">
                         <ion-icon name="help-outline"></ion-icon>
