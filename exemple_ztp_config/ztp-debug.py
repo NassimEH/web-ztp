@@ -38,7 +38,7 @@ cli.executep("show lic all")
 
 cli.executep("show run")
 
-#
+
 try:
     print("Execute Show Version")
     cli.executep("show version")
@@ -46,5 +46,5 @@ except:
     print(traceback.format_exc())
     print("Problem with show version CLI, cya later... \n")
 
-#
+
 print("\n \n ZTP complete! \n \n")

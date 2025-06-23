@@ -1,9 +1,8 @@
 from django import forms
 from crispy_forms.bootstrap import Accordion, AccordionGroup
-from crispy_forms.layout import Layout, Submit, Div, HTML, Field
+from crispy_forms.layout import Layout, Submit, HTML, Field
 from crispy_forms.helper import FormHelper
 from .models import Device, Template, DHCPConfig
-from django.core.exceptions import ValidationError
 
 class DeviceForm(forms.ModelForm):
     template = forms.ModelChoiceField(
@@ -49,7 +48,6 @@ class DeviceForm(forms.ModelForm):
         self.fields["serial_number"].widget.attrs["placeholder"] = "FTX1234W0AB"
         self.fields["ip"].widget.attrs["placeholder"] = "192.168.1.1"
         self.fields["hostname"].widget.attrs["placeholder"] = "toto"
-
         self.fields["subnet_mask"].widget.attrs["placeholder"] = "255.255.255.0"
         self.fields["default_gateway"].widget.attrs["placeholder"] = "192.168.1.254"
         self.fields["login"].widget.attrs["placeholder"] = "Nom d'utilisateur"
