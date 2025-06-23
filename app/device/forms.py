@@ -46,6 +46,16 @@ class DeviceForm(forms.ModelForm):
             Submit("submit", "Enregistrer", css_class="mt-3"),
         )
 
+        self.fields["serial_number"].widget.attrs["placeholder"] = "FTX1234W0AB"
+        self.fields["ip"].widget.attrs["placeholder"] = "192.168.1.1"
+        self.fields["hostname"].widget.attrs["placeholder"] = "toto"
+
+        self.fields["subnet_mask"].widget.attrs["placeholder"] = "255.255.255.0"
+        self.fields["default_gateway"].widget.attrs["placeholder"] = "192.168.1.254"
+        self.fields["login"].widget.attrs["placeholder"] = "Nom d'utilisateur"
+        self.fields["password"].widget.attrs["placeholder"] = "Mot de passe"
+
+
 class DHCPConfigForm(forms.ModelForm):
     class Meta:
         model = DHCPConfig
