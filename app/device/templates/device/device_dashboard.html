@@ -19,6 +19,7 @@
                         <td> Serial Number </td>
                         <td> Template </td>
                         <td> Status </td>
+                        <td> Actions </td>
                     </tr>
                 </thead>
 
@@ -27,7 +28,7 @@
                     <c-device-row :is=device />
                 {% empty %}
                     <tr>
-                        <td colspan="5" style="text-align: center;">Aucun appareil trouvé</td>
+                        <td colspan="6" style="text-align: center;">Aucun appareil trouvé</td>
                     </tr>
                 {% endfor %}
                 </tbody>

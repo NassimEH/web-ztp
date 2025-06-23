@@ -14,4 +14,9 @@
             {% if device.configured %}Configuré{% else %}Non configuré{% endif %}
         </span>
     </td>
+    <td>
+        <a href="{% url 'device_update' device.pk %}" class="btn btn-sm btn-outline-primary">
+            Modifier
+        </a>
+    </td>
 </tr>

@@ -4,6 +4,7 @@ from crispy_forms.layout import Layout, Submit, HTML, Field
 from crispy_forms.helper import FormHelper
 from .models import Device, Template, DHCPConfig
 
+
 class DeviceForm(forms.ModelForm):
     template = forms.ModelChoiceField(
         queryset=Template.objects.all(),
@@ -27,6 +28,9 @@ class DeviceForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = "post"
+
+        submit_text = "Mettre à jour" if self.instance.pk else "Enregistrer"
+
         self.helper.layout = Layout(
             "serial_number",
             "ip",
@@ -42,8 +46,16 @@ class DeviceForm(forms.ModelForm):
                     css_class="accordion-item",
                 ),
             ),
-            Submit("submit", "Enregistrer", css_class="mt-3"),
+            Submit("submit", submit_text, css_class="mt-3"),
         )
+
+        self.fields["serial_number"].widget.attrs["placeholder"] = "FTX1234W0AB"
+        self.fields["ip"].widget.attrs["placeholder"] = "192.168.1.1"
+        self.fields["hostname"].widget.attrs["placeholder"] = "toto"
+        self.fields["subnet_mask"].widget.attrs["placeholder"] = "255.255.255.0"
+        self.fields["default_gateway"].widget.attrs["placeholder"] = "192.168.1.254"
+        self.fields["login"].widget.attrs["placeholder"] = "Nom d'utilisateur"
+        self.fields["password"].widget.attrs["placeholder"] = "Mot de passe"
 
         self.fields["serial_number"].widget.attrs["placeholder"] = "FTX1234W0AB"
         self.fields["ip"].widget.attrs["placeholder"] = "192.168.1.1"
@@ -61,32 +73,40 @@ class DHCPConfigForm(forms.ModelForm):
         widgets = {
             "min_ip_pool": forms.HiddenInput(),
             "max_ip_pool": forms.HiddenInput(),
-            "subnet": forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': '255.255.255.0'
-            }),
+            "subnet": forms.TextInput(attrs={"class": "form-control"}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = "post"
+        self.helper.form_id = "dhcp-config-form"
+        self.helper.attrs = {
+            "data-subnet": self.instance.subnet if self.instance.pk else "192.168.1"
+        }
+
         self.helper.layout = Layout(
-            Field("subnet"),
-            HTML("""
-                <div class="form-group">
-                    <label>Plage d'IP:</label>
-                    <input type="text" id="ip-range" readonly 
-                           class="form-control-plaintext mb-2">
-                    <div id="slider-range-container" style="position: relative;">
-                        <div id="slider-range" class="ip-range-slider mt-3 mb-4"></div>
-                    </div>
-                </div>
-            """),
-            Field("min_ip_pool", type="hidden"),
-            Field("max_ip_pool", type="hidden"),
-            Submit("submit", "Enregistrer", css_class="btn-primary mt-3")
+            Accordion(
+                AccordionGroup(
+                    "Configuration DHCP",
+                    "subnet",
+                    HTML(
+                        """
+                        <label for="ip-range">Plage d'IP:</label>
+                        <input type="text" id="ip-range" readonly 
+                               style="border:0; color:#f6931f; font-weight:bold;" 
+                               class="form-control-plaintext">
+                        <div id="slider-range" class="ip-range-slider mt-3 mb-3"></div>
+                    """
+                    ),
+                    "min_ip_pool",
+                    "max_ip_pool",
+                    css_class="accordion-item",
+                )
+            ),
+            Submit("submit", "Enregistrer", css_class="btn-primary mt-3"),
         )
+
 
 class TemplateForm(forms.ModelForm):
     class Meta:

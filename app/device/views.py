@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from .forms import DeviceForm, TemplateForm, DHCPConfigForm
 from .models import Device, Template, DHCPConfig
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -18,6 +18,25 @@ class DeviceFormView(LoginRequiredMixin, CreateView):
     template_name = "device/device_form.html"
     form_class = DeviceForm
     success_url = reverse_lazy("device_add")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Ajouter l'appareil"
+        context["action"] = self.request.path
+        return context
+
+
+class DeviceUpdateView(LoginRequiredMixin, UpdateView):
+    model = Device
+    template_name = "device/device_form.html"
+    form_class = DeviceForm
+    success_url = reverse_lazy("device_list")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Modifier l'appareil"
+        context["action"] = self.request.path
+        return context
 
 
 class DHCPFormView(LoginRequiredMixin, CreateView):
