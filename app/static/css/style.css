@@ -2746,3 +2746,25 @@ body.dark .form-actions .btn-danger:hover {
 	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* Styles pour les pages d'erreur */
+.error-page {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.error-page h1 {
+  font-size: 4rem;
+  color: #333;
+}
+
+.error-page p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.error-page .btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  font-size: 1.2rem;
+}

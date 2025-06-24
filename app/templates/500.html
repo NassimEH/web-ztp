@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<h1>500 - Erreur Interne du Serveur</h1>
+<div class="container text-center error-page">
+    <h1>500 - Erreur Interne du Serveur</h1>
 <p>Une erreur s'est produite lors du traitement de votre demande.</p>
 <a href="{% url 'home' %}">Retour à l'accueil</a>
-
+</div>
 {% endblock %}
