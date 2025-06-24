@@ -2768,3 +2768,131 @@ body.dark .form-actions .btn-danger:hover {
   padding: 10px 25px;
   font-size: 1.2rem;
 }
+
+/* === Amélioration page de login === */
+#unpoly-auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #e5e9f7 0%, #f7f8fc 100%);
+    animation: fadeInLoginBg 1s;
+}
+
+@keyframes fadeInLoginBg {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.c-crispy-auth-form, .auth-form-container {
+    background: #fff;
+    border-radius: 28px;
+    box-shadow: 0 8px 40px 0 rgba(0,122,255,0.10), 0 1.5px 12px 0 rgba(118,75,162,0.08);
+    padding: 2.7rem 2.2rem 2.2rem 2.2rem;
+    min-width: 340px;
+    max-width: 100%;
+    border: 2.5px solid transparent;
+    border-image: linear-gradient(120deg, #007AFF 30%, #764ba2 100%) 1;
+    position: relative;
+    transition: box-shadow 0.3s, border-color 0.3s, transform 0.2s;
+    animation: fadeInLoginForm 0.8s cubic-bezier(.4,2,.6,1) both;
+}
+.c-crispy-auth-form:hover, .auth-form-container:hover {
+    box-shadow: 0 12px 48px 0 rgba(0,122,255,0.18), 0 2px 16px 0 rgba(118,75,162,0.12);
+    transform: translateY(-2px) scale(1.01);
+    border-color: #007AFF;
+}
+
+.c-crispy-auth-form h2, .auth-form-container h2 {
+    text-align: center;
+    color: #007AFF;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px #e5f1ff;
+}
+
+.c-crispy-auth-form .form-group, .auth-form-container .form-group {
+    position: relative;
+    margin-bottom: 1.7rem;
+}
+
+.c-crispy-auth-form label, .auth-form-container label {
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    color: #86868B;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: 0.2s cubic-bezier(.4,2,.6,1);
+    background: #fff;
+    padding: 0 4px;
+    z-index: 2;
+}
+
+.c-crispy-auth-form input:focus + label,
+.c-crispy-auth-form input:not(:placeholder-shown) + label,
+.auth-form-container input:focus + label,
+.auth-form-container input:not(:placeholder-shown) + label {
+    top: -12px;
+    left: 12px;
+    font-size: 0.92rem;
+    color: #007AFF;
+    background: #fff;
+    padding: 0 6px;
+    box-shadow: 0 2px 8px #e5f1ff33;
+}
+
+.c-crispy-auth-form input, .auth-form-container input {
+    border-radius: 14px !important;
+    border: 1.7px solid #e0e6f7 !important;
+    padding: 1.1rem 1.2rem 0.7rem 1.2rem;
+    font-size: 1.08rem;
+    margin-bottom: 0.2rem;
+    background: #f7f8fc;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    box-shadow: 0 1px 4px #e5f1ff33;
+}
+
+.c-crispy-auth-form input:focus, .auth-form-container input:focus {
+    border-color: #764ba2 !important;
+    box-shadow: 0 0 0 4px #e5f1ff, 0 2px 8px #764ba233;
+    background: #fff;
+}
+
+.c-crispy-auth-form button[type="submit"], .auth-form-container button[type="submit"] {
+    width: 100%;
+    border-radius: 14px;
+    padding: 1rem 0;
+    font-size: 1.13rem;
+    font-weight: 600;
+    background: linear-gradient(90deg, #007AFF 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 16px rgba(0,122,255,0.10);
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.5px;
+}
+
+.c-crispy-auth-form button[type="submit"]:hover, .auth-form-container button[type="submit"]:hover {
+    background: linear-gradient(90deg, #0055B3 0%, #764ba2 100%);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 24px rgba(0,122,255,0.16);
+}
+
+.c-crispy-auth-form .btn-link, .auth-form-container .btn-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #007AFF;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 1.05rem;
+}
+
+.c-crispy-auth-form .btn-link:hover, .auth-form-container .btn-link:hover {
+    color: #764ba2;
+    text-decoration: underline;
+    letter-spacing: 0.5px;
+}
