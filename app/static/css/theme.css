@@ -1,0 +1,481 @@
+body.dark {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --card-bg: #1e1e1e;
+  --border-color: #2d2d2d;
+  --hover-bg: #2d2d2d;
+  --nav-bg: #1a1a1a;
+  --nav-text: #ffffff;
+  --nav-hover: var(--blue);
+  --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --footer-bg: #1a1a1a;
+  --footer-text: #ffffff;
+  --input-bg: #2d2d2d;
+  --input-border: #3a3a3a;
+  --input-placeholder: #a0a0a0;
+  --table-header: #2d2d2d;
+  --table-row: #1e1e1e;
+  --table-hover: #2d2d2d;
+  --form-bg: #1e1e1e;
+  --form-border: #3a3a3a;
+  --help-card-bg: #1e1e1e;
+  --help-card-hover: #2d2d2d;
+  --profile-card-bg: #1e1e1e;
+  --profile-card-header: #2d2d2d;
+  --search-bg: #2d2d2d;
+  --search-border: #3a3a3a;
+  --search-text: #ffffff;
+  --search-placeholder: #a0a0a0;
+  --alert-bg: #2d2d2d;
+  --alert-border: #3a3a3a;
+  --alert-text: #ffffff;
+  --button-bg: #2d2d2d;
+  --button-text: #ffffff;
+  --button-hover: #3a3a3a;
+  --button-border: #3a3a3a;
+  --label-text: #ffffff;
+  --section-bg: #1a1a1a;
+  --section-border: #2d2d2d;
+}
+
+body.dark .accordion-button {
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  box-shadow: none;
+}
+
+body.dark .card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .table {
+  color: var(--text-color);
+}
+
+body.dark .table thead th {
+  background-color: var(--table-header);
+  color: var(--text-color);
+}
+
+body.dark .table tbody tr:hover {
+  background-color: var(--table-hover);
+}
+
+body.dark .form-control,
+body.dark .form-select {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-color);
+  --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+body.dark .form-control:focus {
+  background-color: var(--input-bg);
+  border-color: var(--blue);
+  color: var(--text-color);
+}
+
+body.dark .btn-primary {
+  background-color: var(--button-bg);
+  border-color: var(--button-border);
+  color: var(--button-text);
+}
+
+body.dark .btn-primary:hover {
+  background-color: var(--button-hover);
+  border-color: var(--button-hover);
+}
+
+body.dark .alert {
+  background-color: var(--alert-bg);
+  border-color: var(--alert-border);
+  color: var(--alert-text);
+}
+
+body.dark .modal-content {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .modal-footer {
+  border-top-color: var(--border-color);
+}
+
+body.dark .dropdown-menu {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .dropdown-item {
+  color: var(--text-color);
+}
+
+body.dark .dropdown-item:hover {
+  background-color: var(--hover-bg);
+  color: var(--text-color);
+}
+
+body.dark .navigation {
+  background: var(--nav-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .navigation ul li a {
+  color: var(--nav-text);
+}
+
+body.dark .navigation ul li:hover {
+  background: var(--hover-bg);
+}
+
+body.dark .footer {
+  background: transparent;
+  color: var(--text-color);
+  padding: 2rem 0;
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+}
+
+body.dark .profile-section {
+  background: var(--profile-card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .profile-form {
+  background: var(--form-bg);
+  border-color: var(--form-border);
+}
+
+body.dark .profile-form .card-header {
+  background: var(--profile-card-header);
+}
+
+body.dark .profile-form .form-label {
+  color: var(--label-text);
+}
+
+body.dark .roles-section {
+  background: var(--section-bg);
+  border-color: var(--section-border);
+}
+
+body.dark .help-category {
+  background: var(--help-card-bg);
+}
+
+body.dark .help-category:hover {
+  background: var(--help-card-hover);
+}
+
+body.dark .help-card {
+  background: var(--help-card-bg);
+}
+
+body.dark .help-card:hover {
+  background: var(--help-card-hover);
+}
+
+body.dark .search label input {
+  background: var(--search-bg);
+  border-color: var(--search-border);
+  color: var(--search-text);
+}
+
+body.dark .search label input::placeholder {
+  color: var(--search-placeholder);
+}
+
+body.dark .welcome-panel {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+body.dark .welcome-panel .welcome-title,
+body.dark .welcome-panel .welcome-message {
+  color: var(--text-color);
+}
+
+body.dark .welcome-panel .close-btn {
+  color: var(--text-color);
+}
+
+body.dark .theme-toggle {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .theme-toggle ion-icon {
+  color: var(--text-color);
+}
+
+body.dark .theme-toggle:hover {
+  background: var(--hover-bg);
+}
+
+body.dark .stat-card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .stat-card h3,
+body.dark .stat-card .stat-label {
+  color: var(--text-color);
+}
+
+body.dark .stat-card .stat-value {
+  color: var(--blue);
+}
+
+body.dark .profile-avatar {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+
+body.dark .profile-info h2,
+body.dark .profile-info p {
+  color: var(--text-color);
+}
+
+body.dark .form-group label {
+  color: var(--text-color);
+}
+
+body.dark .form-group input {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-color);
+}
+
+body.dark .form-group input::placeholder {
+  color: var(--input-placeholder);
+}
+
+body.dark .btn {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--button-border);
+}
+
+body.dark .btn:hover {
+  background: var(--button-hover);
+}
+
+body.dark .section-header h2 {
+  color: var(--text-color);
+}
+
+body.dark .section-header ion-icon {
+  color: var(--blue);
+}
+
+body.dark .alert {
+  background: var(--alert-bg);
+  color: var(--alert-text);
+  border-color: var(--alert-border);
+}
+
+body.dark .table {
+  color: var(--text-color);
+}
+
+body.dark .table thead th {
+  background: var(--table-header);
+  color: var(--text-color);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .table tbody tr {
+  background: var(--table-row);
+}
+
+body.dark .table tbody tr:hover {
+  background: var(--table-hover);
+}
+
+body.dark .modal-content {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .modal-footer {
+  border-top-color: var(--border-color);
+}
+
+body.dark .dropdown-menu {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .dropdown-item {
+  color: var(--text-color);
+}
+
+body.dark .dropdown-item:hover {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+body.dark .tooltip {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .badge {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .pagination {
+  background: var(--card-bg);
+}
+
+body.dark .pagination .page-link {
+  color: var(--text-color);
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .pagination .page-item.active .page-link {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+body.dark .breadcrumb {
+  background: var(--card-bg);
+  color: var(--text-color);
+}
+
+body.dark .breadcrumb-item a {
+  color: var(--text-color);
+}
+
+body.dark .breadcrumb-item.active {
+  color: var(--text-color);
+}
+
+body.dark .list-group {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .list-group-item {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .list-group-item:hover {
+  background: var(--hover-bg);
+}
+
+body.dark .progress {
+  background: var(--card-bg);
+}
+
+body.dark .progress-bar {
+  background: var(--blue);
+}
+
+body.dark .spinner-border {
+  color: var(--blue);
+}
+
+body.dark .toast {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .toast-header {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .popover {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .popover-header {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .carousel {
+  background: var(--card-bg);
+}
+
+body.dark .carousel-control-prev,
+body.dark .carousel-control-next {
+  color: var(--text-color);
+}
+
+body.dark .carousel-indicators li {
+  background: var(--text-color);
+}
+
+body.dark .accordion {
+  background: var(--card-bg);
+}
+
+body.dark .accordion-item {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark .accordion-button {
+  background: var(--card-bg);
+  color: var(--text-color);
+}
+
+body.dark .accordion-button:not(.collapsed) {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+body.dark .accordion-body {
+  background: var(--card-bg);
+  color: var(--text-color);
+}
+
+body.dark .btn.btn-link {
+  background: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+body.dark input::placeholder,
+body.dark textarea::placeholder,
+body.dark .form-control::placeholder,
+body.dark .form-group input::placeholder {
+  color: var(--input-placeholder) !important;
+  opacity: 1;
+}
+
+body.dark input[type="file"]::file-selector-button,
+body.dark input[type="file"]::-webkit-file-upload-button {
+  background: #181818 !important;
+  color: #fff !important;
+}
+
+body.dark input[type="file"]::file-selector-button:hover,
+body.dark input[type="file"]::-webkit-file-upload-button:hover {
+  background: #232323 !important;
+  color: #fff !important;
+}

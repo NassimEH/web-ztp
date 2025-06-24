@@ -2,21 +2,28 @@
     <div class="footer-container">
         <div class="footer-links">
             <ul>                
-
                 <li><a href="{% url 'dashboard' %}"  
                     up-target=".fragment-container"
-                    up-transition="cross-fade">Accueil</a></li>
+                    up-transition="cross-fade"
+                    up-history="push"
+                    >Accueil</a></li>
 
                 <li><a href="{% url 'device_list' %}"
                     up-target=".fragment-container"
-                up-transition="cross-fade">Appareils</a></li>
+                    up-transition="cross-fade"
+                    up-history="push"
+                >Appareils</a></li>
 
                 <li><a href="{% url 'device_add' %}"
                     up-target=".fragment-container"
-                    up-transition="cross-fade">Templates</a></li>
+                    up-transition="cross-fade"
+                    up-history="push"
+                    >Templates</a></li>
                 <li><a href="{% url 'account_profile' %}"
                     up-target=".fragment-container"
-                    up-transition="cross-fade">Profils</a></li>
+                    up-transition="cross-fade"
+                    up-history="push"
+                    >Profils</a></li>
                 <li><a href="/docs" target="_blank">Documentation</a></li>
                 <li><a href="https://github.com/Chadi-Mangle/web-ztp/tree/gh-pages" target="_blank">Doc GitHub</a></li>
                 <li><a href="https://chadi-mangle.github.io/web-ztp/" target="_blank">Lien vers la doc</a></li>
