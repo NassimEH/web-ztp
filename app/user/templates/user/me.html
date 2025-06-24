@@ -2,11 +2,21 @@
 
 {% block extra_js %}
 <script> 
-{% comment %} src="{% static 'js/me.js' %}"> {% endcomment %}
-document.getElementById('avatar').addEventListener('change', function(e) {
-    if (this.files && this.files[0]) {
-        this.closest('form').submit();
+function bindAvatarUpload() {
+    const avatarInput = document.getElementById('avatar');
+    if (avatarInput) {
+        avatarInput.addEventListener('change', function(e) {
+            if (this.files && this.files[0]) {
+                this.closest('form').submit();
+            }
+        });
     }
+}
+
+bindAvatarUpload();
+
+document.addEventListener('up:fragment:inserted', function(event) {
+    bindAvatarUpload();
 });
 </script>
 {% endblock %}
