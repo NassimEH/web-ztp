@@ -7,18 +7,7 @@ function bindAvatarUpload() {
     if (avatarInput) {
         avatarInput.addEventListener('change', function(e) {
             if (this.files && this.files[0]) {
-                const form = this.closest('form');
-                
-                // Soumettre le formulaire
-                form.submit();
-                
-                // Forcer le rechargement de l'image après un délai
-                setTimeout(() => {
-                    const avatarImg = document.querySelector('.avatar-image');
-                    if (avatarImg) {
-                        avatarImg.src = avatarImg.src + '?t=' + Date.now();
-                    }
-                }, 500);
+                this.closest('form').submit();
             }
         });
     }
