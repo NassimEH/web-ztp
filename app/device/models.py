@@ -11,8 +11,8 @@ class Template(models.Model):
 
 class Device(models.Model):
     serial_number = models.CharField(max_length=255, unique=True)
-    ip = models.GenericIPAddressField(unique=True)
-    hostname = models.CharField(max_length=255, null=True, blank=True)
+    ip = models.GenericIPAddressField(unique=True, null=True, blank=True)
+    hostname = models.CharField(max_length=255, unique=True)
     configured = models.BooleanField(default=False)
     template = models.ForeignKey(
         Template,
@@ -27,7 +27,7 @@ class Device(models.Model):
     password = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.hostname} ({self.ip})"
+        return f"{self.hostname} ({self.serial_number})"
 
 
 class DHCPConfig(models.Model):

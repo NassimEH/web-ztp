@@ -1,0 +1,9 @@
+{% extends "modal_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block modal_body %}
+<form method="post" action="{% url 'device_delete' device.pk %}">
+    {% csrf_token %}
+    {% crispy form %}
+</form>
+{% endblock %}

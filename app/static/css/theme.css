@@ -77,14 +77,14 @@ body.dark .form-control:focus {
 }
 
 body.dark .btn-primary {
-  background-color: var(--button-bg);
-  border-color: var(--button-border);
-  color: var(--button-text);
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: #ffffff;
 }
 
 body.dark .btn-primary:hover {
-  background-color: var(--button-hover);
-  border-color: var(--button-hover);
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
 }
 
 body.dark .alert {
@@ -479,3 +479,44 @@ body.dark input[type="file"]::-webkit-file-upload-button:hover {
   background: #232323 !important;
   color: #fff !important;
 }
+
+body.dark up-modal-box {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+body.dark .text-muted {
+  color: var(--input-placeholder) !important;
+}
+
+body.dark .btn-outline-primary ion-icon {
+  color: var(--bs-blue, #0d6efd);
+  stroke: var(--bs-blue, #0d6efd);
+}
+
+body.dark .btn-outline-danger ion-icon {
+  color: var(--bs-red, #dc3545);
+  stroke: var(--bs-red, #dc3545);
+}
+
+body.dark .btn-outline-primary:hover ion-icon {
+  color: white;
+  stroke: white;
+}
+
+body.dark .btn-outline-danger:hover ion-icon {
+  color: white;
+  stroke: white;
+}
+
+body.dark .btn-outline-secondary ion-icon {
+  color: var(--bs-gray-600, #6c757d);
+  stroke: var(--bs-gray-600, #6c757d);
+}
+
+body.dark .btn-outline-secondary:hover ion-icon {
+  color: white;
+  stroke: white;
+}
+

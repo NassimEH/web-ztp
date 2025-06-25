@@ -12,8 +12,10 @@
     {% include "components/nav_menu.html" %}
 
     <div class="fragment-container">
-        {% block fragment %}
-        {% endblock %}
+        <up-main>
+            {% block fragment %}
+            {% endblock %}
+        </up-main>
         {% include "components/footer.html" %}
     </div>
 </div>

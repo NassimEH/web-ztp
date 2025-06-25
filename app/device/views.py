@@ -1,10 +1,11 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
-from .forms import DeviceForm, TemplateForm, DHCPConfigForm
+from .forms import DeviceForm, TemplateForm, DHCPConfigForm, DeviceDeleteForm
 from .models import Device, Template, DHCPConfig
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
+from django.contrib import messages
 
 
 class DeviceListView(LoginRequiredMixin, View):
@@ -55,3 +56,17 @@ class TemplateFormView(LoginRequiredMixin, CreateView):
     template_name = "device/template_form.html"
     form_class = TemplateForm
     success_url = reverse_lazy("template_add")
+
+
+class DeviceDeleteView(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        device = get_object_or_404(Device, pk=pk)
+        form = DeviceDeleteForm(device)
+        return render(
+            request, "device/device_delete.html", {"form": form, "device": device}
+        )
+
+    def post(self, _request, pk):
+        device = get_object_or_404(Device, pk=pk)
+        device.delete()
+        return redirect("device_list")

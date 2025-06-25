@@ -1,12 +1,18 @@
 <tr class="align-middle">
     <td class="fw-medium">{{ device.hostname }}</td>
-    <td>{{ device.ip }}</td>
+    <td>
+        {% if device.ip %}
+            {{ device.ip }}
+        {% else %}
+            Non renseigné
+        {% endif %}
+    </td>
     <td class="text-center">{{ device.serial_number }}</td>
     <td>
     {% if device.template %}
         <span>{{ device.template.name }}</span>
     {% else %}
-        <span class="text-muted">Aucun</span>
+        <span>Aucun</span>
     {% endif %}
     </td>
     <td>
@@ -15,8 +21,11 @@
         </span>
     </td>
     <td>
-        <a href="{% url 'device_update' device.pk %}" class="btn btn-sm btn-outline-primary">
-            Modifier
+        <a href="{% url 'device_update' device.pk %}" class="btn btn btn-outline-primary" style="min-width: 0px">
+            <ion-icon name="settings-outline"></ion-icon>
+        </a>
+        <a href="{% url 'device_delete' device.pk %}" class="btn btn btn-outline-danger" style="min-width: 0px" up-layer="new" up-mode="modal" up-position="center">
+            <ion-icon name="trash-outline"></ion-icon>
         </a>
     </td>
 </tr>

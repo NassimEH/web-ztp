@@ -1,6 +1,6 @@
 from django import forms
 from crispy_forms.bootstrap import Accordion, AccordionGroup
-from crispy_forms.layout import Layout, Submit, HTML, Field
+from crispy_forms.layout import Layout, Submit, HTML, ButtonHolder
 from crispy_forms.helper import FormHelper
 from .models import Device, Template, DHCPConfig
 
@@ -8,6 +8,10 @@ from .models import Device, Template, DHCPConfig
 class DeviceForm(forms.ModelForm):
     template = forms.ModelChoiceField(
         queryset=Template.objects.all(),
+        required=False,
+    )
+
+    ip = forms.GenericIPAddressField(
         required=False,
     )
 
@@ -33,8 +37,8 @@ class DeviceForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             "serial_number",
-            "ip",
             "hostname",
+            "ip",
             "template",
             Accordion(
                 AccordionGroup(
@@ -57,7 +61,6 @@ class DHCPConfigForm(forms.ModelForm):
         widgets = {
             "min_ip_pool": forms.HiddenInput(),
             "max_ip_pool": forms.HiddenInput(),
-            "subnet": forms.TextInput(attrs={"class": "form-control"}),
             "subnet": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "255.255.255.0"}
             ),
@@ -108,4 +111,27 @@ class TemplateForm(forms.ModelForm):
             "name",
             "file",
             Submit("submit", "Enregistrer", css_class="mt-3"),
+        )
+
+
+class DeviceDeleteForm(forms.Form):
+    """Formulaire de confirmation de suppression d'un appareil"""
+
+    def __init__(self, device, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.device = device
+        self.helper = FormHelper()
+        self.helper.form_method = "post"
+
+        self.helper.layout = Layout(
+            HTML(f"<h4>Supprimer l'appareil : {device}</h4>"),
+            HTML(
+                '<p class="text-muted">Êtes-vous sûr de vouloir supprimer cet appareil ?</p>'
+            ),
+            ButtonHolder(
+                Submit("delete", "Supprimer", css_class="btn-danger"),
+                HTML(
+                    '<button type="button" class="btn btn-secondary" up-dismiss>Annuler</button>'
+                ),
+            ),
         )

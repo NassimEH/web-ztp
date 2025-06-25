@@ -57,9 +57,22 @@
 }
 
 .deviceDashboard table tr td:nth-child(2) {
-  text-align: end;
+  text-align: center;
 }
 
 .deviceDashboard table tr td:nth-child(3) {
+  text-align: center;
+}
+
+.deviceDashboard table tr td:nth-child(4) {
+  text-align: center;
+}
+
+.deviceDashboard table tr td:nth-child(5) {
+  text-align: center;
+}
+
+
+.deviceDashboard table tr td:nth-child(6) {
   text-align: center;
 }
