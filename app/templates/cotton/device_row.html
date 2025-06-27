@@ -21,10 +21,14 @@
         </span>
     </td>
     <td>
-        <a href="{% url 'device_update' device.pk %}" class="btn btn btn-outline-primary" style="min-width: 0px">
+        <a href="{% url 'device_update' device.pk %}" class="btn btn-outline-primary" style="min-width: 0px"
+           aria-label="Modifier {{ device.hostname }}">
             <ion-icon name="settings-outline"></ion-icon>
         </a>
-        <a href="{% url 'device_delete' device.pk %}" class="btn btn btn-outline-danger" style="min-width: 0px" up-layer="new" up-mode="modal" up-position="center">
+        <a href="{% url 'device_delete' device.pk %}" class="btn btn-outline-danger" style="min-width: 0px" 
+           up-layer="new modal"
+           aria-label="Supprimer {{ device.hostname }}"
+        >
             <ion-icon name="trash-outline"></ion-icon>
         </a>
     </td>

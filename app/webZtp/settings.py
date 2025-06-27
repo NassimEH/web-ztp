@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure--1z06#g%^hss6zn_q%4a-e)sj7c7esniqe9wai2w79rs7urjm+"
+SECRET_KEY = cfg.SECRET_KEY
 
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
@@ -108,7 +108,20 @@ WSGI_APPLICATION = "webZtp.wsgi.application"
 
 
 if cfg.IS_PRODUCTION:
+    # Production security settings
     CSRF_TRUSTED_ORIGINS = ["https://localhost:44344"]
+
+    # Security headers
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+    # Session security
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    CSRF_COOKIE_SECURE = True
 
     # Database
     # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
