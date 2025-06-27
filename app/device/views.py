@@ -66,7 +66,11 @@ class DeviceDeleteView(LoginRequiredMixin, View):
             request, "device/device_delete.html", {"form": form, "device": device}
         )
 
-    def post(self, _request, pk):
+    def post(self, request, pk):
         device = get_object_or_404(Device, pk=pk)
         device.delete()
-        return redirect("device_list")
+
+        devices = Device.objects.select_related("template").all()
+        return render(
+            request, "device/device_table_fragment.html", {"devices": devices}
+        )
