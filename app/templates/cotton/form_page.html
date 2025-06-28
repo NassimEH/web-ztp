@@ -1,0 +1,39 @@
+{% extends "base_with_navbar.html" %}
+{% load crispy_forms_tags %}
+
+{% comment %}
+Generic form component  
+Usage: <c-form-page :title="Form Title" :form=form :cancel_url_name="cancel_url" />
+
+Attributes:
+- title: string - Form page title
+- form: Form instance with helper
+- cancel_url_name: string (optional) - URL name for cancel action
+- extra_content: string (optional) - Additional HTML content
+{% endcomment %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<main class="container-fluid px-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+                </div>
+                <div class="card-body">
+                    {% crispy form %}
+                    {{ extra_content|safe }}
+                    
+                    {% if cancel_url_name %}
+                    <div class="mt-3">
+                        <a href="{% url cancel_url_name %}" class="btn btn-secondary">Annuler</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

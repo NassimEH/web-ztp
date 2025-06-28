@@ -1,0 +1,19 @@
+<table class="template-table" up-hungry>
+    <thead>
+        <tr>
+            <td>Nom</td>
+            <td>Fichier</td>
+            <td>Devices associés</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tbody>
+    {% for template in templates %}
+        <c-template-row :is=template />
+    {% empty %}
+        <tr>
+            <td colspan="4" style="text-align: center;">Aucun template trouvé</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,12 +1,13 @@
-{% extends "base.html" %}
+{% extends "base_with_navbar.html" %}
 
-{% block content %}
+{% block fragment %}
 
-<c-crispy-file-form :form="form" action={% url 'template_add' %} title="Ajouter une fichier de template"> 
-    <c-slot name="paragraph">
-        <p>Le fichier de template doit être dans un format Jinja2.</p>
-    </c-slot>
-</c-crispy-file-form>
-
+<div class="section">
+    <c-crispy-file-form :form="form" action="{{ action }}" title="{{ title }}"> 
+        <c-slot name="paragraph">
+            <p>Le fichier de template doit être dans un format Jinja2.</p>
+        </c-slot>
+    </c-crispy-file-form>
+</div>
 
 {% endblock %}

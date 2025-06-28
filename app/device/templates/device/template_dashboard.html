@@ -1,0 +1,13 @@
+{% extends "base_with_navbar.html" %}
+
+{% block fragment %}
+
+<c-dashboard 
+    title="Gestion des Templates"
+    add_url_name="template_add"
+    add_label="Ajouter un Template"
+    :items=templates
+    table_fragment="device/template_table_fragment.html"
+/>
+
+{% endblock %}

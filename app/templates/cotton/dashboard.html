@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="section">
+    <div class="deviceDashboard">
+        <div class="cardHeader">
+            <h2>{{ title }}</h2>
+            {% if add_url_name %}
+            <a href="{% url add_url_name %}" class="btn btn-primary">
+                {{ add_label|default:"Ajouter un élément" }}
+            </a>
+            {% endif %}
+        </div>
+        <div>
+            {% if table_title %}
+            <h3>{{ table_title }}</h3>
+            {% endif %}
+            {% include table_fragment %}
+        </div>
+        
+        {% if items %}
+        <small class="text-muted">
+            {{ items|length }} élément{{ items|length|pluralize }} au total
+        </small>
+        {% endif %}
+    </div>
+</div>

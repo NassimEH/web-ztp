@@ -469,13 +469,16 @@ body.dark .form-group input::placeholder {
 }
 
 body.dark input[type="file"]::file-selector-button,
-body.dark input[type="file"]::-webkit-file-upload-button {
+body.dark input[type="file"]::-webkit-file-upload-button, 
+body.dark .input-group-text {
   background: #181818 !important;
   color: #fff !important;
+  border-color: var(--input-border);
 }
 
 body.dark input[type="file"]::file-selector-button:hover,
-body.dark input[type="file"]::-webkit-file-upload-button:hover {
+body.dark input[type="file"]::-webkit-file-upload-button:hover,
+body.dark .input-group-text:hover {
   background: #232323 !important;
   color: #fff !important;
 }

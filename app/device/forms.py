@@ -107,10 +107,13 @@ class TemplateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = "post"
+
+        submit_text = "Mettre à jour" if self.instance.pk else "Enregistrer"
+
         self.helper.layout = Layout(
             "name",
             "file",
-            Submit("submit", "Enregistrer", css_class="mt-3"),
+            Submit("submit", submit_text, css_class="btn-primary mt-3"),
         )
 
 
@@ -127,6 +130,29 @@ class DeviceDeleteForm(forms.Form):
             HTML(f"<h4>Supprimer l'appareil : {device}</h4>"),
             HTML(
                 '<p class="text-muted">Êtes-vous sûr de vouloir supprimer cet appareil ?</p>'
+            ),
+            ButtonHolder(
+                Submit("delete", "Supprimer", css_class="btn-danger"),
+                HTML(
+                    '<button type="button" class="btn btn-secondary" up-dismiss>Annuler</button>'
+                ),
+            ),
+        )
+
+
+class TemplateDeleteForm(forms.Form):
+    """Formulaire de confirmation de suppression d'un template"""
+
+    def __init__(self, template, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.template = template
+        self.helper = FormHelper()
+        self.helper.form_method = "post"
+
+        self.helper.layout = Layout(
+            HTML(f"<h4>Supprimer le template : {template}</h4>"),
+            HTML(
+                '<p class="text-muted">Êtes-vous sûr de vouloir supprimer ce template ?</p>'
             ),
             ButtonHolder(
                 Submit("delete", "Supprimer", css_class="btn-danger"),

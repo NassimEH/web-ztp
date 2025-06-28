@@ -1,0 +1,37 @@
+<tr class="align-middle">
+    <td class="fw-medium">{{ template.name }}</td>
+    <td>
+        {% if template.file %}
+            <a href="{{ template.file.url }}"
+            download
+            aria-label="Télécharger {{ template.name }}">
+                <span class="badge bg-success">
+                    <ion-icon name="document-outline"></ion-icon>
+                    <small>{{ template.file.name|slice:"5:" }}</small>
+                </span>
+            </a>
+        {% else %}
+            <span class="badge bg-danger">
+                <ion-icon name="alert-outline"></ion-icon>
+                Aucun fichier
+            </span>
+            </a>
+        {% endif %}
+    </td>
+    <td class="text-center">
+        <span class="badge bg-info">
+            {{ template.devices.count }} device{{ template.devices.count|pluralize }}
+        </span>
+    </td>
+    <td>
+        <a href="{% url 'template_update' template.pk %}" class="btn btn-outline-primary" style="min-width: 0px"
+           aria-label="Modifier {{ template.name }}">
+            <ion-icon name="settings-outline"></ion-icon>
+        </a>
+        <a href="{% url 'template_delete' template.pk %}" class="btn btn-outline-danger" style="min-width: 0px" 
+           up-layer="new modal"
+           aria-label="Supprimer {{ template.name }}">
+            <ion-icon name="trash-outline"></ion-icon>
+        </a>
+    </td>
+</tr>

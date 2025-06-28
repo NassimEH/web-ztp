@@ -1,9 +1,6 @@
-{% extends "modal_base.html" %}
-{% load crispy_forms_tags %}
-
-{% block modal_body %}
-<form method="post" action="{% url 'device_delete' device.pk %}" up-layer="parent" up-target=".device-table">
-    {% csrf_token %}
-    {% crispy form %}
-</form>
-{% endblock %}
+<c-delete-modal 
+    :form=form 
+    :item=device 
+    delete_url_name="device_delete" 
+    target_class=".device-table" 
+/>

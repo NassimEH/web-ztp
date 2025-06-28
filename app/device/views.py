@@ -1,6 +1,12 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
-from .forms import DeviceForm, TemplateForm, DHCPConfigForm, DeviceDeleteForm
+from .forms import (
+    DeviceForm,
+    TemplateForm,
+    DHCPConfigForm,
+    DeviceDeleteForm,
+    TemplateDeleteForm,
+)
 from .models import Device, Template, DHCPConfig
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
@@ -55,7 +61,13 @@ class TemplateFormView(LoginRequiredMixin, CreateView):
     model = Template
     template_name = "device/template_form.html"
     form_class = TemplateForm
-    success_url = reverse_lazy("template_add")
+    success_url = reverse_lazy("template_list")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Ajouter un Template"
+        context["action"] = self.request.path
+        return context
 
 
 class DeviceDeleteView(LoginRequiredMixin, View):
@@ -73,4 +85,45 @@ class DeviceDeleteView(LoginRequiredMixin, View):
         devices = Device.objects.select_related("template").all()
         return render(
             request, "device/device_table_fragment.html", {"devices": devices}
+        )
+
+
+class TemplateListView(LoginRequiredMixin, View):
+    def get(self, request):
+        templates = Template.objects.prefetch_related("devices").all()
+        return render(
+            request, "device/template_dashboard.html", {"templates": templates}
+        )
+
+
+class TemplateUpdateView(LoginRequiredMixin, UpdateView):
+    model = Template
+    template_name = "device/template_form.html"
+    form_class = TemplateForm
+    success_url = reverse_lazy("template_list")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Modifier le template"
+        context["action"] = self.request.path
+        return context
+
+
+class TemplateDeleteView(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        template = get_object_or_404(Template, pk=pk)
+        form = TemplateDeleteForm(template)
+        return render(
+            request, "device/template_delete.html", {"form": form, "template": template}
+        )
+
+    def post(self, request, pk):
+        template = get_object_or_404(Template, pk=pk)
+        template_name = str(template)
+        template.delete()
+        messages.success(request, f"Template '{template_name}' supprimé avec succès.")
+
+        templates = Template.objects.all()
+        return render(
+            request, "device/template_table_fragment.html", {"templates": templates}
         )

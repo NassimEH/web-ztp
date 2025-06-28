@@ -2,24 +2,12 @@
 
 {% block fragment %}
 
-<div class="section">
-    <div class="deviceDashboard">
-        <div class="cardHeader">
-            <h2>Mes appareils</h2>
-            <a href="{% url 'device_add' %}" class="btn btn-primary">
-                Ajouter un appareil
-            </a>
-        </div>
-        <div>
-        {% include "device/device_table_fragment.html" %}
-        </div>
-        
-        {% if devices %}
-        <small class="text-muted">
-            {{ devices|length }} appareil{{ devices|length|pluralize }} au total
-        </small>
-        {% endif %}
-    </div>
-</div>
+<c-dashboard 
+    title="Mes appareils"
+    add_url_name="device_add"
+    add_label="Ajouter un appareil"
+    :items=devices
+    table_fragment="device/device_table_fragment.html"
+/>
 
 {% endblock %}

@@ -1,15 +1,14 @@
 <table class="device-table" up-hungry>
     <thead>
         <tr>
-            <td> Hostname </td>
-            <td> Adresse IP </td>
-            <td> Serial Number </td>
-            <td> Template </td>
-            <td> Status </td>
-            <td> Actions </td>
+            <td>Hostname</td>
+            <td>Adresse IP</td>
+            <td>Serial Number</td>
+            <td>Template</td>
+            <td>Status</td>
+            <td>Actions</td>
         </tr>
     </thead>
-
     <tbody>
     {% for device in devices %}
         <c-device-row :is=device />

@@ -1,0 +1,9 @@
+{% extends "modal_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block modal_body %}
+<form method="post" action="{% url delete_url_name item.pk %}" up-layer="parent" up-target="{{ target_class }}">
+    {% csrf_token %}
+    {% crispy form %}
+</form>
+{% endblock %}

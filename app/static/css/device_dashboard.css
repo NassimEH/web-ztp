@@ -76,3 +76,40 @@
 .deviceDashboard table tr td:nth-child(6) {
   text-align: center;
 }
+
+/* Template specific styles */
+.template-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.template-table thead td {
+  font-weight: 600;
+  padding: 12px 10px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  background: var(--table-header);
+  color: var(--text-color);
+}
+
+.template-table tr {
+  background: var(--table-row);
+  color: var(--text-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.template-table tr:last-child {
+  border-bottom: none;
+}
+
+.template-table tbody tr:hover {
+  background: var(--table-hover);
+}
+
+.template-table tr td {
+  padding: 12px 10px;
+}
+
+.template-table tr td:last-child {
+  text-align: end;
+}

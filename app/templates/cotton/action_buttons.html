@@ -1,0 +1,24 @@
+<td>
+    {% if update_url_name %}
+    <a href="{% url update_url_name item.pk %}" class="btn btn-outline-primary" style="min-width: 0px"
+       aria-label="Modifier {{ item }}">
+        <ion-icon name="settings-outline"></ion-icon>
+    </a>
+    {% endif %}
+    
+    {% if download_url %}
+    <a href="{{ download_url }}" class="btn btn-outline-info" style="min-width: 0px" 
+       download
+       aria-label="Télécharger {{ item }}">
+        <ion-icon name="download-outline"></ion-icon>
+    </a>
+    {% endif %}
+    
+    {% if delete_url_name %}
+    <a href="{% url delete_url_name item.pk %}" class="btn btn-outline-danger" style="min-width: 0px" 
+       up-layer="new modal"
+       aria-label="Supprimer {{ item }}">
+        <ion-icon name="trash-outline"></ion-icon>
+    </a>
+    {% endif %}
+</td>
