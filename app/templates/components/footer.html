@@ -1,3 +1,5 @@
+
+
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-links">
@@ -40,3 +42,21 @@
         <p>&copy; 2025 - web-ztp. Tous droits réservés.</p>
     </div>
 </footer>
+<div class="footer-legal-links">
+    <div class="container">
+        <div class="d-flex justify-content-center gap-3 py-3">
+            <a href="{% url 'terms' %}" 
+               class="btn btn-outline-secondary btn-sm"
+               up-target=".fragment-container"
+               up-transition="cross-fade">
+                Terms of Service
+            </a>
+            <a href="{% url 'privacy' %}" 
+               class="btn btn-outline-secondary btn-sm"
+               up-target=".fragment-container"
+               up-transition="cross-fade">
+                Privacy Policy
+            </a>
+        </div>
+    </div>
+</div>

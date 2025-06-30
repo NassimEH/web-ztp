@@ -36,6 +36,11 @@ body.dark {
   --label-text: #ffffff;
   --section-bg: #1a1a1a;
   --section-border: #2d2d2d;
+  --footer-bg-dark: #2c3e50;
+  --footer-text-dark: #ecf0f1;
+  --footer-link-dark: #bdc3c7;
+  --footer-link-hover-dark: #ffffff;
+  --footer-border-dark: rgba(255, 255, 255, 0.1);
 }
 
 body.dark .accordion-button {
@@ -523,3 +528,18 @@ body.dark .btn-outline-secondary:hover ion-icon {
   stroke: white;
 }
 
+body.dark .footer {
+    color: var(--footer-text-dark, #ffffff);
+}
+
+body.dark .footer a {
+    color: var(--footer-link-dark, #ffffff);
+}
+
+body.dark .footer-link a {
+    color: var(--footer-link-dark, #ffffff);
+}
+
+body.dark .footer-bottom {
+    color: var(--footer-link-dark, #ffffff);
+}
