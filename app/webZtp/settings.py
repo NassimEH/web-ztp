@@ -57,6 +57,7 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
+ACCOUNT_SESSION_REMEMBER = True  # Respect the "remember me" checkbox
 ACCOUNT_LOGIN_METHOD = "username"
 ACCOUNT_SIGNUP_FIELDS = ["username*", "password1*", "password2*"]
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
