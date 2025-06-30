@@ -115,7 +115,7 @@ Installer le projet :
 **En utilisant `docker`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Docker-2CA5E0.svg?style={badge_style}&logo=docker&logoColor=white" />](https://www.docker.com/)
 
 ```sh
-❯ docker compose up --build -d
+❯ docker-compose up --build -d
 ```
 
 ### Information
