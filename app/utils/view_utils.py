@@ -1,3 +1,5 @@
+"""Not usefull"""
+
 from django.views.generic.edit import FormView
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.template.loader import render_to_string

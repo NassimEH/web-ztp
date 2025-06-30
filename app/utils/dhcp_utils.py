@@ -1,4 +1,4 @@
-from app.models import DHCPConfig
+from device.models import DHCPConfig
 
 
 def get_dhcp_config():

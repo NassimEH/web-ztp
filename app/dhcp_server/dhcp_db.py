@@ -1,4 +1,4 @@
-from app.utils import device_utils, dhcp_utils
+from utils import device_utils, dhcp_utils
 
 
 class IPaddress:

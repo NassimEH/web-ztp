@@ -1,8 +1,8 @@
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
-from app.models import Device
-from app.utils.media_utils import get_site_url
+from device.models import Device
+from utils.media_utils import get_site_url
 
 
 def get_devices():

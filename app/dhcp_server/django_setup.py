@@ -1,3 +1,5 @@
+"""Not usefull"""
+
 import sys
 import os
 import django

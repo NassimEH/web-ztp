@@ -2,7 +2,6 @@ import socket
 from scapy.all import packet, BOOTP, DHCP
 
 from dhcp_server.dhcp_db import DHCPData
-from app.utils import device_utils
 
 
 class DHCPServer:
