@@ -37,18 +37,33 @@
             </a>
         </li>
 
-        <li class="{% if request.resolver_match.url_name == 'device_add' %}active{% endif %}">
-            <a href="{% url 'device_add' %}"
+        <li class="{% if request.resolver_match.url_name == 'template_list' %}active{% endif %}">
+            <a href="{% url 'template_list' %}"
             up-target=".fragment-container"
             up-transition="cross-fade"
             up-history="push"
             >
                 <div class="icon-container">
                     <span class="icon">
-                        <ion-icon name="build-outline"></ion-icon>
+                        <ion-icon name="document-text-outline"></ion-icon>
                     </span>
                 </div>
-                <span class="title"> Configurer un appareil </span>
+                <span class="title"> Mes Templates </span>
+            </a>
+        </li>
+
+        <li class="{% if request.resolver_match.url_name == 'dhcp_config_update' %}active{% endif %}">
+            <a href="{% url 'dhcp_config_update' %}"
+            up-target=".fragment-container"
+            up-transition="cross-fade"
+            up-history="push"
+            >
+                <div class="icon-container">
+                    <span class="icon">
+                        <ion-icon name="settings-outline"></ion-icon>
+                    </span>
+                </div>
+                <span class="title"> Configuration DHCP </span>
             </a>
         </li>
 
