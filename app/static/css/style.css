@@ -3770,7 +3770,7 @@ body.dark ul{
 }
 
 .footer-links a {
-    color: #bdc3c7;
+    color: #000000;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
@@ -3781,7 +3781,7 @@ body.dark ul{
 }
 
 .footer-links a:hover {
-    color: #ffffff;
+    color: #0055B3;
     transform: translateY(-2px);
 }
 
