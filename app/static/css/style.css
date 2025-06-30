@@ -3862,3 +3862,27 @@ body.dark ul{
         padding: 2rem 0 1rem;
     }
 }
+
+.btn-retour-custom {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  border: none;
+  background: none;
+  color: #333;
+  font-size: 1.1em;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  text-decoration: none;
+  transition: color 0.2s, top 0.2s;
+}
+.btn-retour-custom:hover {
+  text-decoration: underline;
+  text-decoration-color: #2196f3;
+  text-underline-offset: 2px;
+  color: #1976d2;
+  top: 16px;
+}

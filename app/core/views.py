@@ -20,3 +20,9 @@ class ConditionalRedirectView(View):
         if request.user.is_authenticated:
             return redirect("dashboard")
         return redirect("landing_page")
+
+class PrivacyPolicyView(TemplateView):
+    template_name = "core/privacy.html"
+
+class TermsOfServiceView(TemplateView):
+    template_name = "core/terms.html"
