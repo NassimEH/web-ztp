@@ -1325,7 +1325,8 @@ cardBox .card:hover .iconBx {
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 2rem;
@@ -1339,22 +1340,40 @@ cardBox .card:hover .iconBx {
   display: flex;
   gap: 1.5rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .footer-links a,
 .footer-social a {
   color: var(--text-color);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.2s ease-in-out;
+  font-weight: 500;
+  position: relative;
+  padding: 0.25rem 0;
 }
 
 .footer-links a:hover,
 .footer-social a:hover {
   color: var(--nav-hover);
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .footer-social .social-icon {
   font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-social .social-icon:hover {
+  color: var(--nav-hover);
+  transform: translateY(-2px) scale(1.05);
 }
 
 .footer-bottom {
