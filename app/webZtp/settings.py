@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = cfg.SECRET_KEY
 
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = cfg.ALLOWED_HOSTS_LIST
 
 # Application definition
 
@@ -110,7 +110,11 @@ WSGI_APPLICATION = "webZtp.wsgi.application"
 
 if cfg.IS_PRODUCTION:
     # Production security settings
-    CSRF_TRUSTED_ORIGINS = ["https://localhost:44344"]
+    CSRF_TRUSTED_ORIGINS = [
+        f"https://{cfg.HOSTNAME}:{cfg.HTTPS_PORT}",
+        f"https://{cfg.VM_IP}:{cfg.HTTPS_PORT}",
+        f"http://{cfg.VM_IP}:{cfg.HTTP_PORT}"
+    ]
 
     # Security headers
     SECURE_BROWSER_XSS_FILTER = True

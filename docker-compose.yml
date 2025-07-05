@@ -25,7 +25,11 @@ services:
       - ./app/media:/app/media
       - static:/app/staticfiles
     environment:
-      HOSTNAME: ${HOSTNAME}
+      DJANGO_HOSTNAME: ${CADDY_HOSTNAME}
+      HTTPS_PORT: ${HTTPS_PORT}
+      HTTP_PORT: ${HTTP_PORT}
+      VM_IP: ${VM_IP}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
 
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -56,15 +60,15 @@ services:
       - ./app/media:/web/media
       - static:/web/staticfiles
     environment:
-      HTTP_URL: http://${HOSTNAME}:${HTTP_PORT}
-      HTTPS_URL: https://${HOSTNAME}:${HTTPS_PORT}
+      HTTP_URL: http://${CADDY_HOSTNAME}:${HTTP_PORT}
+      HTTPS_URL: https://${CADDY_HOSTNAME}:${HTTPS_PORT}
     depends_on:
       - web
     command: |
       sh -c "envsubst < Caddyfile.tmpl > Caddyfile && \
       caddy run --config /etc/caddy/Caddyfile --adapter caddyfile"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://${HOSTNAME}:${HTTP_PORT}/status/"]
+      test: ["CMD", "curl", "-f", "http://${CADDY_HOSTNAME}:${HTTP_PORT}/status/"]
       interval: 1m30s
       timeout: 30s
       retries: 5
