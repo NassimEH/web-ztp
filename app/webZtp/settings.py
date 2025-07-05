@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = cfg.SECRET_KEY
 
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = cfg.ALLOWED_HOSTS_LIST
 
 # Application definition
 
@@ -81,6 +81,12 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
+# Configuration pour reverse proxy
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
+# Commenté pour empêcher la détection automatique HTTPS
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 ROOT_URLCONF = "webZtp.urls"
 
 TEMPLATES = [
@@ -110,7 +116,26 @@ WSGI_APPLICATION = "webZtp.wsgi.application"
 
 if cfg.IS_PRODUCTION:
     # Production security settings
-    CSRF_TRUSTED_ORIGINS = ["https://localhost:44344"]
+    CSRF_TRUSTED_ORIGINS = [
+        f"https://{cfg.HOSTNAME}:{cfg.HTTPS_PORT}",
+        f"https://{cfg.VM_IP}:{cfg.HTTPS_PORT}",
+        f"http://{cfg.VM_IP}:{cfg.HTTP_PORT}",
+        f"http://{cfg.HOSTNAME}:{cfg.HTTP_PORT}",
+        f"http://localhost:{cfg.HTTP_PORT}",
+        f"http://127.0.0.1:{cfg.HTTP_PORT}",
+        # Ajout pour l'accès depuis d'autres IPs
+        f"http://{cfg.VM_IP}:3000",
+        f"http://localhost:3000",
+        f"http://127.0.0.1:3000",
+        "http://172.16.10.30:3000",
+        "http://10.30.31.30:3000"
+    ]
+    
+    # CSRF Configuration pour reverse proxy
+    CSRF_USE_SESSIONS = False
+    CSRF_COOKIE_HTTPONLY = False  # Permet au JS d'accéder au cookie CSRF
+    CSRF_COOKIE_SAMESITE = 'Lax'
+    CSRF_COOKIE_SECURE = False  # Important: False pour HTTP
 
     # Security headers
     SECURE_BROWSER_XSS_FILTER = True
@@ -120,9 +145,8 @@ if cfg.IS_PRODUCTION:
     SECURE_HSTS_PRELOAD = True
 
     # Session security
-    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = False  # Changé à False pour HTTP
     SESSION_COOKIE_HTTPONLY = True
-    CSRF_COOKIE_SECURE = True
 
     # Database
     # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
