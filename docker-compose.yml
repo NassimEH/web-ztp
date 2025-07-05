@@ -54,21 +54,17 @@ services:
     build: caddy
     restart: always
     ports:
-      - "${HTTP_PORT}:${HTTP_PORT}"
-      - "${HTTPS_PORT}:${HTTPS_PORT}"
+      - "3000:3000"
     volumes:
       - ./app/media:/web/media
       - static:/web/staticfiles
-    environment:
-      HTTP_URL: http://${CADDY_HOSTNAME}:${HTTP_PORT}
-      HTTPS_URL: https://${CADDY_HOSTNAME}:${HTTPS_PORT}
     depends_on:
       - web
     command: |
-      sh -c "envsubst < Caddyfile.tmpl > Caddyfile && \
+      sh -c "cp Caddyfile.tmpl Caddyfile && \
       caddy run --config /etc/caddy/Caddyfile --adapter caddyfile"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://${CADDY_HOSTNAME}:${HTTP_PORT}/status/"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
       interval: 1m30s
       timeout: 30s
       retries: 5
