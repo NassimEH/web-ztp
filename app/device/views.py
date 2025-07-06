@@ -9,9 +9,8 @@ from .forms import (
 )
 from .models import Device, Template, DHCPConfig
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.views import View
-from django.contrib import messages
 
 
 class DeviceListView(LoginRequiredMixin, View):
@@ -119,9 +118,7 @@ class TemplateDeleteView(LoginRequiredMixin, View):
 
     def post(self, request, pk):
         template = get_object_or_404(Template, pk=pk)
-        template_name = str(template)
         template.delete()
-        messages.success(request, f"Template '{template_name}' supprimé avec succès.")
 
         templates = Template.objects.all()
         return render(

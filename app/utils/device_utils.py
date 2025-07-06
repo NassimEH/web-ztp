@@ -50,7 +50,7 @@ def update_device_status(device_id, status: bool) -> None:
     device.save()
 
 
-def add_device(serial_number, ip, hostname) -> None:
+def create_or_update_device(serial_number, ip, hostname, configured) -> None:
     try:
         device, created = Device.objects.get_or_create(
             serial_number=serial_number,
@@ -58,14 +58,15 @@ def add_device(serial_number, ip, hostname) -> None:
                 "ip": ip,
                 "hostname": hostname or f"device-{serial_number[:6]}",
                 "template": None,
+                "configured": configured,
             },
         )
 
         if not created:
-            if device.ip != ip:
-                device.ip = ip
-            if hostname and device.hostname != hostname:
+            device.ip = ip
+            if hostname:
                 device.hostname = hostname
+            device.configured = configured
             device.save()
     except IntegrityError:
         pass

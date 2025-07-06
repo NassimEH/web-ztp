@@ -62,8 +62,10 @@ class DHCPData:
             if str(ip_address) not in self.get_use_ip():
                 yield str(ip_address)
 
-    def add_device(self, serial_number: str, ip: str, hostname: str) -> None:
-        device_utils.add_device(serial_number, ip, hostname)
+    def create_or_update_device(
+        self, serial_number: str, ip: str, hostname: str, configured: bool
+    ) -> None:
+        device_utils.create_or_update_device(serial_number, ip, hostname, configured)
 
     def get_ip(self, serial_number: str):
         if serial_number:

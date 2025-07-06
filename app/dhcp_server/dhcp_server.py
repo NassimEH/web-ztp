@@ -116,6 +116,12 @@ class DHCPServer:
         message_type = self.get_dhcp_option(packet, "message-type")
         reply_message_type = self.get_reply_message_type(message_type)
 
+        if reply_message_type == "ack":
+            hostname = getattr(packet["BOOTP"], "hostname", None)
+            self.dhcp_data.create_or_update_device(
+                serial_number, client_ip, hostname, True
+            )
+
         if reply_message_type:
             options = self.create_dhcp_options(reply_message_type)
 

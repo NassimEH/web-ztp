@@ -13,8 +13,8 @@ echo "The database is ready!"
 echo "Running migrations..."
 python3 manage.py migrate
 
-# echo "Loading fixtures..."
-# python3 manage.py loaddata dhcp_config.json
+echo "Loading fixtures..."
+python3 manage.py loaddata dhcp_config.json
 
 echo "Collecting static files..."
 python3 manage.py collectstatic --noinput
