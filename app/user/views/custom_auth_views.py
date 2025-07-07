@@ -2,6 +2,8 @@ from django.conf import settings
 from django.shortcuts import redirect
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import logout
+from allauth.account.views import LoginView as AllauthLoginView
+from core.models import LogEntry
 
 
 class CustomLogoutView(LogoutView):
@@ -18,3 +20,13 @@ class CustomLogoutView(LogoutView):
     def get(self, request, *args, **kwargs):
         logout(request)
         return redirect(settings.LOGOUT_REDIRECT_URL)
+
+
+class CustomLoginView(AllauthLoginView):
+    def form_invalid(self, form):
+        LogEntry.objects.create(
+            user=None,
+            action="Erreur connexion",
+            description=f"Tentative de connexion échouée pour l'identifiant : {form.cleaned_data.get('login', 'inconnu')}"
+        )
+        return super().form_invalid(form)

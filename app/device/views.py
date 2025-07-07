@@ -41,6 +41,14 @@ class DeviceFormView(LoginRequiredMixin, CreateView):
         )
         return response
 
+    def form_invalid(self, form):
+        LogEntry.objects.create(
+            user=self.request.user if self.request.user.is_authenticated else None,
+            action="Erreur ajout appareil",
+            description=f"Échec lors de l'ajout d'un appareil. Erreurs : {form.errors.as_text()}"
+        )
+        return super().form_invalid(form)
+
 
 class DeviceUpdateView(LoginRequiredMixin, UpdateView):
     model = Device
@@ -53,6 +61,15 @@ class DeviceUpdateView(LoginRequiredMixin, UpdateView):
         context["title"] = "Modifier l'appareil"
         context["action"] = self.request.path
         return context
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        LogEntry.objects.create(
+            user=self.request.user,
+            action="Modification d'un appareil",
+            description=f"Appareil modifié : {self.object.hostname} ({self.object.ip})"
+        )
+        return response
 
 
 class DHCPFormView(LoginRequiredMixin, CreateView):
@@ -86,6 +103,14 @@ class TemplateFormView(LoginRequiredMixin, CreateView):
             description=f"Template ajouté : {self.object.name}"
         )
         return response
+
+    def form_invalid(self, form):
+        LogEntry.objects.create(
+            user=self.request.user if self.request.user.is_authenticated else None,
+            action="Erreur ajout template",
+            description=f"Échec lors de l'ajout d'un template. Erreurs : {form.errors.as_text()}"
+        )
+        return super().form_invalid(form)
 
 
 class DeviceDeleteView(LoginRequiredMixin, View):
@@ -130,6 +155,15 @@ class TemplateUpdateView(LoginRequiredMixin, UpdateView):
         context["title"] = "Modifier le template"
         context["action"] = self.request.path
         return context
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        LogEntry.objects.create(
+            user=self.request.user,
+            action="Modification d'un template",
+            description=f"Template modifié : {self.object.name}"
+        )
+        return response
 
 
 class TemplateDeleteView(LoginRequiredMixin, View):

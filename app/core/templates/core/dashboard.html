@@ -44,20 +44,25 @@
         {% if recent_logs %}
             <ul style="list-style:none;padding:0;">
                 {% for log in recent_logs %}
-                    <li class="log-entry" style="margin-bottom:1.2rem;padding:1rem 1.5rem;background:var(--card-bg);border-radius:8px;border:1px solid var(--border-color);">
-                        <div style="font-size:0.95rem;opacity:0.7;">
-                            <ion-icon name="time-outline"></ion-icon>
-                            {{ log.timestamp|date:"d/m/Y H:i" }}
-                            —
-                            <ion-icon name="person-outline"></ion-icon>
-                            {% if log.user %}
-                                {{ log.user.username }}
-                            {% else %}
-                                Système
-                            {% endif %}
+                    <li class="log-entry" style="margin-bottom:1.2rem;padding:1rem 1.5rem;background:var(--card-bg);border-radius:8px;border:1px solid var(--border-color);display:flex;align-items:flex-start;gap:0.7em;">
+                        {% if log.is_error_log %}
+                            <ion-icon name="close-circle" style="color:#c0392b;font-size:1.4em;margin-top:2px;"></ion-icon>
+                        {% endif %}
+                        <div style="flex:1;">
+                            <div style="font-size:0.95rem;opacity:0.7;">
+                                <ion-icon name="time-outline"></ion-icon>
+                                {{ log.timestamp|date:"d/m/Y H:i" }}
+                                —
+                                <ion-icon name="person-outline"></ion-icon>
+                                {% if log.user %}
+                                    {{ log.user.username }}
+                                {% else %}
+                                    Système
+                                {% endif %}
+                            </div>
+                            <div style="font-weight:500;{% if log.is_error_log %}color:#c0392b;{% endif %}">{{ log.action }}</div>
+                            <div style="font-size:0.95rem;opacity:0.8;{% if log.is_error_log %}color:#c0392b;{% endif %}">{{ log.description }}</div>
                         </div>
-                        <div style="font-weight:500;">{{ log.action }}</div>
-                        <div style="font-size:0.95rem;opacity:0.8;">{{ log.description }}</div>
                     </li>
                 {% endfor %}
             </ul>
