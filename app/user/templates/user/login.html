@@ -3,6 +3,14 @@
 {% block fragment %}
 
 <c-crispy-auth-form :form="form" action="{% url 'account_login' %}" title="Se connecter"> 
+    {% if form.remember %}
+        <div class="form-group" style="margin-bottom:1em;">
+            <label style="display:flex;align-items:center;gap:0.5em;">
+                {{ form.remember }}
+                {{ form.remember.label }}
+            </label>
+        </div>
+    {% endif %}
     <c-slot name="button">
         <button type="submit" class="btn btn-primary">Se connecter</button>
     </c-slot>

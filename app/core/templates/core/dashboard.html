@@ -2,7 +2,8 @@
 
 {% block fragment %}
 <div class="dashboard-summary">
-    <h2>Résumé du réseau</h2>
+    <h2>Accueil</h2>
+    <div style="font-size:1.2em;margin-bottom:1.5em;">Bienvenue ! {{ user.username }}</div>
     <div class="profile-stats">
         <div class="stat-card">
             <h3>Équipements</h3>
@@ -18,6 +19,11 @@
             <h3>Templates configurés</h3>
             <div class="stat-value">{{ template_count }}</div>
             <div class="stat-label">Nombre de templates</div>
+        </div>
+        <div class="stat-card">
+            <h3>Équipements orphelins</h3>
+            <div class="stat-value">{{ orphan_devices }}</div>
+            <div class="stat-label">Sans template associé</div>
         </div>
         <div class="stat-card">
             <h3>Dernier équipement ajouté</h3>
