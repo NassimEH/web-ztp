@@ -4,12 +4,10 @@
 
 Web-ZTP est structuré autour de quatre composants principaux, chacun s'exécutant dans son propre conteneur Docker :
 
-1. **Application Web Django** : Interface utilisateur et logique métier
+1. **Application WebZTP Django** : Interface utilisateur et logique métier
 2. **Serveur DHCP dédié** : Gestion des adresses IP et des options de configuration
 3. **Proxy Caddy** : Sécurisation des communications HTTPS
 4. **Base de données PostgreSQL** : Stockage des configurations et des données
-
-Cette architecture en microservices permet une grande flexibilité et facilite la maintenance.
 
 ## Composants principaux
 
@@ -33,9 +31,7 @@ Le serveur DHCP est responsable de :
 ### Proxy Caddy
 
 Le proxy inverse Caddy fournit :
-
-- Support HTTPS automatique avec certificats auto-signés ou Let's Encrypt
-- Protection contre certaines attaques web courantes
+- Sert les fichiers statiques vers l'utilisateurs
 - Redirection du trafic vers l'application Django
 
 ### Base de données PostgreSQL
@@ -51,30 +47,22 @@ La base de données stocke :
 
 Le projet est organisé de la façon suivante :
 
-```
+```bash
 web-ztp/
-├── app/                      # Application Django principale
-│   ├── templates/            # Templates HTML pour l'interface web
-│   ├── views/                # Vues Django (contrôleurs)
-│   ├── models.py             # Modèles de données
-│   ├── forms.py              # Formulaires web
-│   └── formset.py            # Formsets pour les formulaires complexes
-├── dhcp_server/              # Serveur DHCP personnalisé
-│   └── dhcp_server.py        # Implémentation du serveur DHCP
-├── webZtp/                   # Configuration du projet Django
-├── docker-compose.yml        # Configuration des conteneurs Docker
-├── Dockerfile                # Configuration du conteneur de l'application web
-├── Dockerfile.dhcp           # Configuration du conteneur du serveur DHCP
-└── Caddyfile                 # Configuration du proxy Caddy
+├── .env                  # Fichier d’environnement
+├── docker-compose.yml    # Lancement des conteneurs
+├── app/
+│   ├── core/             # Pages générales (dashboard, privacy, etc.)
+│   ├── device/           # Gestion des devices et templates
+│   ├── dhcp_server/      # Script ZTP DHCP simulé
+│   ├── user/             # Gestion des utilisateurs
+│   ├── webZtp/           # Paramètres Django (settings, urls, etc.)
+│   ├── templates/        # HTML génériques et partiels
+│   ├── env/              # Configuration Python
+│   ├── monitoring/       # Healthcheck de l’application
+│   ├── utils/            # Fonctions utilitaires (DHCP, formulaires, devices)
+├── caddy/                # Reverse proxy avec Caddy
+├── exemple_dhcp_discover/   # Script de test DHCP
+├── exemple_ztp_config/      # Script de debug ZTP
+
 ```
-
-## Flux de travail typique
-
-Le fonctionnement typique de Web-ZTP suit le processus suivant :
-
-1. L'administrateur crée un template de configuration via l'interface web
-2. L'administrateur enregistre un nouvel équipement avec ses paramètres spécifiques
-3. L'équipement est connecté au réseau et démarre pour la première fois
-4. Le serveur DHCP attribue une adresse IP à l'équipement et lui fournit les options ZTP
-5. L'équipement télécharge sa configuration personnalisée
-6. L'équipement applique automatiquement la configuration
