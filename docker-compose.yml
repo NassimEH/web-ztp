@@ -25,10 +25,9 @@ services:
       - ./app/media:/app/media
       - static:/app/staticfiles
     environment:
-      DJANGO_HOSTNAME: ${CADDY_HOSTNAME}
+      HOSTNAME: ${HOSTNAME}
       HTTPS_PORT: ${HTTPS_PORT}
       HTTP_PORT: ${HTTP_PORT}
-      VM_IP: ${VM_IP}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
 
       POSTGRES_USER: ${POSTGRES_USER}

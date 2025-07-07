@@ -118,22 +118,19 @@ if cfg.IS_PRODUCTION:
     # Production security settings
     CSRF_TRUSTED_ORIGINS = [
         f"https://{cfg.HOSTNAME}:{cfg.HTTPS_PORT}",
-        f"https://{cfg.VM_IP}:{cfg.HTTPS_PORT}",
-        f"http://{cfg.VM_IP}:{cfg.HTTP_PORT}",
         f"http://{cfg.HOSTNAME}:{cfg.HTTP_PORT}",
         f"http://localhost:{cfg.HTTP_PORT}",
         f"http://127.0.0.1:{cfg.HTTP_PORT}",
-        f"http://{cfg.VM_IP}:8080",
         f"http://localhost:8080",
         f"http://127.0.0.1:8080",
         "http://172.16.10.30:8080",
-        "http://10.30.31.30:8080"
+        "http://10.30.31.30:8080",
     ]
-    
+
     # CSRF Configuration pour reverse proxy
     CSRF_USE_SESSIONS = False
     CSRF_COOKIE_HTTPONLY = False  # Permet au JS d'accéder au cookie CSRF
-    CSRF_COOKIE_SAMESITE = 'Lax'
+    CSRF_COOKIE_SAMESITE = "Lax"
     CSRF_COOKIE_SECURE = False  # Important: False pour HTTP
 
     # Security headers
