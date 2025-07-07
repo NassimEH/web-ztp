@@ -32,7 +32,7 @@ class AddView(FormView):
         formset = self.get_formset(self.request.POST)
 
         if formset and formset.is_valid():
-            # Traiter les données du formset
+            # Process formset data
             for subform in formset:
                 if subform.cleaned_data:
                     print("Formset Data:", subform.cleaned_data)
