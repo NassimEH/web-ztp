@@ -2056,7 +2056,7 @@ body.dark .legal-header {
     transform: translateY(-1px);
 }
 
-/* Mode sombre */
+/* Dark mode */
 body.dark .form-actions .btn-secondary {
     background: rgba(255, 59, 48, 0.1);
     transform: translateY(-1px);
@@ -2105,7 +2105,7 @@ body.dark ul{
     --border-color: #404040;
 }
 
-/* Animation des boutons */
+/* Button animation */
 .form-actions .btn {
     position: relative;
     overflow: hidden;
@@ -2176,7 +2176,7 @@ body.dark ul{
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Styles pour les pages d'erreur */
+/* Styles for error pages */
 .error-page {
   padding-top: 50px;
   padding-bottom: 50px;
@@ -2198,7 +2198,7 @@ body.dark ul{
   font-size: 1.2rem;
 }
 
-/* === Amélioration page de login === */
+/* === Improved login page === */
 #unpoly-auth-container {
     min-height: 100vh;
     display: flex;

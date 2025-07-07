@@ -7,9 +7,9 @@ from crispy_forms.layout import Layout, Fieldset, Submit, Div, Field
 
 class AddForm(forms.ModelForm):
     class Meta:
-        model = None  # Doit être redéfini dans les sous-classes
+        model = None  # Must be redefined in subclasses
         fields = []
-        group = []  # Les champs à grouper ensemble dans un Fieldset
+        group = []  # Fields to be grouped together in a Fieldset
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -19,21 +19,21 @@ class AddForm(forms.ModelForm):
         self.helper.label_class = "col-lg-2"
         self.helper.field_class = "col-lg-8"
         self.helper.form_tag = (
-            False  # Pour permettre plus de contrôle sur les attributs du form tag
+            False  # To allow more control over the form tag attributes
         )
 
-        # Ajout des placeholders et des classes aux champs
+        # Adding placeholders and classes to fields
         for field_name, field in self.fields.items():
             field.widget.attrs.update(
                 {"class": "form-control", "placeholder": field.label}
             )
 
-        # Création du layout avec les champs
+        # Creating the layout with fields
         layout_fields = []
         regular_fields = []
         grouped_fields = []
 
-        # Séparation des champs en réguliers et groupés
+        # Separation of fields into regular and grouped
         if hasattr(self.Meta, "group") and self.Meta.group:
             for field_name, field in self.fields.items():
                 if field_name in self.Meta.group:
@@ -43,11 +43,11 @@ class AddForm(forms.ModelForm):
         else:
             regular_fields = list(self.fields.keys())
 
-        # Ajout des champs réguliers au layout
+        # Adding regular fields to the layout
         for field_name in regular_fields:
             layout_fields.append(Field(field_name, css_class="field-item"))
 
-        # Si nous avons des champs groupés, créer un Fieldset avec ces champs
+        # If we have grouped fields, create a Fieldset with these fields
         if grouped_fields:
             group_fieldset = Fieldset(
                 "Configuration avancée",
@@ -59,18 +59,18 @@ class AddForm(forms.ModelForm):
             )
             layout_fields.append(group_fieldset)
 
-        # Application du layout
+        # Applying the layout
         self.helper.layout = Layout(*layout_fields)
-        # Le bouton submit est maintenant géré dans genericForm.html
+        # The submit button is now handled in genericForm.html
 
 
 class UpdateForm(forms.ModelForm):
     class Meta:
-        model = None  # Doit être redéfini dans les sous-classes
+        model = None  # Must be redefined in subclasses
         fields = []
 
     def __init__(self, *args, **kwargs):
-        # Préremplir automatiquement avec la première instance existante
+        # Automatically pre-fill with the first existing instance
         if "instance" not in kwargs:
             instance = self._meta.model.objects.first()
             if instance:
@@ -84,21 +84,21 @@ class UpdateForm(forms.ModelForm):
         self.helper.label_class = "col-lg-2"
         self.helper.field_class = "col-lg-8"
         self.helper.form_tag = (
-            False  # Pour permettre plus de contrôle sur les attributs du form tag
+            False  # To allow more control over the form tag attributes
         )
 
-        # Ajout des placeholders et des classes aux champs
+        # Adding placeholders and classes to fields
         for field_name, field in self.fields.items():
             field.widget.attrs.update(
                 {"class": "form-control", "placeholder": field.label}
             )
 
-        # Création du layout avec tous les champs
+        # Creating the layout with all the fields
         layout_fields = [
             Field(field_name, css_class="field-item") for field_name in self.fields
         ]
         self.helper.layout = Layout(*layout_fields)
-        # Le bouton submit est maintenant géré dans genericForm.html
+        # The submit button is now handled in genericForm.html
 
     def save(self, commit=True):
         """
