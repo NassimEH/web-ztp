@@ -23,7 +23,13 @@
             <h3>Dernier équipement ajouté</h3>
             <div class="stat-value">
                 {% if last_device %}
-                    {{ last_device.hostname }} ({{ last_device.ip }})
+                    {{ last_device.hostname }} (
+                    {% if last_device.ip %}
+                        {{ last_device.ip }}
+                    {% else %}
+                        Aucune IP
+                    {% endif %}
+                    )
                 {% else %}
                     Aucun
                 {% endif %}
