@@ -3,6 +3,7 @@ from django.views import View
 from django.views.generic import TemplateView
 from device.models import Device, Template
 from utils.device_utils import get_device_count, get_used_ips
+from core.models import LogEntry
 
 
 class LandingPageView(TemplateView):
@@ -25,6 +26,7 @@ class DashboardView(TemplateView):
         context["dhcp_leases"] = len(get_used_ips())
         last_device = Device.objects.order_by("-id").first()
         context["last_device"] = last_device
+        context["recent_logs"] = LogEntry.objects.select_related("user").all()[:8]
         return context
 
 

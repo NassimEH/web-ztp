@@ -32,4 +32,32 @@
         </div>
     </div>
 </div>
+<div class="dashboard-logs" style="margin-top:2.5rem;">
+    <h2>Dernières actions</h2>
+    <div class="logs-list">
+        {% if recent_logs %}
+            <ul style="list-style:none;padding:0;">
+                {% for log in recent_logs %}
+                    <li class="log-entry" style="margin-bottom:1.2rem;padding:1rem 1.5rem;background:var(--card-bg);border-radius:8px;border:1px solid var(--border-color);">
+                        <div style="font-size:0.95rem;opacity:0.7;">
+                            <ion-icon name="time-outline"></ion-icon>
+                            {{ log.timestamp|date:"d/m/Y H:i" }}
+                            —
+                            <ion-icon name="person-outline"></ion-icon>
+                            {% if log.user %}
+                                {{ log.user.username }}
+                            {% else %}
+                                Système
+                            {% endif %}
+                        </div>
+                        <div style="font-weight:500;">{{ log.action }}</div>
+                        <div style="font-size:0.95rem;opacity:0.8;">{{ log.description }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div style="opacity:0.7;">Aucune action récente.</div>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

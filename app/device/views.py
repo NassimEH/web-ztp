@@ -11,6 +11,7 @@ from .models import Device, Template, DHCPConfig
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.views import View
+from core.models import LogEntry
 
 
 class DeviceListView(LoginRequiredMixin, View):
@@ -30,6 +31,15 @@ class DeviceFormView(LoginRequiredMixin, CreateView):
         context["title"] = "Ajouter l'appareil"
         context["action"] = self.request.path
         return context
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        LogEntry.objects.create(
+            user=self.request.user,
+            action="Ajout d'un appareil",
+            description=f"Appareil ajouté : {self.object.hostname} ({self.object.ip})"
+        )
+        return response
 
 
 class DeviceUpdateView(LoginRequiredMixin, UpdateView):
@@ -68,6 +78,15 @@ class TemplateFormView(LoginRequiredMixin, CreateView):
         context["action"] = self.request.path
         return context
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        LogEntry.objects.create(
+            user=self.request.user,
+            action="Ajout d'un template",
+            description=f"Template ajouté : {self.object.name}"
+        )
+        return response
+
 
 class DeviceDeleteView(LoginRequiredMixin, View):
     def get(self, request, pk):
@@ -79,6 +98,11 @@ class DeviceDeleteView(LoginRequiredMixin, View):
 
     def post(self, request, pk):
         device = get_object_or_404(Device, pk=pk)
+        LogEntry.objects.create(
+            user=request.user,
+            action="Suppression d'un appareil",
+            description=f"Appareil supprimé : {device.hostname} ({device.ip})"
+        )
         device.delete()
 
         devices = Device.objects.select_related("template").all()
@@ -118,6 +142,11 @@ class TemplateDeleteView(LoginRequiredMixin, View):
 
     def post(self, request, pk):
         template = get_object_or_404(Template, pk=pk)
+        LogEntry.objects.create(
+            user=request.user,
+            action="Suppression d'un template",
+            description=f"Template supprimé : {template.name}"
+        )
         template.delete()
 
         templates = Template.objects.all()
