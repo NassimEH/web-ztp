@@ -123,12 +123,11 @@ if cfg.IS_PRODUCTION:
         f"http://{cfg.HOSTNAME}:{cfg.HTTP_PORT}",
         f"http://localhost:{cfg.HTTP_PORT}",
         f"http://127.0.0.1:{cfg.HTTP_PORT}",
-        # Ajout pour l'accès depuis d'autres IPs
-        f"http://{cfg.VM_IP}:3000",
-        f"http://localhost:3000",
-        f"http://127.0.0.1:3000",
-        "http://172.16.10.30:3000",
-        "http://10.30.31.30:3000"
+        f"http://{cfg.VM_IP}:8080",
+        f"http://localhost:8080",
+        f"http://127.0.0.1:8080",
+        "http://172.16.10.30:8080",
+        "http://10.30.31.30:8080"
     ]
     
     # CSRF Configuration pour reverse proxy

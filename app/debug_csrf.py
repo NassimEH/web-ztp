@@ -84,5 +84,5 @@ def test_csrf_access(base_url):
         print(f"Error during test: {e}")
 
 if __name__ == "__main__":
-    base_url = sys.argv[1] if len(sys.argv) > 1 else "http://172.16.10.30:3000"
+    base_url = sys.argv[1] if len(sys.argv) > 1 else "http://172.16.10.30:8080"
     test_csrf_access(base_url)

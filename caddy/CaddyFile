@@ -1,4 +1,4 @@
-http://:3000 {
+http://:8080 {
    handle_path /static/* {
        root * /web/staticfiles
        file_server
@@ -16,7 +16,7 @@ http://:3000 {
            header_up X-Forwarded-For {remote}
            header_up X-Forwarded-Proto http
            header_up X-Forwarded-Host {host}
-           header_up X-Forwarded-Port 3000
+           header_up X-Forwarded-Port 8080
        }
    }
 }

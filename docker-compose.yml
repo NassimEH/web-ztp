@@ -54,7 +54,7 @@ services:
     build: caddy
     restart: always
     ports:
-      - "3000:3000"
+      - "8080:8080"
     volumes:
       - ./app/media:/web/media
       - static:/web/staticfiles
@@ -64,7 +64,7 @@ services:
       sh -c "cp Caddyfile.tmpl Caddyfile && \
       caddy run --config /etc/caddy/Caddyfile --adapter caddyfile"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
       interval: 1m30s
       timeout: 30s
       retries: 5
