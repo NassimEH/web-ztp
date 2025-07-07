@@ -1,8 +1,8 @@
 from django.conf import settings
+import env.config as cfg
 
 
-def get_site_url():
-    domain = settings.ALLOWED_HOSTS[0]
-    protocol = "https" if not settings.DEBUG else "http"
+def get_internal_url():
+    protocol = "http" if not settings.DEBUG else "http"
 
-    return f"{protocol}://{domain}"
+    return f"{protocol}://{cfg.PRIVATE_IP}:{cfg.HTTP_PORT}"
