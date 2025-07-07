@@ -1,4 +1,35 @@
 {% extends "base_with_navbar.html" %}
 
 {% block fragment %}
+<div class="dashboard-summary">
+    <h2>Résumé du réseau</h2>
+    <div class="profile-stats">
+        <div class="stat-card">
+            <h3>Équipements</h3>
+            <div class="stat-value">{{ device_count }}</div>
+            <div class="stat-label">Nombre total d'équipements</div>
+        </div>
+        <div class="stat-card">
+            <h3>Appareils configurés</h3>
+            <div class="stat-value">{{ configured_devices }}</div>
+            <div class="stat-label">Nombre d'appareils configurés</div>
+        </div>
+        <div class="stat-card">
+            <h3>Templates configurés</h3>
+            <div class="stat-value">{{ template_count }}</div>
+            <div class="stat-label">Nombre de templates</div>
+        </div>
+        <div class="stat-card">
+            <h3>Dernier équipement ajouté</h3>
+            <div class="stat-value">
+                {% if last_device %}
+                    {{ last_device.hostname }} ({{ last_device.ip }})
+                {% else %}
+                    Aucun
+                {% endif %}
+            </div>
+            <div class="stat-label">Nom et IP</div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,6 +1,8 @@
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import TemplateView
+from device.models import Device, Template
+from utils.device_utils import get_device_count, get_used_ips
 
 
 class LandingPageView(TemplateView):
@@ -13,6 +15,17 @@ class HelpPageView(TemplateView):
 
 class DashboardView(TemplateView):
     template_name = "core/dashboard.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["device_count"] = get_device_count()
+        context["configured_devices"] = Device.objects.filter(configured=True).count()
+        context["template_count"] = Template.objects.count()
+        context["active_devices"] = Device.objects.filter(configured=False).count()
+        context["dhcp_leases"] = len(get_used_ips())
+        last_device = Device.objects.order_by("-id").first()
+        context["last_device"] = last_device
+        return context
 
 
 class ConditionalRedirectView(View):
