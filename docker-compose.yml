@@ -80,6 +80,9 @@ services:
     environment:
       PRIVATE_IP: ${PRIVATE_IP}
 
+      HTTPS_PORT: ${HTTPS_PORT}
+      HTTP_PORT: ${HTTP_PORT}      
+
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
