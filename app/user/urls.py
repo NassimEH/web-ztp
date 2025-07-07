@@ -1,14 +1,14 @@
 from django.urls import path
 
 from user.views import profile_views, custom_auth_views
-
+from user.views.custom_auth_views import CustomLoginView
 
 from allauth.account.views import LoginView, SignupView
 
 urlpatterns = [
     path(
         "login/",
-        LoginView.as_view(template_name="user/login.html"),
+        CustomLoginView.as_view(template_name="user/login.html"),
         name="account_login",
     ),
     path(

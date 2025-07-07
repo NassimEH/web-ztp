@@ -26,7 +26,10 @@ class DashboardView(TemplateView):
         context["dhcp_leases"] = len(get_used_ips())
         last_device = Device.objects.order_by("-id").first()
         context["last_device"] = last_device
-        context["recent_logs"] = LogEntry.objects.select_related("user").all()[:8]
+        logs = LogEntry.objects.select_related("user").all()[:8]
+        for log in logs:
+            log.is_error_log = log.action.startswith("Erreur")
+        context["recent_logs"] = logs
         return context
 
 
