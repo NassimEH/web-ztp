@@ -1,4 +1,5 @@
 from utils import device_utils, dhcp_utils
+import env.config as cfg
 
 
 class IPaddress:
@@ -31,7 +32,7 @@ class DHCPData:
         self.subnet = self.get_subnet()
         self.min_ip_pool = self.get_min_ip_pool()
         self.max_ip_pool = self.get_max_ip_pool()
-        self.server_ip = "10.30.31.30"
+        self.server_ip = cfg.PRIVATE_IP
 
         self.generate_ip = self.get_ip_in_pool()
 
