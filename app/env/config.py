@@ -14,7 +14,8 @@ DB_PASSWORD = os.getenv("POSTGRES_PASSWORD")
 DB_HOST = os.getenv("POSTGRES_HOST")
 DB_PORT = os.getenv("POSTGRES_PORT")
 
-HOSTNAME = os.getenv("DJANGO_HOSTNAME", "localhost")
+HOSTNAME = os.getenv("HOSTNAME", "localhost")
+PRIVATE_IP = os.getenv("PRIVATE_IP")
 
 HTTPS_PORT = os.getenv("HTTPS_PORT", "443")
 HTTP_PORT = os.getenv("HTTP_PORT", "80")

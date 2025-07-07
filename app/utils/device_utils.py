@@ -2,7 +2,7 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
 from device.models import Device
-from utils.media_utils import get_site_url
+from utils.media_utils import get_internal_url
 
 
 def get_devices():
@@ -39,7 +39,7 @@ def get_template_url(serial_number):
     try:
         device = Device.objects.get(serial_number=serial_number)
         if device.template:
-            return f"{get_site_url()}{device.template.file.url}"
+            return f"{get_internal_url()}{device.template.file.url}"
     except ObjectDoesNotExist:
         return None
 
