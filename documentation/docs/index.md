@@ -31,7 +31,7 @@ Ce projet s’adresse :
 
 ```bash
 # Cloner le projet
-git clone <repo-url>
+git clone https://github.com/Chadi-Mangle/web-ztp.git
 cd web-ztp
 
 # Configurer l'environnement
