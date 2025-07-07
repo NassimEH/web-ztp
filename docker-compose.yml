@@ -26,6 +26,7 @@ services:
       - static:/app/staticfiles
     environment:
       HOSTNAME: ${HOSTNAME}
+      PRIVATE_IP: ${PRIVATE_IP}
       HTTPS_PORT: ${HTTPS_PORT}
       HTTP_PORT: ${HTTP_PORT}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
@@ -77,6 +78,8 @@ services:
     ports:
       - "67:67/udp" 
     environment:
+      PRIVATE_IP: ${PRIVATE_IP}
+
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
