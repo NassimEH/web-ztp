@@ -20,6 +20,11 @@
             <div class="stat-label">Nombre de templates</div>
         </div>
         <div class="stat-card">
+            <h3>Équipements orphelins</h3>
+            <div class="stat-value">{{ orphan_devices }}</div>
+            <div class="stat-label">Sans template associé</div>
+        </div>
+        <div class="stat-card">
             <h3>Dernier équipement ajouté</h3>
             <div class="stat-value">
                 {% if last_device %}
