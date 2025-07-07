@@ -37,6 +37,7 @@ nav:
   - Configuration: configuration.md
   - Utilisation: utilisation.md
   - Structure du projet: structure.md
+  - Template : template.md
 
 markdown_extensions:
   - admonition
