@@ -17,6 +17,7 @@ DB_PORT = os.getenv("POSTGRES_PORT")
 HOSTNAME = os.getenv("HOSTNAME", "localhost")
 PRIVATE_IP = os.getenv("PRIVATE_IP")
 
-HTTPS_PORT = os.getenv("HTTPS_PORT", "443")
-HTTP_PORT = os.getenv("HTTP_PORT", "80")
+HTTPS_PORT = os.getenv("HTTPS_PORT")
+HTTP_PORT = os.getenv("HTTP_PORT")
+
 ALLOWED_HOSTS_LIST = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
