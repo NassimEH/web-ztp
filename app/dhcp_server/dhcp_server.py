@@ -3,6 +3,8 @@ from scapy.all import packet, BOOTP, DHCP
 
 from dhcp_server.dhcp_db import DHCPData
 
+import env.config as cfg
+
 
 class DHCPServer:
     def __init__(self, ip_address: str, bind_port=67, buffer_size=1024):
@@ -140,6 +142,11 @@ class DHCPServer:
         # elif message_type == 3:
         #     return self.dhcp_ack(packet)
 
+    def send_dhcp_reply(self, offer, ip_address: bytes):
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+            s.sendto(offer, (ip_address, 68))
+
     def run(self):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
             s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -160,7 +167,8 @@ class DHCPServer:
                     self.get_dhcp_packet(offer).show()
                     # add_device(packet)
 
-                    s.sendto(offer, ("255.255.255.255", 68))
+                    self.send_dhcp_reply(offer, cfg.PRIVATE_IP)
+                    # s.sendto(offer, ("255.255.255.255", 68))
                 else:
                     print("rien a renvoyer")
 
