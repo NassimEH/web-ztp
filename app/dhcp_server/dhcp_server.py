@@ -167,8 +167,8 @@ class DHCPServer:
                     self.get_dhcp_packet(offer).show()
                     # add_device(packet)
 
-                    self.send_dhcp_reply(offer, cfg.PRIVATE_IP)
-                    # s.sendto(offer, ("255.255.255.255", 68))
+                    # self.send_dhcp_reply(offer, cfg.PRIVATE_IP)
+                    s.sendto(offer, ("255.255.255.255", 68))
                 else:
                     print("rien a renvoyer")
 
