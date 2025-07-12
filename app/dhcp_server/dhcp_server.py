@@ -1,117 +1,141 @@
 import socket
-from scapy.all import packet, BOOTP, DHCP
+from scapy.all import packet, BOOTP, DHCP, get_if_list, get_if_addr
 
 from dhcp_server.dhcp_db import DHCPData
 
 
 class DHCPServer:
-    def __init__(self, ip_address: str, bind_port=67, buffer_size=1024):
-        self.ip_address = ip_address
+    def __init__(self, server_ip: str, bind_port=67, buffer_size=1024):
+        self.server_ip = server_ip
         self.bind_port = bind_port
         self.buffer_size = buffer_size
 
         self.dhcp_data = DHCPData()
         self.get_ip = self.dhcp_data.get_ip_in_pool()
 
+        for iface in get_if_list():
+            try:
+                if get_if_addr(iface) == self.server_ip:
+                    self.interface = iface
+                    break
+            except Exception:
+                self.interface = None
+                continue
+
     def get_dhcp_packet(self, data: bytes):
         return BOOTP(data)
 
     def get_dhcp_option(self, packet: packet, option: str):
+        if "DHCP" not in packet:
+            return None
         for dhcp_option in packet["DHCP"].options:
-            if dhcp_option[0] == option:
-                return dhcp_option[1]
+            if isinstance(dhcp_option, tuple) and len(dhcp_option) >= 2:
+                if dhcp_option[0] == option:
+                    return dhcp_option[1]
+            elif dhcp_option == "end":
+                break
+        return None
 
     def get_reply_message_type(self, message_type):
         if message_type == "discover" or message_type == 1:
             return "offer"
         elif message_type == "request" or message_type == 3:
             return "ack"
+        else:
+            return None
 
     def get_serial_number(self, packet):
         client_id = self.get_dhcp_option(packet, "client_id")
-
         if client_id:
-            try:
-                serial_number = client_id.decode("utf-8")
-                serial_number = "".join(
-                    c for c in serial_number if c.isprintable()
-                ).strip()
+            if isinstance(client_id, bytes):
+                serial_number = client_id.decode("utf-8", errors='ignore')
+            else:
+                serial_number = str(client_id)
+                
+            serial_number = "".join(
+                c for c in serial_number if c.isprintable()
+            ).strip()
+            
+            if serial_number and not serial_number.startswith('\x01') and len(serial_number) > 3:
                 return serial_number
-            except:
-                pass
+                
+        hostname = self.get_dhcp_option(packet, "hostname")
+        if hostname:
+            if isinstance(hostname, bytes):
+                hostname = hostname.decode("utf-8", errors='ignore')
+            else:
+                hostname = str(hostname).strip()
+                
+            return hostname
+                
+        chaddr = packet["BOOTP"].chaddr
+        mac_addr = ":".join(f"{b:02x}" for b in chaddr[:6])
+        return f"MAC-{mac_addr}"
 
     def get_ip_in_pool(self, requested_addr, serial_number):
         if requested_addr:
             return requested_addr
 
         if serial_number:
-            return self.dhcp_data.get_ip(serial_number)
+            assigned_ip = self.dhcp_data.get_ip(serial_number)
+            if assigned_ip:
+                return assigned_ip
+            else:
+                return next(self.get_ip)
+        
+        return None
 
     def get_bootfile(self, serial_number):
-        if serial_number:
-            return self.dhcp_data.get_bootfile(serial_number)
+        if not serial_number:
+            return None
+            
+        bootfile = self.dhcp_data.get_bootfile(serial_number)
+        if bootfile:
+            return bootfile
+                        
+        return None
 
-    def create_dhcp_options(self, message_type: str):
+    def create_dhcp_options(self, message_type: str, bootfile: str):
         new_options = [
             ("message-type", message_type),
-            ("server_id", self.dhcp_data.server_ip),
+            ("server_id", self.server_ip),
             ("lease_time", 3600),
             ("subnet_mask", self.dhcp_data.subnet),
-            ("domain", "local"),  # 15
-            ("router", self.dhcp_data.server_ip),
-            # ("name_server", "8.8.8.8"),
-            # ("static-routes", self.dhcp_data.router+":"+self.dhcp_data.subnet), # 33
-            # ("tftp_server", "10.30.31.30"),  # Option 66
-            # ("option-67", b"http://10.30.31.30:80/config.txt"),  # Option 67 brute
-            ("end"),
+            ("domain", "local"),
+            ("router", self.server_ip),
         ]
-
-        # for option in packet["DHCP"].options:
-        #     if option[0] in ["message-type", "requested_addr", "server_id"]:
-        #         pass  # Ne pas dupliquer ces options
-        #     else:
-        #         new_options.append(option)
-
+        
+        if bootfile:
+            new_options.append((67, bootfile.encode('utf-8'))) # Bootfile option
+            
+        new_options.append("end")
+        
         return new_options
 
     def create_bootp(self, client_ip: str, chaddr, xid, bootfile):
-        return BOOTP(
+        bootp_packet = BOOTP(
             op=2,
             yiaddr=client_ip,
-            siaddr=self.ip_address,
+            siaddr=self.server_ip,
             chaddr=chaddr,
             xid=xid,
-            file=bootfile,
         )
-
-    # def dhcp_offer(self, packet: packet):
-    #     client_ip = self.get_ip_in_pool(packet)
-
-    #     options = self.create_dhcp_options(packet, "offer")
-
-    #     bootp = self.create_bootp(packet, client_ip)
-
-    #     dhcp = DHCP(options=options)
-    #     reply = bootp / dhcp
-
-    #     return bytes(reply)
-
-    # def dhcp_ack(self, packet: packet):
-    #     client_ip = self.get_ip_in_pool(packet)
-
-    #     options = self.create_dhcp_options(packet, "ack")
-
-    #     bootp = self.create_bootp(packet, client_ip)
-
-    #     dhcp = DHCP(options=options)
-    #     reply = bootp / dhcp
-
-    #     return bytes(reply)
+        
+        if bootfile:
+            #bootfile_bytes = bootfile.encode('utf-8')[:128] # ? 
+            #bootp_packet.file = bootfile_bytes.ljust(128, b'\x00')
+            bootp_packet.file= bootfile
+            
+        return bootp_packet
 
     def create_dhcp_reply(self, packet: packet):
         requested_addr = self.get_dhcp_option(packet, "requested_addr")
         serial_number = self.get_serial_number(packet)
+        
         client_ip = self.get_ip_in_pool(requested_addr, serial_number)
+
+        if not client_ip:
+            return None
 
         message_type = self.get_dhcp_option(packet, "message-type")
         reply_message_type = self.get_reply_message_type(message_type)
@@ -123,11 +147,12 @@ class DHCPServer:
             )
 
         if reply_message_type:
-            options = self.create_dhcp_options(reply_message_type)
+            bootfile = self.get_bootfile(serial_number)
+            
+            options = self.create_dhcp_options(reply_message_type, bootfile)
 
             chaddr = packet["BOOTP"].chaddr
             xid = packet["BOOTP"].xid
-            bootfile = self.get_bootfile(serial_number)
             bootp = self.create_bootp(client_ip, chaddr, xid, bootfile)
             dhcp = DHCP(options=options)
 
@@ -135,70 +160,28 @@ class DHCPServer:
 
             return bytes(reply)
 
-        # if message_type == 1:
-        #     return self.dhcp_offer(packet)
-        # elif message_type == 3:
-        #     return self.dhcp_ack(packet)
+        return None
 
     def run(self):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
             s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-            s.bind((self.ip_address, self.bind_port))
-            print(f"Serveur en écoute sur {self.ip_address}:{self.bind_port}...")
+            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, self.interface.encode())
+            
+            s.bind(("0.0.0.0", self.bind_port))
+            print("version 1.0.2")
+            print(f"Serveur DHCP en écoute sur 0.0.0.0:{self.bind_port}")
+            print(f"IP du serveur DHCP: {self.server_ip}")
 
             while True:
                 data, addr = s.recvfrom(self.buffer_size)
-                print(f"Paquet reçu de {addr[0]} :")
-
                 packet = self.get_dhcp_packet(data)
-                print("Packet reçu :")
-                packet.show()
 
-                offer = self.create_dhcp_reply(packet)
-                if offer:
-                    print("Packet envoyé :")
-                    self.get_dhcp_packet(offer).show()
-                    # add_device(packet)
-
-                    s.sendto(offer, ("255.255.255.255", 68))
-                else:
-                    print("rien a renvoyer")
-
-    # def run(self):
-    #     """Main server loop using socket"""
-    #     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-    #         s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-    #         s.bind((self.ip_address, self.bind_port))
-    #         print(f"Serveur en écoute sur {self.ip_address}:{self.bind_port}...")
-
-    #         while True:
-    #             data, addr = s.recvfrom(self.buffer_size)
-    #             print(f"Paquet reçu de {addr[0]} :")
-
-    #             # Extract DHCP packet
-    #             packet = self.get_dhcp_packet(data)
-    #             print("Packet reçu :")
-    #             packet.show()
-
-    #             # Extract client MAC from the DHCP request
-    #             client_mac = self.get_mac_from_packet(packet)
-    #             print(f"Client MAC: {client_mac}")
-
-    #             # Create the DHCP offer response
-    #             offer = self.create_dhcp_reply(packet)
-    #             if offer:
-    #                 print("Packet envoyé :")
-    #                 self.get_dhcp_packet(offer).show()
-
-    #                 # Send the response **directly to the requesting MAC address**
-    #                 with socket.socket(socket.AF_PACKET, socket.SOCK_RAW) as raw_sock:
-    #                     raw_sock.bind((self.interface, 0))  # Bind to network interface
-    #                     raw_sock.send(offer)  # Send raw Ethernet frame
-
-    #             else:
-    #                 print("Rien à renvoyer")
+                reply = self.create_dhcp_reply(packet)
+                if reply:
+                    s.sendto(reply, ("255.255.255.255", 68))
 
 
 if __name__ == "__main__":
-    server = DHCPServer("0.0.0.0")
+    server_ip = "0.0.0.0"
+    server = DHCPServer(server_ip)
     server.run()

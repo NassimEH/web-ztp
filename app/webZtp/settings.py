@@ -57,13 +57,22 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
-ACCOUNT_SESSION_REMEMBER = True  # Respect the "remember me" checkbox
+# Configuration correcte pour django-allauth selon la documentation
 ACCOUNT_LOGIN_METHOD = "username"
 ACCOUNT_SIGNUP_FIELDS = ["username*", "password1*", "password2*"]
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
 ACCOUNT_SIGNUP_REDIRECT_URL = "/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/login/"
+
+# Configuration "Remember Me" - selon la doc django-allauth moderne
+ACCOUNT_SESSION_REMEMBER = None  # Permet à l'utilisateur de choisir avec la checkbox
+ACCOUNT_REMEMBER_ME = None  # None = affiche la checkbox, True = force activé, False = désactivé
+
+# Sécurité login - nouvelle syntaxe django-allauth
+ACCOUNT_RATE_LIMITS = {
+    'login_failed': '5/5m/ip',  # 5 tentatives max par 5 minutes par IP
+}
 
 # Crispy Forms settings
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -128,10 +137,11 @@ if cfg.IS_PRODUCTION:
     ]
 
     # CSRF Configuration pour reverse proxy
-    CSRF_USE_SESSIONS = False
+    CSRF_USE_SESSIONS = True  # Utilise les sessions pour le CSRF
     CSRF_COOKIE_HTTPONLY = False  # Permet au JS d'accéder au cookie CSRF
     CSRF_COOKIE_SAMESITE = "Lax"
     CSRF_COOKIE_SECURE = False  # Important: False pour HTTP
+    CSRF_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 jours
 
     # Security headers
     SECURE_BROWSER_XSS_FILTER = True
@@ -220,7 +230,23 @@ AUTH_USER_MODEL = "auth.User"
 
 LOGIN_URL = "/login/"
 
-# --- Paramètres de session pour une durée longue ---
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 14  # 2 semaines
+# --- Configuration de session unifiée pour éviter les déconnexions ---
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Utilise la DB pour les sessions
+SESSION_COOKIE_NAME = 'webztp_sessionid'  # Nom personnalisé pour éviter les conflits
+SESSION_COOKIE_SAMESITE = 'Lax'  # Protection CSRF tout en gardant la compatibilité
+SESSION_COOKIE_HTTPONLY = True  # Sécurité : empêche l'accès JS aux cookies de session
+SESSION_COOKIE_SECURE = False  # False pour HTTP, True pour HTTPS
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 jours par défaut
 SESSION_SAVE_EVERY_REQUEST = True  # Prolonge la session à chaque requête
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Ne pas supprimer la session à la fermeture du navigateur
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Sessions persistantes même après fermeture navigateur
+
+# Configuration CSRF unifiée
+CSRF_USE_SESSIONS = True  # Utilise les sessions pour stocker les tokens CSRF
+CSRF_COOKIE_HTTPONLY = False  # Permet au JS d'accéder au cookie CSRF si nécessaire
+CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SECURE = False  # False pour HTTP
+CSRF_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 jours
+
+# Configuration spéciale pour le "Remember Me" de django-allauth
+# Quand l'utilisateur coche "Se souvenir de moi", la session dure plus longtemps
+ACCOUNT_SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 jours si "remember me" coché
