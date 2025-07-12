@@ -51,7 +51,7 @@ class DHCPData:
     def get_bootfile(self, serial_number):
         return device_utils.get_template_url(serial_number)
 
-    def get_ip_in_pool(self) -> str:
+    def get_ip_in_pool(self):
         ip_address = IPaddress(self.min_ip_pool)
         max_ip_address = IPaddress(self.max_ip_pool)
 
@@ -66,7 +66,14 @@ class DHCPData:
     def create_or_update_device(
         self, serial_number: str, ip: str, hostname: str, configured: bool
     ) -> None:
-        device_utils.create_or_update_device(serial_number, ip, hostname, configured)
+        print(f"DHCPData.create_or_update_device appelée avec: {serial_number}, {ip}, {hostname}, {configured}")
+        try:
+            device_utils.create_or_update_device(serial_number, ip, hostname, configured)
+            print(f"device_utils.create_or_update_device terminée avec succès")
+        except Exception as e:
+            print(f"Erreur dans DHCPData.create_or_update_device: {e}")
+            import traceback
+            traceback.print_exc()
 
     def get_ip(self, serial_number: str):
         if serial_number:

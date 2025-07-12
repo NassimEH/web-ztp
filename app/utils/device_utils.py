@@ -36,11 +36,19 @@ def get_device_by_serial(serial_number):
 
 
 def get_template_url(serial_number):
+    print(f"Recherche du template pour serial_number: '{serial_number}'")
     try:
         device = Device.objects.get(serial_number=serial_number)
+        print(f"Device trouvé: {device}")
         if device.template:
-            return f"{get_internal_url()}{device.template.file.url}"
+            template_url = f"{get_internal_url()}{device.template.file.url}"
+            print(f"Template URL généré: {template_url}")
+            return template_url
+        else:
+            print(f"Aucun template assigné au device {serial_number}")
+            return None
     except ObjectDoesNotExist:
+        print(f"Device avec serial_number '{serial_number}' non trouvé en base")
         return None
 
 
@@ -61,12 +69,13 @@ def create_or_update_device(serial_number, ip, hostname, configured) -> None:
                 "configured": configured,
             },
         )
-
+        
         if not created:
             device.ip = ip
             if hostname:
                 device.hostname = hostname
             device.configured = configured
             device.save()
+            
     except IntegrityError:
         pass
