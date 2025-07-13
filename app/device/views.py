@@ -1,5 +1,8 @@
+import os
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
+from django.http import HttpResponse
+from jinja2 import Environment
 from .forms import (
     DeviceForm,
     TemplateForm,
@@ -245,3 +248,55 @@ class TemplateDeleteView(LoginRequiredMixin, View):
         return render(
             request, "device/template_table_fragment.html", {"templates": templates}
         )
+
+
+class DeviceTemplateView(View):
+    """Vue pour afficher le template d'un device avec les variables remplacées"""
+
+    def get(self, request, pk):
+        device = get_object_or_404(Device, pk=pk)
+
+        # Vérifier que le device a un template associé
+        if not device.template or not device.template.file:
+            return HttpResponse(
+                "Aucun template associé à cet appareil.",
+                content_type="text/plain",
+                status=404,
+            )
+
+        try:
+            # Lire le contenu du template
+            device.template.file.seek(0)
+            template_content = device.template.file.read().decode("utf-8")
+
+            # Créer un environnement Jinja2
+            env = Environment()
+            template = env.from_string(template_content)
+
+            # Rendre le template avec les variables du device
+            rendered_content = template.render(device.template_variables)
+
+            # Créer la réponse avec le contenu rendu
+            response = HttpResponse(rendered_content, content_type="text/plain")
+
+            # Ajouter un en-tête pour suggérer le nom du fichier avec l'extension originale
+            original_filename = os.path.basename(device.template.file.name)
+            name_without_ext, ext = os.path.splitext(original_filename)
+            filename = f"{device.hostname}_{device.template.name}{ext}"
+            response["Content-Disposition"] = f'inline; filename="{filename}"'
+
+            # Log de l'action
+            LogEntry.objects.create(
+                user=request.user if request.user.is_authenticated else None,
+                action="Affichage template device",
+                description=f"Template affiché pour l'appareil : {device.hostname}",
+            )
+
+            return response
+
+        except Exception as e:
+            return HttpResponse(
+                f"Erreur lors du rendu du template : {str(e)}",
+                content_type="text/plain",
+                status=500,
+            )

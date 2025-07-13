@@ -25,6 +25,13 @@
            aria-label="Modifier {{ device.hostname }}">
             <ion-icon name="settings-outline"></ion-icon>
         </a>
+        {% if device.template %}
+        <a href="{% url 'device_template' device.pk %}" class="btn btn-outline-info" style="min-width: 0px"
+           target="_blank"
+           aria-label="Voir le template de {{ device.hostname }}">
+            <ion-icon name="document-text-outline"></ion-icon>
+        </a>
+        {% endif %}
         <a href="{% url 'device_delete' device.pk %}" class="btn btn-outline-danger" style="min-width: 0px" 
            up-layer="new modal"
            aria-label="Supprimer {{ device.hostname }}">

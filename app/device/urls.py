@@ -9,6 +9,7 @@ from .views import (
     TemplateListView,
     TemplateUpdateView,
     TemplateDeleteView,
+    DeviceTemplateView,
 )
 
 urlpatterns = [
@@ -16,6 +17,11 @@ urlpatterns = [
     path("device/add/", DeviceFormView.as_view(), name="device_add"),
     path("device/<int:pk>/edit/", DeviceUpdateView.as_view(), name="device_update"),
     path("device/<int:pk>/delete/", DeviceDeleteView.as_view(), name="device_delete"),
+    path(
+        "device/<int:pk>/template/",
+        DeviceTemplateView.as_view(),
+        name="device_template",
+    ),
     path("devices/", DeviceListView.as_view(), name="device_list"),
     # Template URLs
     path("template/", TemplateListView.as_view(), name="template_list"),
