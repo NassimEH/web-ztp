@@ -41,7 +41,7 @@ def get_template_url(serial_number):
         device = Device.objects.get(serial_number=serial_number)
         print(f"Device trouvé: {device}")
         if device.template:
-            template_url = f"{get_internal_url()}{device.template.file.url}"
+            template_url = f"{get_internal_url()}/device/{device.id}/template/"
             print(f"Template URL généré: {template_url}")
             return template_url
         else:
@@ -69,13 +69,13 @@ def create_or_update_device(serial_number, ip, hostname, configured) -> None:
                 "configured": configured,
             },
         )
-        
+
         if not created:
             device.ip = ip
             if hostname:
                 device.hostname = hostname
             device.configured = configured
             device.save()
-            
+
     except IntegrityError:
         pass
