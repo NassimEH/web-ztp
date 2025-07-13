@@ -9,6 +9,12 @@ class DeviceForm(forms.ModelForm):
     template = forms.ModelChoiceField(
         queryset=Template.objects.all(),
         required=False,
+        widget=forms.Select(
+            attrs={
+                "class": "form-control",
+                "id": "id_template",
+            }
+        ),
     )
 
     ip = forms.GenericIPAddressField(
@@ -22,10 +28,6 @@ class DeviceForm(forms.ModelForm):
             "ip",
             "hostname",
             "template",
-            "subnet_mask",
-            "default_gateway",
-            "login",
-            "password",
         ]
 
     def __init__(self, *args, **kwargs):
@@ -33,25 +35,121 @@ class DeviceForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = "post"
 
+        # Ajouter dynamiquement les champs basés sur les variables du template
+        self._add_template_variable_fields()
+
+        # Configurer l'URL de validation pour up-validate
+        if hasattr(self, "instance") and self.instance.pk:
+            validate_url = f"/device/{self.instance.pk}/edit/validate/"
+        else:
+            validate_url = "/device/add/validate/"
+
+        # Ajouter l'attribut up-validate au champ template
+        self.fields["template"].widget.attrs.update(
+            {
+                "up-validate": "#template-variables-accordion",
+                "up-validate-url": validate_url,
+            }
+        )
+
         submit_text = "Mettre à jour" if self.instance.pk else "Enregistrer"
 
-        self.helper.layout = Layout(
-            "serial_number",
-            "hostname",
-            "ip",
-            "template",
-            Accordion(
-                AccordionGroup(
-                    "Champs de configuration ZTP",
-                    "subnet_mask",
-                    "default_gateway",
-                    "login",
-                    "password",
-                    css_class="accordion-item",
+        # Construire le layout avec les champs des variables du template
+        template_fields = self._get_template_variable_field_names()
+
+        if template_fields:
+            self.helper.layout = Layout(
+                "serial_number",
+                "hostname",
+                "ip",
+                "template",
+                HTML('<div id="template-variables-accordion">'),
+                Accordion(
+                    AccordionGroup(
+                        "Variables du template",
+                        *template_fields,
+                        css_class="accordion-item",
+                    ),
                 ),
-            ),
-            Submit("submit", submit_text, css_class="mt-3"),
-        )
+                HTML("</div>"),
+                Submit("submit", submit_text, css_class="mt-3"),
+            )
+        else:
+            self.helper.layout = Layout(
+                "serial_number",
+                "hostname",
+                "ip",
+                "template",
+                HTML('<div id="template-variables-accordion">'),
+                HTML(
+                    '<p class="text-muted">Sélectionnez un template pour voir les variables</p>'
+                ),
+                HTML("</div>"),
+                Submit("submit", submit_text, css_class="mt-3"),
+            )
+
+    def _add_template_variable_fields(self):
+        """Ajoute dynamiquement des champs pour les variables du template"""
+        template = None
+
+        # Récupérer le template depuis l'instance existante ou depuis les données POST
+        if self.instance.pk and self.instance.template:
+            template = self.instance.template
+        elif "template" in self.data and self.data["template"]:
+            try:
+                template = Template.objects.get(pk=self.data["template"])
+            except Template.DoesNotExist:
+                pass
+
+        if template and template.variables:
+            for variable in template.variables:
+                field_name = f"template_var_{variable}"
+
+                # Récupérer la valeur existante depuis template_variables
+                initial_value = ""
+                if self.instance.pk and self.instance.template_variables:
+                    initial_value = self.instance.template_variables.get(variable, "")
+
+                # Créer un champ texte pour chaque variable
+                self.fields[field_name] = forms.CharField(
+                    label=variable.replace("_", " ").title(),
+                    required=False,
+                    initial=initial_value,
+                    help_text=f"Variable du template: {variable}",
+                    widget=forms.TextInput(
+                        attrs={
+                            "class": "form-control",
+                            "placeholder": f"Valeur pour {variable}",
+                        }
+                    ),
+                )
+
+    def _get_template_variable_field_names(self):
+        """Retourne la liste des noms de champs pour les variables du template"""
+        field_names = []
+        for field_name in self.fields:
+            if field_name.startswith("template_var_"):
+                field_names.append(field_name)
+        return field_names
+
+    def get_template_variables_data(self):
+        """Récupère les données des variables du template depuis le formulaire"""
+        variables_data = {}
+        for field_name, value in self.cleaned_data.items():
+            if field_name.startswith("template_var_") and value:
+                variable_name = field_name.replace("template_var_", "")
+                variables_data[variable_name] = value
+        return variables_data
+
+    def save(self, commit=True):
+        """Sauvegarde le device avec les variables du template"""
+        device = super().save(commit=False)
+
+        device.template_variables = self.get_template_variables_data()
+
+        if commit:
+            device.save()
+        return device
 
 
 class DHCPConfigForm(forms.ModelForm):
@@ -61,9 +159,9 @@ class DHCPConfigForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={"class": "form-control", "placeholder": "192.168.1.0"}
         ),
-        help_text="Adresse réseau de base (ex: 192.168.1.0, 10.0.0.0)"
+        help_text="Adresse réseau de base (ex: 192.168.1.0, 10.0.0.0)",
     )
-    
+
     min_ip_manual = forms.GenericIPAddressField(
         required=False,
         label="IP minimum",
@@ -89,9 +187,7 @@ class DHCPConfigForm(forms.ModelForm):
                 attrs={"class": "form-control", "placeholder": "255.255.255.0"}
             ),
         }
-        labels = {
-            "subnet": "Masque de sous-réseau"
-        }
+        labels = {"subnet": "Masque de sous-réseau"}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -100,14 +196,14 @@ class DHCPConfigForm(forms.ModelForm):
         self.helper.form_id = "dhcp-config-form"
 
         if self.instance.pk:
-            self.fields['min_ip_manual'].initial = self.instance.min_ip_pool
-            self.fields['max_ip_manual'].initial = self.instance.max_ip_pool
-            
+            self.fields["min_ip_manual"].initial = self.instance.min_ip_pool
+            self.fields["max_ip_manual"].initial = self.instance.max_ip_pool
+
             if self.instance.min_ip_pool:
-                ip_parts = self.instance.min_ip_pool.split('.')
+                ip_parts = self.instance.min_ip_pool.split(".")
                 if len(ip_parts) == 4:
                     network_base = f"{ip_parts[0]}.{ip_parts[1]}.{ip_parts[2]}.0"
-                    self.fields['network_base'].initial = network_base
+                    self.fields["network_base"].initial = network_base
 
         self.helper.layout = Layout(
             Accordion(
@@ -143,7 +239,7 @@ class DHCPConfigForm(forms.ModelForm):
                         <div class="text-muted small">
                             <i class="fas fa-info-circle"></i> Le slider se synchronise automatiquement avec la saisie manuelle
                         </div>
-                    """
+                        """
                     ),
                     "min_ip_pool",
                     "max_ip_pool",
@@ -155,30 +251,35 @@ class DHCPConfigForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        
-        network_base = cleaned_data.get('network_base')
-        
-        min_ip_manual = cleaned_data.get('min_ip_manual')
-        max_ip_manual = cleaned_data.get('max_ip_manual')
-        
+
+        network_base = cleaned_data.get("network_base")
+        min_ip_manual = cleaned_data.get("min_ip_manual")
+        max_ip_manual = cleaned_data.get("max_ip_manual")
+
         if min_ip_manual:
-            cleaned_data['min_ip_pool'] = min_ip_manual
+            cleaned_data["min_ip_pool"] = min_ip_manual
         if max_ip_manual:
-            cleaned_data['max_ip_pool'] = max_ip_manual
-        
+            cleaned_data["max_ip_pool"] = max_ip_manual
+
         if network_base:
-            network_parts = network_base.split('.')
+            network_parts = network_base.split(".")
             network_prefix = f"{network_parts[0]}.{network_parts[1]}.{network_parts[2]}"
-            
-            min_ip = cleaned_data.get('min_ip_pool')
-            max_ip = cleaned_data.get('max_ip_pool')
-            
+
+            min_ip = cleaned_data.get("min_ip_pool")
+            max_ip = cleaned_data.get("max_ip_pool")
+
             if min_ip and not min_ip.startswith(network_prefix):
-                self.add_error('min_ip_manual', f'L\'IP minimum doit être dans le réseau {network_prefix}.x')
-            
+                self.add_error(
+                    "min_ip_manual",
+                    f"L'IP minimum doit être dans le réseau {network_prefix}.x",
+                )
+
             if max_ip and not max_ip.startswith(network_prefix):
-                self.add_error('max_ip_manual', f'L\'IP maximum doit être dans le réseau {network_prefix}.x')
-            
+                self.add_error(
+                    "max_ip_manual",
+                    f"L'IP maximum doit être dans le réseau {network_prefix}.x",
+                )
+
         return cleaned_data
 
 

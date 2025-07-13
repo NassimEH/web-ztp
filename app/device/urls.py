@@ -30,4 +30,11 @@ urlpatterns = [
     ),
     # DHCP URLs
     path("dhcp/update/", DHCPFormView.as_view(), name="dhcp_config_update"),
+    # Validation URLs
+    path("device/add/validate/", DeviceFormView.as_view(), name="device_add_validate"),
+    path(
+        "device/<int:pk>/edit/validate/",
+        DeviceUpdateView.as_view(),
+        name="device_update_validate",
+    ),
 ]

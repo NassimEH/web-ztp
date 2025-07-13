@@ -32,12 +32,42 @@ class DeviceFormView(LoginRequiredMixin, CreateView):
         context["action"] = self.request.path
         return context
 
+    def post(self, request, *args, **kwargs):
+        # Initialiser self.object pour éviter l'erreur AttributeError
+        self.object = None
+
+        # Si c'est une URL de validation (/validate/)
+        if "validate" in request.path:
+            # C'est une validation, pas une soumission réelle
+            # Créer un formulaire avec les données POST pour déclencher _add_template_variable_fields
+            form = self.form_class(data=request.POST)
+            context = self.get_context_data(form=form)
+            context["title"] = "Ajouter l'appareil"
+            context["action"] = self.request.path.replace(
+                "/validate/", "/"
+            )  # URL normale pour le form action
+            return self.render_to_response(context)
+
+        # Si c'est une requête Unpoly pour validation (changement de template)
+        is_unpoly_validation = "X-Up-Validate" in request.headers
+
+        if is_unpoly_validation:
+            # C'est une validation, pas une soumission réelle
+            # Créer un formulaire avec les données POST pour déclencher _add_template_variable_fields
+            form = self.form_class(data=request.POST)
+            context = self.get_context_data(form=form)
+            context["title"] = "Ajouter l'appareil"
+            context["action"] = self.request.path
+            return self.render_to_response(context)
+        # Sinon, traitement normal du formulaire
+        return super().post(request, *args, **kwargs)
+
     def form_valid(self, form):
         response = super().form_valid(form)
         LogEntry.objects.create(
             user=self.request.user,
             action="Ajout d'un appareil",
-            description=f"Appareil ajouté : {self.object.hostname} ({self.object.ip})"
+            description=f"Appareil ajouté : {self.object.hostname} ({self.object.ip})",
         )
         return response
 
@@ -45,7 +75,7 @@ class DeviceFormView(LoginRequiredMixin, CreateView):
         LogEntry.objects.create(
             user=self.request.user if self.request.user.is_authenticated else None,
             action="Erreur ajout appareil",
-            description=f"Échec lors de l'ajout d'un appareil. Erreurs : {form.errors.as_text()}"
+            description=f"Échec lors de l'ajout d'un appareil. Erreurs : {form.errors.as_text()}",
         )
         return super().form_invalid(form)
 
@@ -62,12 +92,40 @@ class DeviceUpdateView(LoginRequiredMixin, UpdateView):
         context["action"] = self.request.path
         return context
 
+    def post(self, request, *args, **kwargs):
+        # Si c'est une URL de validation (/validate/)
+        if "validate" in request.path:
+            # C'est une validation, pas une soumission réelle
+            # Créer un formulaire avec les données POST pour déclencher _add_template_variable_fields
+            form = self.form_class(data=request.POST, instance=self.get_object())
+            context = self.get_context_data(form=form)
+            context["title"] = "Modifier l'appareil"
+            context["action"] = self.request.path.replace(
+                "/validate/", "/"
+            )  # URL normale pour le form action
+            return self.render_to_response(context)
+
+        # Si c'est une requête Unpoly pour validation (changement de template)
+        is_unpoly_validation = "X-Up-Validate" in request.headers
+
+        if is_unpoly_validation:
+            # C'est une validation, pas une soumission réelle
+            # Créer un formulaire avec les données POST pour déclencher _add_template_variable_fields
+            form = self.form_class(data=request.POST, instance=self.get_object())
+            context = self.get_context_data(form=form)
+            context["title"] = "Modifier l'appareil"
+            context["action"] = self.request.path
+            return self.render_to_response(context)
+
+        # Sinon, traitement normal du formulaire
+        return super().post(request, *args, **kwargs)
+
     def form_valid(self, form):
         response = super().form_valid(form)
         LogEntry.objects.create(
             user=self.request.user,
             action="Modification d'un appareil",
-            description=f"Appareil modifié : {self.object.hostname} ({self.object.ip})"
+            description=f"Appareil modifié : {self.object.hostname} ({self.object.ip})",
         )
         return response
 
@@ -100,7 +158,7 @@ class TemplateFormView(LoginRequiredMixin, CreateView):
         LogEntry.objects.create(
             user=self.request.user,
             action="Ajout d'un template",
-            description=f"Template ajouté : {self.object.name}"
+            description=f"Template ajouté : {self.object.name}",
         )
         return response
 
@@ -108,7 +166,7 @@ class TemplateFormView(LoginRequiredMixin, CreateView):
         LogEntry.objects.create(
             user=self.request.user if self.request.user.is_authenticated else None,
             action="Erreur ajout template",
-            description=f"Échec lors de l'ajout d'un template. Erreurs : {form.errors.as_text()}"
+            description=f"Échec lors de l'ajout d'un template. Erreurs : {form.errors.as_text()}",
         )
         return super().form_invalid(form)
 
@@ -126,7 +184,7 @@ class DeviceDeleteView(LoginRequiredMixin, View):
         LogEntry.objects.create(
             user=request.user,
             action="Suppression d'un appareil",
-            description=f"Appareil supprimé : {device.hostname} ({device.ip})"
+            description=f"Appareil supprimé : {device.hostname} ({device.ip})",
         )
         device.delete()
 
@@ -161,7 +219,7 @@ class TemplateUpdateView(LoginRequiredMixin, UpdateView):
         LogEntry.objects.create(
             user=self.request.user,
             action="Modification d'un template",
-            description=f"Template modifié : {self.object.name}"
+            description=f"Template modifié : {self.object.name}",
         )
         return response
 
@@ -179,7 +237,7 @@ class TemplateDeleteView(LoginRequiredMixin, View):
         LogEntry.objects.create(
             user=request.user,
             action="Suppression d'un template",
-            description=f"Template supprimé : {template.name}"
+            description=f"Template supprimé : {template.name}",
         )
         template.delete()
 
