@@ -172,9 +172,12 @@ class DHCPServer:
     def run(self):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
             s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-            s.setsockopt(
-                socket.SOL_SOCKET, socket.SO_REUSEADDR, self.interface.encode()
-            )
+            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+            if self.interface:
+                s.setsockopt(
+                    socket.SOL_SOCKET, socket.SO_BINDTODEVICE, self.interface.encode()
+                )
 
             s.bind(("0.0.0.0", self.bind_port))
             print(f"Serveur DHCP en écoute sur 0.0.0.0:{self.bind_port}")
