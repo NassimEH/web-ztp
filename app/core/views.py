@@ -31,16 +31,12 @@ class DashboardView(TemplateView):
         for log in logs:
             log.is_error_log = log.action.startswith("Erreur")
         context["recent_logs"] = logs
-        # Répartition des équipements par template
         context["devices_by_template"] = Template.objects.annotate(nb=Count('devices')).order_by('-nb')
-        # Nombre d'équipements orphelins (sans template)
         context["orphan_devices"] = Device.objects.filter(template__isnull=True).count()
-        # Notifications systèmes (exemple statique)
         context["system_notifications"] = [
             "Maintenance prévue le 15/07 à 22h.",
             "Pensez à sauvegarder vos configurations."
         ]
-        # Logs de configuration d'appareil (pour affichage ou traitement ultérieur)
         context["config_logs"] = LogEntry.objects.filter(action="Configuration d'un appareil").order_by('-timestamp')[:5]
         context["devices_list"] = Device.objects.select_related("template").all()
         return context

@@ -15,9 +15,9 @@ def get_device_count():
 
 def get_all_device_order_by(order_by: str, order: str):
     """
-    order_by : champs par lequel la liste des devices va être ordonée
-    order : "" ou "-"
-    "" =  asc
+    order_by: field by which the device list will be ordered
+    order: "" or "-"
+    "" = asc
     "-" = desc
     """
     return Device.objects.all().order_by(f"{order}{order_by}")

@@ -1,5 +1,4 @@
 #!/usr/bin/env python2.7
-#
 # python -m py_compile sample_python_day0.py
 print("\n Welcome to ZTP! \n")
 

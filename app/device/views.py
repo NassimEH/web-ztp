@@ -36,33 +36,23 @@ class DeviceFormView(LoginRequiredMixin, CreateView):
         return context
 
     def post(self, request, *args, **kwargs):
-        # Initialiser self.object pour éviter l'erreur AttributeError
         self.object = None
 
-        # Si c'est une URL de validation (/validate/)
         if "validate" in request.path:
-            # C'est une validation, pas une soumission réelle
-            # Créer un formulaire avec les données POST pour déclencher _add_template_variable_fields
             form = self.form_class(data=request.POST)
             context = self.get_context_data(form=form)
             context["title"] = "Ajouter l'appareil"
-            context["action"] = self.request.path.replace(
-                "/validate/", "/"
-            )  # URL normale pour le form action
+            context["action"] = self.request.path.replace("/validate/", "/")
             return self.render_to_response(context)
 
-        # Si c'est une requête Unpoly pour validation (changement de template)
         is_unpoly_validation = "X-Up-Validate" in request.headers
 
         if is_unpoly_validation:
-            # C'est une validation, pas une soumission réelle
-            # Créer un formulaire avec les données POST pour déclencher _add_template_variable_fields
             form = self.form_class(data=request.POST)
             context = self.get_context_data(form=form)
             context["title"] = "Ajouter l'appareil"
             context["action"] = self.request.path
             return self.render_to_response(context)
-        # Sinon, traitement normal du formulaire
         return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -96,31 +86,24 @@ class DeviceUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
     def post(self, request, *args, **kwargs):
-        # Si c'est une URL de validation (/validate/)
+        self.object = None
+
         if "validate" in request.path:
-            # C'est une validation, pas une soumission réelle
-            # Créer un formulaire avec les données POST pour déclencher _add_template_variable_fields
             form = self.form_class(data=request.POST, instance=self.get_object())
             context = self.get_context_data(form=form)
             context["title"] = "Modifier l'appareil"
-            context["action"] = self.request.path.replace(
-                "/validate/", "/"
-            )  # URL normale pour le form action
+            context["action"] = self.request.path.replace("/validate/", "/")
             return self.render_to_response(context)
 
-        # Si c'est une requête Unpoly pour validation (changement de template)
         is_unpoly_validation = "X-Up-Validate" in request.headers
 
         if is_unpoly_validation:
-            # C'est une validation, pas une soumission réelle
-            # Créer un formulaire avec les données POST pour déclencher _add_template_variable_fields
             form = self.form_class(data=request.POST, instance=self.get_object())
             context = self.get_context_data(form=form)
             context["title"] = "Modifier l'appareil"
             context["action"] = self.request.path
             return self.render_to_response(context)
 
-        # Sinon, traitement normal du formulaire
         return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -256,7 +239,6 @@ class DeviceTemplateView(View):
     def get(self, request, pk):
         device = get_object_or_404(Device, pk=pk)
 
-        # Vérifier que le device a un template associé
         if not device.template or not device.template.file:
             return HttpResponse(
                 "Aucun template associé à cet appareil.",
@@ -265,27 +247,21 @@ class DeviceTemplateView(View):
             )
 
         try:
-            # Lire le contenu du template
             device.template.file.seek(0)
             template_content = device.template.file.read().decode("utf-8")
 
-            # Créer un environnement Jinja2
             env = Environment()
             template = env.from_string(template_content)
 
-            # Rendre le template avec les variables du device
             rendered_content = template.render(device.template_variables)
 
-            # Créer la réponse avec le contenu rendu
             response = HttpResponse(rendered_content, content_type="text/plain")
 
-            # Ajouter un en-tête pour suggérer le nom du fichier avec l'extension originale
             original_filename = os.path.basename(device.template.file.name)
             name_without_ext, ext = os.path.splitext(original_filename)
             filename = f"{device.hostname}_{device.template.name}{ext}"
             response["Content-Disposition"] = f'inline; filename="{filename}"'
 
-            # Log de l'action
             LogEntry.objects.create(
                 user=request.user if request.user.is_authenticated else None,
                 action="Affichage template device",

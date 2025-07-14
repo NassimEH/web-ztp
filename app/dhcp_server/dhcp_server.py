@@ -50,26 +50,28 @@ class DHCPServer:
         client_id = self.get_dhcp_option(packet, "client_id")
         if client_id:
             if isinstance(client_id, bytes):
-                serial_number = client_id.decode("utf-8", errors='ignore')
+                serial_number = client_id.decode("utf-8", errors="ignore")
             else:
                 serial_number = str(client_id)
-                
-            serial_number = "".join(
-                c for c in serial_number if c.isprintable()
-            ).strip()
-            
-            if serial_number and not serial_number.startswith('\x01') and len(serial_number) > 3:
+
+            serial_number = "".join(c for c in serial_number if c.isprintable()).strip()
+
+            if (
+                serial_number
+                and not serial_number.startswith("\x01")
+                and len(serial_number) > 3
+            ):
                 return serial_number
-                
+
         hostname = self.get_dhcp_option(packet, "hostname")
         if hostname:
             if isinstance(hostname, bytes):
-                hostname = hostname.decode("utf-8", errors='ignore')
+                hostname = hostname.decode("utf-8", errors="ignore")
             else:
                 hostname = str(hostname).strip()
-                
+
             return hostname
-                
+
         chaddr = packet["BOOTP"].chaddr
         mac_addr = ":".join(f"{b:02x}" for b in chaddr[:6])
         return f"MAC-{mac_addr}"
@@ -84,17 +86,17 @@ class DHCPServer:
                 return assigned_ip
             else:
                 return next(self.get_ip)
-        
+
         return None
 
     def get_bootfile(self, serial_number):
         if not serial_number:
             return None
-            
+
         bootfile = self.dhcp_data.get_bootfile(serial_number)
         if bootfile:
             return bootfile
-                        
+
         return None
 
     def create_dhcp_options(self, message_type: str, bootfile: str):
@@ -106,12 +108,12 @@ class DHCPServer:
             ("domain", "local"),
             ("router", self.server_ip),
         ]
-        
+
         if bootfile:
-            new_options.append((67, bootfile.encode('utf-8'))) # Bootfile option
-            
+            new_options.append((67, bootfile.encode("utf-8")))  # Bootfile option
+
         new_options.append("end")
-        
+
         return new_options
 
     def create_bootp(self, client_ip: str, chaddr, xid, bootfile):
@@ -122,16 +124,16 @@ class DHCPServer:
             chaddr=chaddr,
             xid=xid,
         )
-        
+
         if bootfile:
-            bootp_packet.file= bootfile
-            
+            bootp_packet.file = bootfile
+
         return bootp_packet
 
     def create_dhcp_reply(self, packet: packet):
         requested_addr = self.get_dhcp_option(packet, "requested_addr")
         serial_number = self.get_serial_number(packet)
-        
+
         client_ip = self.get_ip_in_pool(requested_addr, serial_number)
 
         if not client_ip:
@@ -148,7 +150,7 @@ class DHCPServer:
 
         if reply_message_type:
             bootfile = self.get_bootfile(serial_number)
-            
+
             options = self.create_dhcp_options(reply_message_type, bootfile)
 
             chaddr = packet["BOOTP"].chaddr
@@ -170,10 +172,11 @@ class DHCPServer:
     def run(self):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
             s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, self.interface.encode())
-            
+            s.setsockopt(
+                socket.SOL_SOCKET, socket.SO_REUSEADDR, self.interface.encode()
+            )
+
             s.bind(("0.0.0.0", self.bind_port))
-            print("version 1.0.2")
             print(f"Serveur DHCP en écoute sur 0.0.0.0:{self.bind_port}")
             print(f"IP du serveur DHCP: {self.server_ip}")
 
@@ -185,7 +188,7 @@ class DHCPServer:
                 if reply:
                     s.sendto(reply, ("255.255.255.255", 68))
 
-                    
+
 if __name__ == "__main__":
     server_ip = "0.0.0.0"
     server = DHCPServer(server_ip)

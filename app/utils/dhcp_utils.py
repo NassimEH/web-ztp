@@ -2,6 +2,6 @@ from device.models import DHCPConfig
 
 
 def get_dhcp_config():
-    """Récupère les informations du subnet DHCP et du pool d'adresses IP."""
+    """Retrieves DHCP subnet and IP address pool information."""
     config = DHCPConfig.objects.first()
     return config

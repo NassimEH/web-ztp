@@ -15,12 +15,12 @@ class Template(models.Model):
         return str(self.name)
 
     def save(self, *args, **kwargs):
-        """Override save pour extraire automatiquement les variables du template"""
+        """Override save to automatically extract template variables"""
         super().save(*args, **kwargs)
 
         if self.file:
             try:
-                self.file.seek(0)  # Retourne au début du fichier
+                self.file.seek(0)
                 template_content = self.file.read().decode("utf-8")
                 variables = list(extract_jinja_variables(template_content))
 
@@ -44,16 +44,9 @@ class Device(models.Model):
         related_name="devices",
     )
 
-    # Stockage des valeurs des variables du template en JSON
     template_variables = models.JSONField(
         default=dict, blank=True, help_text="Valeurs des variables du template associé"
     )
-
-    # Anciens champs ZTP - peuvent être supprimés plus tard
-    subnet_mask = models.CharField(max_length=255, null=True, blank=True)
-    default_gateway = models.GenericIPAddressField(null=True, blank=True)
-    login = models.CharField(max_length=255, null=True, blank=True)
-    password = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return f"{self.hostname} ({self.serial_number})"

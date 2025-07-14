@@ -35,16 +35,13 @@ class DeviceForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = "post"
 
-        # Ajouter dynamiquement les champs basés sur les variables du template
         self._add_template_variable_fields()
 
-        # Configurer l'URL de validation pour up-validate
         if hasattr(self, "instance") and self.instance.pk:
             validate_url = f"/device/{self.instance.pk}/edit/validate/"
         else:
             validate_url = "/device/add/validate/"
 
-        # Ajouter l'attribut up-validate au champ template
         self.fields["template"].widget.attrs.update(
             {
                 "up-validate": "#template-variables-accordion",
@@ -54,7 +51,6 @@ class DeviceForm(forms.ModelForm):
 
         submit_text = "Mettre à jour" if self.instance.pk else "Enregistrer"
 
-        # Construire le layout avec les champs des variables du template
         template_fields = self._get_template_variable_field_names()
 
         if template_fields:
@@ -89,10 +85,9 @@ class DeviceForm(forms.ModelForm):
             )
 
     def _add_template_variable_fields(self):
-        """Ajoute dynamiquement des champs pour les variables du template"""
+        """Dynamically adds fields for template variables"""
         template = None
 
-        # Récupérer le template depuis l'instance existante ou depuis les données POST
         if self.instance.pk and self.instance.template:
             template = self.instance.template
         elif "template" in self.data and self.data["template"]:
@@ -105,12 +100,10 @@ class DeviceForm(forms.ModelForm):
             for variable in template.variables:
                 field_name = f"template_var_{variable}"
 
-                # Récupérer la valeur existante depuis template_variables
                 initial_value = ""
                 if self.instance.pk and self.instance.template_variables:
                     initial_value = self.instance.template_variables.get(variable, "")
 
-                # Créer un champ texte pour chaque variable
                 self.fields[field_name] = forms.CharField(
                     label=variable.replace("_", " ").title(),
                     required=False,
@@ -125,7 +118,7 @@ class DeviceForm(forms.ModelForm):
                 )
 
     def _get_template_variable_field_names(self):
-        """Retourne la liste des noms de champs pour les variables du template"""
+        """Returns list of field names for template variables"""
         field_names = []
         for field_name in self.fields:
             if field_name.startswith("template_var_"):
@@ -133,7 +126,7 @@ class DeviceForm(forms.ModelForm):
         return field_names
 
     def get_template_variables_data(self):
-        """Récupère les données des variables du template depuis le formulaire"""
+        """Retrieves template variable data from the form"""
         variables_data = {}
         for field_name, value in self.cleaned_data.items():
             if field_name.startswith("template_var_") and value:
@@ -142,7 +135,7 @@ class DeviceForm(forms.ModelForm):
         return variables_data
 
     def save(self, commit=True):
-        """Sauvegarde le device avec les variables du template"""
+        """Saves the device with template variables"""
         device = super().save(commit=False)
 
         device.template_variables = self.get_template_variables_data()
