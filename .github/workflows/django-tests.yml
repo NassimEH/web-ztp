@@ -47,4 +47,4 @@ jobs:
     
     - name: Test Docker Compose build
       run: |
-        docker-compose build --no-cache
+        docker compose build --no-cache
