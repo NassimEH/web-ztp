@@ -76,10 +76,9 @@ services:
       dockerfile: Dockerfile.dhcp
     depends_on:
       - web
+    command: /bin/bash entrypoint-dhcp.sh
     network_mode: host
     restart: always
-    ports:
-      - "67:67/udp" 
     environment:
       PRIVATE_IP: ${PRIVATE_IP}
 
