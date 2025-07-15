@@ -9,14 +9,19 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from django.views.generic.edit import FormView
 
-from device.models import Device
+from device.models import Device, Template
 
 
 class ProfileView(LoginRequiredMixin, View):
     template_name = "user/me.html"
 
     def get(self, request):
-        context = {"user": request.user, "device_count": Device.objects.count()}
+        context = {
+            "user": request.user,
+            "device_count": Device.objects.count(),
+            "configured_devices": Device.objects.filter(configured=True).count(),
+            "template_count": Template.objects.count(),
+        }
         return render(request, self.template_name, context)
 
     def post(self, request):

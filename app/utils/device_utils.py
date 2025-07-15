@@ -9,10 +9,6 @@ def get_devices():
     return Device
 
 
-def get_device_count():
-    return Device.objects.count()
-
-
 def get_all_device_order_by(order_by: str, order: str):
     """
     order_by: field by which the device list will be ordered
