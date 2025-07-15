@@ -36,6 +36,50 @@ La plateforme permet aussi le monitoring en temps réel des équipements, la ges
 
 ---
 
+```bash
+ztp-project/
+├── core/                       # App principale Django (gestion utilisateurs, dashboard)
+│   ├── migrations/
+│   ├── templates/
+│   ├── static/
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── views.py
+│   └── ...
+├── device/                     # App pour gestion des appareils et templates
+│   ├── migrations/
+│   ├── templates/
+│   ├── static/
+│   ├── models.py
+│   ├── views.py
+│   └── ...
+├── dhcp_server/                # App serveur DHCP intégré
+│   ├── config/                 # Config spécifiques DHCP
+│   ├── scripts/                # Scripts de gestion DHCP
+│   ├── views.py
+│   └── ...
+├── monitoring/                 # App monitoring et logs
+│   ├── templates/
+│   ├── views.py
+│   └── ...
+├── user/                      # Gestion avancée utilisateurs (rôles, 2FA, LDAP)
+│   ├── templates/
+│   ├── models.py
+│   ├── views.py
+│   └── ...
+├── static/                    # Fichiers statiques globaux
+├── templates/                 # Templates globaux
+├── migrations/                # Migrations globales (si besoin)
+├── Dockerfile
+├── docker-compose.yml
+├── manage.py
+├── requirements.txt
+├── README.md
+└── roadmap.png                # Image de la roadmap
+
+```
+
 ## Fonctionnalités principales
 
 - **Gestion des utilisateurs**
