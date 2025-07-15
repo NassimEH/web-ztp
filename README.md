@@ -16,6 +16,26 @@ La plateforme permet aussi le monitoring en temps réel des équipements, la ges
 
 ---
 
+## Installation
+
+### Prérequis
+
+- Docker et Docker Compose installés
+- Python 3.x
+- PostgreSQL
+
+### Lancement rapide
+
+1. Cloner le dépôt :  
+   ```bash
+   git clone https://github.com/Chadi-Mangle/web-ztp.git
+   ```
+2. Lancer le projet :
+   ```bash
+   docker-compose up -d build
+
+---
+
 ## Fonctionnalités principales
 
 - **Gestion des utilisateurs**
@@ -73,24 +93,4 @@ La roadmap détaille les fonctionnalités déjà mises en place ainsi que celles
 <p align="center">
     <img src="image/image1.png" align="center" width="80%">
 </p>
-
----
-
-## Installation
-
-### Prérequis
-
-- Docker et Docker Compose installés
-- Python 3.x
-- PostgreSQL
-
-### Lancement rapide
-
-1. Cloner le dépôt :  
-   ```bash
-   git clone https://github.com/Chadi-Mangle/web-ztp.git
-   ```
-2. Lancer le projet :
-   ```bash
-   docker-compose up -d build
 
