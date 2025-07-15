@@ -47,4 +47,5 @@ jobs:
     
     - name: Test Docker Compose build
       run: |
+        cp .env.example .env
         docker compose build --no-cache
