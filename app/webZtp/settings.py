@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = cfg.SECRET_KEY
 
 
-ALLOWED_HOSTS = cfg.ALLOWED_HOSTS_LIST
+ALLOWED_HOSTS = ["localhost", cfg.PRIVATE_IP, cfg.HOSTNAME]
 
 # Application definition
 
@@ -68,7 +68,7 @@ ACCOUNT_SESSION_REMEMBER = None
 ACCOUNT_REMEMBER_ME = None
 
 ACCOUNT_RATE_LIMITS = {
-    'login_failed': '5/5m/ip',
+    "login_failed": "5/5m/ip",
 }
 
 # Crispy Forms settings
@@ -221,9 +221,9 @@ AUTH_USER_MODEL = "auth.User"
 LOGIN_URL = "/login/"
 
 # Unified session configuration to avoid disconnections
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_NAME = 'webztp_sessionid'
-SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+SESSION_COOKIE_NAME = "webztp_sessionid"
+SESSION_COOKIE_SAMESITE = "Lax"
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SECURE = False
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
@@ -233,7 +233,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 # Unified CSRF configuration
 CSRF_USE_SESSIONS = True
 CSRF_COOKIE_HTTPONLY = False
-CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SAMESITE = "Lax"
 CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_AGE = 60 * 60 * 24 * 30
 
