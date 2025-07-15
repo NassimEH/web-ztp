@@ -1,0 +1,50 @@
+name: Tests & Build
+
+on:
+  push:
+    branches: [ "main", "remake" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    name: Django Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        cd app
+        pip install -r requirements.txt
+    
+    - name: Run Django tests
+      run: |
+        cd app
+        python manage.py test --verbosity=2
+
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Build Django App Docker image
+      run: |
+        docker build -t webztp-app:test ./app
+    
+    - name: Test Docker Compose build
+      run: |
+        docker-compose build --no-cache

@@ -269,3 +269,7 @@ CSRF_COOKIE_AGE = 60 * 60 * 24 * 30
 
 # Special configuration for django-allauth "Remember Me"
 ACCOUNT_SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+
+DEBUG_TOOLBAR_CONFIG = {
+    "IS_RUNNING_TESTS": False,
+}

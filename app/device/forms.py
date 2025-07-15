@@ -150,7 +150,7 @@ class DHCPConfigForm(forms.ModelForm):
         required=True,
         label="Subnet",
         widget=forms.TextInput(
-            attrs={"class": "form-control"}
+            attrs={"class": "form-control", "placeholder": "192.168.1.0"}
         ),
         help_text="Adresse réseau de base (ex: 192.168.1.0, 10.0.0.0)",
     )
@@ -159,14 +159,14 @@ class DHCPConfigForm(forms.ModelForm):
         required=False,
         label="IP minimum",
         widget=forms.TextInput(
-            attrs={"class": "form-control"}
+            attrs={"class": "form-control", "placeholder": "192.168.1.100"}
         ),
     )
     max_ip_manual = forms.GenericIPAddressField(
         required=False,
         label="IP maximum",
         widget=forms.TextInput(
-            attrs={"class": "form-control"}
+            attrs={"class": "form-control", "placeholder": "192.168.1.200"}
         ),
     )
 
@@ -200,16 +200,11 @@ class DHCPConfigForm(forms.ModelForm):
             self.fields["max_ip_manual"].initial = dhcp_config.max_ip_pool
             self.fields["subnet"].initial = dhcp_config.subnet
 
-            # Mettre à jour les placeholders avec les vraies valeurs
-            self.fields["min_ip_manual"].widget.attrs["placeholder"] = dhcp_config.min_ip_pool
-            self.fields["max_ip_manual"].widget.attrs["placeholder"] = dhcp_config.max_ip_pool
-
             if dhcp_config.min_ip_pool:
                 ip_parts = dhcp_config.min_ip_pool.split(".")
                 if len(ip_parts) == 4:
                     network_base = f"{ip_parts[0]}.{ip_parts[1]}.{ip_parts[2]}.0"
                     self.fields["network_base"].initial = network_base
-                    self.fields["network_base"].widget.attrs["placeholder"] = network_base
 
         self.helper.layout = Layout(
             Accordion(
