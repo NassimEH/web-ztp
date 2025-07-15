@@ -68,10 +68,10 @@ La plateforme permet aussi le monitoring en temps réel des équipements, la ges
 La roadmap détaille les fonctionnalités déjà mises en place ainsi que celles prévues pour les évolutions futures. 
 
 <p align="center">
-    <img src="image/image.png" align="center" width="30%">
+    <img src="image/image.png" align="center" width="80%">
 </p>
 <p align="center">
-    <img src="image/image1.png" align="center" width="30%">
+    <img src="image/image1.png" align="center" width="80%">
 </p>
 
 ---
