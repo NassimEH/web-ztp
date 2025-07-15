@@ -23,7 +23,7 @@ La plateforme permet aussi le monitoring en temps réel des équipements, la ges
   - Gestion du profil utilisateur (modification mot de passe, informations personnelles)
 
 - **Dashboard & navigation**
-  - Tableau de bord central avec statistiques (équipements, templates, appareils configurés, orphelins)
+  - Tableau de bord central avec statistiques (équipements, templates, appareils configurés)
   - Navigation dynamique avec Unpoly
   - Interface responsive et moderne
 
@@ -82,12 +82,15 @@ La roadmap détaille les fonctionnalités déjà mises en place ainsi que celles
 
 - Docker et Docker Compose installés
 - Python 3.x
-- PostgreSQL (optionnel selon configuration)
+- PostgreSQL
 
 ### Lancement rapide
 
 1. Cloner le dépôt :  
    ```bash
-   git clone <url-du-depot>
-   cd <nom-du-repo>
+   git clone https://github.com/Chadi-Mangle/web-ztp.git
+   ```
+2. Lancer le projet :
+   ```bash
+   docker-compose up -d build
 
