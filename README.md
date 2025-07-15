@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/Chadi-Mangle/web-ztp/refs/heads/main/logo.png" align="center" width="30%">
+    <img src="https://raw.githubusercontent.com/Chadi-Mangle/web-ztp/image/image2.png" align="center" width="30%">
 </p>
 <p align="center"><h1 align="center">WEB-ZTP</h1></p>
 <p align="center">
@@ -68,10 +68,10 @@ La plateforme permet aussi le monitoring en temps réel des équipements, la ges
 La roadmap détaille les fonctionnalités déjà mises en place ainsi que celles prévues pour les évolutions futures. 
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/Chadi-Mangle/web-ztp/refs/heads/main/logo.png" align="center" width="30%">
+    <img src="https://raw.githubusercontent.com/Chadi-Mangle/web-ztp/image/image.png" align="center" width="30%">
 </p>
 <p align="center">
-    <img src="https://raw.githubusercontent.com/Chadi-Mangle/web-ztp/refs/heads/main/logo.png" align="center" width="30%">
+    <img src="https://raw.githubusercontent.com/Chadi-Mangle/web-ztp/image/image1.png" align="center" width="30%">
 </p>
 
 ---
