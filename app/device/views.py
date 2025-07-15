@@ -116,11 +116,18 @@ class DeviceUpdateView(LoginRequiredMixin, UpdateView):
         return response
 
 
-class DHCPFormView(LoginRequiredMixin, CreateView):
+class DHCPFormView(LoginRequiredMixin, UpdateView):
     model = DHCPConfig
     template_name = "device/dhcp_config_form.html"
     form_class = DHCPConfigForm
     success_url = reverse_lazy("dhcp_config_update")
+
+    def get_object(self, queryset=None):
+        """Récupère l'instance unique de DHCPConfig ou en crée une nouvelle"""
+        obj = DHCPConfig.objects.first()
+        if not obj:
+            obj = DHCPConfig()
+        return obj
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

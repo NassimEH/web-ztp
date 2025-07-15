@@ -150,7 +150,7 @@ class DHCPConfigForm(forms.ModelForm):
         required=True,
         label="Subnet",
         widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "192.168.1.0"}
+            attrs={"class": "form-control"}
         ),
         help_text="Adresse réseau de base (ex: 192.168.1.0, 10.0.0.0)",
     )
@@ -159,14 +159,14 @@ class DHCPConfigForm(forms.ModelForm):
         required=False,
         label="IP minimum",
         widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "192.168.1.100"}
+            attrs={"class": "form-control"}
         ),
     )
     max_ip_manual = forms.GenericIPAddressField(
         required=False,
         label="IP maximum",
         widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "192.168.1.200"}
+            attrs={"class": "form-control"}
         ),
     )
 
@@ -188,15 +188,28 @@ class DHCPConfigForm(forms.ModelForm):
         self.helper.form_method = "post"
         self.helper.form_id = "dhcp-config-form"
 
+        # Récupérer la configuration DHCP existante ou la première disponible
+        dhcp_config = None
         if self.instance.pk:
-            self.fields["min_ip_manual"].initial = self.instance.min_ip_pool
-            self.fields["max_ip_manual"].initial = self.instance.max_ip_pool
+            dhcp_config = self.instance
+        else:
+            dhcp_config = DHCPConfig.objects.first()
 
-            if self.instance.min_ip_pool:
-                ip_parts = self.instance.min_ip_pool.split(".")
+        if dhcp_config:
+            self.fields["min_ip_manual"].initial = dhcp_config.min_ip_pool
+            self.fields["max_ip_manual"].initial = dhcp_config.max_ip_pool
+            self.fields["subnet"].initial = dhcp_config.subnet
+
+            # Mettre à jour les placeholders avec les vraies valeurs
+            self.fields["min_ip_manual"].widget.attrs["placeholder"] = dhcp_config.min_ip_pool
+            self.fields["max_ip_manual"].widget.attrs["placeholder"] = dhcp_config.max_ip_pool
+
+            if dhcp_config.min_ip_pool:
+                ip_parts = dhcp_config.min_ip_pool.split(".")
                 if len(ip_parts) == 4:
                     network_base = f"{ip_parts[0]}.{ip_parts[1]}.{ip_parts[2]}.0"
                     self.fields["network_base"].initial = network_base
+                    self.fields["network_base"].widget.attrs["placeholder"] = network_base
 
         self.helper.layout = Layout(
             Accordion(
@@ -209,12 +222,18 @@ class DHCPConfigForm(forms.ModelForm):
                         <div class="manual-ip-inputs">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="id_min_ip_manual">IP minimum :</label>
-                                    <input type="text" id="id_min_ip_manual" name="min_ip_manual" class="form-control" placeholder="192.168.1.100">
+                        """
+                    ),
+                    "min_ip_manual",
+                    HTML(
+                        """
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="id_max_ip_manual">IP maximum :</label>
-                                    <input type="text" id="id_max_ip_manual" name="max_ip_manual" class="form-control" placeholder="192.168.1.200">
+                        """
+                    ),
+                    "max_ip_manual",
+                    HTML(
+                        """
                                 </div>
                             </div>
                             <div class="ip-sync-info">
@@ -248,7 +267,22 @@ class DHCPConfigForm(forms.ModelForm):
         network_base = cleaned_data.get("network_base")
         min_ip_manual = cleaned_data.get("min_ip_manual")
         max_ip_manual = cleaned_data.get("max_ip_manual")
+        subnet = cleaned_data.get("subnet")
 
+        if not network_base:
+            self.add_error(
+                "network_base",
+                "Le champ 'Subnet' est obligatoire et doit être renseigné.",
+            )
+
+        if not subnet:
+            self.add_error(
+                "subnet",
+                "Le champ 'Masque de sous-réseau' est obligatoire et doit être renseigné.",
+            )
+
+        if subnet:
+            cleaned_data["subnet"] = subnet.strip()
         if min_ip_manual:
             cleaned_data["min_ip_pool"] = min_ip_manual
         if max_ip_manual:

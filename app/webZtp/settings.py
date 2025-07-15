@@ -26,6 +26,7 @@ SECRET_KEY = cfg.SECRET_KEY
 
 
 ALLOWED_HOSTS = ["localhost", cfg.PRIVATE_IP, cfg.HOSTNAME]
+INTERNAL_IPS = ["localhost", "127.0.0.1", cfg.PRIVATE_IP, cfg.HOSTNAME]
 
 # Application definition
 
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     "django_cotton",
     "crispy_forms",
     "crispy_bootstrap5",
+    "debug_toolbar",
     "device",
     "monitoring",
     "user",
@@ -85,6 +87,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 USE_X_FORWARDED_HOST = True
@@ -167,6 +170,18 @@ else:
         }
     }
 
+# Configuration pour la Debug Toolbar (uniquement en développement)
+if not cfg.IS_PRODUCTION:
+    DEBUG = True
+    
+    # Configuration pour la debug toolbar
+    def show_toolbar(request):  # noqa: ARG001
+        return DEBUG
+    
+    DEBUG_TOOLBAR_CONFIG = {
+        "SHOW_TOOLBAR_CALLBACK": show_toolbar,
+    }
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -239,3 +254,21 @@ CSRF_COOKIE_AGE = 60 * 60 * 24 * 30
 
 # Special configuration for django-allauth "Remember Me"
 ACCOUNT_SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+
+
+DEBUG_TOOLBAR_PANELS = [
+    "debug_toolbar.panels.history.HistoryPanel",
+    "debug_toolbar.panels.versions.VersionsPanel",
+    "debug_toolbar.panels.timer.TimerPanel",
+    "debug_toolbar.panels.settings.SettingsPanel",
+    "debug_toolbar.panels.headers.HeadersPanel",
+    "debug_toolbar.panels.request.RequestPanel",
+    "debug_toolbar.panels.sql.SQLPanel",
+    "debug_toolbar.panels.staticfiles.StaticFilesPanel",
+    "debug_toolbar.panels.templates.TemplatesPanel",
+    "debug_toolbar.panels.alerts.AlertsPanel",
+    "debug_toolbar.panels.cache.CachePanel",
+    "debug_toolbar.panels.signals.SignalsPanel",
+    "debug_toolbar.panels.redirects.RedirectsPanel",
+    "debug_toolbar.panels.profiling.ProfilingPanel",
+]

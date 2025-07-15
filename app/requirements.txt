@@ -7,4 +7,5 @@ django-crispy-forms
 crispy-bootstrap5
 django-allauth
 django-cotton
+django-debug-toolbar
 jinja2
