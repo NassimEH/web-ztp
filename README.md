@@ -36,6 +36,8 @@ La plateforme permet aussi le monitoring en temps réel des équipements, la ges
 
 ---
 
+## Architecture
+
 ```bash
 ztp-project/
 ├── core/                       # App principale Django (gestion utilisateurs, dashboard)
