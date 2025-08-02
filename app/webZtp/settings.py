@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = cfg.SECRET_KEY
 
 
-ALLOWED_HOSTS = ["localhost", cfg.PRIVATE_IP, cfg.HOSTNAME]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", cfg.PRIVATE_IP, cfg.HOSTNAME]
 INTERNAL_IPS = ["localhost", "127.0.0.1", cfg.HOSTNAME]
 
 # Application definition
