@@ -5,7 +5,7 @@ from django.core.management.utils import get_random_secret_key
 
 # Django settings
 SECRET_KEY = os.environ.get("SECRET_KEY", get_random_secret_key())
-IS_PRODUCTION = os.getenv("IS_PRODUCTION")
+IS_PRODUCTION = os.getenv("IS_PRODUCTION", "0") == "1"
 
 # Database configuration
 DB_NAME = os.getenv("POSTGRES_DB")
