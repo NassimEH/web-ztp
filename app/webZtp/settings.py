@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 import env.config as cfg
 
 
@@ -26,6 +27,14 @@ SECRET_KEY = cfg.SECRET_KEY
 
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", cfg.PRIVATE_IP, cfg.HOSTNAME]
+
+# Add render.com domain for production
+if os.getenv("IS_PRODUCTION"):
+    ALLOWED_HOSTS.extend([
+        ".onrender.com",  # Allow all Render subdomains
+        os.getenv("RENDER_EXTERNAL_HOSTNAME", ""),
+    ])
+
 INTERNAL_IPS = ["localhost", "127.0.0.1", cfg.HOSTNAME]
 
 # Application definition
@@ -80,6 +89,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Add WhiteNoise for static files
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -150,16 +160,24 @@ if cfg.IS_PRODUCTION:
     # Database
     # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": cfg.DB_NAME,
-            "USER": cfg.DB_USER,
-            "PASSWORD": cfg.DB_PASSWORD,
-            "HOST": cfg.DB_HOST,
-            "PORT": cfg.DB_PORT,
+    # Use DATABASE_URL from Render if available
+    import dj_database_url
+    database_url = os.getenv("DATABASE_URL")
+    if database_url:
+        DATABASES = {
+            "default": dj_database_url.parse(database_url)
         }
-    }
+    else:
+        DATABASES = {
+            "default": {
+                "ENGINE": "django.db.backends.postgresql",
+                "NAME": cfg.DB_NAME,
+                "USER": cfg.DB_USER,
+                "PASSWORD": cfg.DB_PASSWORD,
+                "HOST": cfg.DB_HOST,
+                "PORT": cfg.DB_PORT,
+            }
+        }
 else:
     DEBUG = True
 
@@ -235,6 +253,9 @@ STATICFILES_DIRS = [
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# WhiteNoise configuration for static files on Render
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Media files (User-uploaded content)
 
